@@ -1,3 +1,4 @@
+@file:Suppress("MatchingDeclarationName")
 package com.example.virtualsportsandroid.di
 
 import android.content.Context
