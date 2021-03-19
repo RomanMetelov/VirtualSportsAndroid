@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:paddingHorizontal="@dimen/login_header_paddingHorizontal"
+    android:paddingVertical="@dimen/login_header_paddingVertical">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/logout_button_margin"
+        android:background="@drawable/logout_button_background"
+        android:paddingHorizontal="@dimen/logout_button_paddingHorizontal"
+        android:text="@string/logout_button_text"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_dark"
+        android:textSize="@dimen/logout_button_text_size"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/login_button_margin"
+        android:background="@drawable/login_button_background"
+        android:paddingHorizontal="@dimen/login_button_padding"
+        android:text="@string/login_button_text"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_dark"
+        android:textSize="@dimen/login_button_textSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btnSignUp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/signup_button_margin"
+        android:background="@drawable/signup_button_background"
+        android:paddingHorizontal="@dimen/signup_button_paddingHorizontal"
+        android:text="@string/signup_button_text"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_dark"
+        android:textSize="@dimen/signup_button_textSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gButtonsForUnauthorizedUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="btnLogin, btnSignUp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

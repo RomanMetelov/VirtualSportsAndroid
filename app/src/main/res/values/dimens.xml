@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logout_button_corners_radius">4dp</dimen>
+    <dimen name="logout_button_text_size">16sp</dimen>
+    <dimen name="logout_button_margin">8dp</dimen>
+    <dimen name="logout_button_paddingHorizontal">24dp</dimen>
+    <dimen name="login_header_paddingVertical">8dp</dimen>
+    <dimen name="login_button_corners_radius">4dp</dimen>
+    <dimen name="login_button_margin">8dp</dimen>
+    <dimen name="login_button_padding">24dp</dimen>
+    <dimen name="login_button_textSize">16sp</dimen>
+    <dimen name="signup_button_corners_radius">4dp</dimen>
+    <dimen name="signup_button_margin">8dp</dimen>
+    <dimen name="signup_button_paddingHorizontal">24dp</dimen>
+    <dimen name="login_header_paddingHorizontal">4dp</dimen>
+    <dimen name="signup_button_textSize">16sp</dimen>
+</resources>
