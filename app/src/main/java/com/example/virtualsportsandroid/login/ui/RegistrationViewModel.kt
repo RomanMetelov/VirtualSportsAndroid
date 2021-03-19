@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.virtualsportsandroid.login.domain.CheckRegistrationInputsUseCase
-import com.example.virtualsportsandroid.login.domain.RegistrationError
+import com.example.virtualsportsandroid.login.domain.RegistrationInputsError
 import com.example.virtualsportsandroid.utils.Result
 import javax.inject.Inject
 
@@ -13,8 +13,8 @@ class RegistrationViewModel
     private var checkRegistrationInputsUseCase: CheckRegistrationInputsUseCase
 ) : ViewModel() {
 
-    private val _checkInputsLiveData = MutableLiveData<Result<Boolean, RegistrationError>>()
-    val checkInputsLiveData: LiveData<Result<Boolean, RegistrationError>> =
+    private val _checkInputsLiveData = MutableLiveData<Result<Boolean, RegistrationInputsError>>()
+    val checkInputsLiveData: LiveData<Result<Boolean, RegistrationInputsError>> =
         _checkInputsLiveData
 
     fun checkInputs(login: String, password: String, repeatPassword: String) {

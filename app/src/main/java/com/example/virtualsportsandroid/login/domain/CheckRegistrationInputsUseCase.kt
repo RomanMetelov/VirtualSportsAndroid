@@ -5,7 +5,7 @@ import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.utils.Result
 import javax.inject.Inject
 
-enum class RegistrationErrorTypeText(@StringRes val messageError: Int) {
+enum class RegistrationInputsErrorType(@StringRes val messageError: Int) {
     MIN_LOGIN_LENGTH(R.string.min_login_length_error),
     MAX_LOGIN_LENGTH(R.string.max_login_length_error),
     MIN_PASSWORD_LENGTH(R.string.min_password_length_error),
@@ -13,7 +13,10 @@ enum class RegistrationErrorTypeText(@StringRes val messageError: Int) {
     NOT_SAME_PASSWORD(R.string.not_same_password_error)
 }
 
-data class RegistrationError(val type: RegistrationErrorTypeText, val requireValue: String = "")
+data class RegistrationInputsError(
+    val type: RegistrationInputsErrorType,
+    val requireValue: String = ""
+)
 
 class CheckRegistrationInputsUseCase @Inject constructor() {
 
@@ -28,49 +31,49 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
         login: String,
         password: String,
         repeatPassword: String
-    ): Result<Boolean, RegistrationError> {
+    ): Result<Boolean, RegistrationInputsError> {
 
-        when {
+        return when {
             login.length < minLoginLength -> {
-                return Result.error(
-                    RegistrationError(
-                        RegistrationErrorTypeText.MIN_LOGIN_LENGTH,
+                Result.error(
+                    RegistrationInputsError(
+                        RegistrationInputsErrorType.MIN_LOGIN_LENGTH,
                         minLoginLength.toString()
                     )
                 )
             }
             login.length > maxLoginLength -> {
-                return Result.error(
-                    RegistrationError(
-                        RegistrationErrorTypeText.MAX_LOGIN_LENGTH,
+                Result.error(
+                    RegistrationInputsError(
+                        RegistrationInputsErrorType.MAX_LOGIN_LENGTH,
                         maxLoginLength.toString()
                     )
                 )
             }
             password.length < minPasswordLength -> {
-                return Result.error(
-                    RegistrationError(
-                        RegistrationErrorTypeText.MIN_PASSWORD_LENGTH,
+                Result.error(
+                    RegistrationInputsError(
+                        RegistrationInputsErrorType.MIN_PASSWORD_LENGTH,
                         minPasswordLength.toString()
                     )
                 )
             }
             password.length > maxPasswordLength -> {
-                return Result.error(
-                    RegistrationError(
-                        RegistrationErrorTypeText.MAX_PASSWORD_LENGTH,
+                Result.error(
+                    RegistrationInputsError(
+                        RegistrationInputsErrorType.MAX_PASSWORD_LENGTH,
                         maxPasswordLength.toString()
                     )
                 )
             }
             password != repeatPassword -> {
-                return Result.error(
-                    RegistrationError(
-                        RegistrationErrorTypeText.NOT_SAME_PASSWORD
+                Result.error(
+                    RegistrationInputsError(
+                        RegistrationInputsErrorType.NOT_SAME_PASSWORD
                     )
                 )
             }
-            else -> return Result.success(true)
+            else -> Result.success(true)
         }
     }
 

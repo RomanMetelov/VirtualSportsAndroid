@@ -14,8 +14,8 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.RegistrationFragmentBinding
-import com.example.virtualsportsandroid.login.domain.RegistrationError
-import com.example.virtualsportsandroid.login.domain.RegistrationErrorTypeText
+import com.example.virtualsportsandroid.login.domain.RegistrationInputsError
+import com.example.virtualsportsandroid.login.domain.RegistrationInputsErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.showError
 import javax.inject.Inject
@@ -102,27 +102,27 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         })
     }
 
-    private fun handleInputsError(errorResult: RegistrationError) {
-        when (errorResult.type) {
-            RegistrationErrorTypeText.MIN_LOGIN_LENGTH, RegistrationErrorTypeText.MAX_LOGIN_LENGTH -> {
+    private fun handleInputsError(inputsErrorResult: RegistrationInputsError) {
+        when (inputsErrorResult.type) {
+            RegistrationInputsErrorType.MIN_LOGIN_LENGTH, RegistrationInputsErrorType.MAX_LOGIN_LENGTH -> {
                 showErrorOnEditText(
                     etLogin,
-                    errorResult.type.messageError,
-                    errorResult.requireValue
+                    inputsErrorResult.type.messageError,
+                    inputsErrorResult.requireValue
                 )
             }
-            RegistrationErrorTypeText.MIN_PASSWORD_LENGTH, RegistrationErrorTypeText.MAX_PASSWORD_LENGTH -> {
+            RegistrationInputsErrorType.MIN_PASSWORD_LENGTH, RegistrationInputsErrorType.MAX_PASSWORD_LENGTH -> {
                 showErrorOnEditText(
                     etPassword,
-                    errorResult.type.messageError,
-                    errorResult.requireValue
+                    inputsErrorResult.type.messageError,
+                    inputsErrorResult.requireValue
                 )
             }
-            RegistrationErrorTypeText.NOT_SAME_PASSWORD -> {
+            RegistrationInputsErrorType.NOT_SAME_PASSWORD -> {
                 showErrorOnEditText(
                     etRepeatPassword,
-                    errorResult.type.messageError,
-                    errorResult.requireValue
+                    inputsErrorResult.type.messageError,
+                    inputsErrorResult.requireValue
                 )
             }
         }
