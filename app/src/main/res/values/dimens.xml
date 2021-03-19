@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_margin_elements">16dp</dimen>
+    <dimen name="login_half_margin_elements">8dp</dimen>
+    <dimen name="login_half_padding_elements">8dp</dimen>
+    <dimen name="login_top_panel_min_height">42dp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
+</resources>
