@@ -14,5 +14,5 @@
     <color name="bright_yellow_57">#FAFD57</color>
     <color name="red">#B71C1C</color>
     <color name="transparent">#00000000</color>
-
+    <color name="gray_dark">#0F0F0F</color>
 </resources>
