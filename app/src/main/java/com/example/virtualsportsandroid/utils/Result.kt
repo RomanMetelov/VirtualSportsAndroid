@@ -22,6 +22,20 @@ class Result<T, E> private constructor(
             }.value
         }
 
+    fun <R> mapSuccess(transformation: (T) -> R): Result<R, E> {
+        return Result(
+            success = success?.let { ValueWrapper(transformation(it.value)) },
+            error = error
+        )
+    }
+
+    fun <R> mapError(transformation: (E) -> R): Result<T, R> {
+        return Result(
+            success = success,
+            error = error?.let { ValueWrapper(transformation(it.value)) }
+        )
+    }
+
     companion object {
         fun <T, E> success(entity: T): Result<T, E> {
             return Result(ValueWrapper(entity), null)
