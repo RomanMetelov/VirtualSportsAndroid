@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/view_top_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/gray_light_eb"
@@ -35,7 +35,6 @@
     </RelativeLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/login_margin_elements"
@@ -57,7 +56,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/login_margin_elements"
@@ -84,7 +82,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_repeat_password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/login_margin_elements"
@@ -116,10 +113,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/login_margin_elements"
         android:layout_marginEnd="@dimen/login_margin_elements"
+        android:layout_marginBottom="@dimen/login_margin_elements"
         android:background="@color/gray_light_eb"
         android:enabled="false"
         android:text="@string/register_btn_text"
         android:textColor="@color/gray_light_9e"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_login_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:visibility="gone"
+        tools:text="Неудалось зарегистрироваться"
+        tools:visibility="visible" />
 
 </LinearLayout>
