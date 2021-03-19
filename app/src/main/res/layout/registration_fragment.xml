@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/close_button_image_description"
-            android:padding="@dimen/login_half_padding_elements"
+            android:padding="@dimen/login_half_all_padding_elements"
             android:src="@drawable/ic_close" />
 
         <TextView
@@ -116,7 +116,7 @@
         android:layout_marginBottom="@dimen/login_margin_elements"
         android:background="@color/gray_light_eb"
         android:enabled="false"
-        android:padding="@dimen/login_padding_buttons"
+        android:padding="@dimen/login_all_padding_buttons"
         android:text="@string/register_btn_text"
         android:textColor="@color/gray_light_9e"
         android:textStyle="bold" />
@@ -128,7 +128,7 @@
         android:gravity="center"
         android:textColor="@color/red"
         android:visibility="gone"
-        tools:text="Неудалось зарегистрироваться"
+        tools:text="Не удалось зарегистрироваться"
         tools:visibility="visible" />
 
 </LinearLayout>
