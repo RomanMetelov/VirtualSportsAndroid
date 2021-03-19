@@ -5,4 +5,5 @@
     <dimen name="login_half_padding_elements">8dp</dimen>
     <dimen name="login_top_panel_min_height">42dp</dimen>
     <dimen name="zero_dp">0dp</dimen>
+    <dimen name="login_padding_buttons">16dp</dimen>
 </resources>

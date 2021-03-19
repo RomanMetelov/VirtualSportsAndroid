@@ -116,6 +116,7 @@
         android:layout_marginBottom="@dimen/login_margin_elements"
         android:background="@color/gray_light_eb"
         android:enabled="false"
+        android:padding="@dimen/login_padding_buttons"
         android:text="@string/register_btn_text"
         android:textColor="@color/gray_light_9e"
         android:textStyle="bold" />
