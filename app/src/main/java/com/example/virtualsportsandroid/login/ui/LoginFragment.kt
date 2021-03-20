@@ -14,8 +14,11 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.LoginFragmentBinding
+import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
+import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.login.domain.LoginInputsError
 import com.example.virtualsportsandroid.login.domain.LoginInputsErrorType
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.showError
 import javax.inject.Inject
@@ -50,6 +53,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         setupViews()
         setupListeners()
         observeCheckInputsLiveData()
+        observeLoginTryLiveData()
     }
 
     private fun setupViews() {
@@ -118,6 +122,28 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         }
     }
 
+    private fun observeLoginTryLiveData() {
+        viewModel.loginTryLiveData.observe(viewLifecycleOwner, { result ->
+            if (result.isError) {
+                handleLoginError(result.errorResult)
+            } else {
+                saveUserTokenToLocal(result.successResult)
+                requireActivity().onBackPressed()
+            }
+        })
+    }
+
+    private fun handleLoginError(errorResult: NetworkErrorType) {
+        when (errorResult) {
+            NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
+            else -> return
+        }
+    }
+
+    private fun saveUserTokenToLocal(successResult: AccessTokenResponse) {
+        sharedPreferences.token = successResult.accessToken.toString()
+    }
+
     private fun showErrorOnEditText(
         editText: AppCompatEditText,
         @StringRes idResErrorText: Int,
@@ -127,7 +153,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun tryLogin() {
-        closeScreen()
+        viewModel.tryLogin(UserModel(login = etLogin.toString(), password = etPassword.toString()))
     }
 
     private fun closeScreen() {
