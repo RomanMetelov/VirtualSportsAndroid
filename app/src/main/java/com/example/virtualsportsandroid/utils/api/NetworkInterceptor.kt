@@ -1,16 +1,13 @@
 package com.example.virtualsportsandroid.utils.api
 
 import com.example.virtualsportsandroid.utils.Result
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class NetworkInterceptor @Inject constructor() {
 
-    private companion object {
-        private const val NO_NETWORK = "Unable to resolve host"
-    }
-
     fun <T> getError(exception: Exception): Result<T, NetworkErrorType> {
-        if (exception.message?.contains(NO_NETWORK, ignoreCase = true) == true)
+        if (exception is UnknownHostException)
             return Result.error(NetworkErrorType.NO_NETWORK)
         return when (exception.message) {
             NetworkStatusCode.NotFound.code.toString() -> Result.error(NetworkErrorType.RESOURCE_NOT_FOUND)

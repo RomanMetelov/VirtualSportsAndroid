@@ -6,5 +6,4 @@ enum class NetworkErrorType {
     API_RATE_LIMIT_EXCEED,
     UNAUTHORIZED,
     UNKNOWN_ERROR
-
 }
