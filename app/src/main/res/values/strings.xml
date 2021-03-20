@@ -3,4 +3,7 @@
     <string name="logout_button_text">Выход</string>
     <string name="login_button_text">Вход</string>
     <string name="signup_button_text">Регистрация</string>
+    <string name="filters_button_text">Фильтры</string>
+    <string name="top_games_title">Топ</string>
+    <string name="all_games_title">Все игры</string>
 </resources>

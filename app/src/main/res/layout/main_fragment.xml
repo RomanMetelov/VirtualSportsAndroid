@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/login_header" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/main_content_layout_padding">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnFilters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/filter_button_background"
+                android:drawableStart="@drawable/filter_button_icon"
+                android:drawablePadding="@dimen/filters_button_drawablePadding"
+                android:fontFamily="@font/sf_pro_text"
+                android:paddingHorizontal="@dimen/filters_button_paddingHorizontal"
+                android:text="@string/filters_button_text"
+                android:textAllCaps="false"
+                android:textColor="@color/gray_light_9d"
+                android:textSize="@dimen/filters_button_textSize" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTopGamesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="@dimen/top_games_title_margin"
+                android:drawableStart="@drawable/top_category_icon"
+                android:drawablePadding="@dimen/top_games_title_drawablePadding"
+                android:fontFamily="@font/roboto_condensed"
+                android:text="@string/top_games_title"
+                android:textColor="@color/gray_light_f5"
+                android:textSize="@dimen/top_games_title_textSize" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTopGames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAllGamesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="@dimen/all_games_title_margin"
+                android:fontFamily="@font/roboto_condensed"
+                android:text="@string/all_games_title"
+                android:textColor="@color/gray_light_f5"
+                android:textSize="@dimen/all_games_title_textSize" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAllGames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
