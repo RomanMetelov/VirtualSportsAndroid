@@ -2,9 +2,6 @@ package com.example.virtualsportsandroid.utils.ui
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.virtualsportsandroid.MainActivity
 import com.example.virtualsportsandroid.utils.FragmentNavigator
