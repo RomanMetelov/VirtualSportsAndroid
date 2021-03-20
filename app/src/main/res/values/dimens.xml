@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="login_margin_elements">16dp</dimen>
+    <dimen name="login_half_margin_elements">8dp</dimen>
+    <dimen name="login_half_all_padding_elements">8dp</dimen>
+    <dimen name="login_top_panel_min_height">42dp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="login_all_padding_buttons">16dp</dimen>
     <dimen name="logout_button_corners_radius">4dp</dimen>
     <dimen name="logout_button_text_size">16sp</dimen>
     <dimen name="logout_button_margin">8dp</dimen>
@@ -14,4 +20,5 @@
     <dimen name="signup_button_paddingHorizontal">24dp</dimen>
     <dimen name="login_header_paddingHorizontal">4dp</dimen>
     <dimen name="signup_button_textSize">16sp</dimen>
+
 </resources>
