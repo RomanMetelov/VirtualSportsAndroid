@@ -41,7 +41,6 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        if (!isNetworkConnected()) navigator.showNoNetworkFragment()
         setupDi()
         binding = RegistrationFragmentBinding.inflate(inflater, container, false)
         return binding.root
