@@ -44,7 +44,7 @@
         app:boxStrokeColor="@color/black"
         app:hintTextColor="@color/gray_light_9e">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         app:hintTextColor="@color/gray_light_9e"
         app:passwordToggleEnabled="true">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

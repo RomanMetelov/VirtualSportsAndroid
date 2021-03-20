@@ -18,4 +18,7 @@
     <string name="login_error_message_text">Неверно указан логин или пароль</string>
     <string name="logout_button_text">Выход</string>
     <string name="signup_button_text">Регистрация</string>
+    <string name="no_internet_error_text">Подключение к интернету отсутствует</string>
+    <string name="retry_btn_text">Обновить</string>
+    <string name="image_no_internet_text_description">Image no internet</string>
 </resources>
