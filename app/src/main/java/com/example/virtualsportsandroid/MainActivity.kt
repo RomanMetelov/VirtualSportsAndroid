@@ -17,11 +17,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        fragmentNavigator.showMainFragmentWithNotFilteredGames()
+        fragmentNavigator.showLoginFragment()
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        //temp solution
+        if (supportFragmentManager.backStackEntryCount < 1) {
+            fragmentNavigator.showMainFragmentWithoutFilters()
+        }
+    }
 }

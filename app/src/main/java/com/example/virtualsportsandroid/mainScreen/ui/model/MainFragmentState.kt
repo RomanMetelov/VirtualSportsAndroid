@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.mainScreen.ui.model
 
-import com.example.virtualsportsandroid.mainScreen.data.model.GameResponse
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
 
 

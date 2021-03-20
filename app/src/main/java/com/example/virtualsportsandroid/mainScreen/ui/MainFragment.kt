@@ -1,7 +1,9 @@
 package com.example.virtualsportsandroid.mainScreen.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
@@ -18,8 +20,29 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
 
     companion object {
         private const val ALL_GAMES_LIST_COLUMNS_NUMBER = 2
+        private const val CATEGORY_KEY = "CATEGORY_KEY"
+        private const val PROVIDERS_KEY = "PROVIDERS_KEY"
 
         fun newInstance() = MainFragment()
+
+        fun newInstance(category: String) = MainFragment().apply {
+            arguments = Bundle().apply {
+                putString(CATEGORY_KEY, category)
+            }
+        }
+
+        fun newInstance(providers: List<String>) = MainFragment().apply {
+            arguments = Bundle().apply {
+                putStringArray(PROVIDERS_KEY, providers.toTypedArray())
+            }
+        }
+
+        fun newInstance(category: String, providers: List<String>) = MainFragment().apply {
+            arguments = Bundle().apply {
+                putString(CATEGORY_KEY, category)
+                putStringArray(PROVIDERS_KEY, providers.toTypedArray())
+            }
+        }
     }
 
     private lateinit var binding: MainFragmentBinding
@@ -29,12 +52,44 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
     @Inject
     lateinit var viewModel: MainViewModel
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = MainFragmentBinding.inflate(inflater, container, false)
+        setupViewModel()
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = MainFragmentBinding.bind(view)
         setupRecyclerViews()
-        setupViewModel()
-        viewModel.loadNotFilteredGames()
+        setupListeners()
+        loadData()
+    }
+
+    private fun setupListeners() {
+        binding.header.btnLogin.setOnClickListener {
+            navigator.showLoginFragment()
+        }
+        binding.header.btnSignUp.setOnClickListener {
+            navigator.showRegistrationFragment()
+        }
+    }
+
+    private fun loadData() {
+        val category = arguments?.getString(CATEGORY_KEY)
+        val providers = arguments?.getStringArray(PROVIDERS_KEY)
+        if (category != null && providers != null) {
+            viewModel.loadFilteredByCategoryAndProviders(category, listOf(*providers))
+        } else if (category != null) {
+            viewModel.loadFilteredByCategory(category)
+        } else if (providers != null) {
+            viewModel.loadFilteredByProviders(listOf(*providers))
+        } else {
+            viewModel.loadNotFilteredGames()
+        }
     }
 
     private fun setupRecyclerViews() {
@@ -62,8 +117,48 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
             when (it) {
                 is MainFragmentState.Loading -> showLoading()
                 is MainFragmentState.NotFiltered -> showNotFilteredGames(it.topGames, it.allGames)
+                is MainFragmentState.FilteredByCategory -> {
+                    showFilteredGames(it.filteredGames)
+                    binding.tvAllGamesTitle.text = it.categoryName
+                }
+                is MainFragmentState.FilteredByProviders -> {
+                    showFilteredGames(it.filteredGames)
+                    binding.tvAllGamesTitle.text = getString(R.string.search_results_title)
+                }
+                is MainFragmentState.FilteredByProvidersAndCategory -> {
+                    showFilteredGames(it.filteredGames)
+                    binding.tvAllGamesTitle.text = getString(R.string.search_results_title)
+                }
                 is MainFragmentState.Error -> showError(it.errorMessage)
             }
+        }
+    }
+
+    private fun showNotFilteredGames(topGames: List<GameModel>, allGames: List<GameModel>) {
+        with(binding) {
+            header.headerContainer.show()
+            svContentContainer.show()
+            tvTopGamesTitle.show()
+            rvTopGames.show()
+            tvAllGamesTitle.show()
+            rvAllGames.show()
+            pbLoading.hide()
+            tvErrorMessage.hide()
+            topGamesListAdapter.submitList(topGames)
+            allGamesListAdapter.submitList(allGames)
+        }
+    }
+
+    private fun showFilteredGames(filteredGames: List<GameModel>) {
+        with(binding) {
+            header.headerContainer.show()
+            tvErrorMessage.hide()
+            pbLoading.hide()
+            svContentContainer.show()
+            tvTopGamesTitle.hide()
+            rvTopGames.hide()
+            allGamesListAdapter.submitList(filteredGames)
+            tvAllGamesTitle.text = getString(R.string.search_results_title)
         }
     }
 
@@ -83,21 +178,6 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
             svContentContainer.hide()
             tvErrorMessage.hide()
             pbLoading.show()
-        }
-    }
-
-    private fun showNotFilteredGames(topGames: List<GameModel>, allGames: List<GameModel>) {
-        with(binding) {
-            header.headerContainer.show()
-            svContentContainer.show()
-            tvTopGamesTitle.show()
-            rvTopGames.show()
-            tvAllGamesTitle.show()
-            rvAllGames.show()
-            pbLoading.hide()
-            tvErrorMessage.hide()
-            topGamesListAdapter.submitList(topGames)
-            allGamesListAdapter.submitList(allGames)
         }
     }
 }

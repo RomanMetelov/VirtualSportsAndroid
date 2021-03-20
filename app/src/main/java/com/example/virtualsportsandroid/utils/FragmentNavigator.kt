@@ -25,9 +25,33 @@ class FragmentNavigator(
             .commit()
     }
 
-    fun showMainFragmentWithNotFilteredGames() {
+    fun showMainFragmentWithoutFilters() {
         fragmentManager.beginTransaction()
             .replace(container, MainFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun showMainFragmentWithFilterByCategory(category: String) {
+        fragmentManager.beginTransaction()
+            .replace(container, MainFragment.newInstance(category))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun showMainFragmentWithFilterByProviders(providers: List<String>) {
+        fragmentManager.beginTransaction()
+            .replace(container, MainFragment.newInstance(providers))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun showMainFragmentWithFilterByCategoryAndProviders(
+        category: String,
+        providers: List<String>
+    ) {
+        fragmentManager.beginTransaction()
+            .replace(container, MainFragment.newInstance(category, providers))
             .addToBackStack(null)
             .commit()
     }

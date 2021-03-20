@@ -150,7 +150,10 @@ class GamesRepository @Inject constructor(
             )
         }
 
-    suspend fun getGamesFilteredByCategoryAndProviders(category: String, providers: List<String>): Result<List<GameModel>, GamesLoadingError> =
+    suspend fun getGamesFilteredByCategoryAndProviders(
+        category: String,
+        providers: List<String>
+    ): Result<List<GameModel>, GamesLoadingError> =
         withContext(dispatcher) {
             delay(2000) //emulation loading from network
             Result.success(
