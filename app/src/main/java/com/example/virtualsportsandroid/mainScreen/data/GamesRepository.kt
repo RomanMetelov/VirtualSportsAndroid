@@ -13,6 +13,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+
+@Suppress("MagicNumber")
 class GamesRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val filterByCategoryUseCase: FilterByCategoryUseCase,

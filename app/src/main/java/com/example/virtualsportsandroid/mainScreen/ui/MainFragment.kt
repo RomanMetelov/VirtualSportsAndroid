@@ -1,9 +1,7 @@
 package com.example.virtualsportsandroid.mainScreen.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
@@ -23,26 +21,15 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
 
-        fun newInstance() = MainFragment()
-
-        fun newInstance(category: String) = MainFragment().apply {
-            arguments = Bundle().apply {
-                putString(CATEGORY_KEY, category)
+        fun newInstance(category: String? = null, providers: List<String>? = null) =
+            MainFragment().apply {
+                arguments = Bundle().apply {
+                    putString(CATEGORY_KEY, category)
+                    providers?.let {
+                        putStringArray(PROVIDERS_KEY, it.toTypedArray())
+                    }
+                }
             }
-        }
-
-        fun newInstance(providers: List<String>) = MainFragment().apply {
-            arguments = Bundle().apply {
-                putStringArray(PROVIDERS_KEY, providers.toTypedArray())
-            }
-        }
-
-        fun newInstance(category: String, providers: List<String>) = MainFragment().apply {
-            arguments = Bundle().apply {
-                putString(CATEGORY_KEY, category)
-                putStringArray(PROVIDERS_KEY, providers.toTypedArray())
-            }
-        }
     }
 
     private lateinit var binding: MainFragmentBinding
@@ -52,18 +39,10 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
     @Inject
     lateinit var viewModel: MainViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = MainFragmentBinding.inflate(inflater, container, false)
-        setupViewModel()
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = MainFragmentBinding.bind(view)
+        setupViewModel()
         setupRecyclerViews()
         setupListeners()
         loadData()
@@ -78,6 +57,7 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         }
     }
 
+    @Suppress("SpreadOperator")
     private fun loadData() {
         val category = arguments?.getString(CATEGORY_KEY)
         val providers = arguments?.getStringArray(PROVIDERS_KEY)

@@ -34,14 +34,14 @@ class FragmentNavigator(
 
     fun showMainFragmentWithFilterByCategory(category: String) {
         fragmentManager.beginTransaction()
-            .replace(container, MainFragment.newInstance(category))
+            .replace(container, MainFragment.newInstance(category = category))
             .addToBackStack(null)
             .commit()
     }
 
     fun showMainFragmentWithFilterByProviders(providers: List<String>) {
         fragmentManager.beginTransaction()
-            .replace(container, MainFragment.newInstance(providers))
+            .replace(container, MainFragment.newInstance(providers = providers))
             .addToBackStack(null)
             .commit()
     }
@@ -51,7 +51,7 @@ class FragmentNavigator(
         providers: List<String>
     ) {
         fragmentManager.beginTransaction()
-            .replace(container, MainFragment.newInstance(category, providers))
+            .replace(container, MainFragment.newInstance(category = category, providers = providers))
             .addToBackStack(null)
             .commit()
     }
