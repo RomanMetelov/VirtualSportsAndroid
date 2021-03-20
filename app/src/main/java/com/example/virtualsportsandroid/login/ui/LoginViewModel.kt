@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-private typealias checkInputsAlias = Result<Boolean, LoginInputsError>
+private typealias checkLoginInputsAlias = Result<Boolean, LoginInputsError>
 private typealias loginTryAlias = Result<AccessTokenResponse, NetworkErrorType>
 
 class LoginViewModel @Inject constructor(
@@ -24,8 +24,8 @@ class LoginViewModel @Inject constructor(
     private val loginUtils: LoginUtils
 ) : ViewModel() {
 
-    private val _checkInputsLiveData = MutableLiveData<checkInputsAlias>()
-    val checkInputsLiveData: LiveData<checkInputsAlias> =
+    private val _checkInputsLiveData = MutableLiveData<checkLoginInputsAlias>()
+    val checkInputsLiveData: LiveData<checkLoginInputsAlias> =
         _checkInputsLiveData
 
     private val _loginTryLiveData = MutableLiveData<loginTryAlias>()
