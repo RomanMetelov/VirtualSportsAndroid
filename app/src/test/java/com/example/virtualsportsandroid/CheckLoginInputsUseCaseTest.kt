@@ -3,7 +3,7 @@ package com.example.virtualsportsandroid
 import com.example.virtualsportsandroid.login.domain.CheckLoginInputsUseCase
 import com.example.virtualsportsandroid.login.domain.LoginInputsErrorType
 import io.kotest.matchers.shouldBe
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 
 class CheckLoginInputsUseCaseTest {
@@ -38,7 +38,7 @@ class CheckLoginInputsUseCaseTest {
         useCase.invoke(
             login = login,
             password = emptyPassword
-        ).errorResult.type shouldBe LoginInputsErrorType.EMPTY_LOGIN
+        ).errorResult.type shouldBe LoginInputsErrorType.EMPTY_PASSWORD
     }
 
 }
