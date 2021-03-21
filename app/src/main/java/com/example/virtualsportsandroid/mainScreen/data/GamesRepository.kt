@@ -216,7 +216,7 @@ class GamesRepository @Inject constructor(
                 )
             )
         }
-
+    @Suppress("LongMethod")
     suspend fun getAllGames(): Result<List<GameModel>, GamesLoadingError> =
         withContext(dispatcher) {
             delay(2000) //emulation loading from network
