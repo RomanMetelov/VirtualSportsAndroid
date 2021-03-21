@@ -36,4 +36,13 @@
     <dimen name="main_fragment_error_message_textSize">24sp</dimen>
     <dimen name="filter_button_paddingVertical">16dp</dimen>
     <dimen name="top_games_space_between">16dp</dimen>
+    <dimen name="filters_title_margin">16dp</dimen>
+    <dimen name="filters_title_textSize">16sp</dimen>
+    <dimen name="ic_close_width">24dp</dimen>
+    <dimen name="ic_close_height">24dp</dimen>
+    <dimen name="border_height">1dp</dimen>
+    <dimen name="filters_border_marginTop">16dp</dimen>
+    <dimen name="providers_title_textSize">16sp</dimen>
+    <dimen name="providers_title_margin">16dp</dimen>
+    <dimen name="apply_button_padding">24dp</dimen>
 </resources>

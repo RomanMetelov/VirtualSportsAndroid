@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/close_button_image_description"
             android:padding="@dimen/login_half_all_padding_elements"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/ic_close_dark" />
 
         <TextView
             android:layout_width="match_parent"

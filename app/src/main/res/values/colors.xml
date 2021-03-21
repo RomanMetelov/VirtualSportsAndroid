@@ -13,10 +13,11 @@
     <color name="gray_light_9d">#9D9D9D</color>
     <color name="gray_light_f5">#f2f3f5</color>
     <color name="gray_light_9e">#9E9E9E</color>
+    <color name="gray_dark_57">#565656</color>
+    <color name="gray_dark_0f">#0F0F0F</color>
     <color name="gray_background">#262626</color>
     <color name="bright_yellow_13">#F8FF13</color>
     <color name="bright_yellow_57">#FAFD57</color>
     <color name="red">#B71C1C</color>
     <color name="transparent">#00000000</color>
-    <color name="gray_dark">#0F0F0F</color>
 </resources>
