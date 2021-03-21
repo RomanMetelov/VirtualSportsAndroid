@@ -2,6 +2,7 @@ package com.example.virtualsportsandroid.di
 
 import android.content.Context
 import androidx.annotation.NonNull
+import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,5 +14,9 @@ class AppModule(@NonNull private val context: Context) {
     @Provides
     @NonNull
     fun provideContext(): Context = context
+
+    @Singleton
+    @Provides
+    fun provideSharedPrefs(): SharedPref = SharedPref(context)
 
 }

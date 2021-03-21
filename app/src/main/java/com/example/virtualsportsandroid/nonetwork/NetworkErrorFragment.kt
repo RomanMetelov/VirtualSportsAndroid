@@ -1,5 +1,7 @@
 package com.example.virtualsportsandroid.nonetwork
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,10 +30,15 @@ class NetworkErrorFragment : BaseFragment(R.layout.nonetwork_fragment) {
 
     private fun setupListeners() {
         binding.btnRetry.setOnClickListener {
-            if (isNetworkConnected()) {
-                requireActivity().onBackPressed()
-            }
+            if (isNetworkConnected()) requireActivity().onBackPressed()
         }
+    }
+
+    private fun isNetworkConnected(): Boolean {
+        val connectivityManager =
+            requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = connectivityManager.activeNetwork
+        return activeNetwork != null
     }
 
     companion object {

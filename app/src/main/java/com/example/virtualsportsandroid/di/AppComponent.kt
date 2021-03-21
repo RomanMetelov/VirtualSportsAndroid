@@ -8,7 +8,7 @@ import com.example.virtualsportsandroid.mainScreen.ui.MainFragment
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [AppModule::class, RepositoryModule::class, UseCaseModule::class])
+@Component(modules = [AppModule::class, RepositoryModule::class, UseCaseModule::class, NetworkModule::class])
 @Singleton
 interface AppComponent {
 
