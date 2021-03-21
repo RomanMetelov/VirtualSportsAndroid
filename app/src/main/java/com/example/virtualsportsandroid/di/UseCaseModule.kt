@@ -2,13 +2,7 @@ package com.example.virtualsportsandroid.di
 
 import android.content.Context
 import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.NotFilteredGamesLoadingUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.LoadingByCategoryUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.LoadingByProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.LoadingByCategoryAndProvidersUseCase
+import com.example.virtualsportsandroid.mainScreen.domain.*
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +27,12 @@ class UseCaseModule {
     @Singleton
     fun provideFilterByCategoryAndProvidersUseCase(): FilterByCategoryAndProvidersUseCase {
         return FilterByCategoryAndProvidersUseCase(Dispatchers.Default)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFilterByTagUseCase(): FilterByTagUseCase {
+        return FilterByTagUseCase(Dispatchers.Default)
     }
 
     @Provides
