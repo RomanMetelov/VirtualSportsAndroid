@@ -19,25 +19,25 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun filterByCategoryUseCase(): FilterByCategoryUseCase {
+    fun provideFilterByCategoryUseCase(): FilterByCategoryUseCase {
         return FilterByCategoryUseCase(Dispatchers.Default)
     }
 
     @Provides
     @Singleton
-    fun filterByProvidersUseCase(): FilterByProvidersUseCase {
+    fun provideFilterByProvidersUseCase(): FilterByProvidersUseCase {
         return FilterByProvidersUseCase(Dispatchers.Default)
     }
 
     @Provides
     @Singleton
-    fun filterByCategoryAndProvidersUseCase(): FilterByCategoryAndProvidersUseCase {
+    fun provideFilterByCategoryAndProvidersUseCase(): FilterByCategoryAndProvidersUseCase {
         return FilterByCategoryAndProvidersUseCase(Dispatchers.Default)
     }
 
     @Provides
     @Singleton
-    fun notFilteredGamesLoadingUseCase(
+    fun provideNotFilteredGamesLoadingUseCase(
         gamesRepository: GamesRepository,
         context: Context
     ): NotFilteredGamesLoadingUseCase {
@@ -46,7 +46,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun filteredGamesByCategoryLoadingUseCase(
+    fun provideFilteredGamesByCategoryLoadingUseCase(
         gamesRepository: GamesRepository,
         context: Context
     ): LoadingByCategoryUseCase {
@@ -55,7 +55,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun filteredGamesByProvidersLoadingUseCase(
+    fun provideFilteredGamesByProvidersLoadingUseCase(
         gamesRepository: GamesRepository,
         context: Context
     ): LoadingByProvidersUseCase {
@@ -64,7 +64,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun loadingByCategoryAndProvidersUseCase(
+    fun provideLoadingByCategoryAndProvidersUseCase(
         gamesRepository: GamesRepository,
         context: Context
     ): LoadingByCategoryAndProvidersUseCase {

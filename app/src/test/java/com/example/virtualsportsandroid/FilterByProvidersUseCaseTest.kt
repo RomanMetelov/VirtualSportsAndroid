@@ -1,7 +1,8 @@
-package com.example.virtualsportsandroid.mainScreen.domain
+package com.example.virtualsportsandroid
 
 import com.example.virtualsportsandroid.mainScreen.data.model.GameResponse
 import com.example.virtualsportsandroid.mainScreen.data.model.GamesResponse
+import com.example.virtualsportsandroid.mainScreen.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi

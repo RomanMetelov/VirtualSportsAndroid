@@ -14,7 +14,7 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun gamesRepository(
+    fun provideGamesRepository(
         filterByCategoryUseCase: FilterByCategoryUseCase,
         filterByProvidersUseCase: FilterByProvidersUseCase,
         filterByCategoryAndProvidersUseCase: FilterByCategoryAndProvidersUseCase

@@ -1,7 +1,8 @@
-package com.example.virtualsportsandroid.mainScreen.domain
+package com.example.virtualsportsandroid
 
 import com.example.virtualsportsandroid.mainScreen.data.model.GameResponse
 import com.example.virtualsportsandroid.mainScreen.data.model.GamesResponse
+import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -9,11 +10,10 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
-
-internal class FilterByCategoryUseCaseTest {
+internal class FilterByCategoryAndProvidersUseCaseTest {
     @ExperimentalCoroutinesApi
     @Test
-    fun `filter by category works correctly`() {
+    fun `filter by category and providers works correctly`() {
         val fakeGamesResponse = GamesResponse(
             listOf(
                 GameResponse(
@@ -38,25 +38,26 @@ internal class FilterByCategoryUseCaseTest {
                 ),
                 GameResponse(
                     "id5", "", "", "provider3", listOf(
-                        "category2"
+                        "category1", "category2"
                     )
                 ),
                 GameResponse(
                     "id6", "", "", "provider4", listOf(
-                        "category2"
+                        "category1", "category2"
                     )
                 )
             )
         )
         val expectedResult = listOf(
-            GameModel("id1", "", ""),
             GameModel("id2", "", ""),
             GameModel("id3", "", ""),
-            GameModel("id4", "", "")
+            GameModel("id4", "", ""),
+            GameModel("id5", "", "")
         )
         runBlockingTest {
-            FilterByCategoryUseCase(TestCoroutineDispatcher()).invoke(
+            FilterByCategoryAndProvidersUseCase(TestCoroutineDispatcher()).invoke(
                 "category1",
+                listOf("provider2", "provider3"),
                 fakeGamesResponse
             ) shouldBe expectedResult
         }

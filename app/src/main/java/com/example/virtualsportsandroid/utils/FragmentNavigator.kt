@@ -25,30 +25,9 @@ class FragmentNavigator(
             .commit()
     }
 
-    fun showMainFragmentWithoutFilters() {
-        fragmentManager.beginTransaction()
-            .replace(container, MainFragment.newInstance())
-            .addToBackStack(null)
-            .commit()
-    }
-
-    fun showMainFragmentWithFilterByCategory(category: String) {
-        fragmentManager.beginTransaction()
-            .replace(container, MainFragment.newInstance(category = category))
-            .addToBackStack(null)
-            .commit()
-    }
-
-    fun showMainFragmentWithFilterByProviders(providers: List<String>) {
-        fragmentManager.beginTransaction()
-            .replace(container, MainFragment.newInstance(providers = providers))
-            .addToBackStack(null)
-            .commit()
-    }
-
-    fun showMainFragmentWithFilterByCategoryAndProviders(
-        category: String,
-        providers: List<String>
+    fun showMainFragment(
+        category: String? = null,
+        providers: List<String>? = null
     ) {
         fragmentManager.beginTransaction()
             .replace(container, MainFragment.newInstance(category = category, providers = providers))

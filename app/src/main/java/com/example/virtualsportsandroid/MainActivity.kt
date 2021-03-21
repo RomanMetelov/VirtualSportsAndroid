@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed()
         //temp solution
         if (supportFragmentManager.backStackEntryCount < 1) {
-            fragmentNavigator.showMainFragmentWithoutFilters()
+            fragmentNavigator.showMainFragment()
         }
     }
 }
