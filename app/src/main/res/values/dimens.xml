@@ -45,4 +45,10 @@
     <dimen name="providers_title_textSize">16sp</dimen>
     <dimen name="providers_title_margin">16dp</dimen>
     <dimen name="apply_button_padding">24dp</dimen>
+    <dimen name="category_icon_width">24dp</dimen>
+    <dimen name="category_icon_height">24dp</dimen>
+    <dimen name="category_item_padding">32dp</dimen>
+    <dimen name="category_name_textSize">16sp</dimen>
+    <dimen name="provider_item_corners_radius">4dp</dimen>
+    <dimen name="provider_item_border">2dp</dimen>
 </resources>
