@@ -2,7 +2,7 @@ package com.example.virtualsportsandroid
 
 import com.example.virtualsportsandroid.mainScreen.data.model.GameResponse
 import com.example.virtualsportsandroid.mainScreen.data.model.GamesResponse
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryUseCase
+import com.example.virtualsportsandroid.mainScreen.domain.FilterByTagUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -10,11 +10,10 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
-
-internal class FilterByCategoryUseCaseTest {
+internal class FilterByTagUseCaseTest {
     @ExperimentalCoroutinesApi
     @Test
-    fun `filter by category works correctly`() {
+    fun `filter by tag works correctly`() {
         val fakeGamesResponse = GamesResponse(
             listOf(
                 GameResponse(
@@ -39,19 +38,19 @@ internal class FilterByCategoryUseCaseTest {
                     "id4", "", "", "provider3", listOf(
                         "category1"
                     ),
-                    listOf("all")
+                    listOf("top")
                 ),
                 GameResponse(
                     "id5", "", "", "provider3", listOf(
                         "category2"
                     ),
-                    listOf("all")
+                    listOf("top", "all")
                 ),
                 GameResponse(
                     "id6", "", "", "provider4", listOf(
                         "category2"
                     ),
-                    listOf("all")
+                    listOf("top")
                 )
             )
         )
@@ -59,11 +58,11 @@ internal class FilterByCategoryUseCaseTest {
             GameModel("id1", "", ""),
             GameModel("id2", "", ""),
             GameModel("id3", "", ""),
-            GameModel("id4", "", "")
+            GameModel("id5", "", "")
         )
         runBlockingTest {
-            FilterByCategoryUseCase(TestCoroutineDispatcher()).invoke(
-                "category1",
+            FilterByTagUseCase(TestCoroutineDispatcher()).invoke(
+                "all",
                 fakeGamesResponse
             ) shouldBe expectedResult
         }

@@ -5,5 +5,6 @@ data class GameResponse(
     val displayName: String,
     val imageURL: String,
     val providerId: String,
-    val categoryIds: List<String>
+    val categoryIds: List<String>,
+    val tags: List<String>
 )
