@@ -25,32 +25,8 @@ class AppModule(@NonNull private val context: Context) {
     @NonNull
     fun context(): Context = context
 
-    @Provides
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .client(
-                OkHttpClient().newBuilder()
-                    .addInterceptor(NetworkHeaderInterceptor(provideSharedPrefs()))
-                    .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                    .build()
-            )
-            .baseUrl(HttpUrl.Builder().scheme(schema).host(apiHost).build())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
+    @Singleton
     @Provides
     fun provideSharedPrefs(): SharedPref = SharedPref(context())
-
-    @Singleton
-    @Provides
-    fun provideLoginService(): LoginService =
-        provideRetrofit().create(LoginService::class.java)
-
-    @Singleton
-    @Provides
-    fun provideRegistrationService(): RegistrationService =
-        provideRetrofit().create(RegistrationService::class.java)
-
 
 }
