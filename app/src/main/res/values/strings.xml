@@ -48,4 +48,8 @@
     <string name="bet_history_item_bet_outcome">Win/Lose</string>
     <string name="game_title">Game Title</string>
     <string name="change_favorite_game_text">Ошибка при изменении списка избранного</string>
+    <string name="user_exist_registration_error_text">Данный пользователь уже зарегистрирован</string>
+    <string name="inputs_registration_error_text">Вы ввели неверные значения</string>
+    <string name="unknown_registration_error_text">Неизвестная ошибка</string>
+    <string name="network_error_text">Ошибка сети</string>
 </resources>

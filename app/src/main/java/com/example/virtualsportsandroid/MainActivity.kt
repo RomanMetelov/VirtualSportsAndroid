@@ -23,11 +23,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+
         fragmentNavigator.showGameFragment(
             ScreenGameModel(
                 "", "", "https://vsw.betradar.com/ls/mobile/?/parimatchrgs/ru/page/vsmobile_demo"
             )
         )
+        fragmentNavigator.showRegistrationFragment()
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
