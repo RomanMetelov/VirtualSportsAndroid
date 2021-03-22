@@ -60,6 +60,7 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
                 if (providers != null && providers.isEmpty()) {
                     providers = null
                 }
+                navigator.back()
                 navigator.showMainFragment(category, providers)
             }
         }

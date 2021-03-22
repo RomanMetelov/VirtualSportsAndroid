@@ -56,7 +56,7 @@
     <dimen name="filter_fragment_error_message_textSize">24sp</dimen>
     <dimen name="provider_item_padding">32dp</dimen>
     <dimen name="provider_item_marginVertical">4dp</dimen>
-    <dimen name="game_image_size">170dp</dimen>
+    <dimen name="game_image_size">144dp</dimen>
     <dimen name="divider_height">5dp</dimen>
     <dimen name="header_elements_horizontal_margin">10dp</dimen>
     <dimen name="radio_button_margin">8dp</dimen>
