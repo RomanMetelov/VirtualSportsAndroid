@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="login_margin_elements">16dp</dimen>
     <dimen name="login_half_margin_elements">8dp</dimen>

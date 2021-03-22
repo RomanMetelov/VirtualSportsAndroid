@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_light_eb"
+        android:gravity="center"
+        android:minHeight="@dimen/login_top_panel_min_height"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/close_button_image_description"
+            android:padding="@dimen/login_half_all_padding_elements"
+            android:src="@drawable/ic_close" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/login_half_margin_elements"
+            android:gravity="center"
+            android:text="@string/login_text"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/login_margin_elements"
+        android:hint="@string/login_input_text"
+        android:textColorHint="@color/gray_light_9e"
+        app:boxBackgroundColor="@color/transparent"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/gray_light_9e">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="text"
+            android:paddingStart="@dimen/zero_dp"
+            android:paddingEnd="@dimen/zero_dp"
+            android:textCursorDrawable="@drawable/color_cursor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/login_margin_elements"
+        android:layout_marginEnd="@dimen/login_margin_elements"
+        android:layout_marginBottom="@dimen/login_margin_elements"
+        android:textColorHint="@color/gray_light_9e"
+        app:boxBackgroundColor="@color/transparent"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/gray_light_9e"
+        app:passwordToggleEnabled="true">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:hint="@string/password_input_text"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/zero_dp"
+            android:paddingEnd="@dimen/zero_dp"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/color_cursor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/login_margin_elements"
+        android:layout_marginEnd="@dimen/login_margin_elements"
+        android:background="@color/gray_light_eb"
+        android:enabled="false"
+        android:padding="@dimen/login_all_padding_buttons"
+        android:text="@string/login_button_text"
+        android:textColor="@color/gray_light_9e"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/login_margin_elements"
+        android:background="@drawable/btn_register_border"
+        android:padding="@dimen/login_all_padding_buttons"
+        android:text="@string/register_btn_text"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_login_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/login_error_message_text"
+        android:textColor="@color/red"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>
