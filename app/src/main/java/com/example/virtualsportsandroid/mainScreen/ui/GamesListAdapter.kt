@@ -24,7 +24,7 @@ class GamesListAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val binding = GameItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context), null, false
         )
         return GameViewHolder(binding)
     }
