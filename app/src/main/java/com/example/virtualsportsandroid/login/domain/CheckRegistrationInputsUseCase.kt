@@ -13,6 +13,12 @@ enum class RegistrationInputsErrorType(@StringRes val messageError: Int) {
     NOT_SAME_PASSWORD(R.string.not_same_password_error)
 }
 
+data class RegistrationUserInputs(
+    val login: String,
+    val password: String,
+    val repeatPassword: String
+)
+
 data class RegistrationInputsError(
     val type: RegistrationInputsErrorType,
     val requireValue: String = ""
@@ -27,14 +33,9 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
         private const val maxPasswordLength = 20
     }
 
-    fun invoke(
-        login: String,
-        password: String,
-        repeatPassword: String
-    ): Result<Boolean, RegistrationInputsError> {
-
+    fun invoke(userInputs: RegistrationUserInputs): Result<Boolean, RegistrationInputsError> {
         return when {
-            login.length < minLoginLength -> {
+            userInputs.login.length < minLoginLength -> {
                 Result.error(
                     RegistrationInputsError(
                         RegistrationInputsErrorType.MIN_LOGIN_LENGTH,
@@ -42,7 +43,7 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
                     )
                 )
             }
-            login.length > maxLoginLength -> {
+            userInputs.login.length > maxLoginLength -> {
                 Result.error(
                     RegistrationInputsError(
                         RegistrationInputsErrorType.MAX_LOGIN_LENGTH,
@@ -50,7 +51,7 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
                     )
                 )
             }
-            password.length < minPasswordLength -> {
+            userInputs.password.length < minPasswordLength -> {
                 Result.error(
                     RegistrationInputsError(
                         RegistrationInputsErrorType.MIN_PASSWORD_LENGTH,
@@ -58,7 +59,7 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
                     )
                 )
             }
-            password.length > maxPasswordLength -> {
+            userInputs.password.length > maxPasswordLength -> {
                 Result.error(
                     RegistrationInputsError(
                         RegistrationInputsErrorType.MAX_PASSWORD_LENGTH,
@@ -66,7 +67,7 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
                     )
                 )
             }
-            password != repeatPassword -> {
+            userInputs.password != userInputs.repeatPassword -> {
                 Result.error(
                     RegistrationInputsError(
                         RegistrationInputsErrorType.NOT_SAME_PASSWORD
@@ -76,6 +77,4 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
             else -> Result.success(true)
         }
     }
-
-
 }
