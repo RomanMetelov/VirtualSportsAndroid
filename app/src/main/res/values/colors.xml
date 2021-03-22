@@ -19,4 +19,8 @@
     <color name="red">#B71C1C</color>
     <color name="transparent">#00000000</color>
     <color name="gray_dark">#0F0F0F</color>
+
+    <color name="dice_ground_shade">#FBFB33</color>
+    <color name="dice_edge">#888800</color>
+    <color name="dice_corner">#666600</color>
 </resources>
