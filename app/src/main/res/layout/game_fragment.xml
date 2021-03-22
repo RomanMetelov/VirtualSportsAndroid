@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/game_title_padding"
+        android:layout_marginStart="@dimen/game_title_margin"
+        android:contentDescription="@string/back_button_description"
+        android:src="@drawable/ic_baseline_arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGameTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvGameTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvGameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/header_elements_horizontal_margin"
+        android:padding="@dimen/game_title_padding"
+        android:text="@string/game_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/game_title_textSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/webview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivAddedToFavourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
+        android:contentDescription="@string/added_to_favourites_button_decription"
+        android:src="@drawable/ic_baseline_favourite_added"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGameTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvGameTitle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivAddToFavourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
+        android:contentDescription="@string/add_to_favourites_button_description"
+        android:src="@drawable/ic_baseline_favourite_not_added"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGameTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvGameTitle" />
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGameTitle" />
+</androidx.constraintlayout.widget.ConstraintLayout>
