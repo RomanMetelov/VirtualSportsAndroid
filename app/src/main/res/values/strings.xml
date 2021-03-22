@@ -47,4 +47,5 @@
     <string name="bet_history_item_bet_result_value">%d, %s</string>
     <string name="bet_history_item_bet_outcome">Win/Lose</string>
     <string name="game_title">Game Title</string>
+    <string name="change_favorite_game_text">Ошибка при изменении списка избранного</string>
 </resources>

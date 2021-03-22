@@ -3,6 +3,7 @@ package com.example.virtualsportsandroid
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.utils.FragmentNavigator
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +20,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        fragmentNavigator.showLoginFragment()
+        fragmentNavigator.showGameFragment(
+            ScreenGameModel(
+                "", "", "https://vsw.betradar.com/ls/mobile/?/parimatchrgs/ru/page/vsmobile_demo"
+            )
+        )
     }
 
     override fun onBackPressed() {
