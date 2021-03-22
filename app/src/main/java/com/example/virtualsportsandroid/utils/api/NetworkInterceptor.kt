@@ -13,7 +13,9 @@ class NetworkInterceptor @Inject constructor() {
             NetworkStatusCode.NotFound.code.toString() -> Result.error(NetworkErrorType.RESOURCE_NOT_FOUND)
             NetworkStatusCode.Forbidden.code.toString() -> Result.error(NetworkErrorType.API_RATE_LIMIT_EXCEED)
             NetworkStatusCode.Unauthorized.code.toString() -> Result.error(NetworkErrorType.UNAUTHORIZED)
+            NetworkStatusCode.Conflict.code.toString() -> Result.error(NetworkErrorType.USER_EXIST)
             else -> Result.error(NetworkErrorType.UNKNOWN_ERROR)
         }
     }
+
 }

@@ -5,5 +5,6 @@ enum class NetworkErrorType {
     RESOURCE_NOT_FOUND,
     API_RATE_LIMIT_EXCEED,
     UNAUTHORIZED,
+    USER_EXIST,
     UNKNOWN_ERROR
 }
