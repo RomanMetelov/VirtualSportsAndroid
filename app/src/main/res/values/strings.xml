@@ -14,7 +14,7 @@
     <string name="max_password_length_error">Максимальная длина пароля %1$s</string>
     <string name="not_same_password_error">Пароли не совпадают</string>
     <string name="empty_login_error">Номер счёта не может быть пустым</string>
-    <string name="empty_password_error">Пароль не может быть пустымт</string>
+    <string name="empty_password_error">Пароль не может быть пустым</string>
     <string name="login_error_message_text">Неверно указан логин или пароль</string>
     <string name="logout_button_text">Выход</string>
     <string name="signup_button_text">Регистрация</string>
