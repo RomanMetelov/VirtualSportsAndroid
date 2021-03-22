@@ -36,4 +36,5 @@
     <dimen name="main_fragment_error_message_textSize">24sp</dimen>
     <dimen name="filter_button_paddingVertical">16dp</dimen>
     <dimen name="top_games_space_between">16dp</dimen>
+    <dimen name="game_image_size">170dp</dimen>
 </resources>

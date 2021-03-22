@@ -9,8 +9,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivGameImage"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="@dimen/game_image_size"
+        android:layout_height="@dimen/game_image_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
