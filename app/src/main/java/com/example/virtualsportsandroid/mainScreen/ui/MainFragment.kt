@@ -49,11 +49,16 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
     }
 
     private fun setupListeners() {
-        binding.header.btnLogin.setOnClickListener {
-            navigator.showLoginFragment()
-        }
-        binding.header.btnSignUp.setOnClickListener {
-            navigator.showRegistrationFragment()
+        with(binding) {
+            header.btnLogin.setOnClickListener {
+                navigator.showLoginFragment()
+            }
+            header.btnSignUp.setOnClickListener {
+                navigator.showRegistrationFragment()
+            }
+            llFilterButton.setOnClickListener {
+                navigator.showFilterFragment()
+            }
         }
     }
 

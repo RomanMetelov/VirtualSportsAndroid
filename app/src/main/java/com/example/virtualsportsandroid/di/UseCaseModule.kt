@@ -1,6 +1,8 @@
 package com.example.virtualsportsandroid.di
 
 import android.content.Context
+import com.example.virtualsportsandroid.filter.data.FiltersRepository
+import com.example.virtualsportsandroid.filter.domain.FiltersLoadingUseCase
 import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByTagUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryUseCase
@@ -76,5 +78,11 @@ class UseCaseModule {
         context: Context
     ): LoadingByCategoryAndProvidersUseCase {
         return LoadingByCategoryAndProvidersUseCase(Dispatchers.IO, gamesRepository, context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFiltersLoadingUseCase(filtersRepository: FiltersRepository): FiltersLoadingUseCase {
+        return FiltersLoadingUseCase(Dispatchers.Default, filtersRepository)
     }
 }

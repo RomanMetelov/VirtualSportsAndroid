@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GameItemBinding
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameDiffCallback
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.utils.ui.loadGameImageFromURL
+import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
+import com.example.virtualsportsandroid.utils.ui.loadImageFromURLWithPlaceholder
 
 class GamesListAdapter :
     ListAdapter<GameModel, GamesListAdapter.GameViewHolder>(GameDiffCallback()) {
@@ -17,7 +19,10 @@ class GamesListAdapter :
         fun bind(gameModel: GameModel) {
             with(binding) {
                 tvGameName.text = gameModel.displayName
-                ivGameImage.loadGameImageFromURL(gameModel.imageURL)
+                ivGameImage.loadImageFromURLWithPlaceholder(
+                    gameModel.imageURL,
+                    R.drawable.game_image_placeholder
+                )
             }
         }
     }
