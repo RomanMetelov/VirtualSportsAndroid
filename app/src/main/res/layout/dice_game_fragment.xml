@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_background"
+    tools:context=".MainActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/game_title_margin"
+        android:contentDescription="@string/back_button_description"
+        android:paddingTop="@dimen/game_title_padding"
+        android:src="@drawable/ic_baseline_arrow_back"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDiceGameTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvDiceGameTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDiceGameTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/header_elements_horizontal_margin"
+        android:padding="@dimen/game_title_padding"
+        android:text="@string/dice_game_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/game_title_textSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/btnShowBetHistory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivAddedToFavourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
+        android:contentDescription="@string/added_to_favourites_button_decription"
+        android:src="@drawable/ic_baseline_favourite_added"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDiceGameTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvDiceGameTitle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivAddToFavourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
+        android:contentDescription="@string/add_to_favourites_button_description"
+        android:src="@drawable/ic_baseline_favourite_not_added"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDiceGameTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvDiceGameTitle" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnShowBetHistory"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiceGameTitle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnShowBetHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/header_elements_horizontal_margin"
+        android:background="@drawable/bet_history_button_background"
+        android:text="@string/button_bet_history_text"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rgBetTypesSet1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiceGameTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPlaceYourBet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/header_elements_horizontal_margin"
+        android:text="@string/tv_place_your_bet_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/place_your_bet_textSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/rgBetTypesSet1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/rgBetTypesSet1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/radio_group_horizontal_padding"
+        app:layout_constraintBottom_toTopOf="@+id/rgBetTypesSet2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowBetHistory">
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:button="@drawable/ic_twotone_bet_1" />
+
+        <RadioButton
+            android:id="@+id/radio3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:button="@drawable/ic_twotone_bet_3" />
+
+        <RadioButton
+            android:id="@+id/radio5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:button="@drawable/ic_twotone_bet_5" />
+
+        <RadioButton
+            android:id="@+id/radioOdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:paddingHorizontal="@dimen/radio_button_margin"
+            android:text="@string/radio_button_odd_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/radio_button_textSize" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rgBetTypesSet2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/radio_group_horizontal_padding"
+        app:layout_constraintBottom_toTopOf="@+id/ivDiceImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet1">
+
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:button="@drawable/ic_twotone_bet_2" />
+
+        <RadioButton
+            android:id="@+id/radio4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:button="@drawable/ic_twotone_bet_4" />
+
+        <RadioButton
+            android:id="@+id/radio6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:button="@drawable/ic_twotone_bet_6" />
+
+        <RadioButton
+            android:id="@+id/radioEven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/radio_button_margin"
+            android:paddingHorizontal="@dimen/radio_button_margin"
+            android:text="@string/radio_button_even_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/radio_button_textSize" />
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivDiceImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dice_start"
+        app:layout_constraintBottom_toTopOf="@+id/tvDiceGameRollResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet2"
+        tools:src="@drawable/dice_start" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDiceGameRollResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dice_game_roll_result_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/radio_button_textSize"
+        app:layout_constraintBottom_toTopOf="@+id/btnRoll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivDiceImage" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/game_title_margin"
+        android:background="@drawable/roll_button_background"
+        android:paddingHorizontal="@dimen/button_roll_horizontal_padding"
+        android:text="@string/roll_the_dice_button_text"
+        android:textColor="@color/black"
+        android:textSize="@dimen/game_title_textSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiceGameRollResult" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

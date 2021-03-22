@@ -5,6 +5,7 @@ import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByProvidersUseCase
+import com.example.virtualsportsandroid.mainScreen.domain.FilterByTagUseCase
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +19,15 @@ class RepositoryModule {
     fun provideGamesRepository(
         filterByCategoryUseCase: FilterByCategoryUseCase,
         filterByProvidersUseCase: FilterByProvidersUseCase,
-        filterByCategoryAndProvidersUseCase: FilterByCategoryAndProvidersUseCase
+        filterByCategoryAndProvidersUseCase: FilterByCategoryAndProvidersUseCase,
+        filterByTagUseCase: FilterByTagUseCase
     ): GamesRepository {
         return GamesRepository(
             Dispatchers.IO,
             filterByCategoryUseCase,
             filterByProvidersUseCase,
-            filterByCategoryAndProvidersUseCase
+            filterByCategoryAndProvidersUseCase,
+            filterByTagUseCase
         )
     }
 

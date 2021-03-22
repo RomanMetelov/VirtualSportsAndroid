@@ -20,32 +20,38 @@ internal class FilterByCategoryUseCaseTest {
                 GameResponse(
                     "id1", "", "", "provider1", listOf(
                         "category1", "category2"
-                    )
+                    ),
+                    listOf("all")
                 ),
                 GameResponse(
                     "id2", "", "", "provider2", listOf(
                         "category1"
-                    )
+                    ),
+                    listOf("all")
                 ),
                 GameResponse(
                     "id3", "", "", "provider2", listOf(
                         "category1", "category2", "category3"
-                    )
+                    ),
+                    listOf("all")
                 ),
                 GameResponse(
                     "id4", "", "", "provider3", listOf(
                         "category1"
-                    )
+                    ),
+                    listOf("all")
                 ),
                 GameResponse(
                     "id5", "", "", "provider3", listOf(
                         "category2"
-                    )
+                    ),
+                    listOf("all")
                 ),
                 GameResponse(
                     "id6", "", "", "provider4", listOf(
                         "category2"
-                    )
+                    ),
+                    listOf("all")
                 )
             )
         )
