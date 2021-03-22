@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="login_margin_elements">16dp</dimen>
     <dimen name="login_half_margin_elements">8dp</dimen>
@@ -38,6 +37,7 @@
     <dimen name="filter_button_paddingVertical">16dp</dimen>
     <dimen name="top_games_space_between">16dp</dimen>
     <dimen name="game_image_size">170dp</dimen>
+
 
     <dimen name="divider_height">5dp</dimen>
     <dimen name="header_elements_horizontal_margin">10dp</dimen>

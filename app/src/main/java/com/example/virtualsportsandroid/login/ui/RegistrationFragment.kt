@@ -14,8 +14,11 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.RegistrationFragmentBinding
+import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
+import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.login.domain.RegistrationInputsError
 import com.example.virtualsportsandroid.login.domain.RegistrationInputsErrorType
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.showError
 import javax.inject.Inject
@@ -51,6 +54,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         setupViews()
         setupListeners()
         observeCheckInputsLiveData()
+        observeRegistrationTryLiveData()
     }
 
     private fun setupViews() {
@@ -136,6 +140,28 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         editText.showError(requireActivity().getString(idResErrorText, requireValue))
     }
 
+    private fun observeRegistrationTryLiveData() {
+        viewModel.registrationTryLiveData.observe(viewLifecycleOwner, { result ->
+            if (result.isError) {
+                handleRegisterError(result.errorResult)
+            } else {
+                saveUserTokenToLocal(result.successResult)
+                requireActivity().onBackPressed()
+            }
+        })
+    }
+
+    private fun handleRegisterError(errorResult: NetworkErrorType) {
+        when (errorResult) {
+            NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
+            else -> return
+        }
+    }
+
+    private fun saveUserTokenToLocal(successResult: AccessTokenResponse) {
+        sharedPreferences.token = successResult.accessToken.toString()
+    }
+
     private fun enableRegisterButton() {
         etLogin.error = null
         etPassword.error = null
@@ -157,6 +183,11 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun tryRegister() {
-        requireActivity().onBackPressed()
+        viewModel.tryRegister(
+            UserModel(
+                login = etLogin.toString(),
+                password = etPassword.toString()
+            )
+        )
     }
 }

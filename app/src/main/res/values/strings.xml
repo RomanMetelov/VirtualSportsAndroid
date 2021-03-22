@@ -27,6 +27,7 @@
     <string name="search_results_title">Результаты поиска</string>
     <string name="not_found_message">Не найдено…</string>
 
+
     <string name="roll_the_dice_button_text">ROLL!</string>
     <string name="dice_game_roll_result_text">Result: %d - %s</string>
     <string name="back_button_description">Back button</string>
