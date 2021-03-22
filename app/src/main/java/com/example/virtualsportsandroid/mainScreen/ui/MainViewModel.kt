@@ -24,36 +24,31 @@ class MainViewModel @Inject constructor(
     fun loadNotFilteredGames() {
         viewModelScope.launch {
             _mainFragmentStateLiveData.value = MainFragmentState.Loading
-            notFilteredGamesLoadingUseCase().let {
-                _mainFragmentStateLiveData.value = it
-            }
+            _mainFragmentStateLiveData.value = notFilteredGamesLoadingUseCase.invoke()
         }
     }
 
     fun loadFilteredByCategory(category: String) {
         viewModelScope.launch {
             _mainFragmentStateLiveData.value = MainFragmentState.Loading
-            loadingByCategoryUseCase(category).let {
-                _mainFragmentStateLiveData.value = it
-            }
+            _mainFragmentStateLiveData.value = loadingByCategoryUseCase.invoke(category)
         }
     }
 
     fun loadFilteredByProviders(providers: List<String>) {
         viewModelScope.launch {
             _mainFragmentStateLiveData.value = MainFragmentState.Loading
-            loadingByProvidersUseCase(providers).let {
-                _mainFragmentStateLiveData.value = it
-            }
+            _mainFragmentStateLiveData.value = loadingByProvidersUseCase.invoke(providers)
+
         }
     }
 
     fun loadFilteredByCategoryAndProviders(category: String, providers: List<String>) {
         viewModelScope.launch {
             _mainFragmentStateLiveData.value = MainFragmentState.Loading
-            loadingByCategoryAndProvidersUseCase(category, providers).let {
-                _mainFragmentStateLiveData.value = it
-            }
+            _mainFragmentStateLiveData.value =
+                loadingByCategoryAndProvidersUseCase.invoke(category, providers)
+
         }
     }
 }

@@ -2,6 +2,7 @@
 
 package com.example.virtualsportsandroid.di
 
+import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
 import com.example.virtualsportsandroid.login.ui.RegistrationFragment
 import com.example.virtualsportsandroid.mainScreen.ui.MainFragment
@@ -17,4 +18,5 @@ interface AppComponent {
     fun inject(loginFragment: LoginFragment)
     fun inject(networkErrorFragment: NetworkErrorFragment)
     fun inject(mainFragment: MainFragment)
+    fun inject(filterFragment: FilterFragment)
 }
