@@ -52,4 +52,7 @@
     <string name="inputs_registration_error_text">Вы ввели неверные значения</string>
     <string name="unknown_registration_error_text">Неизвестная ошибка</string>
     <string name="network_error_text">Ошибка сети</string>
+    <string name="inputs_login_error_text">Вы ввели неверные значения</string>
+    <string name="user_not_found_login_error_text">Пользователь не найден</string>
+    <string name="unknown_login_error_text">Неизвестная ошибка</string>
 </resources>

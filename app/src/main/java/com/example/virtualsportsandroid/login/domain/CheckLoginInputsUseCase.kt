@@ -2,6 +2,7 @@ package com.example.virtualsportsandroid.login.domain
 
 import androidx.annotation.StringRes
 import com.example.virtualsportsandroid.R
+import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.utils.Result
 import javax.inject.Inject
 
@@ -19,11 +20,10 @@ class CheckLoginInputsUseCase @Inject constructor() {
     }
 
     fun invoke(
-        login: String,
-        password: String
+        user: UserModel
     ): Result<Boolean, LoginInputsError> {
         return when {
-            login.isEmpty() -> {
+            user.login.isEmpty() -> {
                 Result.error(
                     LoginInputsError(
                         LoginInputsErrorType.EMPTY_LOGIN,
@@ -31,7 +31,7 @@ class CheckLoginInputsUseCase @Inject constructor() {
                     )
                 )
             }
-            password.isEmpty() -> {
+            user.password.isEmpty() -> {
                 Result.error(
                     LoginInputsError(
                         LoginInputsErrorType.EMPTY_PASSWORD,

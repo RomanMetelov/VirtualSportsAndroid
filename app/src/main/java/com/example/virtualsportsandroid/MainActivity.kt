@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 "", "", "https://vsw.betradar.com/ls/mobile/?/parimatchrgs/ru/page/vsmobile_demo"
             )
         )
-        fragmentNavigator.showRegistrationFragment()
+        fragmentNavigator.showLoginFragment()
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
