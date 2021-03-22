@@ -9,22 +9,22 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivGameImage"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
+        android:layout_width="@dimen/game_image_size"
+        android:layout_height="@dimen/game_image_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvGameName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/game_name_marginTop"
         android:fontFamily="@font/roboto_condensed"
         android:textColor="@color/white"
         android:textSize="@dimen/game_name_textSize"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/ivGameImage"
         app:layout_constraintTop_toBottomOf="@id/ivGameImage"
         tools:text="Football World Cup" />
 </androidx.constraintlayout.widget.ConstraintLayout>
