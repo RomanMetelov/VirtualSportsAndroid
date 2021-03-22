@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.di
 
+import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryUseCase
@@ -27,4 +28,9 @@ class RepositoryModule {
         )
     }
 
+    @Singleton
+    @Provides
+    fun provideFiltersRepository(): FiltersRepository {
+        return FiltersRepository(Dispatchers.IO)
+    }
 }

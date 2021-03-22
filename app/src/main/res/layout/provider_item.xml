@@ -2,12 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/provider_item_marginVertical"
     android:background="@drawable/provider_item_background"
-    android:padding="16dp">
+    android:padding="@dimen/provider_item_padding">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivProviderImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/provider_image_width"
+        android:layout_height="@dimen/provider_image_height"
         android:layout_gravity="center" />
 </FrameLayout>

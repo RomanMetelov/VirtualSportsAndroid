@@ -2,6 +2,7 @@ package com.example.virtualsportsandroid.utils
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
+import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
 import com.example.virtualsportsandroid.login.ui.RegistrationFragment
 import com.example.virtualsportsandroid.mainScreen.ui.MainFragment
@@ -30,7 +31,10 @@ class FragmentNavigator(
         providers: List<String>? = null
     ) {
         fragmentManager.beginTransaction()
-            .replace(container, MainFragment.newInstance(category = category, providers = providers))
+            .replace(
+                container,
+                MainFragment.newInstance(category = category, providers = providers)
+            )
             .addToBackStack(null)
             .commit()
     }
@@ -40,5 +44,16 @@ class FragmentNavigator(
             .replace(container, NetworkErrorFragment.newInstance())
             .addToBackStack(null)
             .commit()
+    }
+
+    fun showFilterFragment() {
+        fragmentManager.beginTransaction()
+            .replace(container, FilterFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun back() {
+        fragmentManager.popBackStack()
     }
 }
