@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.login.data.api
 
-import android.util.Log
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.utils.Result
@@ -22,7 +21,6 @@ class LoginUtils @Inject constructor(
                 )
             )
         } catch (e: Exception) {
-            Log.d("TAG", "tryLogin: ${e}")
             networkInterceptor.getError(e)
         }
     }

@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.di
 
+import com.example.virtualsportsandroid.game.data.api.GameScreenService
 import com.example.virtualsportsandroid.login.data.api.LoginService
 import com.example.virtualsportsandroid.login.data.api.RegistrationService
 import com.example.virtualsportsandroid.utils.api.NetworkHeaderInterceptor
@@ -42,5 +43,10 @@ class NetworkModule {
     @Provides
     fun provideRegistrationService(retrofit: Retrofit): RegistrationService =
         retrofit.create(RegistrationService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideGameScreenService(retrofit: Retrofit): GameScreenService =
+        retrofit.create(GameScreenService::class.java)
 
 }
