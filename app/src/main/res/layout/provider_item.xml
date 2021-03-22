@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/provider_item_marginVertical"
-    android:background="@drawable/provider_item_background"
+    android:background="@drawable/default_provider_item_background"
     android:padding="@dimen/provider_item_padding">
 
     <androidx.appcompat.widget.AppCompatImageView

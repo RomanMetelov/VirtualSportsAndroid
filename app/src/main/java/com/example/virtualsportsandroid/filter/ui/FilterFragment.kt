@@ -2,8 +2,6 @@ package com.example.virtualsportsandroid.filter.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
@@ -25,17 +23,22 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
     lateinit var viewModel: FilterViewModel
     private lateinit var binding: FilterFragmentBinding
     private val categoryAdapter: CategoryListAdapter by lazy {
-        CategoryListAdapter(viewModel::selectCategory) {
+        CategoryListAdapter(viewModel::selectCategory, viewModel::unselectCategory) {
             viewModel.selectedCategoryLiveData.value.toString()
         }
     }
-    private val providerAdapter = ProviderListAdapter()
+    private val providerAdapter: ProviderListAdapter by lazy {
+        ProviderListAdapter(viewModel::selectProvider, viewModel::unselectProvider) {
+            viewModel.selectedProvidersLiveData.value ?: emptyList()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FilterFragmentBinding.bind(view)
         setupViewModel()
         setupRecyclerViews()
+        observeSelectedItems()
         setupListeners()
         viewModel.loadData()
     }
@@ -50,6 +53,14 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
             }
             header.btnSignUp.setOnClickListener {
                 navigator.showRegistrationFragment()
+            }
+            btnApply.setOnClickListener {
+                val category = viewModel.selectedCategoryLiveData.value
+                var providers = viewModel.selectedProvidersLiveData.value
+                if (providers != null && providers.isEmpty()) {
+                    providers = null
+                }
+                navigator.showMainFragment(category, providers)
             }
         }
     }
@@ -119,14 +130,26 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
                 layoutManager = LinearLayoutManager(context)
                 adapter = categoryAdapter
             }
-            viewModel.selectedCategoryLiveData.observe(viewLifecycleOwner) {
-                if (!btnApply.isVisible && it != null) {
-                    btnApply.show()
-                }
-            }
             rvProviders.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = providerAdapter
+            }
+        }
+    }
+
+    private fun observeSelectedItems() {
+        viewModel.selectedCategoryLiveData.observe(viewLifecycleOwner) {
+            if (it == null && viewModel.selectedProvidersLiveData.value.isNullOrEmpty()) {
+                binding.btnApply.hide()
+            } else {
+                binding.btnApply.show()
+            }
+        }
+        viewModel.selectedProvidersLiveData.observe(viewLifecycleOwner) {
+            if (viewModel.selectedCategoryLiveData.value == null && it.isNullOrEmpty()) {
+                binding.btnApply.hide()
+            } else {
+                binding.btnApply.show()
             }
         }
     }

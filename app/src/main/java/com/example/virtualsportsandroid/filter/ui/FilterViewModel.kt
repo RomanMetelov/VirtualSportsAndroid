@@ -18,6 +18,11 @@ class FilterViewModel @Inject constructor(
     private val _selectedCategoryLiveData = MutableLiveData<String?>()
     val selectedCategoryLiveData: LiveData<String?> = _selectedCategoryLiveData
 
+    private val _selectedProvidersLiveData = MutableLiveData<List<String>>().apply {
+        value = emptyList()
+    }
+    val selectedProvidersLiveData: LiveData<List<String>> = _selectedProvidersLiveData
+
     fun loadData() {
         viewModelScope.launch {
             _filterFragmentStateLiveData.value = FilterFragmentState.Loading
@@ -28,6 +33,28 @@ class FilterViewModel @Inject constructor(
     fun selectCategory(category: String) {
         viewModelScope.launch {
             _selectedCategoryLiveData.value = category
+        }
+    }
+
+    fun unselectCategory() {
+        viewModelScope.launch {
+            _selectedCategoryLiveData.value = null
+        }
+    }
+
+    fun selectProvider(provider: String) {
+        viewModelScope.launch {
+            (_selectedProvidersLiveData.value ?: emptyList()).let {
+                _selectedProvidersLiveData.value = it + provider
+            }
+        }
+    }
+
+    fun unselectProvider(provider: String) {
+        viewModelScope.launch {
+            (_selectedProvidersLiveData.value ?: emptyList()).let { selectedProviders ->
+                _selectedProvidersLiveData.value = selectedProviders.filter { it != provider }
+            }
         }
     }
 }

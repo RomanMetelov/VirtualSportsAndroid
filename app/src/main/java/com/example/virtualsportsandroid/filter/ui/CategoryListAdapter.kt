@@ -13,6 +13,7 @@ import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
 
 class CategoryListAdapter(
     private val selectCategory: (String) -> Unit,
+    private val unselectCategory: () -> Unit,
     private val getSelectedCategory: () -> String
 ) :
     ListAdapter<CategoryResponse, CategoryListAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
@@ -21,6 +22,7 @@ class CategoryListAdapter(
     class CategoryViewHolder(
         private val binding: CategoryItemBinding,
         private val selectCategory: (String) -> Unit,
+        private val unselectCategory: () -> Unit,
         private val getSelectedCategory: () -> String,
         private val update: () -> Unit
     ) :
@@ -36,7 +38,11 @@ class CategoryListAdapter(
                     }
                 }
                 root.setOnClickListener {
-                    selectCategory(category.id)
+                    if(getSelectedCategory() != category.id) {
+                        selectCategory(category.id)
+                    } else {
+                        unselectCategory()
+                    }
                     update()
                 }
                 if (category.id == getSelectedCategory()) {
@@ -56,7 +62,7 @@ class CategoryListAdapter(
             parent,
             false
         )
-        return CategoryViewHolder(binding, selectCategory, getSelectedCategory) {
+        return CategoryViewHolder(binding, selectCategory, unselectCategory, getSelectedCategory) {
             notifyDataSetChanged()
         }
     }
