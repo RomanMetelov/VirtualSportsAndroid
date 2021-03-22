@@ -1,6 +1,6 @@
 @file:Suppress("TooManyFunctions")
 
-package com.example.virtualsportsandroid.login.ui
+package com.example.virtualsportsandroid.registration.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,12 +15,12 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.RegistrationFragmentBinding
-import com.example.virtualsportsandroid.login.data.api.RegistrationErrorType
+import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
-import com.example.virtualsportsandroid.login.domain.RegistrationInputsError
-import com.example.virtualsportsandroid.login.domain.RegistrationInputsErrorType
-import com.example.virtualsportsandroid.login.domain.RegistrationUserInputs
+import com.example.virtualsportsandroid.registration.domain.RegistrationInputsError
+import com.example.virtualsportsandroid.registration.domain.RegistrationInputsErrorType
+import com.example.virtualsportsandroid.registration.domain.RegistrationUserInputs
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show

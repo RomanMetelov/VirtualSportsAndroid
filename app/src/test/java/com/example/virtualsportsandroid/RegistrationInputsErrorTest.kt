@@ -1,8 +1,8 @@
 package com.example.virtualsportsandroid
 
-import com.example.virtualsportsandroid.login.domain.CheckRegistrationInputsUseCase
-import com.example.virtualsportsandroid.login.domain.RegistrationInputsErrorType
-import com.example.virtualsportsandroid.login.domain.RegistrationUserInputs
+import com.example.virtualsportsandroid.registration.domain.CheckRegistrationInputsUseCase
+import com.example.virtualsportsandroid.registration.domain.RegistrationInputsErrorType
+import com.example.virtualsportsandroid.registration.domain.RegistrationUserInputs
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 

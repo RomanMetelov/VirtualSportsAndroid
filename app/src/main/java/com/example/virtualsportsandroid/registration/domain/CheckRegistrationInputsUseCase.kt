@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.login.domain
+package com.example.virtualsportsandroid.registration.domain
 
 import androidx.annotation.StringRes
 import com.example.virtualsportsandroid.R

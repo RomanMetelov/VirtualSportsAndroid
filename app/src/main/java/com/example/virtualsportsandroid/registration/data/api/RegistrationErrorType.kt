@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.login.data.api
+package com.example.virtualsportsandroid.registration.data.api
 
 import androidx.annotation.StringRes
 import com.example.virtualsportsandroid.R

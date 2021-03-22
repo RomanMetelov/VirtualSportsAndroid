@@ -1,6 +1,6 @@
-package com.example.virtualsportsandroid.login.domain
+package com.example.virtualsportsandroid.registration.domain
 
-import com.example.virtualsportsandroid.login.data.api.RegistrationErrorType
+import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import javax.inject.Inject
 
