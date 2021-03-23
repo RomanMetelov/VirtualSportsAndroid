@@ -2,7 +2,7 @@ package com.example.virtualsportsandroid
 
 import android.content.Context
 import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.data.model.GamesLoadingError
+import com.example.virtualsportsandroid.mainScreen.data.GamesLoadingError
 import com.example.virtualsportsandroid.mainScreen.domain.LoadingByCategoryUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
 import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
@@ -14,7 +14,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 internal class LoadingByCategoryUseCaseTest {

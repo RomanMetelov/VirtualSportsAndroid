@@ -23,14 +23,18 @@ class RepositoryModule {
         filterByCategoryUseCase: FilterByCategoryUseCase,
         filterByProvidersUseCase: FilterByProvidersUseCase,
         filterByCategoryAndProvidersUseCase: FilterByCategoryAndProvidersUseCase,
-        filterByTagUseCase: FilterByTagUseCase
+        filterByTagUseCase: FilterByTagUseCase,
+        sharedPref: SharedPref,
+        gson: Gson
     ): GamesRepository {
         return GamesRepository(
             Dispatchers.IO,
             filterByCategoryUseCase,
             filterByProvidersUseCase,
             filterByCategoryAndProvidersUseCase,
-            filterByTagUseCase
+            filterByTagUseCase,
+            sharedPref,
+            gson
         )
     }
 

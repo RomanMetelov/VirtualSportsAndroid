@@ -6,7 +6,7 @@ import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
 sealed class MainFragmentState {
     object Loading : MainFragmentState()
     data class Error(val errorMessage: String) : MainFragmentState()
-    data class NotFiltered(val topGames: List<GameModel>, val allGames: List<GameModel>) :
+    data class NotFiltered(val gamesWithFirstTag: List<GameModel>, val allGamesWithoutFirstTag: List<GameModel>) :
         MainFragmentState()
 
     data class FilteredByCategory(

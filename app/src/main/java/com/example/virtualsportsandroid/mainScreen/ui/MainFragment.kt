@@ -101,7 +101,7 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is MainFragmentState.Loading -> showLoading()
-                is MainFragmentState.NotFiltered -> showNotFilteredGames(it.topGames, it.allGames)
+                is MainFragmentState.NotFiltered -> showNotFilteredGames(it.gamesWithFirstTag, it.allGamesWithoutFirstTag)
                 is MainFragmentState.FilteredByCategory -> {
                     showFilteredGames(it.filteredGames)
                     binding.tvAllGamesTitle.text = it.categoryName

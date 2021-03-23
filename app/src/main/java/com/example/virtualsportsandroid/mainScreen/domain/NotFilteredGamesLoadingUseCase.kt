@@ -3,7 +3,7 @@ package com.example.virtualsportsandroid.mainScreen.domain
 import android.content.Context
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.data.model.GamesLoadingError
+import com.example.virtualsportsandroid.mainScreen.data.GamesLoadingError
 import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -14,18 +14,18 @@ class NotFilteredGamesLoadingUseCase(
     private val context: Context
 ) {
     suspend operator fun invoke(): MainFragmentState = withContext(dispatcher) {
-        val allGamesResult = gamesRepository.getAllGames()
-        val topGamesResult = gamesRepository.getTopGames()
+        val allGamesWithoutFirstTagResult = gamesRepository.getAllGamesWithoutFirstTag()
+        val gamesWithFirstTagResult = gamesRepository.getGamesWithFirstTag()
         when {
-            allGamesResult.isError -> {
-                when (allGamesResult.errorResult) {
+            allGamesWithoutFirstTagResult.isError -> {
+                when (allGamesWithoutFirstTagResult.errorResult) {
                     GamesLoadingError.NOT_FOUND -> {
                         return@withContext MainFragmentState.Error(context.getString(R.string.not_found_message))
                     }
                 }
             }
-            topGamesResult.isError -> {
-                when (topGamesResult.errorResult) {
+            gamesWithFirstTagResult.isError -> {
+                when (gamesWithFirstTagResult.errorResult) {
                     GamesLoadingError.NOT_FOUND -> {
                         return@withContext MainFragmentState.Error(context.getString(R.string.not_found_message))
                     }
@@ -33,8 +33,8 @@ class NotFilteredGamesLoadingUseCase(
             }
             else -> {
                 return@withContext MainFragmentState.NotFiltered(
-                    topGamesResult.successResult,
-                    allGamesResult.successResult
+                    gamesWithFirstTagResult.successResult,
+                    allGamesWithoutFirstTagResult.successResult
                 )
             }
         }
