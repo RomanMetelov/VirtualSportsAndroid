@@ -1,3 +1,4 @@
+@file:Suppress("TooManyFunctions")
 package com.example.virtualsportsandroid.game.ui
 
 import android.annotation.SuppressLint
@@ -13,7 +14,7 @@ import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GameFragmentBinding
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
-import com.example.virtualsportsandroid.utils.api.NetworkErrorType
+import com.example.virtualsportsandroid.game.data.api.GameScreenErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.isVisible
@@ -83,18 +84,22 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
                 game.isFavorite = !game.isFavorite
                 changeFavoriteStarView()
             } else {
-                when (result.errorResult) {
-                    NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
-                    else -> {
-                        Toast.makeText(
-                            context,
-                            getString(R.string.change_favorite_game_text),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+                handleErrorOnUi(result.errorResult)
             }
         })
+    }
+
+    private fun handleErrorOnUi(errorType: GameScreenErrorType) {
+        when (errorType) {
+            GameScreenErrorType.NETWORK_ERROR -> navigator.showNoNetworkFragment()
+            else -> {
+                Toast.makeText(
+                    context,
+                    getString(R.string.change_favorite_game_text),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun changeGameFavorite() {
