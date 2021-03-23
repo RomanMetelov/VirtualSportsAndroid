@@ -18,6 +18,7 @@ import javax.inject.Singleton
 @Module(includes = [UseCaseModule::class, AppModule::class])
 class RepositoryModule {
 
+    @Suppress("LongParameterList")
     @Singleton
     @Provides
     fun provideGamesRepository(

@@ -7,7 +7,7 @@ import com.example.virtualsportsandroid.game.ui.GameFragment
 import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.loadingConfigs.ui.LoadingFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
-import com.example.virtualsportsandroid.login.ui.RegistrationFragment
+import com.example.virtualsportsandroid.registration.ui.RegistrationFragment
 import com.example.virtualsportsandroid.mainScreen.ui.MainFragment
 import com.example.virtualsportsandroid.nonetwork.NetworkErrorFragment
 import dagger.Component

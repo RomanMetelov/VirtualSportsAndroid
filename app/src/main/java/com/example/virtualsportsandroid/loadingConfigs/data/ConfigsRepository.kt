@@ -12,7 +12,7 @@ class ConfigsRepository @Inject constructor(
     private val sharedPref: SharedPref,
     private val gson: Gson
 ) {
-    @Suppress("MagicNumber")
+    @Suppress("MagicNumber", "LongMethod")
     suspend fun loadConfigs() = withContext(dispatcher) {
         delay(1000)
         val fakeConfigs = ConfigsResponse(

@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid
 
+import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.login.domain.CheckLoginInputsUseCase
 import com.example.virtualsportsandroid.login.domain.LoginInputsErrorType
 import io.kotest.matchers.shouldBe
@@ -14,7 +15,12 @@ class CheckLoginInputsUseCaseTest {
         val emptyLogin = ""
         val emptyPassword = ""
 
-        useCase.invoke(login = emptyLogin, password = emptyPassword).isError shouldBe true
+        useCase.invoke(
+            UserModel(
+                login = emptyLogin,
+                password = emptyPassword
+            )
+        ).isError shouldBe true
     }
 
     @Test
@@ -24,8 +30,10 @@ class CheckLoginInputsUseCaseTest {
         val password = "12345"
 
         useCase.invoke(
-            login = emptyLogin,
-            password = password
+            UserModel(
+                login = emptyLogin,
+                password = password
+            )
         ).errorResult.type shouldBe LoginInputsErrorType.EMPTY_LOGIN
     }
 
@@ -36,8 +44,10 @@ class CheckLoginInputsUseCaseTest {
         val emptyPassword = ""
 
         useCase.invoke(
-            login = login,
-            password = emptyPassword
+            UserModel(
+                login = login,
+                password = emptyPassword
+            )
         ).errorResult.type shouldBe LoginInputsErrorType.EMPTY_PASSWORD
     }
 

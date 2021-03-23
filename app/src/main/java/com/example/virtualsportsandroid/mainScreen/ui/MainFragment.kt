@@ -85,7 +85,11 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         with(binding) {
             rvFirstTagGames.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            rvFirstTagGames.addItemDecoration(GamesItemDecorator(resources.getDimension(R.dimen.first_tag_games_space_between).toInt()))
+            rvFirstTagGames.addItemDecoration(
+                GamesItemDecorator(
+                    resources.getDimension(R.dimen.first_tag_games_space_between).toInt()
+                )
+            )
             rvFirstTagGames.adapter = firstTagGamesListAdapter
             rvTags.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

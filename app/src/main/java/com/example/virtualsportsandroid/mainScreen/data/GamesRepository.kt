@@ -15,6 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
+@Suppress("LongParameterList")
 class GamesRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val filterByCategoryUseCase: FilterByCategoryUseCase,

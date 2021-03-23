@@ -2,7 +2,7 @@ package com.example.virtualsportsandroid.di
 
 import com.example.virtualsportsandroid.game.data.api.GameScreenService
 import com.example.virtualsportsandroid.login.data.api.LoginService
-import com.example.virtualsportsandroid.login.data.api.RegistrationService
+import com.example.virtualsportsandroid.registration.data.api.RegistrationService
 import com.example.virtualsportsandroid.utils.api.NetworkHeaderInterceptor
 import com.example.virtualsportsandroid.utils.apiHost
 import com.example.virtualsportsandroid.utils.schema
