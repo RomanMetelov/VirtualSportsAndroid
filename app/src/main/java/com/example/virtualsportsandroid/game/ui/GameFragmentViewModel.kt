@@ -5,21 +5,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
+import com.example.virtualsportsandroid.game.data.api.GameScreenErrorType
 import com.example.virtualsportsandroid.game.data.api.GameScreenUtils
+import com.example.virtualsportsandroid.game.domain.NetworkToGameScreenErrorMapper
 import com.example.virtualsportsandroid.utils.Result
-import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+private typealias ChangeResult = Result<Boolean, GameScreenErrorType>
+
 class GameFragmentViewModel @Inject constructor(
-    private val gameScreenUtils: GameScreenUtils
+    private val gameScreenUtils: GameScreenUtils,
+    private val networkErrorMapper: NetworkToGameScreenErrorMapper
 ) : ViewModel() {
 
     private val _changeGameFavoriteResultLiveData =
-        MutableLiveData<Result<Boolean, NetworkErrorType>>()
-    val changeGameFavoriteResultLiveData: LiveData<Result<Boolean, NetworkErrorType>> =
+        MutableLiveData<ChangeResult>()
+    val changeGameFavoriteResultLiveData: LiveData<ChangeResult> =
         _changeGameFavoriteResultLiveData
 
     fun changeGameFavorite(game: ScreenGameModel) {
@@ -27,6 +31,8 @@ class GameFragmentViewModel @Inject constructor(
             val result = when (game.isFavorite) {
                 true -> gameScreenUtils.delGameFromFavorite(gameId = game.id)
                 false -> gameScreenUtils.addGameToFavorite(gameId = game.id)
+            }.mapError {
+                networkErrorMapper.invoke(it)
             }
             withContext(Dispatchers.Main) {
                 _changeGameFavoriteResultLiveData.value = result
@@ -34,4 +40,3 @@ class GameFragmentViewModel @Inject constructor(
         }
     }
 }
-

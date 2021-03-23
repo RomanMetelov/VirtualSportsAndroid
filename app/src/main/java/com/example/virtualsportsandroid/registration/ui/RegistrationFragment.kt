@@ -1,11 +1,12 @@
 @file:Suppress("TooManyFunctions")
 
-package com.example.virtualsportsandroid.login.ui
+package com.example.virtualsportsandroid.registration.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
@@ -16,10 +17,13 @@ import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.RegistrationFragmentBinding
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
-import com.example.virtualsportsandroid.login.domain.RegistrationInputsError
-import com.example.virtualsportsandroid.login.domain.RegistrationInputsErrorType
-import com.example.virtualsportsandroid.utils.api.NetworkErrorType
+import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
+import com.example.virtualsportsandroid.registration.domain.RegistrationInputsError
+import com.example.virtualsportsandroid.registration.domain.RegistrationInputsErrorType
+import com.example.virtualsportsandroid.registration.domain.RegistrationUserInputs
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
+import com.example.virtualsportsandroid.utils.ui.hide
+import com.example.virtualsportsandroid.utils.ui.show
 import com.example.virtualsportsandroid.utils.ui.showError
 import javax.inject.Inject
 
@@ -34,6 +38,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     private lateinit var etRepeatPassword: AppCompatEditText
     private lateinit var btnRegister: AppCompatButton
     private lateinit var btnClose: AppCompatImageView
+    private lateinit var tvRegistrationErrorMessage: TextView
 
     @Inject
     lateinit var viewModel: RegistrationViewModel
@@ -63,11 +68,13 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         etRepeatPassword = binding.etRepeatPassword
         btnRegister = binding.btnRegister
         btnClose = binding.btnClose
+        tvRegistrationErrorMessage = binding.tvRegistrationErrorMessage
     }
 
     private fun setupListeners() {
         etLogin.doAfterTextChanged {
             checkAllRules()
+            tvRegistrationErrorMessage.hide()
         }
         etPassword.doAfterTextChanged {
             checkAllRules()
@@ -76,6 +83,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
             checkAllRules()
         }
         btnRegister.setOnClickListener {
+            tvRegistrationErrorMessage.hide()
             tryRegister()
         }
         btnClose.setOnClickListener {
@@ -89,9 +97,11 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         val repeatPassword = etRepeatPassword.text.toString()
 
         viewModel.checkInputs(
-            login = login,
-            password = password,
-            repeatPassword = repeatPassword
+            RegistrationUserInputs(
+                login = login,
+                password = password,
+                repeatPassword = repeatPassword
+            )
         )
     }
 
@@ -151,10 +161,16 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         })
     }
 
-    private fun handleRegisterError(errorResult: NetworkErrorType) {
-        when (errorResult) {
-            NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
-            else -> return
+    private fun handleRegisterError(errorResult: RegistrationErrorType) {
+        with(binding.tvRegistrationErrorMessage) {
+            when (errorResult) {
+                RegistrationErrorType.NETWORK_ERROR -> navigator.showNoNetworkFragment()
+                RegistrationErrorType.INPUTS_ERROR, RegistrationErrorType.USER_EXIST -> {
+                    this.show()
+                    this.text = getString(errorResult.errorMessage)
+                }
+                else -> return
+            }
         }
     }
 

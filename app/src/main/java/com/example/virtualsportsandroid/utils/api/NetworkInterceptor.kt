@@ -10,6 +10,7 @@ class NetworkInterceptor @Inject constructor() {
         if (exception is UnknownHostException)
             return Result.error(NetworkErrorType.NO_NETWORK)
         return when (exception.message) {
+            NetworkStatusCode.BadRequest.code.toString() -> Result.error(NetworkErrorType.BAD_REQUEST)
             NetworkStatusCode.NotFound.code.toString() -> Result.error(NetworkErrorType.RESOURCE_NOT_FOUND)
             NetworkStatusCode.Forbidden.code.toString() -> Result.error(NetworkErrorType.API_RATE_LIMIT_EXCEED)
             NetworkStatusCode.Unauthorized.code.toString() -> Result.error(NetworkErrorType.UNAUTHORIZED)

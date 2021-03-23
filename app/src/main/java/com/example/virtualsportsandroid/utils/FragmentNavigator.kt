@@ -2,11 +2,11 @@ package com.example.virtualsportsandroid.utils
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
+import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.ui.GameFragment
-import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
-import com.example.virtualsportsandroid.login.ui.RegistrationFragment
+import com.example.virtualsportsandroid.registration.ui.RegistrationFragment
 import com.example.virtualsportsandroid.mainScreen.ui.MainFragment
 import com.example.virtualsportsandroid.nonetwork.NetworkErrorFragment
 
@@ -47,7 +47,7 @@ class FragmentNavigator(
             .addToBackStack(null)
             .commit()
     }
-  
+
     fun showGameFragment(gameModel: ScreenGameModel) {
         fragmentManager.beginTransaction()
             .replace(container, GameFragment.newInstance(gameModel))

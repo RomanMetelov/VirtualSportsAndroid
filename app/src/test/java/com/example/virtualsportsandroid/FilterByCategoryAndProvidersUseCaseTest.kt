@@ -24,7 +24,7 @@ internal class FilterByCategoryAndProvidersUseCaseTest {
                 ),
                 GameResponse(
                     "id2", "", "", "provider2", listOf(
-                        "category1"
+                        "z"
                     ),
                     listOf("all")
                 ),

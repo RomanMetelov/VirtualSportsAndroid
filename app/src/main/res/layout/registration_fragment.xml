@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -73,6 +73,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:hint="@string/password_input_text"
+            android:inputType="textPassword"
             android:paddingStart="@dimen/zero_dp"
             android:paddingEnd="@dimen/zero_dp"
             android:textColor="@color/black"
@@ -98,6 +99,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:hint="@string/repeat_password_input_text"
+            android:inputType="textPassword"
             android:paddingStart="@dimen/zero_dp"
             android:paddingEnd="@dimen/zero_dp"
             android:textColor="@color/black"
@@ -121,7 +123,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_login_error_message"
+        android:id="@+id/tv_registration_error_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
