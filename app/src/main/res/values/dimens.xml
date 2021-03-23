@@ -83,4 +83,5 @@
     <dimen name="tag_name_marginVertical">16dp</dimen>
     <dimen name="filtered_games_title_marginVertical">16dp</dimen>
     <dimen name="filtered_games_title_textSize">16sp</dimen>
+    <dimen name="providers_list_marginHorizontal">16dp</dimen>
 </resources>

@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.FilterFragmentBinding
-import com.example.virtualsportsandroid.filter.data.models.CategoryResponse
-import com.example.virtualsportsandroid.filter.data.models.ProviderResponse
+import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
+import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
@@ -74,7 +74,6 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
     private fun observeFragmentState() {
         viewModel.filterFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is FilterFragmentState.Loading -> showLoading()
                 is FilterFragmentState.Error -> showError(it.errorMessage)
                 is FilterFragmentState.Content -> showContent(it.categories, it.providers)
             }
@@ -89,7 +88,6 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
             filtersBorder.show()
             scContent.show()
             tvErrorMessage.hide()
-            pbLoading.hide()
         }
         categoryAdapter.submitList(categories)
         providerAdapter.submitList(providers)
@@ -104,24 +102,10 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
             scContent.hide()
             btnApply.hide()
             tvErrorMessage.hide()
-            pbLoading.hide()
             tvErrorMessage.apply {
                 show()
                 text = errorMessage
             }
-        }
-    }
-
-    private fun showLoading() {
-        with(binding) {
-            header.headerContainer.hide()
-            tvFiltersTitle.hide()
-            ivClose.hide()
-            filtersBorder.hide()
-            scContent.hide()
-            btnApply.hide()
-            tvErrorMessage.hide()
-            pbLoading.show()
         }
     }
 

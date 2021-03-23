@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.di
 
+import android.content.Context
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsRepository
 import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
@@ -40,8 +41,12 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideFiltersRepository(): FiltersRepository {
-        return FiltersRepository(Dispatchers.IO)
+    fun provideFiltersRepository(
+        sharedPref: SharedPref,
+        gson: Gson,
+        context: Context
+    ): FiltersRepository {
+        return FiltersRepository(Dispatchers.IO, sharedPref, gson, context)
     }
 
     @Singleton
