@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-private typealias checkRegInputsAlias = Result<Boolean, RegistrationInputsError>
-private typealias registrationTryAlias = Result<AccessTokenResponse, RegistrationErrorType>
+private typealias CheckRegInputsResult = Result<Boolean, RegistrationInputsError>
+private typealias RegistrationTryResult = Result<AccessTokenResponse, RegistrationErrorType>
 
 class RegistrationViewModel
 @Inject constructor(
@@ -28,12 +28,12 @@ class RegistrationViewModel
     private val networkErrorMapper: NetworkToRegisterErrorsMapper
 ) : ViewModel() {
 
-    private val _checkInputsLiveData = MutableLiveData<checkRegInputsAlias>()
+    private val _checkInputsLiveData = MutableLiveData<CheckRegInputsResult>()
     val checkInputsLiveData: LiveData<Result<Boolean, RegistrationInputsError>> =
         _checkInputsLiveData
 
-    private val _registrationTryLiveData = MutableLiveData<registrationTryAlias>()
-    val registrationTryLiveData: LiveData<registrationTryAlias> =
+    private val _registrationTryLiveData = MutableLiveData<RegistrationTryResult>()
+    val registrationTryLiveData: LiveData<RegistrationTryResult> =
         _registrationTryLiveData
 
 

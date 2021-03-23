@@ -40,4 +40,3 @@ class GameFragmentViewModel @Inject constructor(
         }
     }
 }
-
