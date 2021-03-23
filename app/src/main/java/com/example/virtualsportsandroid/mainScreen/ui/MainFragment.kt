@@ -84,6 +84,7 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         with(binding) {
             rvFirstTagGames.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            rvFirstTagGames.addItemDecoration(GamesItemDecorator(resources.getDimension(R.dimen.first_tag_games_space_between).toInt()))
             rvFirstTagGames.adapter = firstTagGamesListAdapter
             rvTags.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -123,7 +124,10 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         }
     }
 
-    private fun showNotFilteredGames(firstTagGames: TagModel, allGamesWithoutFirstTag: List<TagModel>) {
+    private fun showNotFilteredGames(
+        firstTagGames: TagModel,
+        allGamesWithoutFirstTag: List<TagModel>
+    ) {
         with(binding) {
             header.headerContainer.show()
             svContentContainer.show()

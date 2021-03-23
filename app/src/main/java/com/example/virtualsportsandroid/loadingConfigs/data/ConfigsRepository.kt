@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.loadingConfigs.data
 
-import android.util.Log
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,7 +21,7 @@ class ConfigsRepository @Inject constructor(
                     "id1",
                     "Game 1",
                     "provider1",
-                    listOf("top", "category1"),
+                    listOf("category1"),
                     listOf("top"),
                     "url1",
                     "imageURL1"
@@ -31,7 +30,7 @@ class ConfigsRepository @Inject constructor(
                     "id2",
                     "Game 2",
                     "provider1",
-                    listOf("top", "category1"),
+                    listOf("category1"),
                     listOf("top"),
                     "url2",
                     "imageURL2"
@@ -40,7 +39,7 @@ class ConfigsRepository @Inject constructor(
                     "id3",
                     "Game 3",
                     "provider2",
-                    listOf("top", "category2"),
+                    listOf("category2"),
                     listOf("top"),
                     "url3",
                     "imageURL3"
@@ -50,7 +49,7 @@ class ConfigsRepository @Inject constructor(
                     "Game 4",
                     "provider2",
                     listOf("category2"),
-                    listOf("top"),
+                    listOf("top", "favorites"),
                     "url4",
                     "imageURL4"
                 ),
@@ -58,8 +57,8 @@ class ConfigsRepository @Inject constructor(
                     "id5",
                     "Game 5",
                     "provider3",
-                    listOf("favorites", "category2"),
-                    listOf("all"),
+                    listOf("category2"),
+                    listOf("all", "favorites"),
                     "url5",
                     "imageURL5"
                 ),
@@ -67,7 +66,7 @@ class ConfigsRepository @Inject constructor(
                     "id6",
                     "Game 6",
                     "provider3",
-                    listOf("favorites", "category3"),
+                    listOf("category3"),
                     listOf("all"),
                     "url6",
                     "imageURL6"
@@ -76,7 +75,7 @@ class ConfigsRepository @Inject constructor(
                     "id7",
                     "Game 7",
                     "provider4",
-                    listOf("top", "category3"),
+                    listOf("category3"),
                     listOf("all"),
                     "url7",
                     "imageURL7"
@@ -95,7 +94,7 @@ class ConfigsRepository @Inject constructor(
                     "Game 9",
                     "provider5",
                     listOf("category4"),
-                    listOf("all"),
+                    listOf("all", "recentlyLaunched"),
                     "url9",
                     "imageURL9"
                 ),
@@ -104,18 +103,16 @@ class ConfigsRepository @Inject constructor(
                     "Game 10",
                     "provider5",
                     listOf("category4"),
-                    listOf("all"),
+                    listOf("all", "recentlyLaunched"),
                     "url10",
                     "imageURL10"
                 ),
             ),
             listOf(
-                CategoryResponse("top", "url1", "Top"),
-                CategoryResponse("favorites", "url2", "Favorites"),
-                CategoryResponse("category1", "url3", "Category 1"),
-                CategoryResponse("category2", "url4", "Category 2"),
-                CategoryResponse("category3", "url5", "Category 3"),
-                CategoryResponse("category4", "url6", "Category 4"),
+                CategoryResponse("category1", "url1", "Category 1"),
+                CategoryResponse("category2", "url2", "Category 2"),
+                CategoryResponse("category3", "url3", "Category 3"),
+                CategoryResponse("category4", "url4", "Category 4"),
             ),
             listOf(
                 ProviderResponse("provider1", "url1", "Provider 1"),
@@ -126,10 +123,11 @@ class ConfigsRepository @Inject constructor(
             ),
             listOf(
                 TagResponse("top", "Top"),
-                TagResponse("all", "All")
+                TagResponse("all", "All"),
+                TagResponse("favorites", "Favorites"),
+                TagResponse("recentlyLaunched", "Recently launched")
             )
         )
         sharedPref.configsJSON = gson.toJson(fakeConfigs)
-        Log.d("wtf", sharedPref.configsJSON)
     }
 }

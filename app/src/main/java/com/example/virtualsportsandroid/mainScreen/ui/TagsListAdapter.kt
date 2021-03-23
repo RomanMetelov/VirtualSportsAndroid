@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.mainScreen.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -37,6 +38,7 @@ class TagsListAdapter : ListAdapter<TagModel, TagsListAdapter.TagViewHolder>(Tag
     }
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
+        Log.d("wtf", currentList.toString())
         holder.bind(getItem(position))
     }
 }
