@@ -5,6 +5,7 @@ import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
 import com.example.virtualsportsandroid.mainScreen.data.GamesLoadingError
 import com.example.virtualsportsandroid.mainScreen.domain.NotFilteredGamesLoadingUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
+import com.example.virtualsportsandroid.mainScreen.domain.model.TagModel
 import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import io.kotest.matchers.shouldBe
@@ -25,22 +26,31 @@ internal class NotFilteredGamesLoadingUseCaseTest {
         val mockContext = mockk<Context> {
             every { getString(any()) } returns "Error"
         }
-        val fakeAllGamesWithoutFirstTagList = listOf(
-            GameModel("id4", "name4", "imageURL4"),
-            GameModel("id5", "name5", "imageURL5")
+        val fakeFirstTag = TagModel(
+            "top", "Top",
+            listOf(
+                GameModel("id1", "name1", "imageURL1"),
+                GameModel("id2", "name2", "imageURL2"),
+                GameModel("id3", "name3", "imageURL3")
+            )
         )
-        val fakeGamesWithFirstTag = listOf(
-            GameModel("id1", "name1", "imageURL1"),
-            GameModel("id2", "name2", "imageURL2"),
-            GameModel("id3", "name3", "imageURL3")
+        val fakeAllTagsWithoutFirst = listOf(
+            TagModel("favorites", "Favorites", listOf(
+                GameModel("id4", "name4", "imageURL4"),
+                GameModel("id5", "name5", "imageURL5")
+            )),
+            TagModel("recentlyLaunched", "Recently launched", listOf(
+                GameModel("id6", "name6", "imageURL6"),
+                GameModel("id7", "name7", "imageURL7")
+            ))
         )
         val mockGamesRepository = mockk<GamesRepository> {
-            coEvery { getAllGamesWithoutFirstTag() } returns Result.success(fakeAllGamesWithoutFirstTagList)
-            coEvery { getGamesWithFirstTag() } returns Result.success(fakeGamesWithFirstTag)
+            coEvery { getAllGamesWithoutFirstTag() } returns Result.success(fakeAllTagsWithoutFirst)
+            coEvery { getGamesWithFirstTag() } returns Result.success(fakeFirstTag)
         }
         val expectedResult = MainFragmentState.NotFiltered(
-            fakeGamesWithFirstTag,
-            fakeAllGamesWithoutFirstTagList
+            fakeFirstTag,
+            fakeAllTagsWithoutFirst
         )
         runBlockingTest {
             NotFilteredGamesLoadingUseCase(
@@ -57,15 +67,18 @@ internal class NotFilteredGamesLoadingUseCaseTest {
         val mockContext = mockk<Context> {
             every { getString(any()) } returns errorMessage
         }
-        val fakeAllGamesList = listOf(
-            GameModel("id1", "name1", "imageURL1"),
-            GameModel("id2", "name2", "imageURL2"),
-            GameModel("id3", "name3", "imageURL3"),
-            GameModel("id4", "name4", "imageURL4"),
-            GameModel("id5", "name5", "imageURL5")
+        val fakeAllTagsWithoutFirst = listOf(
+            TagModel("favorites", "Favorites", listOf(
+                GameModel("id1", "name1", "imageURL1"),
+                GameModel("id2", "name2", "imageURL2")
+            )),
+            TagModel("recentlyLaunched", "Recently launched", listOf(
+                GameModel("id3", "name3", "imageURL3"),
+                GameModel("id4", "name4", "imageURL4")
+            ))
         )
         val mockGamesRepository = mockk<GamesRepository> {
-            coEvery { getAllGamesWithoutFirstTag() } returns Result.success(fakeAllGamesList)
+            coEvery { getAllGamesWithoutFirstTag() } returns Result.success(fakeAllTagsWithoutFirst)
             coEvery { getGamesWithFirstTag() } returns Result.error(GamesLoadingError.NOT_FOUND)
         }
         val expectedResult = MainFragmentState.Error(errorMessage)
@@ -84,14 +97,17 @@ internal class NotFilteredGamesLoadingUseCaseTest {
         val mockContext = mockk<Context> {
             every { getString(any()) } returns errorMessage
         }
-        val fakeTopGamesList = listOf(
-            GameModel("id1", "name1", "imageURL1"),
-            GameModel("id2", "name2", "imageURL2"),
-            GameModel("id3", "name3", "imageURL3")
+        val fakeFirstTag = TagModel(
+            "top", "Top",
+            listOf(
+                GameModel("id1", "name1", "imageURL1"),
+                GameModel("id2", "name2", "imageURL2"),
+                GameModel("id3", "name3", "imageURL3")
+            )
         )
         val mockGamesRepository = mockk<GamesRepository> {
             coEvery { getAllGamesWithoutFirstTag() } returns Result.error(GamesLoadingError.NOT_FOUND)
-            coEvery { getGamesWithFirstTag() } returns Result.success(fakeTopGamesList)
+            coEvery { getGamesWithFirstTag() } returns Result.success(fakeFirstTag)
         }
         val expectedResult = MainFragmentState.Error(errorMessage)
         runBlockingTest {
