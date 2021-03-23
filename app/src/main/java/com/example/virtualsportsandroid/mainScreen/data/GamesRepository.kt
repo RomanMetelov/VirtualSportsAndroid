@@ -6,6 +6,7 @@ import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndPro
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByTagUseCase
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
+import com.example.virtualsportsandroid.mainScreen.domain.model.TagModel
 import com.example.virtualsportsandroid.utils.Result
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
@@ -24,30 +25,32 @@ class GamesRepository @Inject constructor(
     private val gson: Gson
 ) {
 
-    suspend fun getGamesWithFirstTag(): Result<List<GameModel>, GamesLoadingError> =
+    suspend fun getGamesWithFirstTag(): Result<TagModel, GamesLoadingError> =
         withContext(dispatcher) {
             val configsJSON = sharedPref.configsJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
             val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
-            Result.success(filterByTagUseCase(configs.tags.first().id, configs))
+            with(configs.tags.first()) {
+                Result.success(TagModel(id, name, filterByTagUseCase(id, configs)))
+            }
         }
 
-    suspend fun getAllGamesWithoutFirstTag(): Result<List<GameModel>, GamesLoadingError> =
+    suspend fun getAllGamesWithoutFirstTag(): Result<List<TagModel>, GamesLoadingError> =
         withContext(dispatcher) {
             val configsJSON = sharedPref.configsJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
             val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
-            var games = emptyList<GameModel>()
+            var tags = emptyList<TagModel>()
             configs.tags.forEach {
                 if (it.id != configs.tags.first().id) {
-                    games = games + filterByTagUseCase(it.id, configs)
+                    tags = tags + TagModel(it.id, it.name, filterByTagUseCase(it.id, configs))
                 }
             }
-            Result.success(games)
+            Result.success(tags)
         }
 
     suspend fun getGamesFilteredByCategory(category: String): Result<List<GameModel>, GamesLoadingError> =
