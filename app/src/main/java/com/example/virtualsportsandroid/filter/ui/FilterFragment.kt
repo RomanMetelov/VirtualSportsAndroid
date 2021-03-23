@@ -68,10 +68,10 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
-        observeViewModel()
+        observeFragmentState()
     }
 
-    private fun observeViewModel() {
+    private fun observeFragmentState() {
         viewModel.filterFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is FilterFragmentState.Loading -> showLoading()

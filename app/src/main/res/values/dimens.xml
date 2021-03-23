@@ -78,4 +78,5 @@
     <dimen name="bet_history_item_id_margin">4dp</dimen>
     <dimen name="bet_history_item_horizontal_margin">16dp</dimen>
     <dimen name="game_title_padding">4dp</dimen>
+    <dimen name="loading_error_message_textSize">32sp</dimen>
 </resources>
