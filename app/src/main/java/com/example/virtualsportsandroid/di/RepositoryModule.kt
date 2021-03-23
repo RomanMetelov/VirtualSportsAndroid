@@ -52,7 +52,7 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideConfigsRepository(sharedPref: SharedPref): ConfigsRepository {
-        return ConfigsRepository(Dispatchers.IO, sharedPref, Gson())
+    fun provideConfigsRepository(sharedPref: SharedPref, gson: Gson): ConfigsRepository {
+        return ConfigsRepository(Dispatchers.IO, sharedPref, gson)
     }
 }
