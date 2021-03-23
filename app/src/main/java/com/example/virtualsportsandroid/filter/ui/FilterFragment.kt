@@ -37,6 +37,7 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
         super.onViewCreated(view, savedInstanceState)
         binding = FilterFragmentBinding.bind(view)
         setupViewModel()
+        observeFragmentState()
         setupRecyclerViews()
         observeSelectedItems()
         setupListeners()
@@ -68,7 +69,6 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
-        observeFragmentState()
     }
 
     private fun observeFragmentState() {

@@ -30,6 +30,7 @@ class LoadingFragment private constructor() : BaseFragment(R.layout.loading_frag
     private fun observeFragmentState() {
         viewModel.loadingStateLiveData.observe(viewLifecycleOwner) {
             if (it == ConfigsLoadingState.Successful) {
+                navigator.showMainFragment()
                 navigator.showLoginFragment()
             }
         }

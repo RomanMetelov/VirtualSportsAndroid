@@ -46,6 +46,7 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         super.onViewCreated(view, savedInstanceState)
         binding = MainFragmentBinding.bind(view)
         setupViewModel()
+        observeMainFragmentState()
         setupRecyclerViews()
         setupListeners()
         loadData()
@@ -97,10 +98,9 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
-        observeViewModel()
     }
 
-    private fun observeViewModel() {
+    private fun observeMainFragmentState() {
         viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is MainFragmentState.NotFiltered -> showNotFilteredGames(
