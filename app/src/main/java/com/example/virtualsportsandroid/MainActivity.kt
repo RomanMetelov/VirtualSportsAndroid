@@ -6,7 +6,6 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.utils.FragmentNavigator
 
 class MainActivity : AppCompatActivity() {
@@ -22,14 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-
-        fragmentNavigator.showGameFragment(
-            ScreenGameModel(
-                "", "", "https://vsw.betradar.com/ls/mobile/?/parimatchrgs/ru/page/vsmobile_demo"
-            )
-        )
-        fragmentNavigator.showLoginFragment()
+        fragmentNavigator.showConfigsLoadingFragment()
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

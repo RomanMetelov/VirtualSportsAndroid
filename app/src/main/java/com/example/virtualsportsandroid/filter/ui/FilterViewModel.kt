@@ -25,7 +25,6 @@ class FilterViewModel @Inject constructor(
 
     fun loadData() {
         viewModelScope.launch {
-            _filterFragmentStateLiveData.value = FilterFragmentState.Loading
             _filterFragmentStateLiveData.value = filtersLoadingUseCase.invoke()
         }
     }

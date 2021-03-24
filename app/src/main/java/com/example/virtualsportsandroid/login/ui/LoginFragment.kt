@@ -166,7 +166,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun closeScreen() {
-        requireActivity().onBackPressed()
+        navigator.back()
     }
 
     private fun enableLoginButton() {

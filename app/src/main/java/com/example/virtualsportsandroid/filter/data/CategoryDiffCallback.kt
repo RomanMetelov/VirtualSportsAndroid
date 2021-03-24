@@ -1,6 +1,7 @@
-package com.example.virtualsportsandroid.filter.data.models
+package com.example.virtualsportsandroid.filter.data
 
 import androidx.recyclerview.widget.DiffUtil
+import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
 
 class CategoryDiffCallback : DiffUtil.ItemCallback<CategoryResponse>() {
     override fun areItemsTheSame(oldItem: CategoryResponse, newItem: CategoryResponse): Boolean {

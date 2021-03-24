@@ -8,6 +8,7 @@ import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.MainFragmentBinding
 import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
+import com.example.virtualsportsandroid.mainScreen.domain.model.TagModel
 import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
@@ -17,7 +18,7 @@ import javax.inject.Inject
 class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) {
 
     companion object {
-        private const val ALL_GAMES_LIST_COLUMNS_NUMBER = 2
+        private const val FILTERED_GAMES_LIST_COLUMNS_NUMBER = 2
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
 
@@ -33,8 +34,10 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
     }
 
     private lateinit var binding: MainFragmentBinding
-    private val topGamesListAdapter = GamesListAdapter()
-    private val allGamesListAdapter = GamesListAdapter()
+
+    private val firstTagGamesListAdapter = GamesListAdapter()
+    private val allTagsWithoutFirstListAdapter = TagsListAdapter()
+    private val filteredGamesListAdapter = GamesListAdapter()
 
     @Inject
     lateinit var viewModel: MainViewModel
@@ -43,6 +46,7 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         super.onViewCreated(view, savedInstanceState)
         binding = MainFragmentBinding.bind(view)
         setupViewModel()
+        observeMainFragmentState()
         setupRecyclerViews()
         setupListeners()
         loadData()
@@ -79,58 +83,69 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
 
     private fun setupRecyclerViews() {
         with(binding) {
-            rvTopGames.layoutManager =
+            rvFirstTagGames.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            rvTopGames.addItemDecoration(
+            rvFirstTagGames.addItemDecoration(
                 GamesItemDecorator(
-                    resources.getDimension(R.dimen.top_games_space_between).toInt()
+                    resources.getDimension(R.dimen.first_tag_games_space_between).toInt()
                 )
             )
-            rvTopGames.adapter = topGamesListAdapter
-            rvAllGames.layoutManager = GridLayoutManager(context, ALL_GAMES_LIST_COLUMNS_NUMBER)
-            rvAllGames.adapter = allGamesListAdapter
+            rvFirstTagGames.adapter = firstTagGamesListAdapter
+            rvTags.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            rvTags.adapter = allTagsWithoutFirstListAdapter
+            rvFilteredGames.layoutManager =
+                GridLayoutManager(context, FILTERED_GAMES_LIST_COLUMNS_NUMBER)
+            rvFilteredGames.adapter = filteredGamesListAdapter
         }
     }
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
-        observeViewModel()
     }
 
-    private fun observeViewModel() {
+    private fun observeMainFragmentState() {
         viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is MainFragmentState.Loading -> showLoading()
-                is MainFragmentState.NotFiltered -> showNotFilteredGames(it.topGames, it.allGames)
+                is MainFragmentState.NotFiltered -> showNotFilteredGames(
+                    it.gamesWithFirstTag,
+                    it.allGamesWithoutFirstTag
+                )
                 is MainFragmentState.FilteredByCategory -> {
                     showFilteredGames(it.filteredGames)
-                    binding.tvAllGamesTitle.text = it.categoryName
+                    binding.tvFilteredGamesTitle.text = it.categoryName
                 }
                 is MainFragmentState.FilteredByProviders -> {
                     showFilteredGames(it.filteredGames)
-                    binding.tvAllGamesTitle.text = getString(R.string.search_results_title)
+                    binding.tvFilteredGamesTitle.text = getString(R.string.search_results_title)
                 }
                 is MainFragmentState.FilteredByProvidersAndCategory -> {
                     showFilteredGames(it.filteredGames)
-                    binding.tvAllGamesTitle.text = getString(R.string.search_results_title)
+                    binding.tvFilteredGamesTitle.text = getString(R.string.search_results_title)
                 }
                 is MainFragmentState.Error -> showError(it.errorMessage)
             }
         }
     }
 
-    private fun showNotFilteredGames(topGames: List<GameModel>, allGames: List<GameModel>) {
+    private fun showNotFilteredGames(
+        firstTagGames: TagModel,
+        allGamesWithoutFirstTag: List<TagModel>
+    ) {
         with(binding) {
             header.headerContainer.show()
             svContentContainer.show()
-            tvTopGamesTitle.show()
-            rvTopGames.show()
-            tvAllGamesTitle.show()
-            rvAllGames.show()
-            pbLoading.hide()
+            tvFirstTagName.apply {
+                show()
+                text = firstTagGames.name
+            }
+            rvFirstTagGames.show()
+            firstTagGamesListAdapter.submitList(firstTagGames.games)
+            rvTags.show()
+            allTagsWithoutFirstListAdapter.submitList(allGamesWithoutFirstTag)
+            tvFilteredGamesTitle.hide()
+            rvFilteredGames.hide()
             tvErrorMessage.hide()
-            topGamesListAdapter.submitList(topGames)
-            allGamesListAdapter.submitList(allGames)
         }
     }
 
@@ -138,12 +153,13 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         with(binding) {
             header.headerContainer.show()
             tvErrorMessage.hide()
-            pbLoading.hide()
             svContentContainer.show()
-            tvTopGamesTitle.hide()
-            rvTopGames.hide()
-            allGamesListAdapter.submitList(filteredGames)
-            tvAllGamesTitle.text = getString(R.string.search_results_title)
+            tvFirstTagName.hide()
+            rvFirstTagGames.hide()
+            rvTags.hide()
+            tvFilteredGamesTitle.show()
+            rvFilteredGames.show()
+            filteredGamesListAdapter.submitList(filteredGames)
         }
     }
 
@@ -151,18 +167,10 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         with(binding) {
             header.headerContainer.hide()
             svContentContainer.hide()
-            pbLoading.hide()
-            tvErrorMessage.show()
-            tvErrorMessage.text = errorMessage
-        }
-    }
-
-    private fun showLoading() {
-        with(binding) {
-            header.headerContainer.hide()
-            svContentContainer.hide()
-            tvErrorMessage.hide()
-            pbLoading.show()
+            tvErrorMessage.apply {
+                show()
+                text = errorMessage
+            }
         }
     }
 }

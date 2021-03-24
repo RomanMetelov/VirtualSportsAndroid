@@ -11,7 +11,7 @@
         android:id="@+id/header"
         layout="@layout/login_header" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/svContentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -45,52 +45,49 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvTopGamesTitle"
+                android:id="@+id/tvFirstTagName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
                 android:layout_marginVertical="@dimen/top_games_title_marginVertical"
-                android:drawableStart="@drawable/top_category_icon"
-                android:drawablePadding="@dimen/top_games_title_drawablePadding"
                 android:fontFamily="@font/roboto_condensed"
-                android:text="@string/top_games_title"
                 android:textColor="@color/gray_light_f5"
-                android:textSize="@dimen/top_games_title_textSize" />
+                android:textSize="@dimen/top_games_title_textSize"
+                tools:text="First tag" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTopGames"
+                android:id="@+id/rvFirstTagGames"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvAllGamesTitle"
+                android:id="@+id/tvFilteredGamesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginVertical="@dimen/all_games_title_marginVertical"
+                android:layout_marginVertical="@dimen/filtered_games_title_marginVertical"
                 android:fontFamily="@font/roboto_condensed"
-                android:text="@string/all_games_title"
                 android:textColor="@color/gray_light_f5"
-                android:textSize="@dimen/all_games_title_textSize" />
+                android:textSize="@dimen/filtered_games_title_textSize"
+                android:visibility="gone"
+                tools:text="Filtered games title" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAllGames"
+                android:id="@+id/rvFilteredGames"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:nestedScrollingEnabled="false"
-                android:overScrollMode="never" />
+                android:overScrollMode="never"
+                android:visibility="gone" />
         </LinearLayout>
-    </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:indeterminateTint="@color/bright_yellow_57"
-        android:visibility="gone" />
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvErrorMessage"

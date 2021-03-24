@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.CategoryItemBinding
-import com.example.virtualsportsandroid.filter.data.models.CategoryDiffCallback
-import com.example.virtualsportsandroid.filter.data.models.CategoryResponse
+import com.example.virtualsportsandroid.filter.data.CategoryDiffCallback
+import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
 
 class CategoryListAdapter(

@@ -87,7 +87,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
             tryRegister()
         }
         btnClose.setOnClickListener {
-            requireActivity().onBackPressed()
+            navigator.back()
         }
     }
 
