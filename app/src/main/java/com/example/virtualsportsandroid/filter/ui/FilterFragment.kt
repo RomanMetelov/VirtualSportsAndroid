@@ -13,7 +13,7 @@ import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
 
-@Suppress("TooManyFunctions ")
+@Suppress("TooManyFunctions")
 class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragment) {
 
     companion object {
