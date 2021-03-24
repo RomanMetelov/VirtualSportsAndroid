@@ -8,11 +8,10 @@ import javax.inject.Inject
 class NetworkHeaderInterceptor @Inject constructor(private val sharedPref: SharedPref) :
     Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request()
-            .newBuilder()
-            .addHeader("X-Platform", "android")
-            .addHeader("Authorization", sharedPref.token)
-            .build()
-        return chain.proceed(request)
+        val requestBuilder = chain.request().newBuilder()
+        requestBuilder.addHeader("X-Platform", "android")
+        if (sharedPref.token.isNotEmpty())
+            requestBuilder.addHeader("Authorization", sharedPref.token)
+        return chain.proceed(requestBuilder.build())
     }
 }

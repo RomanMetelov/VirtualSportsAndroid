@@ -3,6 +3,7 @@
 package com.example.virtualsportsandroid.registration.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -201,8 +202,8 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     private fun tryRegister() {
         viewModel.tryRegister(
             UserModel(
-                login = etLogin.toString(),
-                password = etPassword.toString()
+                login = etLogin.text.toString(),
+                password = etPassword.text.toString()
             )
         )
     }
