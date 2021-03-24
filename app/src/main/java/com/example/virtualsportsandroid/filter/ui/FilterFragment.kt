@@ -13,6 +13,7 @@ import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragment) {
 
     companion object {
@@ -39,8 +40,10 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
         setupViewModel()
         observeFragmentState()
         setupRecyclerViews()
+        observeIsAuthorized()
         observeSelectedItems()
         setupListeners()
+        viewModel.checkIsAuthorized()
         viewModel.loadData()
     }
 
@@ -54,6 +57,9 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
             }
             header.btnSignUp.setOnClickListener {
                 navigator.showRegistrationFragment()
+            }
+            header.btnLogout.setOnClickListener {
+                //implementation
             }
             btnApply.setOnClickListener {
                 val category = viewModel.selectedCategoryLiveData.value
@@ -77,6 +83,31 @@ class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragme
                 is FilterFragmentState.Error -> showError(it.errorMessage)
                 is FilterFragmentState.Content -> showContent(it.categories, it.providers)
             }
+        }
+    }
+
+    private fun observeIsAuthorized() {
+        viewModel.isAuthorizedLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                false -> showLoginAndRegistrationButtons()
+                true -> showLogoutButton()
+            }
+        }
+    }
+
+    private fun showLogoutButton() {
+        with(binding.header) {
+            btnLogin.hide()
+            btnSignUp.hide()
+            btnLogout.show()
+        }
+    }
+
+    private fun showLoginAndRegistrationButtons() {
+        with(binding.header) {
+            btnLogin.show()
+            btnSignUp.show()
+            btnLogout.hide()
         }
     }
 
