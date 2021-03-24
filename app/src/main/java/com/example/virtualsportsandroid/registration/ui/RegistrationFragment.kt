@@ -3,7 +3,6 @@
 package com.example.virtualsportsandroid.registration.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -157,7 +156,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
                 handleRegisterError(result.errorResult)
             } else {
                 saveUserTokenToLocal(result.successResult)
-                requireActivity().onBackPressed()
+                navigator.showConfigsLoadingFragment()
             }
         })
     }
@@ -176,7 +175,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun saveUserTokenToLocal(successResult: AccessTokenResponse) {
-        sharedPreferences.token = successResult.accessToken.toString()
+        sharedPreferences.token = successResult.accessToken
     }
 
     private fun enableRegisterButton() {

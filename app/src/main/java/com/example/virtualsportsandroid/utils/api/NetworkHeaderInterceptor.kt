@@ -9,7 +9,7 @@ class NetworkHeaderInterceptor @Inject constructor(private val sharedPref: Share
     Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
-        requestBuilder.addHeader("X-Platform", "android")
+        requestBuilder.addHeader("X-Platform", "Mobile")
         if (sharedPref.token.isNotEmpty())
             requestBuilder.addHeader("Authorization", sharedPref.token)
         return chain.proceed(requestBuilder.build())

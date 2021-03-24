@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.registration.data.api
 
-import android.util.Log
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.utils.Result
@@ -17,7 +16,6 @@ class RegistrationUtils @Inject constructor(
         return try {
             Result.success(AccessTokenResponse(registrationService.tryRegisterAndGetAccessToken(user)))
         } catch (e: Exception) {
-            Log.d("TAG", "tryRegister: ${e.message}")
             networkInterceptor.getError(e)
         }
     }
