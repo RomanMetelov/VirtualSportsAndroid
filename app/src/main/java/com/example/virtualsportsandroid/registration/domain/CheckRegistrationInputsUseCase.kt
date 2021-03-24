@@ -27,8 +27,8 @@ data class RegistrationInputsError(
 class CheckRegistrationInputsUseCase @Inject constructor() {
 
     companion object {
-        private const val minLoginLength = 3
-        private const val maxLoginLength = 15
+        private const val minLoginLength = 6
+        private const val maxLoginLength = 64
         private const val minPasswordLength = 8
         private const val maxPasswordLength = 20
     }
