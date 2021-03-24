@@ -14,7 +14,7 @@ import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
-class FilterFragment private constructor() : BaseFragment(R.layout.filter_fragment) {
+class FilterFragment constructor() : BaseFragment(R.layout.filter_fragment) {
 
     companion object {
         fun newInstance() = FilterFragment()

@@ -7,7 +7,7 @@ import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import javax.inject.Inject
 
-class LoadingFragment private constructor() : BaseFragment(R.layout.loading_fragment) {
+class LoadingFragment constructor() : BaseFragment(R.layout.loading_fragment) {
 
     companion object {
         fun newInstance() = LoadingFragment()
