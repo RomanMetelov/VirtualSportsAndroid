@@ -28,4 +28,15 @@ class LoginUtils @Inject constructor(
             networkInterceptor.getError(e)
         }
     }
+
+    @Suppress("TooGenericExceptionCaught")
+    suspend fun logout(): Result<Boolean, NetworkErrorType> {
+        return try {
+            loginService.logout()
+            Result.success(true)
+        } catch (e: Exception) {
+            networkInterceptor.getError(e)
+        }
+    }
+
 }
