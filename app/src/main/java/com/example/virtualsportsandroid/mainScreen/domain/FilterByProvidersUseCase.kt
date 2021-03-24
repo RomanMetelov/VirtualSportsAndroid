@@ -14,6 +14,6 @@ class FilterByProvidersUseCase(
         configsResponse: ConfigsResponse
     ): List<GameModel> = withContext(dispatcher) {
         configsResponse.games.filter { providers.contains(it.providerId) }
-            .map { GameModel(it.id, it.displayName, it.imageURL) }
+            .map { GameModel(it.id, it.displayName, "") } //temp solution
     }
 }

@@ -23,8 +23,7 @@ class ConfigsRepository @Inject constructor(
                     "provider1",
                     listOf("category1"),
                     listOf("top"),
-                    "url1",
-                    "imageURL1"
+                    "url1"
                 ),
                 GameResponse(
                     "id2",
@@ -32,8 +31,7 @@ class ConfigsRepository @Inject constructor(
                     "provider1",
                     listOf("category1"),
                     listOf("top"),
-                    "url2",
-                    "imageURL2"
+                    "url2"
                 ),
                 GameResponse(
                     "id3",
@@ -41,8 +39,7 @@ class ConfigsRepository @Inject constructor(
                     "provider2",
                     listOf("category2"),
                     listOf("top"),
-                    "url3",
-                    "imageURL3"
+                    "url3"
                 ),
                 GameResponse(
                     "id4",
@@ -50,8 +47,7 @@ class ConfigsRepository @Inject constructor(
                     "provider2",
                     listOf("category2"),
                     listOf("top", "favorites"),
-                    "url4",
-                    "imageURL4"
+                    "url4"
                 ),
                 GameResponse(
                     "id5",
@@ -59,8 +55,7 @@ class ConfigsRepository @Inject constructor(
                     "provider3",
                     listOf("category2"),
                     listOf("all", "favorites"),
-                    "url5",
-                    "imageURL5"
+                    "url5"
                 ),
                 GameResponse(
                     "id6",
@@ -68,8 +63,7 @@ class ConfigsRepository @Inject constructor(
                     "provider3",
                     listOf("category3"),
                     listOf("all"),
-                    "url6",
-                    "imageURL6"
+                    "url6"
                 ),
                 GameResponse(
                     "id7",
@@ -77,8 +71,7 @@ class ConfigsRepository @Inject constructor(
                     "provider4",
                     listOf("category3"),
                     listOf("all"),
-                    "url7",
-                    "imageURL7"
+                    "url7"
                 ),
                 GameResponse(
                     "id8",
@@ -86,8 +79,7 @@ class ConfigsRepository @Inject constructor(
                     "provider4",
                     listOf("category4"),
                     listOf("all"),
-                    "url8",
-                    "imageURL8"
+                    "url8"
                 ),
                 GameResponse(
                     "id9",
@@ -95,8 +87,7 @@ class ConfigsRepository @Inject constructor(
                     "provider5",
                     listOf("category4"),
                     listOf("all", "recentlyLaunched"),
-                    "url9",
-                    "imageURL9"
+                    "url9"
                 ),
                 GameResponse(
                     "id10",
@@ -104,8 +95,7 @@ class ConfigsRepository @Inject constructor(
                     "provider5",
                     listOf("category4"),
                     listOf("all", "recentlyLaunched"),
-                    "url10",
-                    "imageURL10"
+                    "url10"
                 ),
             ),
             listOf(
