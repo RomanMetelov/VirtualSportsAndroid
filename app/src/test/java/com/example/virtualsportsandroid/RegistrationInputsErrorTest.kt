@@ -59,7 +59,7 @@ class RegistrationInputsErrorTest {
     @Test
     fun `if login too long - should return error result max login length`() {
         val useCase = CheckRegistrationInputsUseCase()
-        val login = "123456789123456789"
+        val login = "123456789123456789123456789123456789123456789123456789123456789123456789"
         val emptyPassword = ""
         val emptyRepeatPassword = ""
 
