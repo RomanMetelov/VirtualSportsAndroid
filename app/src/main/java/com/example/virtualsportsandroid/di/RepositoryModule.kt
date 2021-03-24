@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.di
 
+import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
 import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndProvidersUseCase
@@ -35,5 +36,11 @@ class RepositoryModule {
     @Provides
     fun provideFiltersRepository(): FiltersRepository {
         return FiltersRepository(Dispatchers.IO)
+    }
+
+    @Singleton
+    @Provides
+    fun provideDiceGameBetHistoryRepository(): DiceGameBetHistoryRepository {
+        return DiceGameBetHistoryRepository(Dispatchers.IO)
     }
 }

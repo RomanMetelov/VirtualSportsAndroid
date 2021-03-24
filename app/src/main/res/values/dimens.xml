@@ -57,7 +57,7 @@
     <dimen name="provider_item_padding">32dp</dimen>
     <dimen name="provider_item_marginVertical">4dp</dimen>
     <dimen name="game_image_size">144dp</dimen>
-    <dimen name="divider_height">5dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
     <dimen name="header_elements_horizontal_margin">10dp</dimen>
     <dimen name="radio_button_margin">8dp</dimen>
     <dimen name="game_title_margin">20dp</dimen>
@@ -71,10 +71,10 @@
     <dimen name="square_icon_size">36dp</dimen>
     <dimen name="square_background_size">108dp</dimen>
     <dimen name="button_corners_radius">4dp</dimen>
-    <dimen name="bet_history_item_h2">8sp</dimen>
-    <dimen name="bet_history_item_h1">10sp</dimen>
-    <dimen name="bet_history_item_h0">14sp</dimen>
-    <dimen name="bet_history_item_vertical_margin">2dp</dimen>
+    <dimen name="bet_history_item_h2">12sp</dimen>
+    <dimen name="bet_history_item_h1">14sp</dimen>
+    <dimen name="bet_history_item_h0">18sp</dimen>
+    <dimen name="bet_history_item_vertical_margin">4dp</dimen>
     <dimen name="bet_history_item_id_margin">4dp</dimen>
     <dimen name="bet_history_item_horizontal_margin">16dp</dimen>
     <dimen name="game_title_padding">4dp</dimen>

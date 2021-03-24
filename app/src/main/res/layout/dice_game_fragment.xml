@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -31,12 +31,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/header_elements_horizontal_margin"
+        android:fontFamily="@font/roboto_condensed"
         android:padding="@dimen/game_title_padding"
         android:text="@string/dice_game_title"
         android:textColor="@color/white"
         android:textSize="@dimen/game_title_textSize"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/btnShowBetHistory"
+        app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,8 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
-        android:contentDescription="@string/added_to_favourites_button_decription"
+        android:contentDescription="@string/added_to_favourites_button_description"
         android:src="@drawable/ic_baseline_favourite_added"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/tvDiceGameTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvDiceGameTitle" />
@@ -64,12 +66,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvDiceGameTitle" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
         android:background="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/btnShowBetHistory"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tvDiceGameTitle" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -80,9 +89,9 @@
         android:background="@drawable/bet_history_button_background"
         android:text="@string/button_bet_history_text"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rgBetTypesSet1"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlaceYourBet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDiceGameTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPlaceYourBet"
@@ -93,94 +102,124 @@
         android:textColor="@color/white"
         android:textSize="@dimen/place_your_bet_textSize"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/rgBetTypesSet1"
+        app:layout_constraintBottom_toTopOf="@id/rgBetTypesSet"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowBetHistory"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/rgBetTypesSet1"
+    <com.example.virtualsportsandroid.utils.ui.BlRadioGroup
+        android:id="@+id/rgBetTypesSet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/radio_group_horizontal_padding"
-        app:layout_constraintBottom_toTopOf="@+id/rgBetTypesSet2"
+        app:constraint_referenced_ids="radio1, radio2, radio3, radio4, radio5, radio6,
+                                        radioOdd, radioEven"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/radioOdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnShowBetHistory">
+        app:layout_constraintTop_toBottomOf="@+id/tvPlaceYourBet" />
 
-        <RadioButton
-            android:id="@+id/radio1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:button="@drawable/ic_twotone_bet_1" />
-
-        <RadioButton
-            android:id="@+id/radio3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:button="@drawable/ic_twotone_bet_3" />
-
-        <RadioButton
-            android:id="@+id/radio5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:button="@drawable/ic_twotone_bet_5" />
-
-        <RadioButton
-            android:id="@+id/radioOdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:paddingHorizontal="@dimen/radio_button_margin"
-            android:text="@string/radio_button_odd_text"
-            android:textColor="@color/white"
-            android:textSize="@dimen/radio_button_textSize" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/rgBetTypesSet2"
-        android:layout_width="match_parent"
+    <RadioButton
+        android:id="@+id/radio1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/radio_group_horizontal_padding"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:button="@drawable/ic_twotone_bet_1"
+        app:layout_constraintEnd_toStartOf="@+id/radio3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+
+    <RadioButton
+        android:id="@+id/radio3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:button="@drawable/ic_twotone_bet_3"
+        app:layout_constraintEnd_toStartOf="@+id/radio5"
+        app:layout_constraintStart_toEndOf="@+id/radio1"
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+
+    <RadioButton
+        android:id="@+id/radio5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:button="@drawable/ic_twotone_bet_5"
+        app:layout_constraintEnd_toStartOf="@+id/radioOdd"
+        app:layout_constraintStart_toEndOf="@+id/radio3"
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+
+    <RadioButton
+        android:id="@+id/radioOdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:paddingHorizontal="@dimen/radio_button_margin"
+        android:text="@string/radio_button_odd_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/radio_button_textSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radio5"
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+
+    <RadioButton
+        android:id="@+id/radio2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:button="@drawable/ic_twotone_bet_2"
+        app:layout_constraintEnd_toStartOf="@+id/radio4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
+        app:layout_constraintBottom_toTopOf="@+id/divider2" />
+
+    <RadioButton
+        android:id="@+id/radio4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:button="@drawable/ic_twotone_bet_4"
+        app:layout_constraintEnd_toStartOf="@+id/radio6"
+        app:layout_constraintStart_toEndOf="@+id/radio2"
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
+        app:layout_constraintBottom_toTopOf="@+id/divider2" />
+
+    <RadioButton
+        android:id="@+id/radio6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:button="@drawable/ic_twotone_bet_6"
+        app:layout_constraintEnd_toStartOf="@+id/radioEven"
+        app:layout_constraintStart_toEndOf="@+id/radio4"
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
+        app:layout_constraintBottom_toTopOf="@+id/divider2" />
+
+    <RadioButton
+        android:id="@+id/radioEven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/radio_button_margin"
+        android:paddingHorizontal="@dimen/radio_button_margin"
+        android:text="@string/radio_button_even_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/radio_button_textSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radio6"
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"/>
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
         app:layout_constraintBottom_toTopOf="@+id/ivDiceImage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet1">
-
-        <RadioButton
-            android:id="@+id/radio2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:button="@drawable/ic_twotone_bet_2" />
-
-        <RadioButton
-            android:id="@+id/radio4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:button="@drawable/ic_twotone_bet_4" />
-
-        <RadioButton
-            android:id="@+id/radio6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:button="@drawable/ic_twotone_bet_6" />
-
-        <RadioButton
-            android:id="@+id/radioEven"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/radio_button_margin"
-            android:paddingHorizontal="@dimen/radio_button_margin"
-            android:text="@string/radio_button_even_text"
-            android:textColor="@color/white"
-            android:textSize="@dimen/radio_button_textSize" />
-    </RadioGroup>
+        app:layout_constraintTop_toBottomOf="@+id/radio2" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivDiceImage"
@@ -190,7 +229,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvDiceGameRollResult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet2"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
         tools:src="@drawable/dice_start" />
 
     <androidx.appcompat.widget.AppCompatTextView

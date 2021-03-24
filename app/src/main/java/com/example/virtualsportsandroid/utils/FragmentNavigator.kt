@@ -2,6 +2,9 @@ package com.example.virtualsportsandroid.utils
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
+import com.example.virtualsportsandroid.dices.DiceGameBetHistoryModel
+import com.example.virtualsportsandroid.dices.history.ui.DiceGameBetHistoryFragment
+import com.example.virtualsportsandroid.dices.game.ui.DiceGameFragment
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.ui.GameFragment
 import com.example.virtualsportsandroid.filter.ui.FilterFragment
@@ -58,6 +61,20 @@ class FragmentNavigator(
     fun showFilterFragment() {
         fragmentManager.beginTransaction()
             .replace(container, FilterFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun showDiceGameFragment() {
+        fragmentManager.beginTransaction()
+            .replace(container, DiceGameFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun showDiceGameBetHistoryFragment() {
+        fragmentManager.beginTransaction()
+            .replace(container, DiceGameBetHistoryFragment.newInstance())
             .addToBackStack(null)
             .commit()
     }

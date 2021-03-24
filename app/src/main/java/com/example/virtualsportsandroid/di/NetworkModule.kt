@@ -1,5 +1,7 @@
 package com.example.virtualsportsandroid.di
 
+import com.example.virtualsportsandroid.dices.game.data.DiceGameResultService
+import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryService
 import com.example.virtualsportsandroid.game.data.api.GameScreenService
 import com.example.virtualsportsandroid.login.data.api.LoginService
 import com.example.virtualsportsandroid.login.data.api.RegistrationService
@@ -49,4 +51,13 @@ class NetworkModule {
     fun provideGameScreenService(retrofit: Retrofit): GameScreenService =
         retrofit.create(GameScreenService::class.java)
 
+    @Singleton
+    @Provides
+    fun provideDiceGameResultService(retrofit: Retrofit): DiceGameResultService =
+        retrofit.create(DiceGameResultService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideDiceGameBetHistoryService(retrofit: Retrofit): DiceGameBetHistoryService =
+        retrofit.create(DiceGameBetHistoryService::class.java)
 }
