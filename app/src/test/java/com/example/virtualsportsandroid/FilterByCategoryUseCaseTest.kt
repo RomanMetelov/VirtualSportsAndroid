@@ -21,48 +21,42 @@ internal class FilterByCategoryUseCaseTest {
                         "category1", "category2"
                     ),
                     listOf("all"),
-                    "gameURL",
-                    "imageURL"
+                    "gameURL"
                 ),
                 GameResponse(
                     "id2", "", "provider2", listOf(
                         "category1"
                     ),
                     listOf("all"),
-                    "gameURL",
-                    "imageURL"
+                    "gameURL"
                 ),
                 GameResponse(
                     "id3", "", "provider2", listOf(
                         "category1", "category2", "category3"
                     ),
                     listOf("all"),
-                    "gameURL",
-                    "imageURL"
+                    "gameURL"
                 ),
                 GameResponse(
                     "id4", "", "provider3", listOf(
                         "category1"
                     ),
                     listOf("top"),
-                    "gameURL",
-                    "imageURL"
+                    "gameURL"
                 ),
                 GameResponse(
                     "id5", "", "provider3", listOf(
                         "category2"
                     ),
                     listOf("top", "all"),
-                    "gameURL",
-                    "imageURL"
+                    "gameURL"
                 ),
                 GameResponse(
                     "id6", "", "provider4", listOf(
                         "category2"
                     ),
                     listOf("top"),
-                    "gameURL",
-                    "imageURL"
+                    "gameURL"
                 )
             ),
             listOf(
@@ -82,10 +76,10 @@ internal class FilterByCategoryUseCaseTest {
             )
         )
         val expectedResult = listOf(
-            GameModel("id1", "", "imageURL"),
-            GameModel("id2", "", "imageURL"),
-            GameModel("id3", "", "imageURL"),
-            GameModel("id4", "", "imageURL")
+            GameModel("id1", "", ""),
+            GameModel("id2", "", ""),
+            GameModel("id3", "", ""),
+            GameModel("id4", "", "")
         )
         runBlockingTest {
             FilterByCategoryUseCase(TestCoroutineDispatcher()).invoke(

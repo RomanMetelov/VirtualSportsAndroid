@@ -15,6 +15,6 @@ class FilterByCategoryUseCase @Inject constructor(
     ): List<GameModel> =
         withContext(dispatcher) {
             configsResponse.games.filter { it.categoriesIds.contains(category) }
-                .map { GameModel(it.id, it.displayName, it.imageURL) }
+                .map { GameModel(it.id, it.displayName, "") } //temp solution
         }
 }
