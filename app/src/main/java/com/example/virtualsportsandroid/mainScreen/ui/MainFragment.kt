@@ -47,8 +47,10 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
         binding = MainFragmentBinding.bind(view)
         setupViewModel()
         observeMainFragmentState()
+        observeIsAuthorized()
         setupRecyclerViews()
         setupListeners()
+        viewModel.checkIsAuthorized()
         loadData()
     }
 
@@ -59,6 +61,9 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
             }
             header.btnSignUp.setOnClickListener {
                 navigator.showRegistrationFragment()
+            }
+            header.btnLogout.setOnClickListener {
+                //implementation
             }
             llFilterButton.setOnClickListener {
                 navigator.showFilterFragment()
@@ -125,6 +130,31 @@ class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) 
                 }
                 is MainFragmentState.Error -> showError(it.errorMessage)
             }
+        }
+    }
+
+    private fun observeIsAuthorized() {
+        viewModel.isAuthorizedLiveData.observe(viewLifecycleOwner) {
+            when(it) {
+                false -> showLoginAndRegistrationButtons()
+                true -> showLogoutButton()
+            }
+        }
+    }
+
+    private fun showLogoutButton() {
+        with(binding.header) {
+            btnLogin.hide()
+            btnSignUp.hide()
+            btnLogout.show()
+        }
+    }
+
+    private fun showLoginAndRegistrationButtons() {
+        with(binding.header) {
+            btnLogin.show()
+            btnSignUp.show()
+            btnLogout.hide()
         }
     }
 
