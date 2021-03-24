@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
-import com.example.virtualsportsandroid.registration.data.api.RegistrationUtils
 import com.example.virtualsportsandroid.registration.domain.CheckRegistrationInputsUseCase
 import com.example.virtualsportsandroid.registration.domain.NetworkToRegisterErrorsMapper
 import com.example.virtualsportsandroid.registration.domain.RegistrationInputsError
+import com.example.virtualsportsandroid.registration.domain.RegistrationUseCase
 import com.example.virtualsportsandroid.registration.domain.RegistrationUserInputs
 import com.example.virtualsportsandroid.utils.Result
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +24,7 @@ private typealias RegistrationTryResult = Result<AccessTokenResponse, Registrati
 class RegistrationViewModel
 @Inject constructor(
     private var checkRegistrationInputsUseCase: CheckRegistrationInputsUseCase,
-    private val registrationUtils: RegistrationUtils,
+    private val registrationUseCase: RegistrationUseCase,
     private val networkErrorMapper: NetworkToRegisterErrorsMapper
 ) : ViewModel() {
 
@@ -36,14 +36,13 @@ class RegistrationViewModel
     val registrationTryLiveData: LiveData<RegistrationTryResult> =
         _registrationTryLiveData
 
-
     fun checkInputs(userInputs: RegistrationUserInputs) {
         _checkInputsLiveData.value = checkRegistrationInputsUseCase.invoke(userInputs)
     }
 
     fun tryRegister(user: UserModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = registrationUtils.tryRegister(user).mapError {
+            val result = registrationUseCase(user).mapError {
                 networkErrorMapper.invoke(it)
             }
             withContext(Dispatchers.Main) {

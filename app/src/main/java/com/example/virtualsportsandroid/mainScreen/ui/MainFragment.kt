@@ -16,7 +16,7 @@ import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
-class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) {
+class MainFragment : BaseFragment(R.layout.main_fragment) {
 
     companion object {
         private const val FILTERED_GAMES_LIST_COLUMNS_NUMBER = 2

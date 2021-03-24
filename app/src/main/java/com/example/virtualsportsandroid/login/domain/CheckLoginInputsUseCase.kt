@@ -19,9 +19,7 @@ class CheckLoginInputsUseCase @Inject constructor() {
         private const val minPasswordLength = 8
     }
 
-    fun invoke(
-        user: UserModel
-    ): Result<Boolean, LoginInputsError> {
+    operator fun invoke(user: UserModel): Result<Boolean, LoginInputsError> {
         return when {
             user.login.isEmpty() -> {
                 Result.error(
