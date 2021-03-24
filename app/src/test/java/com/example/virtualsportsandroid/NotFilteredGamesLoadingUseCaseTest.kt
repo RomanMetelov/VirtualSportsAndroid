@@ -1,12 +1,12 @@
 package com.example.virtualsportsandroid
 
 import android.content.Context
-import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.data.GamesLoadingError
-import com.example.virtualsportsandroid.mainScreen.domain.NotFilteredGamesLoadingUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.mainScreen.domain.model.TagModel
-import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
+import com.example.virtualsportsandroid.games.data.GamesRepository
+import com.example.virtualsportsandroid.games.data.GamesLoadingError
+import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
+import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.games.domain.model.TagModel
+import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
@@ -48,7 +48,7 @@ internal class NotFilteredGamesLoadingUseCaseTest {
             coEvery { getAllGamesWithoutFirstTag() } returns Result.success(fakeAllTagsWithoutFirst)
             coEvery { getGamesWithFirstTag() } returns Result.success(fakeFirstTag)
         }
-        val expectedResult = MainFragmentState.NotFiltered(
+        val expectedResult = GamesFragmentState.NotFiltered(
             fakeFirstTag,
             fakeAllTagsWithoutFirst
         )
@@ -81,7 +81,7 @@ internal class NotFilteredGamesLoadingUseCaseTest {
             coEvery { getAllGamesWithoutFirstTag() } returns Result.success(fakeAllTagsWithoutFirst)
             coEvery { getGamesWithFirstTag() } returns Result.error(GamesLoadingError.NOT_FOUND)
         }
-        val expectedResult = MainFragmentState.Error(errorMessage)
+        val expectedResult = GamesFragmentState.Error(errorMessage)
         runBlockingTest {
             NotFilteredGamesLoadingUseCase(
                 TestCoroutineDispatcher(),
@@ -109,7 +109,7 @@ internal class NotFilteredGamesLoadingUseCaseTest {
             coEvery { getAllGamesWithoutFirstTag() } returns Result.error(GamesLoadingError.NOT_FOUND)
             coEvery { getGamesWithFirstTag() } returns Result.success(fakeFirstTag)
         }
-        val expectedResult = MainFragmentState.Error(errorMessage)
+        val expectedResult = GamesFragmentState.Error(errorMessage)
         runBlockingTest {
             NotFilteredGamesLoadingUseCase(
                 TestCoroutineDispatcher(),
