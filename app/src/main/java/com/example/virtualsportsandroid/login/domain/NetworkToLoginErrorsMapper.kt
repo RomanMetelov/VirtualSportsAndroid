@@ -8,7 +8,7 @@ class NetworkToLoginErrorsMapper @Inject constructor() {
 
     fun invoke(networkError: NetworkErrorType): LoginErrorType {
         return when (networkError) {
-            NetworkErrorType.RESOURCE_NOT_FOUND -> LoginErrorType.USER_NOT_FOUND
+            NetworkErrorType.RESOURCE_NOT_FOUND -> LoginErrorType.LOGIN_ERROR
             NetworkErrorType.BAD_REQUEST -> LoginErrorType.INPUTS_ERROR
             NetworkErrorType.NO_NETWORK -> LoginErrorType.NETWORK_ERROR
             else -> LoginErrorType.UNKNOWN_ERROR

@@ -15,8 +15,8 @@ data class LoginInputsError(val type: LoginInputsErrorType, val requireValue: St
 
 class CheckLoginInputsUseCase @Inject constructor() {
     companion object {
-        private const val minLoginLength = 1
-        private const val minPasswordLength = 1
+        private const val minLoginLength = 6
+        private const val minPasswordLength = 8
     }
 
     fun invoke(

@@ -13,7 +13,7 @@ class NetworkToLoginErrorsMapperTest {
 
         val mapper = NetworkToLoginErrorsMapper()
         val networkError = NetworkErrorType.RESOURCE_NOT_FOUND
-        val expectedResult = LoginErrorType.USER_NOT_FOUND
+        val expectedResult = LoginErrorType.LOGIN_ERROR
 
         mapper.invoke(networkError) shouldBe expectedResult
     }
