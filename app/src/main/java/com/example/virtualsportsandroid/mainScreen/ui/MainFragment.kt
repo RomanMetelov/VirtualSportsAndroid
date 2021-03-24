@@ -15,6 +15,7 @@ import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions ")
 class MainFragment private constructor() : BaseFragment(R.layout.main_fragment) {
 
     companion object {
