@@ -14,12 +14,7 @@ class RegistrationUtils @Inject constructor(
     @Suppress("TooGenericExceptionCaught")
     suspend fun tryRegister(user: UserModel): Result<AccessTokenResponse, NetworkErrorType> {
         return try {
-            Result.success(
-                registrationService.tryRegisterAndGetAccessToken(
-                    login = user.login,
-                    password = user.password
-                )
-            )
+            Result.success(AccessTokenResponse(registrationService.tryRegisterAndGetAccessToken(user)))
         } catch (e: Exception) {
             networkInterceptor.getError(e)
         }

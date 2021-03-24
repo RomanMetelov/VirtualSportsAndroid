@@ -156,7 +156,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
                 handleRegisterError(result.errorResult)
             } else {
                 saveUserTokenToLocal(result.successResult)
-                requireActivity().onBackPressed()
+                navigator.showConfigsLoadingFragment()
             }
         })
     }
@@ -175,7 +175,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun saveUserTokenToLocal(successResult: AccessTokenResponse) {
-        sharedPreferences.token = successResult.accessToken.toString()
+        sharedPreferences.token = successResult.accessToken
     }
 
     private fun enableRegisterButton() {
@@ -201,8 +201,8 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     private fun tryRegister() {
         viewModel.tryRegister(
             UserModel(
-                login = etLogin.toString(),
-                password = etPassword.toString()
+                login = etLogin.text.toString(),
+                password = etPassword.text.toString()
             )
         )
     }

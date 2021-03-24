@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
-import com.example.virtualsportsandroid.registration.data.api.RegistrationUtils
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
+import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
+import com.example.virtualsportsandroid.registration.data.api.RegistrationUtils
 import com.example.virtualsportsandroid.registration.domain.CheckRegistrationInputsUseCase
 import com.example.virtualsportsandroid.registration.domain.NetworkToRegisterErrorsMapper
 import com.example.virtualsportsandroid.registration.domain.RegistrationInputsError

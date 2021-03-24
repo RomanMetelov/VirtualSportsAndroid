@@ -15,9 +15,13 @@ class LoginUtils @Inject constructor(
     suspend fun tryLogin(user: UserModel): Result<AccessTokenResponse, NetworkErrorType> {
         return try {
             Result.success(
-                loginService.tryLoginAndGetAccessToken(
-                    login = user.login,
-                    password = user.password
+                AccessTokenResponse(
+                    loginService.tryLoginAndGetAccessToken(
+                        UserModel(
+                            login = user.login,
+                            password = user.password
+                        )
+                    )
                 )
             )
         } catch (e: Exception) {
