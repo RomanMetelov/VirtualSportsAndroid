@@ -18,16 +18,17 @@ import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
 
-class DiceGameBetHistoryFragment private constructor() :
+class DiceGameBetHistoryFragment :
     BaseFragment(R.layout.dice_game_bet_history_fragment) {
 
     private lateinit var binding: DiceGameBetHistoryFragmentBinding
 
     @Inject
     lateinit var viewModel: DiceGameBetHistoryViewModel
+
     //adapter
     private val betHistoryAdapter: BetHistoryAdapter by lazy {
-        BetHistoryAdapter(){
+        BetHistoryAdapter() {
             viewModel.diceGameBetHistoryFragmentStateLiveData.value.toString()
         }
     }
@@ -81,16 +82,12 @@ class DiceGameBetHistoryFragment private constructor() :
         binding.rvBetHistory.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = betHistoryAdapter
-            var itemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
+            val itemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)
             ContextCompat.getDrawable(context, R.drawable.divider)?.let {
-                itemDecoration.setDrawable(
-                    it
-                )
+                itemDecoration.setDrawable(it)
             }
             addItemDecoration(itemDecoration)
-
         }
-
     }
 
     private fun showContent(betHistory: List<DiceGameResultModel>) {

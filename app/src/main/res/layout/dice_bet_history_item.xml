@@ -27,7 +27,7 @@
         android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:layout_marginTop="@dimen/bet_history_item_id_margin"
         android:text="@string/bet_history_bet_datetime"
-        android:textColor="@color/bright_yellow_13"
+        android:textColor="@color/bright_yellow_57"
         android:textSize="@dimen/bet_history_item_h2"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

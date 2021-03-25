@@ -24,5 +24,4 @@ class DiceGameBetHistoryViewModel@Inject constructor(
             _diceGameBetHistoryFragmentStateLiveData.value = diceGameBetHistoryLoadingUseCase.invoke()
         }
     }
-
 }

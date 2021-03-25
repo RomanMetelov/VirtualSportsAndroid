@@ -1,39 +1,48 @@
-package com.example.virtualsportsandroid.dices.history.data
+package com.example.virtualsportsandroid.dices.game.data
 
 import com.example.virtualsportsandroid.dices.BetType
 import com.example.virtualsportsandroid.dices.DiceGameResultModel
 import com.example.virtualsportsandroid.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 import kotlin.random.Random
 
+
 @Suppress("EmptyClassBlock")
-class DiceGameBetHistoryRepository @Inject constructor(
+class DiceGameResultRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher
 ) {
 
     //написать тут поход на сервер
-    suspend fun getDiceGameBetHistory(): Result<List<DiceGameResultModel>, String> = withContext(dispatcher) {
-        val last100betsResult: MutableList<DiceGameResultModel> = mutableListOf()
-        var randomDiceBet: BetType
-        var diceRollRandomResult: Int
-        var diceGameResult: DiceGameResultModel
-        var isBetWon: Boolean
-
-        for (id in 1..100) {
-            randomDiceBet = getRandomBet()
-            diceRollRandomResult = getDiceRollRandomResult()
-            isBetWon = isBetWon(randomDiceBet, diceRollRandomResult)
-            diceGameResult = DiceGameResultModel(id.toString(), "datetime", randomDiceBet, diceRollRandomResult, isBetWon)
-            last100betsResult.add(diceGameResult)
+    //override suspend fun
+    suspend fun getDiceGameResult(betTypeId: Int, datetime: String): Result<DiceGameResultModel, String> =
+        withContext(dispatcher) {
+            delay(1500)
+            val diceGameResult: DiceGameResultModel
+            val isBetWon: Boolean
+            val diceBet: BetType = getBetType(betTypeId)
+            val diceRollRandomResult: Int = getDiceRollRandomResult()
+            isBetWon = isBetWon(diceBet, diceRollRandomResult)
+            val dateNow = Calendar.getInstance().time
+            val sdf = SimpleDateFormat("dd.MM.yyyy hh:mm:ss", Locale.getDefault())
+            val currentDateString = sdf.format(dateNow).toString()
+            diceGameResult = DiceGameResultModel(
+                1.toString(),
+                currentDateString,
+                diceBet,
+                diceRollRandomResult,
+                isBetWon
+            )
+            return@withContext Result.success(diceGameResult)
         }
 
-        return@withContext Result.success(last100betsResult)
-    }
-
-    private fun getRandomBet(): BetType {
-        return when (Random.nextInt(8)) {
+    private fun getBetType(betTypeId: Int): BetType {
+        return when (betTypeId) {
             0 -> BetType.NUMBER1
             1 -> BetType.NUMBER2
             2 -> BetType.NUMBER3

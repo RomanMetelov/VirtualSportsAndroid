@@ -30,6 +30,7 @@
     <string name="providers_title_text">Провайдеры</string>
     <string name="apply_button_text">Применить</string>
     <string name="roll_the_dice_button_text">ROLL!</string>
+    <string name="dice_game_roll_result_text_start">Result: </string>
     <string name="dice_game_roll_result_text">Result: %1$d - %2$s</string>
     <string name="back_button_description">Back button</string>
     <string name="dice_game_title">Dice Game</string>
@@ -44,7 +45,7 @@
     <string name="bet_history_item_bet_title">Bet</string>
     <string name="bet_history_item_result_title">Result</string>
     <string name="bet_history_item_bet_value">%d</string>
-    <string name="bet_history_item_bet_result_value">%1$d, %2$s</string>
+    <string name="bet_history_item_bet_result_value">%1$d - %2$s</string>
     <string name="bet_history_item_bet_outcome">Win/Lose</string>
     <string name="game_title">Game Title</string>
     <string name="change_favorite_game_text">Ошибка при изменении списка избранного</string>

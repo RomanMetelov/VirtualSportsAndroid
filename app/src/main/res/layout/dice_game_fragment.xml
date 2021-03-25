@@ -226,23 +226,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/dice_start"
-        app:layout_constraintBottom_toTopOf="@+id/tvDiceGameRollResult"
+        app:layout_constraintBottom_toTopOf="@+id/tvErrorMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2"
         tools:src="@drawable/dice_start" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvDiceGameRollResult"
+        android:id="@+id/tvDiceGameRollResultLose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed"
         android:text="@string/dice_game_roll_result_text"
-        android:textColor="@color/white"
+        android:textColor="@color/lose"
         android:textSize="@dimen/radio_button_textSize"
+        app:layout_constraintBottom_toBottomOf="@+id/tvErrorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvErrorMessage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDiceGameRollResultWin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed"
+        android:text="@string/dice_game_roll_result_text"
+        android:textColor="@color/win"
+        android:textSize="@dimen/radio_button_textSize"
+        app:layout_constraintBottom_toBottomOf="@+id/tvErrorMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvErrorMessage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvErrorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_condensed"
+        android:textColor="@color/white"
+        android:textSize="@dimen/filter_fragment_error_message_textSize"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btnRoll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivDiceImage" />
+        app:layout_constraintTop_toBottomOf="@+id/ivDiceImage"
+        tools:text="Some error message" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRoll"
@@ -258,6 +286,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDiceGameRollResult" />
+        app:layout_constraintTop_toBottomOf="@+id/tvErrorMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

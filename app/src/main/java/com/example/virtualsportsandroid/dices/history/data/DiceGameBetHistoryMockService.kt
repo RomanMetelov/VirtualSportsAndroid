@@ -25,14 +25,14 @@ class DiceGameBetHistoryMockService : DiceGameBetHistoryService {
     }
 
     private fun getRandomBet(): BetType {
-        return when (Random.nextInt(8) + 1) {
-            1 -> BetType.NUMBER1
-            2 -> BetType.NUMBER2
-            3 -> BetType.NUMBER3
-            4 -> BetType.NUMBER4
-            5 -> BetType.NUMBER5
-            6 -> BetType.NUMBER6
-            7 -> BetType.EVEN
+        return when (Random.nextInt(8)) {
+            0 -> BetType.NUMBER1
+            1 -> BetType.NUMBER2
+            2 -> BetType.NUMBER3
+            3 -> BetType.NUMBER4
+            4 -> BetType.NUMBER5
+            5 -> BetType.NUMBER6
+            6 -> BetType.EVEN
             else -> BetType.ODD
         }
     }
