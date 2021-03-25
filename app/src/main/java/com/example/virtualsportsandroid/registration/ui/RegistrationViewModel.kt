@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
-import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
 import com.example.virtualsportsandroid.registration.domain.CheckRegistrationInputsUseCase
-import com.example.virtualsportsandroid.registration.domain.NetworkToRegisterErrorsMapper
-import com.example.virtualsportsandroid.registration.domain.RegistrationInputsError
-import com.example.virtualsportsandroid.registration.domain.RegistrationUseCase
 import com.example.virtualsportsandroid.registration.domain.RegistrationUserInputs
+import com.example.virtualsportsandroid.registration.domain.RegistrationErrorType
+import com.example.virtualsportsandroid.registration.domain.RegistrationInputsError
+import com.example.virtualsportsandroid.registration.domain.NetworkToRegisterErrorsMapper
+import com.example.virtualsportsandroid.registration.domain.RegistrationUseCase
 import com.example.virtualsportsandroid.utils.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

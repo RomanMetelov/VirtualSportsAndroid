@@ -1,8 +1,10 @@
 @file:Suppress("TooManyFunctions")
+
 package com.example.virtualsportsandroid.game.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,9 +85,9 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
         viewModel.changeGameFavoriteResultLiveData.observe(viewLifecycleOwner, { result ->
             if (!result.isError) {
                 game.isFavorite = !game.isFavorite
-                changeFavoriteStarView()
             } else {
                 handleErrorOnUi(result.errorResult)
+                changeFavoriteStarView()
             }
         })
     }
@@ -104,6 +106,7 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     }
 
     private fun changeGameFavorite() {
+        changeFavoriteStarView()
         viewModel.changeGameFavorite(game)
     }
 

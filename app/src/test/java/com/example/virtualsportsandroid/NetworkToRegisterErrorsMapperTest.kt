@@ -1,7 +1,7 @@
 package com.example.virtualsportsandroid
 
-import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
 import com.example.virtualsportsandroid.registration.domain.NetworkToRegisterErrorsMapper
+import com.example.virtualsportsandroid.registration.domain.RegistrationErrorType
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test

@@ -14,9 +14,9 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.LoginFragmentBinding
-import com.example.virtualsportsandroid.login.data.api.LoginErrorType
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
+import com.example.virtualsportsandroid.login.domain.LoginErrorType
 import com.example.virtualsportsandroid.login.domain.LoginInputsError
 import com.example.virtualsportsandroid.login.domain.LoginInputsErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
