@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virtualsportsandroid.login.data.api.LoginErrorType
-import com.example.virtualsportsandroid.login.data.api.LoginUtils
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.login.domain.CheckLoginInputsUseCase
 import com.example.virtualsportsandroid.login.domain.LoginInputsError
+import com.example.virtualsportsandroid.login.domain.LoginUseCase
 import com.example.virtualsportsandroid.login.domain.NetworkToLoginErrorsMapper
 import com.example.virtualsportsandroid.utils.Result
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,7 @@ private typealias LoginTryResult = Result<AccessTokenResponse, LoginErrorType>
 
 class LoginViewModel @Inject constructor(
     private val checkLoginInputsUseCase: CheckLoginInputsUseCase,
-    private val loginUtils: LoginUtils,
+    private val loginUseCase: LoginUseCase,
     private val networkErrorMapper: NetworkToLoginErrorsMapper
 ) : ViewModel() {
 
@@ -35,12 +35,12 @@ class LoginViewModel @Inject constructor(
         _loginTryLiveData
 
     fun checkInputs(user: UserModel) {
-        _checkInputsLiveData.value = checkLoginInputsUseCase.invoke(user)
+        _checkInputsLiveData.value = checkLoginInputsUseCase(user)
     }
 
     fun tryLogin(user: UserModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = loginUtils.tryLogin(user).mapError {
+            val result = loginUseCase(user).mapError {
                 networkErrorMapper.invoke(it)
             }
             withContext(Dispatchers.Main) {

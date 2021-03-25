@@ -4,9 +4,9 @@ import com.example.virtualsportsandroid.utils.Result
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class NetworkInterceptor @Inject constructor() {
+class NetworkExceptionHandler @Inject constructor() {
 
-    fun <T> getError(exception: Exception): Result<T, NetworkErrorType> {
+    fun <T> handleError(exception: Exception): Result<T, NetworkErrorType> {
         if (exception is UnknownHostException)
             return Result.error(NetworkErrorType.NO_NETWORK)
         return when {

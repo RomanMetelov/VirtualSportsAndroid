@@ -15,7 +15,7 @@ class CheckLoginInputsUseCaseTest {
         val emptyLogin = ""
         val emptyPassword = ""
 
-        useCase.invoke(
+        useCase(
             UserModel(
                 login = emptyLogin,
                 password = emptyPassword
@@ -29,7 +29,7 @@ class CheckLoginInputsUseCaseTest {
         val emptyLogin = ""
         val password = "12345"
 
-        useCase.invoke(
+        useCase(
             UserModel(
                 login = emptyLogin,
                 password = password
@@ -43,7 +43,7 @@ class CheckLoginInputsUseCaseTest {
         val login = "12345"
         val emptyPassword = ""
 
-        useCase.invoke(
+        useCase(
             UserModel(
                 login = login,
                 password = emptyPassword
