@@ -1,6 +1,10 @@
 package com.example.virtualsportsandroid.di
 
 import android.content.Context
+import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
+import com.example.virtualsportsandroid.dices.game.ui.DiceGameResultLoadingUseCase
+import com.example.virtualsportsandroid.dices.history.DiceGameBetHistoryLoadingUseCase
+import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.filter.domain.FiltersLoadingUseCase
 import com.example.virtualsportsandroid.games.data.GamesRepository
@@ -14,9 +18,12 @@ import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvide
 import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 import javax.inject.Singleton
 
+@Suppress("TooManyFunctions")
 @Module(includes = [RepositoryModule::class, AppModule::class])
 class UseCaseModule {
 
@@ -84,5 +91,21 @@ class UseCaseModule {
     @Singleton
     fun provideFiltersLoadingUseCase(filtersRepository: FiltersRepository): FiltersLoadingUseCase {
         return FiltersLoadingUseCase(Dispatchers.Default, filtersRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDiceGameBetHistoryLoadingUseCase(
+        diceGameBetHistoryRepository: DiceGameBetHistoryRepository
+    ): DiceGameBetHistoryLoadingUseCase {
+        return DiceGameBetHistoryLoadingUseCase(Dispatchers.Default, diceGameBetHistoryRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDiceGameResultLoadingUseCase(
+        diceGameResultRepository: DiceGameResultRepository
+    ): DiceGameResultLoadingUseCase {
+        return DiceGameResultLoadingUseCase(Dispatchers.Default, diceGameResultRepository)
     }
 }

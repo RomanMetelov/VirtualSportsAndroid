@@ -1,13 +1,17 @@
-package com.example.virtualsportsandroid.dices.data.models
+package com.example.virtualsportsandroid.dices
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class GameResult(
-    @SerializedName("id") val id: Int,
+@Parcelize
+data class DiceGameResultModel(
+    @SerializedName("id") val id: String,
+    @SerializedName("datetime") val datetime: String,
     @SerializedName("betType") val betType: BetType,
     @SerializedName("droppedNumber") val droppedNumber: Int,
     @SerializedName("isBetWon") val isBetWon: Boolean
-)
+) : Parcelable
 
 enum class BetType(val stringValue: String) {
     NUMBER1("1"),
@@ -18,5 +22,4 @@ enum class BetType(val stringValue: String) {
     NUMBER6("6"),
     EVEN("Even"),
     ODD("Odd")
-
 }
