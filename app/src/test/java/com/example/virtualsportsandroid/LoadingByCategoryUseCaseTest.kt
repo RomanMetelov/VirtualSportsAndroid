@@ -1,11 +1,11 @@
 package com.example.virtualsportsandroid
 
 import android.content.Context
-import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.data.GamesLoadingError
-import com.example.virtualsportsandroid.mainScreen.domain.LoadingByCategoryUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
+import com.example.virtualsportsandroid.games.data.GamesRepository
+import com.example.virtualsportsandroid.games.data.GamesLoadingError
+import com.example.virtualsportsandroid.games.domain.LoadingByCategoryUseCase
+import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
@@ -36,7 +36,7 @@ internal class LoadingByCategoryUseCaseTest {
             LoadingByCategoryUseCase(
                 TestCoroutineDispatcher(),
                 mockGamesRepository, mockContext
-            ).invoke(fakeCategory) shouldBe MainFragmentState.FilteredByCategory(
+            ).invoke(fakeCategory) shouldBe GamesFragmentState.FilteredByCategory(
                 fakeCategory,
                 fakeFilteredGames
             )
@@ -57,7 +57,7 @@ internal class LoadingByCategoryUseCaseTest {
             LoadingByCategoryUseCase(
                 TestCoroutineDispatcher(),
                 mockGamesRepository, mockContext
-            ).invoke(fakeCategory) shouldBe MainFragmentState.Error(errorMessage)
+            ).invoke(fakeCategory) shouldBe GamesFragmentState.Error(errorMessage)
         }
     }
 
@@ -75,7 +75,7 @@ internal class LoadingByCategoryUseCaseTest {
             LoadingByCategoryUseCase(
                 TestCoroutineDispatcher(),
                 mockGamesRepository, mockContext
-            ).invoke(fakeCategory) shouldBe MainFragmentState.Error(errorMessage)
+            ).invoke(fakeCategory) shouldBe GamesFragmentState.Error(errorMessage)
         }
     }
 }

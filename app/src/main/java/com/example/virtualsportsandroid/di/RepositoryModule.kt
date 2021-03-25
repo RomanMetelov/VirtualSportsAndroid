@@ -3,11 +3,11 @@ package com.example.virtualsportsandroid.di
 import android.content.Context
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsRepository
-import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByTagUseCase
+import com.example.virtualsportsandroid.games.data.GamesRepository
+import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import dagger.Module

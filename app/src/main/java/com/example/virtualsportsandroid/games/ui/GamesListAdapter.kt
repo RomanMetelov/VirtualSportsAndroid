@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.mainScreen.ui
+package com.example.virtualsportsandroid.games.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GameItemBinding
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameDiffCallback
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
+import com.example.virtualsportsandroid.games.domain.model.GameDiffCallback
+import com.example.virtualsportsandroid.games.domain.model.GameModel
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURLWithPlaceholder
 
 class GamesListAdapter :

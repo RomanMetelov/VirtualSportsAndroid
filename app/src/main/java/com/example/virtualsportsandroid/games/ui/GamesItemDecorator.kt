@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.mainScreen.ui
+package com.example.virtualsportsandroid.games.ui
 
 import android.graphics.Rect
 import android.view.View

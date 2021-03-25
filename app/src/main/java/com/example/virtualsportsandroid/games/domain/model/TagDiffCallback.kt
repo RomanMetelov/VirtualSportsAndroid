@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.mainScreen.domain.model
+package com.example.virtualsportsandroid.games.domain.model
 
 import androidx.recyclerview.widget.DiffUtil
 

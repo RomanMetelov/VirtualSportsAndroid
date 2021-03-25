@@ -2,14 +2,13 @@ package com.example.virtualsportsandroid.utils
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
-import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.ui.GameFragment
 import com.example.virtualsportsandroid.loadingConfigs.ui.LoadingFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
-import com.example.virtualsportsandroid.mainScreen.ui.MainFragment
-import com.example.virtualsportsandroid.nonetwork.NetworkErrorFragment
 import com.example.virtualsportsandroid.registration.ui.RegistrationFragment
+import com.example.virtualsportsandroid.main.ui.MainFragment
+import com.example.virtualsportsandroid.nonetwork.NetworkErrorFragment
 
 class FragmentNavigator(
     private val fragmentManager: FragmentManager,
@@ -19,58 +18,44 @@ class FragmentNavigator(
         fragmentManager.beginTransaction()
             .replace(container, LoginFragment.newInstance())
             .addToBackStack(null)
-            .commitAllowingStateLoss()
+            .commit()
     }
 
     fun showRegistrationFragment() {
         fragmentManager.beginTransaction()
             .replace(container, RegistrationFragment.newInstance())
             .addToBackStack(null)
-            .commitAllowingStateLoss()
+            .commit()
     }
 
-    fun showMainFragment(
-        category: String? = null,
-        providers: List<String>? = null
-    ) {
+    fun showMainFragment() {
         fragmentManager.beginTransaction()
-            .replace(
-                container,
-                MainFragment.newInstance(category = category, providers = providers)
-            )
+            .replace(container, MainFragment.newInstance())
             .addToBackStack(null)
-            .commitAllowingStateLoss()
+            .commit()
     }
 
     fun showNoNetworkFragment() {
         fragmentManager.beginTransaction()
             .replace(container, NetworkErrorFragment.newInstance())
             .addToBackStack(null)
-            .commitAllowingStateLoss()
+            .commit()
     }
 
     fun showGameFragment(gameModel: ScreenGameModel) {
         fragmentManager.beginTransaction()
             .replace(container, GameFragment.newInstance(gameModel))
             .addToBackStack(null)
-            .commitAllowingStateLoss()
-    }
-
-    fun showFilterFragment() {
-        fragmentManager.beginTransaction()
-            .replace(container, FilterFragment.newInstance())
-            .addToBackStack(null)
-            .commitAllowingStateLoss()
+            .commit()
     }
 
     fun showConfigsLoadingFragment() {
         fragmentManager.beginTransaction()
             .replace(container, LoadingFragment.newInstance())
-            .commitAllowingStateLoss()
+            .commit()
     }
 
     fun back() {
         fragmentManager.popBackStack()
     }
-
 }

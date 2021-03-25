@@ -1,7 +1,7 @@
 package com.example.virtualsportsandroid.game.domain
 
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
+import com.example.virtualsportsandroid.games.domain.model.GameModel
 import javax.inject.Inject
 
 @Suppress("ForbiddenComment")

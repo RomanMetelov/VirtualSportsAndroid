@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.mainScreen.ui
+package com.example.virtualsportsandroid.games.ui
 
 import android.os.Bundle
 import android.view.View
@@ -6,68 +6,62 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
-import com.example.virtualsportsandroid.databinding.MainFragmentBinding
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.mainScreen.domain.model.TagModel
-import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
+import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
+import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.games.domain.model.TagModel
+import com.example.virtualsportsandroid.main.ui.MainFragmentNavigator
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
 
-@Suppress("TooManyFunctions")
-class MainFragment : BaseFragment(R.layout.main_fragment) {
+class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     companion object {
         private const val FILTERED_GAMES_LIST_COLUMNS_NUMBER = 2
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
 
-        fun newInstance(category: String? = null, providers: List<String>? = null) =
-            MainFragment().apply {
+        fun newInstance(
+            category: String? = null,
+            providers: List<String>? = null,
+            mainFragmentNavigator: MainFragmentNavigator
+        ) =
+            GamesFragment().apply {
                 arguments = Bundle().apply {
                     putString(CATEGORY_KEY, category)
                     providers?.let {
                         putStringArray(PROVIDERS_KEY, it.toTypedArray())
                     }
                 }
+                this.mainFragmentNavigator = mainFragmentNavigator
             }
     }
 
-    private lateinit var binding: MainFragmentBinding
+    private lateinit var binding: GamesFragmentBinding
+    private lateinit var mainFragmentNavigator: MainFragmentNavigator
 
     private val firstTagGamesListAdapter = GamesListAdapter()
     private val allTagsWithoutFirstListAdapter = TagsListAdapter()
     private val filteredGamesListAdapter = GamesListAdapter()
 
     @Inject
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModel: GamesViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = MainFragmentBinding.bind(view)
+        binding = GamesFragmentBinding.bind(view)
         setupViewModel()
         observeMainFragmentState()
-        observeIsAuthorized()
         setupRecyclerViews()
         setupListeners()
-        viewModel.checkIsAuthorized()
         loadData()
     }
 
     private fun setupListeners() {
         with(binding) {
-            header.btnLogin.setOnClickListener {
-                navigator.showLoginFragment()
-            }
-            header.btnSignUp.setOnClickListener {
-                navigator.showRegistrationFragment()
-            }
-            header.btnLogout.setOnClickListener {
-                //implementation
-            }
             llFilterButton.setOnClickListener {
-                navigator.showFilterFragment()
+                mainFragmentNavigator.showFilterFragment()
             }
         }
     }
@@ -111,60 +105,44 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     }
 
     private fun observeMainFragmentState() {
-        viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
+        viewModel.gamesFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is MainFragmentState.NotFiltered -> showNotFilteredGames(
+                is GamesFragmentState.Loading -> showLoading()
+                is GamesFragmentState.NotFiltered -> showNotFilteredGames(
                     it.gamesWithFirstTag,
                     it.allGamesWithoutFirstTag
                 )
-                is MainFragmentState.FilteredByCategory -> {
+                is GamesFragmentState.FilteredByCategory -> {
                     showFilteredGames(it.filteredGames)
                     binding.tvFilteredGamesTitle.text = it.categoryName
                 }
-                is MainFragmentState.FilteredByProviders -> {
+                is GamesFragmentState.FilteredByProviders -> {
                     showFilteredGames(it.filteredGames)
                     binding.tvFilteredGamesTitle.text = getString(R.string.search_results_title)
                 }
-                is MainFragmentState.FilteredByProvidersAndCategory -> {
+                is GamesFragmentState.FilteredByProvidersAndCategory -> {
                     showFilteredGames(it.filteredGames)
                     binding.tvFilteredGamesTitle.text = getString(R.string.search_results_title)
                 }
-                is MainFragmentState.Error -> showError(it.errorMessage)
+                is GamesFragmentState.Error -> showError(it.errorMessage)
             }
         }
     }
 
-    private fun observeIsAuthorized() {
-        viewModel.isAuthorizedLiveData.observe(viewLifecycleOwner) {
-            when(it) {
-                false -> showLoginAndRegistrationButtons()
-                true -> showLogoutButton()
-            }
+    private fun showLoading() {
+        with(binding) {
+            svContentContainer.hide()
+            tvErrorMessage.hide()
+            pbLoading.show()
         }
     }
 
-    private fun showLogoutButton() {
-        with(binding.header) {
-            btnLogin.hide()
-            btnSignUp.hide()
-            btnLogout.show()
-        }
-    }
-
-    private fun showLoginAndRegistrationButtons() {
-        with(binding.header) {
-            btnLogin.show()
-            btnSignUp.show()
-            btnLogout.hide()
-        }
-    }
 
     private fun showNotFilteredGames(
         firstTagGames: TagModel,
         allGamesWithoutFirstTag: List<TagModel>
     ) {
         with(binding) {
-            header.headerContainer.show()
             svContentContainer.show()
             tvFirstTagName.apply {
                 show()
@@ -177,12 +155,12 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             tvFilteredGamesTitle.hide()
             rvFilteredGames.hide()
             tvErrorMessage.hide()
+            pbLoading.hide()
         }
     }
 
     private fun showFilteredGames(filteredGames: List<GameModel>) {
         with(binding) {
-            header.headerContainer.show()
             tvErrorMessage.hide()
             svContentContainer.show()
             tvFirstTagName.hide()
@@ -191,17 +169,18 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             tvFilteredGamesTitle.show()
             rvFilteredGames.show()
             filteredGamesListAdapter.submitList(filteredGames)
+            pbLoading.hide()
         }
     }
 
     private fun showError(errorMessage: String) {
         with(binding) {
-            header.headerContainer.hide()
             svContentContainer.hide()
             tvErrorMessage.apply {
                 show()
                 text = errorMessage
             }
+            pbLoading.hide()
         }
     }
 }

@@ -4,6 +4,7 @@ import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
 import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
 
 sealed class FilterFragmentState {
+    object Loading : FilterFragmentState()
     data class Content(
         val categories: List<CategoryResponse>,
         val providers: List<ProviderResponse>

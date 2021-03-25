@@ -1,11 +1,11 @@
 package com.example.virtualsportsandroid
 
 import android.content.Context
-import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.data.GamesLoadingError
-import com.example.virtualsportsandroid.mainScreen.domain.LoadingByProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
+import com.example.virtualsportsandroid.games.data.GamesRepository
+import com.example.virtualsportsandroid.games.data.GamesLoadingError
+import com.example.virtualsportsandroid.games.domain.LoadingByProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
@@ -38,7 +38,7 @@ internal class LoadingByProvidersUseCaseTest {
                 TestCoroutineDispatcher(),
                 mockGamesRepository,
                 mockContext
-            ).invoke(fakeProviders) shouldBe MainFragmentState.FilteredByProviders(fakeFilteredGames)
+            ).invoke(fakeProviders) shouldBe GamesFragmentState.FilteredByProviders(fakeFilteredGames)
         }
     }
 
@@ -57,7 +57,7 @@ internal class LoadingByProvidersUseCaseTest {
                 TestCoroutineDispatcher(),
                 mockGamesRepository,
                 mockContext
-            ).invoke(fakeProviders) shouldBe MainFragmentState.Error(errorMessage)
+            ).invoke(fakeProviders) shouldBe GamesFragmentState.Error(errorMessage)
         }
     }
 
@@ -76,7 +76,7 @@ internal class LoadingByProvidersUseCaseTest {
                 TestCoroutineDispatcher(),
                 mockGamesRepository,
                 mockContext
-            ).invoke(fakeProviders) shouldBe MainFragmentState.Error(errorMessage)
+            ).invoke(fakeProviders) shouldBe GamesFragmentState.Error(errorMessage)
         }
     }
 }
