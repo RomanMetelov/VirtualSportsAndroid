@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.data.api.GameScreenErrorType
-import com.example.virtualsportsandroid.game.data.api.GameScreenUtils
+import com.example.virtualsportsandroid.game.domain.AddGameToFavoriteUseCase
+import com.example.virtualsportsandroid.game.domain.DelGameFromFavoriteUseCase
 import com.example.virtualsportsandroid.game.domain.NetworkToGameScreenErrorMapper
 import com.example.virtualsportsandroid.utils.Result
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,8 @@ import javax.inject.Inject
 private typealias ChangeResult = Result<Boolean, GameScreenErrorType>
 
 class GameFragmentViewModel @Inject constructor(
-    private val gameScreenUtils: GameScreenUtils,
+    private val addGameToFavoriteUseCase: AddGameToFavoriteUseCase,
+    private val delGameToFavoriteUseCase: DelGameFromFavoriteUseCase,
     private val networkErrorMapper: NetworkToGameScreenErrorMapper
 ) : ViewModel() {
 
@@ -29,8 +31,8 @@ class GameFragmentViewModel @Inject constructor(
     fun changeGameFavorite(game: ScreenGameModel) {
         viewModelScope.launch(Dispatchers.IO) {
             val result = when (game.isFavorite) {
-                true -> gameScreenUtils.delGameFromFavorite(gameId = game.id)
-                false -> gameScreenUtils.addGameToFavorite(gameId = game.id)
+                true -> delGameToFavoriteUseCase(gameId = game.id)
+                false -> addGameToFavoriteUseCase(gameId = game.id)
             }.mapError {
                 networkErrorMapper.invoke(it)
             }

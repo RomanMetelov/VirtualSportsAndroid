@@ -1,3 +1,5 @@
+@file:Suppress("TooGenericExceptionCaught")
+
 package com.example.virtualsportsandroid.game.data.api
 
 import com.example.virtualsportsandroid.utils.Result
@@ -5,8 +7,7 @@ import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.api.NetworkExceptionHandler
 import javax.inject.Inject
 
-@Suppress("TooGenericExceptionCaught")
-class GameScreenUtils @Inject constructor(
+class GameScreenRepository @Inject constructor(
     private val gameScreenService: GameScreenService,
     private val networkExceptionHandler: NetworkExceptionHandler
 ) {

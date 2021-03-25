@@ -53,6 +53,7 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
         setupListeners()
         observeLiveData()
         showGameInfo()
+        binding.tvGameTitle.text = game.displayName
     }
 
     @SuppressLint("SetJavaScriptEnabled")

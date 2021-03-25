@@ -45,6 +45,10 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             btnLogout.setOnClickListener {
                 //implementation
             }
+            ivDiceGameLaunch.setOnClickListener {
+                navigator.showDiceGameFragment()
+            }
+
         }
     }
 
