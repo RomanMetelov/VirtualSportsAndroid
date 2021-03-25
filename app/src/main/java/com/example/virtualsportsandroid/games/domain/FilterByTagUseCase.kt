@@ -1,7 +1,7 @@
-package com.example.virtualsportsandroid.mainScreen.domain
+package com.example.virtualsportsandroid.games.domain
 
 import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsResponse
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
+import com.example.virtualsportsandroid.games.domain.model.GameModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

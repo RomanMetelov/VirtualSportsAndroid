@@ -1,9 +1,9 @@
-package com.example.virtualsportsandroid.mainScreen.domain
+package com.example.virtualsportsandroid.games.domain
 
 import android.content.Context
 import com.example.virtualsportsandroid.R
-import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
+import com.example.virtualsportsandroid.games.data.GamesRepository
+import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -12,17 +12,17 @@ class LoadingByCategoryUseCase(
     private val gamesRepository: GamesRepository,
     private val context: Context
 ) {
-    suspend operator fun invoke(category: String): MainFragmentState = withContext(dispatcher) {
+    suspend operator fun invoke(category: String): GamesFragmentState = withContext(dispatcher) {
         val result = gamesRepository.getGamesFilteredByCategory(category)
         when {
             result.isError -> {
-                return@withContext MainFragmentState.Error(context.getString(R.string.not_found_message))
+                return@withContext GamesFragmentState.Error(context.getString(R.string.not_found_message))
             }
             result.successResult.isEmpty() -> {
-                return@withContext MainFragmentState.Error(context.getString(R.string.not_found_message))
+                return@withContext GamesFragmentState.Error(context.getString(R.string.not_found_message))
             }
             else -> {
-                return@withContext MainFragmentState.FilteredByCategory(
+                return@withContext GamesFragmentState.FilteredByCategory(
                     category,
                     result.successResult
                 )

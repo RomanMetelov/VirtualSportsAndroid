@@ -1,9 +1,9 @@
-package com.example.virtualsportsandroid.mainScreen.domain
+package com.example.virtualsportsandroid.games.domain
 
 import android.content.Context
 import com.example.virtualsportsandroid.R
-import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
+import com.example.virtualsportsandroid.games.data.GamesRepository
+import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -13,18 +13,18 @@ class LoadingByProvidersUseCase(
     private val context: Context
 ) {
 
-    suspend operator fun invoke(providers: List<String>): MainFragmentState =
+    suspend operator fun invoke(providers: List<String>): GamesFragmentState =
         withContext(dispatcher) {
             val result = gamesRepository.getGamesFilteredByProviders(providers)
             when {
                 result.isError -> {
-                    return@withContext MainFragmentState.Error(context.getString(R.string.not_found_message))
+                    return@withContext GamesFragmentState.Error(context.getString(R.string.not_found_message))
                 }
                 result.successResult.isEmpty() -> {
-                    return@withContext MainFragmentState.Error(context.getString(R.string.not_found_message))
+                    return@withContext GamesFragmentState.Error(context.getString(R.string.not_found_message))
                 }
                 else -> {
-                    return@withContext MainFragmentState.FilteredByProviders(result.successResult)
+                    return@withContext GamesFragmentState.FilteredByProviders(result.successResult)
                 }
             }
         }

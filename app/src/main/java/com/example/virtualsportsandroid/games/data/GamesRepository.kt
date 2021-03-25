@@ -1,12 +1,12 @@
-package com.example.virtualsportsandroid.mainScreen.data
+package com.example.virtualsportsandroid.games.data
 
 import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsResponse
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByCategoryAndProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.FilterByTagUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.mainScreen.domain.model.TagModel
+import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
+import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.games.domain.model.TagModel
 import com.example.virtualsportsandroid.utils.Result
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
