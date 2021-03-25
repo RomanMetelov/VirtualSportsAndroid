@@ -7,13 +7,18 @@ import com.example.virtualsportsandroid.games.ui.GamesFragment
 
 class MainFragmentNavigator(
     private val fragmentManager: FragmentManager,
-    @IdRes private val container: Int
+    @IdRes private val container: Int,
+    private val setFragmentContainerStateToFilter: () -> Unit,
+    private val setFragmentContainerStateToGames: (category: String?, providers: List<String>?) -> Unit
 ) {
 
     fun showFilterFragment() {
         fragmentManager.beginTransaction()
             .addToBackStack(null)
-            .replace(container, FilterFragment.newInstance(this))
+            .replace(
+                container,
+                FilterFragment.newInstance(::back, setFragmentContainerStateToGames)
+            )
             .commitAllowingStateLoss()
     }
 
@@ -22,12 +27,12 @@ class MainFragmentNavigator(
             .addToBackStack(null)
             .replace(
                 container,
-                GamesFragment.newInstance(category, providers, this)
+                GamesFragment.newInstance(category, providers, setFragmentContainerStateToFilter)
             )
             .commitAllowingStateLoss()
     }
 
-    fun back() {
+    private fun back() {
         fragmentManager.popBackStack()
     }
 }

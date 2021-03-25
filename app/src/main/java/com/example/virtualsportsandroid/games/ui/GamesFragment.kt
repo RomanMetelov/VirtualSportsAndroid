@@ -1,14 +1,12 @@
 package com.example.virtualsportsandroid.games.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
 import com.example.virtualsportsandroid.games.domain.model.GamesList
-import com.example.virtualsportsandroid.main.ui.MainFragmentNavigator
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
@@ -23,7 +21,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         fun newInstance(
             category: String? = null,
             providers: List<String>? = null,
-            mainFragmentNavigator: MainFragmentNavigator
+            showFilterFragment: () -> Unit
         ) =
             GamesFragment().apply {
                 arguments = Bundle().apply {
@@ -32,12 +30,12 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                         putStringArray(PROVIDERS_KEY, it.toTypedArray())
                     }
                 }
-                this.mainFragmentNavigator = mainFragmentNavigator
+                this.showFilterFragment = showFilterFragment
             }
     }
 
     private lateinit var binding: GamesFragmentBinding
-    private lateinit var mainFragmentNavigator: MainFragmentNavigator
+    private lateinit var showFilterFragment: () -> Unit
 
     @Inject
     lateinit var viewModel: GamesViewModel
@@ -121,7 +119,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 show()
                 layoutManager = LinearLayoutManager(context)
                 adapter = MainRecyclerViewAdapter(
-                    mainFragmentNavigator::showFilterFragment,
+                    showFilterFragment,
                     firstTagGames,
                     allGamesWithoutFirstTag
                 )
@@ -137,7 +135,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 show()
                 layoutManager = LinearLayoutManager(context)
                 adapter = MainRecyclerViewAdapter(
-                    mainFragmentNavigator::showFilterFragment,
+                    showFilterFragment,
                     null,
                     listOf(gamesList)
                 )

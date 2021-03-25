@@ -16,8 +16,15 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     lateinit var viewModel: MainViewModel
     private lateinit var binding: MainFragmentBinding
     private val mainFragmentNavigator: MainFragmentNavigator by lazy {
-        MainFragmentNavigator(childFragmentManager, R.id.fragmentContainer)
+        MainFragmentNavigator(
+            childFragmentManager,
+            R.id.fragmentContainer,
+            { viewModel.showFilterFragment() },
+            { category, providers ->
+                viewModel.showGamesFragment(category, providers)
+            })
     }
+
 
     companion object {
         fun newInstance() = MainFragment()
