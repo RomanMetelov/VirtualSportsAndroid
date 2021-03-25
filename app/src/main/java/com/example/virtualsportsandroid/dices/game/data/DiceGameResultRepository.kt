@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import okhttp3.internal.wait
+import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -15,31 +16,25 @@ import kotlin.random.Random
 
 @Suppress("EmptyClassBlock", "MagicNumber")
 class DiceGameResultRepository @Inject constructor(
+    private val diceGameResultService: DiceGameResultService,
     private val dispatcher: CoroutineDispatcher
 ) {
 
     //написать тут поход на сервер
     //override suspend fun
     @Suppress("EmptyClassBlock", "MagicNumber")
-    suspend fun getDiceGameResult(betTypeId: Int, datetime: String): Result<DiceGameResultModel, String> =
+    suspend fun getDiceGameResult(
+        datetime: String,
+        betTypeId: Int
+    ): Result<DiceGameResultModel, String> =
         withContext(dispatcher) {
-            delay(1500)
-            val diceGameResult: DiceGameResultModel
-            val isBetWon: Boolean
-            val diceBet: BetType = getBetType(betTypeId)
-            val diceRollRandomResult: Int = getDiceRollRandomResult()
-            isBetWon = isBetWon(diceBet, diceRollRandomResult)
-            val dateNow = Calendar.getInstance().time
-            val sdf = SimpleDateFormat("dd.MM.yyyy hh:mm:ss", Locale.getDefault())
-            val currentDateString = sdf.format(dateNow).toString()
-            diceGameResult = DiceGameResultModel(
-                1.toString(),
-                currentDateString,
-                diceBet,
-                diceRollRandomResult,
-                isBetWon
-            )
-            return@withContext Result.success(diceGameResult)
+            val diceGameResult: DiceGameResultModel =
+                diceGameResultService.getDiceGameResult(datetime, betTypeId)
+            return@withContext try {
+                Result.success(diceGameResult)
+            } catch (e: HttpException) {
+                Result.error(e.toString())
+            }
         }
 
     private fun getBetType(betTypeId: Int): BetType {

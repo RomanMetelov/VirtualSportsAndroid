@@ -3,6 +3,7 @@ package com.example.virtualsportsandroid.di
 
 import android.content.Context
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
+import com.example.virtualsportsandroid.dices.game.data.DiceGameResultService
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsRepository
@@ -67,7 +68,7 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideDiceGameResultRepository(): DiceGameResultRepository {
-        return DiceGameResultRepository(Dispatchers.IO)
+    fun provideDiceGameResultRepository(diceGameResultService: DiceGameResultService): DiceGameResultRepository {
+        return DiceGameResultRepository(diceGameResultService, Dispatchers.IO, )
     }
 }

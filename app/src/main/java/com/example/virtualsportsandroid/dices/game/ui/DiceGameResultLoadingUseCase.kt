@@ -14,7 +14,7 @@ class DiceGameResultLoadingUseCase @Inject constructor(
     private val diceGameResultRepository: DiceGameResultRepository
 ) {
     suspend operator fun invoke(betTypeId: Int, datetime: String): DiceGameResultFragmentState = withContext(dispatcher) {
-        val betResult = diceGameResultRepository.getDiceGameResult(betTypeId, datetime)
+        val betResult = diceGameResultRepository.getDiceGameResult(datetime, betTypeId)
         when {
             betResult.isError -> DiceGameResultFragmentState.Error(betResult.errorResult)
             else -> DiceGameResultFragmentState.Content(

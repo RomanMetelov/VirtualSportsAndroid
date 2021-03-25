@@ -68,4 +68,5 @@ class NetworkModule {
     @Provides
     fun provideDiceGameBetHistoryService(retrofit: Retrofit): DiceGameBetHistoryService =
         retrofit.create(DiceGameBetHistoryService::class.java)
+
 }
