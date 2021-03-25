@@ -5,7 +5,7 @@ import com.example.virtualsportsandroid.games.data.GamesRepository
 import com.example.virtualsportsandroid.games.data.GamesLoadingError
 import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
 import com.example.virtualsportsandroid.games.domain.model.GameModel
-import com.example.virtualsportsandroid.games.domain.model.TagModel
+import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import io.kotest.matchers.shouldBe
@@ -26,8 +26,8 @@ internal class NotFilteredGamesLoadingUseCaseTest {
         val mockContext = mockk<Context> {
             every { getString(any()) } returns "Error"
         }
-        val fakeFirstTag = TagModel(
-            "top", "Top",
+        val fakeFirstTag = GamesList(
+            "Top",
             listOf(
                 GameModel("id1", "name1", "imageURL1"),
                 GameModel("id2", "name2", "imageURL2"),
@@ -35,11 +35,11 @@ internal class NotFilteredGamesLoadingUseCaseTest {
             )
         )
         val fakeAllTagsWithoutFirst = listOf(
-            TagModel("favorites", "Favorites", listOf(
+            GamesList("Favorites", listOf(
                 GameModel("id4", "name4", "imageURL4"),
                 GameModel("id5", "name5", "imageURL5")
             )),
-            TagModel("recentlyLaunched", "Recently launched", listOf(
+            GamesList("Recently launched", listOf(
                 GameModel("id6", "name6", "imageURL6"),
                 GameModel("id7", "name7", "imageURL7")
             ))
@@ -68,11 +68,11 @@ internal class NotFilteredGamesLoadingUseCaseTest {
             every { getString(any()) } returns errorMessage
         }
         val fakeAllTagsWithoutFirst = listOf(
-            TagModel("favorites", "Favorites", listOf(
+            GamesList("Favorites", listOf(
                 GameModel("id1", "name1", "imageURL1"),
                 GameModel("id2", "name2", "imageURL2")
             )),
-            TagModel("recentlyLaunched", "Recently launched", listOf(
+            GamesList("Recently launched", listOf(
                 GameModel("id3", "name3", "imageURL3"),
                 GameModel("id4", "name4", "imageURL4")
             ))
@@ -97,8 +97,8 @@ internal class NotFilteredGamesLoadingUseCaseTest {
         val mockContext = mockk<Context> {
             every { getString(any()) } returns errorMessage
         }
-        val fakeFirstTag = TagModel(
-            "top", "Top",
+        val fakeFirstTag = GamesList(
+            "Top",
             listOf(
                 GameModel("id1", "name1", "imageURL1"),
                 GameModel("id2", "name2", "imageURL2"),

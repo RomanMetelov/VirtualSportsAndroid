@@ -2,7 +2,6 @@ package com.example.virtualsportsandroid.utils
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
-import com.example.virtualsportsandroid.dices.DiceGameBetHistoryModel
 import com.example.virtualsportsandroid.dices.history.ui.DiceGameBetHistoryFragment
 import com.example.virtualsportsandroid.dices.game.ui.DiceGameFragment
 import com.example.virtualsportsandroid.game.data.ScreenGameModel

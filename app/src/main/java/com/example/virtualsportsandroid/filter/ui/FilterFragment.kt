@@ -27,23 +27,12 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
     lateinit var viewModel: FilterViewModel
     private lateinit var binding: FilterFragmentBinding
     private lateinit var mainFragmentNavigator: MainFragmentNavigator
-    private val categoryAdapter: CategoryListAdapter by lazy {
-        CategoryListAdapter(viewModel::selectCategory, viewModel::unselectCategory) {
-            viewModel.selectedCategoryLiveData.value.toString()
-        }
-    }
-    private val providerAdapter: ProviderListAdapter by lazy {
-        ProviderListAdapter(viewModel::selectProvider, viewModel::unselectProvider) {
-            viewModel.selectedProvidersLiveData.value ?: emptyList()
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FilterFragmentBinding.bind(view)
         setupViewModel()
         observeFragmentState()
-        setupRecyclerViews()
         observeSelectedItems()
         setupListeners()
         viewModel.loadData()
@@ -81,27 +70,39 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
 
     private fun showLoading() {
         with(binding) {
-            pbLoading.show()
             tvFiltersTitle.hide()
             ivClose.hide()
             filtersBorder.hide()
-            scContent.hide()
+            rvFilters.hide()
+            btnApply.hide()
             tvErrorMessage.hide()
+            pbLoading.show()
         }
     }
 
 
     private fun showContent(categories: List<CategoryResponse>, providers: List<ProviderResponse>) {
         with(binding) {
+            tvErrorMessage.hide()
+            pbLoading.hide()
             tvFiltersTitle.show()
             ivClose.show()
             filtersBorder.show()
-            scContent.show()
-            tvErrorMessage.hide()
-            pbLoading.hide()
+            btnApply.hide()
+            with(rvFilters) {
+                layoutManager = LinearLayoutManager(context)
+                adapter = FiltersAdapter(
+                    categories,
+                    providers,
+                    viewModel::selectCategory,
+                    viewModel::unselectCategory,
+                    {viewModel.selectedCategoryLiveData.value.toString()},
+                    viewModel::selectProvider,
+                    viewModel::unselectProvider
+                ) { viewModel.selectedProvidersLiveData.value ?: emptyList() }
+                show()
+            }
         }
-        categoryAdapter.submitList(categories)
-        providerAdapter.submitList(providers)
     }
 
     private fun showError(errorMessage: String) {
@@ -109,26 +110,13 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
             tvFiltersTitle.hide()
             ivClose.hide()
             filtersBorder.hide()
-            scContent.hide()
+            rvFilters.hide()
             btnApply.hide()
             tvErrorMessage.apply {
                 show()
                 text = errorMessage
             }
             pbLoading.hide()
-        }
-    }
-
-    private fun setupRecyclerViews() {
-        with(binding) {
-            rvCategories.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = categoryAdapter
-            }
-            rvProviders.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = providerAdapter
-            }
         }
     }
 
