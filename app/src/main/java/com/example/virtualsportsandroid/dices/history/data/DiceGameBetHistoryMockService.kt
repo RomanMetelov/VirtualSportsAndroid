@@ -17,7 +17,12 @@ class DiceGameBetHistoryMockService : DiceGameBetHistoryService {
             randomDiceBet = getRandomBet()
             diceRollRandomResult = getDiceRollRandomResult()
             isBetWon = isBetWon(randomDiceBet, diceRollRandomResult)
-            diceGameResult = DiceGameResultModel(id.toString(), "datetime", randomDiceBet, diceRollRandomResult, isBetWon)
+            diceGameResult = DiceGameResultModel(
+                id.toString(),
+                "datetime",
+                randomDiceBet,
+                diceRollRandomResult,
+                isBetWon)
             last100betsResult.add(diceGameResult)
         }
 

@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@Suppress("EmptyClassBlock", "MagicNumber", "MaxLineLength")
 class DiceGameResultLoadingUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val diceGameResultRepository: DiceGameResultRepository

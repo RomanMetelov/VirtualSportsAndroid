@@ -23,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@Suppress("TooManyFunctions")
 @Module(includes = [RepositoryModule::class, AppModule::class])
 class UseCaseModule {
 
@@ -94,13 +95,17 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideDiceGameBetHistoryLoadingUseCase(diceGameBetHistoryRepository: DiceGameBetHistoryRepository): DiceGameBetHistoryLoadingUseCase {
+    fun provideDiceGameBetHistoryLoadingUseCase(
+        diceGameBetHistoryRepository: DiceGameBetHistoryRepository
+    ): DiceGameBetHistoryLoadingUseCase {
         return DiceGameBetHistoryLoadingUseCase(Dispatchers.Default, diceGameBetHistoryRepository)
     }
 
     @Provides
     @Singleton
-    fun provideDiceGameResultLoadingUseCase(diceGameResultRepository: DiceGameResultRepository): DiceGameResultLoadingUseCase {
+    fun provideDiceGameResultLoadingUseCase(
+        diceGameResultRepository: DiceGameResultRepository
+    ): DiceGameResultLoadingUseCase {
         return DiceGameResultLoadingUseCase(Dispatchers.Default, diceGameResultRepository)
     }
 }

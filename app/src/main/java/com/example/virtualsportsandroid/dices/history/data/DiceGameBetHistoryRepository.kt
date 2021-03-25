@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.random.Random
 
-@Suppress("EmptyClassBlock")
+@Suppress("EmptyClassBlock", "MagicNumber")
 class DiceGameBetHistoryRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher
 ) {
@@ -25,7 +25,12 @@ class DiceGameBetHistoryRepository @Inject constructor(
             randomDiceBet = getRandomBet()
             diceRollRandomResult = getDiceRollRandomResult()
             isBetWon = isBetWon(randomDiceBet, diceRollRandomResult)
-            diceGameResult = DiceGameResultModel(id.toString(), "datetime", randomDiceBet, diceRollRandomResult, isBetWon)
+            diceGameResult = DiceGameResultModel(
+                id.toString(),
+                "datetime",
+                randomDiceBet,
+                diceRollRandomResult,
+                isBetWon)
             last100betsResult.add(diceGameResult)
         }
 

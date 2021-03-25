@@ -13,13 +13,14 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 
-@Suppress("EmptyClassBlock")
+@Suppress("EmptyClassBlock", "MagicNumber")
 class DiceGameResultRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher
 ) {
 
     //написать тут поход на сервер
     //override suspend fun
+    @Suppress("EmptyClassBlock", "MagicNumber")
     suspend fun getDiceGameResult(betTypeId: Int, datetime: String): Result<DiceGameResultModel, String> =
         withContext(dispatcher) {
             delay(1500)

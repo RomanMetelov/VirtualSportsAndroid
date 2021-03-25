@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.random.Random
-
+@Suppress("TooManyFunctions", "MagicNumber", "ComplexMethod")
 class DiceGameFragment :
     BaseFragment(R.layout.dice_game_fragment) {
 

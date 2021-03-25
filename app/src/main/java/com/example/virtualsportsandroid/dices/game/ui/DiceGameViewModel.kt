@@ -14,13 +14,15 @@ class DiceGameViewModel@Inject constructor(
 ) : ViewModel() {
 
     private val _diceGameResultFragmentStateLiveData = MutableLiveData<DiceGameResultFragmentState>()
-    val diceGameResultFragmentStateLiveData: LiveData<DiceGameResultFragmentState> = _diceGameResultFragmentStateLiveData
+    val diceGameResultFragmentStateLiveData: LiveData<DiceGameResultFragmentState>
+    = _diceGameResultFragmentStateLiveData
 
 
     fun placeBet(betTypeId: Int, datetime: String) {
         viewModelScope.launch {
             _diceGameResultFragmentStateLiveData.value = DiceGameResultFragmentState.Loading
-            _diceGameResultFragmentStateLiveData.value = diceGameResultLoadingUseCase.invoke(betTypeId, datetime)
+            _diceGameResultFragmentStateLiveData.value =
+                diceGameResultLoadingUseCase.invoke(betTypeId, datetime)
         }
     }
 }

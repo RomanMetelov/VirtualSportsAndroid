@@ -15,8 +15,10 @@ class DiceGameBetHistoryViewModel@Inject constructor(
     private val diceGameBetHistoryLoadingUseCase: DiceGameBetHistoryLoadingUseCase
 ) : ViewModel() {
 
-    private val _diceGameBetHistoryFragmentStateLiveData = MutableLiveData<DiceGameBetHistoryFragmentState>()
-    val diceGameBetHistoryFragmentStateLiveData: LiveData<DiceGameBetHistoryFragmentState> = _diceGameBetHistoryFragmentStateLiveData
+    private val _diceGameBetHistoryFragmentStateLiveData
+    = MutableLiveData<DiceGameBetHistoryFragmentState>()
+    val diceGameBetHistoryFragmentStateLiveData
+    : LiveData<DiceGameBetHistoryFragmentState> = _diceGameBetHistoryFragmentStateLiveData
 
     fun loadData() {
         viewModelScope.launch {
