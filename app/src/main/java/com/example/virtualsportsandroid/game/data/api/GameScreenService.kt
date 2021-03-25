@@ -9,7 +9,7 @@ import retrofit2.http.Path
 
 interface GameScreenService {
 
-    @POST("/User/favourite/")
+    @POST("/User/favourite/{gameId}")
     suspend fun addGameToFavorite(
         @Path("gameId") gameId: String,
     )
