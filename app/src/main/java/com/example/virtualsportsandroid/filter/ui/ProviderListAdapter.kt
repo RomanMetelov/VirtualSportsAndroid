@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.ProviderItemBinding
-import com.example.virtualsportsandroid.filter.data.models.ProviderDiffCallback
-import com.example.virtualsportsandroid.filter.data.models.ProviderResponse
+import com.example.virtualsportsandroid.filter.data.ProviderDiffCallback
+import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
 
 class ProviderListAdapter(

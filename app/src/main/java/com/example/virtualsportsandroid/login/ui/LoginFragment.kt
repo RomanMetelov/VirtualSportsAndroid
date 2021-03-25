@@ -14,12 +14,13 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.LoginFragmentBinding
+import com.example.virtualsportsandroid.login.data.api.LoginErrorType
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.login.domain.LoginInputsError
 import com.example.virtualsportsandroid.login.domain.LoginInputsErrorType
-import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
+import com.example.virtualsportsandroid.utils.ui.show
 import com.example.virtualsportsandroid.utils.ui.showError
 import javax.inject.Inject
 
@@ -50,10 +51,16 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkSavedToken()
         setupViews()
         setupListeners()
         observeCheckInputsLiveData()
         observeLoginTryLiveData()
+    }
+
+    private fun checkSavedToken() {
+        if (sharedPreferences.token.isNotEmpty())
+            navigator.back()
     }
 
     private fun setupViews() {
@@ -87,8 +94,10 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         val password = etPassword.text.toString()
 
         viewModel.checkInputs(
-            login = login,
-            password = password
+            UserModel(
+                login = login,
+                password = password
+            )
         )
     }
 
@@ -133,15 +142,21 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         })
     }
 
-    private fun handleLoginError(errorResult: NetworkErrorType) {
-        when (errorResult) {
-            NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
-            else -> return
+    private fun handleLoginError(errorResult: LoginErrorType) {
+        with(binding.tvLoginErrorMessage) {
+            when (errorResult) {
+                LoginErrorType.NETWORK_ERROR -> navigator.showNoNetworkFragment()
+                LoginErrorType.LOGIN_ERROR, LoginErrorType.INPUTS_ERROR -> {
+                    this.show()
+                    this.text = getString(errorResult.errorMessage)
+                }
+                else -> return
+            }
         }
     }
 
     private fun saveUserTokenToLocal(successResult: AccessTokenResponse) {
-        sharedPreferences.token = successResult.accessToken.toString()
+        sharedPreferences.token = successResult.accessToken
     }
 
     private fun showErrorOnEditText(
@@ -153,11 +168,16 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun tryLogin() {
-        viewModel.tryLogin(UserModel(login = etLogin.toString(), password = etPassword.toString()))
+        viewModel.tryLogin(
+            UserModel(
+                login = etLogin.text.toString(),
+                password = etPassword.text.toString()
+            )
+        )
     }
 
     private fun closeScreen() {
-        requireActivity().onBackPressed()
+        navigator.back()
     }
 
     private fun enableLoginButton() {

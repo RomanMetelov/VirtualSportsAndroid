@@ -2,6 +2,7 @@ package com.example.virtualsportsandroid.login.domain
 
 import androidx.annotation.StringRes
 import com.example.virtualsportsandroid.R
+import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.utils.Result
 import javax.inject.Inject
 
@@ -14,16 +15,13 @@ data class LoginInputsError(val type: LoginInputsErrorType, val requireValue: St
 
 class CheckLoginInputsUseCase @Inject constructor() {
     companion object {
-        private const val minLoginLength = 1
-        private const val minPasswordLength = 1
+        private const val minLoginLength = 6
+        private const val minPasswordLength = 8
     }
 
-    fun invoke(
-        login: String,
-        password: String
-    ): Result<Boolean, LoginInputsError> {
+    operator fun invoke(user: UserModel): Result<Boolean, LoginInputsError> {
         return when {
-            login.isEmpty() -> {
+            user.login.isEmpty() -> {
                 Result.error(
                     LoginInputsError(
                         LoginInputsErrorType.EMPTY_LOGIN,
@@ -31,7 +29,7 @@ class CheckLoginInputsUseCase @Inject constructor() {
                     )
                 )
             }
-            password.isEmpty() -> {
+            user.password.isEmpty() -> {
                 Result.error(
                     LoginInputsError(
                         LoginInputsErrorType.EMPTY_PASSWORD,

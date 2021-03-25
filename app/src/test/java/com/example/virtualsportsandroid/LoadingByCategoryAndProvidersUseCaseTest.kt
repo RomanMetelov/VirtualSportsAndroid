@@ -1,11 +1,11 @@
 package com.example.virtualsportsandroid
 
 import android.content.Context
-import com.example.virtualsportsandroid.mainScreen.data.GamesRepository
-import com.example.virtualsportsandroid.mainScreen.data.model.GamesLoadingError
-import com.example.virtualsportsandroid.mainScreen.domain.LoadingByCategoryAndProvidersUseCase
-import com.example.virtualsportsandroid.mainScreen.domain.model.GameModel
-import com.example.virtualsportsandroid.mainScreen.ui.model.MainFragmentState
+import com.example.virtualsportsandroid.games.data.GamesRepository
+import com.example.virtualsportsandroid.games.data.GamesLoadingError
+import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
@@ -14,7 +14,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 internal class LoadingByCategoryAndProvidersUseCaseTest {
@@ -44,7 +44,7 @@ internal class LoadingByCategoryAndProvidersUseCaseTest {
             ).invoke(
                 fakeCategory,
                 fakeProviders
-            ) shouldBe MainFragmentState.FilteredByProvidersAndCategory(fakeFilteredGames)
+            ) shouldBe GamesFragmentState.FilteredByProvidersAndCategory(fakeFilteredGames)
         }
     }
 
@@ -66,7 +66,7 @@ internal class LoadingByCategoryAndProvidersUseCaseTest {
                 TestCoroutineDispatcher(),
                 mockGamesRepository,
                 mockContext
-            ).invoke(fakeCategory, fakeProviders) shouldBe MainFragmentState.Error(errorMessage)
+            ).invoke(fakeCategory, fakeProviders) shouldBe GamesFragmentState.Error(errorMessage)
         }
     }
 
@@ -88,7 +88,7 @@ internal class LoadingByCategoryAndProvidersUseCaseTest {
                 TestCoroutineDispatcher(),
                 mockGamesRepository,
                 mockContext
-            ).invoke(fakeCategory, fakeProviders) shouldBe MainFragmentState.Error(errorMessage)
+            ).invoke(fakeCategory, fakeProviders) shouldBe GamesFragmentState.Error(errorMessage)
         }
     }
 }

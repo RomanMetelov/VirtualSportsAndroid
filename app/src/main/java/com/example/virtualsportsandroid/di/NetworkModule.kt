@@ -4,11 +4,13 @@ import com.example.virtualsportsandroid.dices.game.data.DiceGameResultService
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryService
 import com.example.virtualsportsandroid.game.data.api.GameScreenService
 import com.example.virtualsportsandroid.login.data.api.LoginService
-import com.example.virtualsportsandroid.login.data.api.RegistrationService
+import com.example.virtualsportsandroid.registration.data.api.RegistrationService
 import com.example.virtualsportsandroid.utils.api.NetworkHeaderInterceptor
 import com.example.virtualsportsandroid.utils.apiHost
 import com.example.virtualsportsandroid.utils.schema
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -23,7 +25,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(sharedPrefs: SharedPref): Retrofit {
+    fun provideRetrofit(sharedPrefs: SharedPref, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .client(
                 OkHttpClient().newBuilder()
@@ -32,8 +34,14 @@ class NetworkModule {
                     .build()
             )
             .baseUrl(HttpUrl.Builder().scheme(schema).host(apiHost).build())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson {
+        return GsonBuilder().setLenient().create()
     }
 
     @Singleton

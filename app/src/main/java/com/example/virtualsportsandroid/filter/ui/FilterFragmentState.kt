@@ -1,7 +1,7 @@
 package com.example.virtualsportsandroid.filter.ui
 
-import com.example.virtualsportsandroid.filter.data.models.CategoryResponse
-import com.example.virtualsportsandroid.filter.data.models.ProviderResponse
+import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
+import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
 
 sealed class FilterFragmentState {
     object Loading : FilterFragmentState()
