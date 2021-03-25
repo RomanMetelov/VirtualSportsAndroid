@@ -1,8 +1,16 @@
 package com.example.virtualsportsandroid.registration.domain
 
-import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
+import androidx.annotation.StringRes
+import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import javax.inject.Inject
+
+enum class RegistrationErrorType(@StringRes val errorMessage: Int) {
+    USER_EXIST(R.string.user_exist_registration_error_text),
+    INPUTS_ERROR(R.string.inputs_registration_error_text),
+    NETWORK_ERROR(R.string.network_error_text),
+    UNKNOWN_ERROR(R.string.unknown_registration_error_text)
+}
 
 class NetworkToRegisterErrorsMapper @Inject constructor() {
 

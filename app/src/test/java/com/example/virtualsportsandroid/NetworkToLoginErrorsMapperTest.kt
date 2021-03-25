@@ -1,6 +1,6 @@
 package com.example.virtualsportsandroid
 
-import com.example.virtualsportsandroid.login.data.api.LoginErrorType
+import com.example.virtualsportsandroid.login.domain.LoginErrorType
 import com.example.virtualsportsandroid.login.domain.NetworkToLoginErrorsMapper
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import io.kotest.matchers.shouldBe

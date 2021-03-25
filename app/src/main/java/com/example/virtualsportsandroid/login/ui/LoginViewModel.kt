@@ -4,13 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.virtualsportsandroid.login.data.api.LoginErrorType
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
-import com.example.virtualsportsandroid.login.domain.CheckLoginInputsUseCase
-import com.example.virtualsportsandroid.login.domain.LoginInputsError
-import com.example.virtualsportsandroid.login.domain.LoginUseCase
-import com.example.virtualsportsandroid.login.domain.NetworkToLoginErrorsMapper
+import com.example.virtualsportsandroid.login.domain.*
 import com.example.virtualsportsandroid.utils.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

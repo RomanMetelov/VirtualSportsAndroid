@@ -17,7 +17,7 @@ import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.RegistrationFragmentBinding
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
-import com.example.virtualsportsandroid.registration.data.api.RegistrationErrorType
+import com.example.virtualsportsandroid.registration.domain.RegistrationErrorType
 import com.example.virtualsportsandroid.registration.domain.RegistrationInputsError
 import com.example.virtualsportsandroid.registration.domain.RegistrationInputsErrorType
 import com.example.virtualsportsandroid.registration.domain.RegistrationUserInputs
