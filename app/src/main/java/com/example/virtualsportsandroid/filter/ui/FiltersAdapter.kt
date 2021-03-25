@@ -14,6 +14,7 @@ import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
 import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
 
+@Suppress("LongParameterList")
 class FiltersAdapter(
     private val categories: List<CategoryResponse>,
     private val providers: List<ProviderResponse>,
