@@ -1,14 +1,14 @@
 package com.example.virtualsportsandroid.registration.domain
 
-import android.util.Patterns
 import androidx.annotation.StringRes
+import androidx.core.util.PatternsCompat
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.utils.Result
 import javax.inject.Inject
 
 enum class RegistrationInputsErrorType(@StringRes val messageError: Int) {
-    MIN_LOGIN_LENGTH(R.string.min_mail_length_error),
-    MAX_LOGIN_LENGTH(R.string.max_mail_length_error),
+    MIN_MAIL_LENGTH(R.string.min_mail_length_error),
+    MAX_MAIL_LENGTH(R.string.max_mail_length_error),
     MIN_PASSWORD_LENGTH(R.string.min_password_length_error),
     MAX_PASSWORD_LENGTH(R.string.max_password_length_error),
     NOT_SAME_PASSWORD(R.string.not_same_password_error),
@@ -35,9 +35,9 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
         private const val maxPasswordLength = 20
     }
 
-    fun invoke(userInputs: RegistrationUserInputs): Result<Boolean, RegistrationInputsError> {
+    operator fun invoke(userInputs: RegistrationUserInputs): Result<Boolean, RegistrationInputsError> {
         return when {
-            !Patterns.EMAIL_ADDRESS.matcher(userInputs.mail).matches() -> {
+            !PatternsCompat.EMAIL_ADDRESS.matcher(userInputs.mail).matches() -> {
                 Result.error(
                     RegistrationInputsError(
                         RegistrationInputsErrorType.INCORRECT_MAIL
@@ -47,7 +47,7 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
             userInputs.mail.length < minMailLength -> {
                 Result.error(
                     RegistrationInputsError(
-                        RegistrationInputsErrorType.MIN_LOGIN_LENGTH,
+                        RegistrationInputsErrorType.MIN_MAIL_LENGTH,
                         minMailLength.toString()
                     )
                 )
@@ -55,7 +55,7 @@ class CheckRegistrationInputsUseCase @Inject constructor() {
             userInputs.mail.length > maxMailLength -> {
                 Result.error(
                     RegistrationInputsError(
-                        RegistrationInputsErrorType.MAX_LOGIN_LENGTH,
+                        RegistrationInputsErrorType.MAX_MAIL_LENGTH,
                         maxMailLength.toString()
                     )
                 )

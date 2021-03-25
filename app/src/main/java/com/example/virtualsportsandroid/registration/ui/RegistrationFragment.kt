@@ -118,7 +118,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
 
     private fun handleInputsError(inputsErrorResult: RegistrationInputsError) {
         when (inputsErrorResult.type) {
-            RegistrationInputsErrorType.MIN_LOGIN_LENGTH, RegistrationInputsErrorType.MAX_LOGIN_LENGTH,
+            RegistrationInputsErrorType.MIN_MAIL_LENGTH, RegistrationInputsErrorType.MAX_MAIL_LENGTH,
             RegistrationInputsErrorType.INCORRECT_MAIL -> {
                 showErrorOnEditText(
                     etMail,

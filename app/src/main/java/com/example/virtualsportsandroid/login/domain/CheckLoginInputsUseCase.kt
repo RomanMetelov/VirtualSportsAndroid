@@ -1,7 +1,7 @@
 package com.example.virtualsportsandroid.login.domain
 
-import android.util.Patterns
 import androidx.annotation.StringRes
+import androidx.core.util.PatternsCompat
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.utils.Result
@@ -31,7 +31,7 @@ class CheckLoginInputsUseCase @Inject constructor() {
                     )
                 )
             }
-            !Patterns.EMAIL_ADDRESS.matcher(user.mail).matches() -> {
+            !PatternsCompat.EMAIL_ADDRESS.matcher(user.mail).matches() -> {
                 Result.error(
                     LoginInputsError(
                         LoginInputsErrorType.INCORRECT_MAIL
