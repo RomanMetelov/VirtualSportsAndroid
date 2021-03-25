@@ -6,7 +6,7 @@ import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvider
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
 import com.example.virtualsportsandroid.games.domain.model.GameModel
-import com.example.virtualsportsandroid.games.domain.model.TagModel
+import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.utils.Result
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
@@ -26,7 +26,7 @@ class GamesRepository @Inject constructor(
     private val gson: Gson
 ) {
 
-    suspend fun getGamesWithFirstTag(): Result<TagModel, GamesLoadingError> =
+    suspend fun getGamesWithFirstTag(): Result<GamesList, GamesLoadingError> =
         withContext(dispatcher) {
             val configsJSON = sharedPref.configsJSON
             if (configsJSON.isEmpty()) {
@@ -34,21 +34,21 @@ class GamesRepository @Inject constructor(
             }
             val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
             with(configs.tags.first()) {
-                Result.success(TagModel(id, name, filterByTagUseCase(id, configs)))
+                Result.success(GamesList(name, filterByTagUseCase(id, configs)))
             }
         }
 
-    suspend fun getAllGamesWithoutFirstTag(): Result<List<TagModel>, GamesLoadingError> =
+    suspend fun getAllGamesWithoutFirstTag(): Result<List<GamesList>, GamesLoadingError> =
         withContext(dispatcher) {
             val configsJSON = sharedPref.configsJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
             val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
-            var tags = emptyList<TagModel>()
+            var tags = emptyList<GamesList>()
             configs.tags.forEach {
                 if (it.id != configs.tags.first().id) {
-                    tags = tags + TagModel(it.id, it.name, filterByTagUseCase(it.id, configs))
+                    tags = tags + GamesList(it.name, filterByTagUseCase(it.id, configs))
                 }
             }
             Result.success(tags)

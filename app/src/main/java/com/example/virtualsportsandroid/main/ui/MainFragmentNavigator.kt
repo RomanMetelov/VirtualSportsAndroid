@@ -12,14 +12,15 @@ class MainFragmentNavigator(
 
     fun showFilterFragment() {
         fragmentManager.beginTransaction()
-            .add(container, FilterFragment.newInstance(this))
+            .addToBackStack(null)
+            .replace(container, FilterFragment.newInstance(this))
             .commitAllowingStateLoss()
     }
 
     fun showGamesFragment(category: String?, providers: List<String>?) {
         fragmentManager.beginTransaction()
             .addToBackStack(null)
-            .add(
+            .replace(
                 container,
                 GamesFragment.newInstance(category, providers, this)
             )

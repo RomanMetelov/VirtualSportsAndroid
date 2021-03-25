@@ -1,7 +1,7 @@
 package com.example.virtualsportsandroid.games.ui
 
 import com.example.virtualsportsandroid.games.domain.model.GameModel
-import com.example.virtualsportsandroid.games.domain.model.TagModel
+import com.example.virtualsportsandroid.games.domain.model.GamesList
 
 
 sealed class GamesFragmentState {
@@ -9,8 +9,8 @@ sealed class GamesFragmentState {
     object Loading : GamesFragmentState()
     data class Error(val errorMessage: String) : GamesFragmentState()
     data class NotFiltered(
-        val gamesWithFirstTag: TagModel,
-        val allGamesWithoutFirstTag: List<TagModel>
+        val gamesWithFirstTag: GamesList,
+        val allGamesWithoutFirstTag: List<GamesList>
     ) :
         GamesFragmentState()
 
