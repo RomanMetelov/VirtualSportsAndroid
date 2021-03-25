@@ -66,21 +66,11 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun setupListeners() {
-        btnLogin.setOnClickListener {
-            tryLogin()
-        }
-        btnClose.setOnClickListener {
-            closeScreen()
-        }
-        btnRegister.setOnClickListener {
-            navigator.showRegistrationFragment()
-        }
-        etMail.doAfterTextChanged {
-            checkAllRules()
-        }
-        etPassword.doAfterTextChanged {
-            checkAllRules()
-        }
+        btnLogin.setOnClickListener { tryLogin() }
+        btnClose.setOnClickListener { navigator.back() }
+        btnRegister.setOnClickListener { navigator.showRegistrationFragment() }
+        etMail.doAfterTextChanged { checkAllRules() }
+        etPassword.doAfterTextChanged { checkAllRules() }
     }
 
     private fun checkAllRules() {
@@ -168,10 +158,6 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
                 password = etPassword.text.toString()
             )
         )
-    }
-
-    private fun closeScreen() {
-        navigator.back()
     }
 
     private fun enableLoginButton() {

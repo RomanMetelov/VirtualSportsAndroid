@@ -76,19 +76,13 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
             checkAllRules()
             tvRegistrationErrorMessage.hide()
         }
-        etPassword.doAfterTextChanged {
-            checkAllRules()
-        }
-        etRepeatPassword.doAfterTextChanged {
-            checkAllRules()
-        }
+        etPassword.doAfterTextChanged { checkAllRules() }
+        etRepeatPassword.doAfterTextChanged { checkAllRules() }
         btnRegister.setOnClickListener {
             tvRegistrationErrorMessage.hide()
             tryRegister()
         }
-        btnClose.setOnClickListener {
-            navigator.back()
-        }
+        btnClose.setOnClickListener { navigator.back() }
     }
 
     private fun checkAllRules() {

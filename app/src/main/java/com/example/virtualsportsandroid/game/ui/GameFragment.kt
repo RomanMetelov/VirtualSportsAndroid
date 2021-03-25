@@ -92,6 +92,7 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     private fun setupListeners() {
         ivAddToFavorite.setOnClickListener { changeGameFavorite() }
         ivDelFromFavorite.setOnClickListener { changeGameFavorite() }
+        binding.ivBack.setOnClickListener { navigator.back() }
     }
 
     private fun observeLiveData() {

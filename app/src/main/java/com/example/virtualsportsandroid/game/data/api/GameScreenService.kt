@@ -15,7 +15,6 @@ interface GameScreenService {
     )
 
     @DELETE("/User/favourite/{gameId}")
-    @FormUrlEncoded
     suspend fun delGameFromFavorite(
         @Path("gameId") gameId: String,
     )
