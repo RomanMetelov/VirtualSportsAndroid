@@ -51,17 +51,17 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkSavedToken()
+        //checkSavedToken()
         setupViews()
         setupListeners()
         observeCheckInputsLiveData()
         observeLoginTryLiveData()
     }
 
-    private fun checkSavedToken() {
-        if (sharedPreferences.token.isNotEmpty())
-            navigator.back()
-    }
+    //private fun checkSavedToken() {
+    //if (sharedPreferences.token.isNotEmpty())
+    //navigator.back()
+    //}
 
     private fun setupViews() {
         btnLogin = binding.btnLogin
