@@ -2,7 +2,8 @@
 
 package com.example.virtualsportsandroid.di
 
-
+import com.example.virtualsportsandroid.dices.game.ui.DiceGameFragment
+import com.example.virtualsportsandroid.dices.history.ui.DiceGameBetHistoryFragment
 import com.example.virtualsportsandroid.game.ui.GameFragment
 import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.loadingConfigs.ui.LoadingFragment
@@ -26,4 +27,6 @@ interface AppComponent {
     fun inject(filterFragment: FilterFragment)
     fun inject(loadingFragment: LoadingFragment)
     fun inject(mainFragment: MainFragment)
+    fun inject(diceGameFragment: DiceGameFragment)
+    fun inject(diceGameBetHistoryFragment: DiceGameBetHistoryFragment)
 }

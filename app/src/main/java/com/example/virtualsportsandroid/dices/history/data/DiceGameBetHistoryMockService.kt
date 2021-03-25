@@ -1,38 +1,43 @@
-package com.example.virtualsportsandroid.dices.data.api
+package com.example.virtualsportsandroid.dices.history.data
 
-import com.example.virtualsportsandroid.dices.data.models.BetType
-import com.example.virtualsportsandroid.dices.data.models.GameResult
+import com.example.virtualsportsandroid.dices.BetType
+import com.example.virtualsportsandroid.dices.DiceGameResultModel
 import kotlin.random.Random
 
 @Suppress("MagicNumber")
-class DiceBetHistoryMockService : DiceBetHistoryService {
-    override suspend fun getDiceBetHistory(): List<GameResult> {
-        val last100betsResult: MutableList<GameResult> = mutableListOf()
+class DiceGameBetHistoryMockService : DiceGameBetHistoryService {
+    override suspend fun getDiceGameBetHistory(): List<DiceGameResultModel> {
+        val last100betsResult: MutableList<DiceGameResultModel> = mutableListOf()
         var randomDiceBet: BetType
         var diceRollRandomResult: Int
-        var gameResult: GameResult
+        var diceGameResult: DiceGameResultModel
         var isBetWon: Boolean
 
         for (id in 1..100) {
             randomDiceBet = getRandomBet()
             diceRollRandomResult = getDiceRollRandomResult()
             isBetWon = isBetWon(randomDiceBet, diceRollRandomResult)
-            gameResult = GameResult(id, randomDiceBet, diceRollRandomResult, isBetWon)
-            last100betsResult.add(gameResult)
+            diceGameResult = DiceGameResultModel(
+                id.toString(),
+                "datetime",
+                randomDiceBet,
+                diceRollRandomResult,
+                isBetWon)
+            last100betsResult.add(diceGameResult)
         }
 
         return last100betsResult
     }
 
     private fun getRandomBet(): BetType {
-        return when (Random.nextInt(8) + 1) {
-            1 -> BetType.NUMBER1
-            2 -> BetType.NUMBER2
-            3 -> BetType.NUMBER3
-            4 -> BetType.NUMBER4
-            5 -> BetType.NUMBER5
-            6 -> BetType.NUMBER6
-            7 -> BetType.EVEN
+        return when (Random.nextInt(8)) {
+            0 -> BetType.NUMBER1
+            1 -> BetType.NUMBER2
+            2 -> BetType.NUMBER3
+            3 -> BetType.NUMBER4
+            4 -> BetType.NUMBER5
+            5 -> BetType.NUMBER6
+            6 -> BetType.EVEN
             else -> BetType.ODD
         }
     }

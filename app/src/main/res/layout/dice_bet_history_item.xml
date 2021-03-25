@@ -3,85 +3,117 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/gray_background" >
+    android:background="@color/gray_background">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvBetId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
         android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:layout_marginTop="@dimen/bet_history_item_id_margin"
-        android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
         android:text="@string/bet_history_item_id"
         android:textColor="@color/bright_yellow_13"
         android:textSize="@dimen/bet_history_item_h2"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBetDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
+        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
+        android:layout_marginTop="@dimen/bet_history_item_id_margin"
+        android:text="@string/bet_history_bet_datetime"
+        android:textColor="@color/bright_yellow_57"
+        android:textSize="@dimen/bet_history_item_h2"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvBetTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
+        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:text="@string/bet_history_item_bet_title"
         android:textColor="@color/white"
         android:textSize="@dimen/bet_history_item_h1"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBetId"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvBetResultTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
-        android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
-        android:text="@string/bet_history_item_result_title"
-        android:textColor="@color/white"
-        android:textSize="@dimen/bet_history_item_h1"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBetId" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBetId"
+        app:layout_constraintBottom_toTopOf="@+id/tvBetResultTitle"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvBetValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
+        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:text="@string/bet_history_item_bet_value"
         android:textColor="@color/white"
-        android:textSize="@dimen/bet_history_item_h0"
+        android:textSize="@dimen/bet_history_item_h1"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tvBetResultTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvBetTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBetTitle"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBetResultTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
+        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
+        android:text="@string/bet_history_item_result_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/bet_history_item_h1"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBetTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvBetTitle"
+        app:layout_constraintBottom_toTopOf="@+id/tvBetOutcomeWin"
+         />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvBetResultValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
+        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:text="@string/bet_history_item_bet_result_value"
         android:textColor="@color/white"
-        android:textSize="@dimen/bet_history_item_h0"
+        android:textSize="@dimen/bet_history_item_h1"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBetResultTitle"/>
+        app:layout_constraintStart_toEndOf="@+id/tvBetResultTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvBetResultTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBetResultTitle" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvBetOutcome"
+        android:id="@+id/tvBetOutcomeWin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
+        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
         android:text="@string/bet_history_item_bet_outcome"
-        android:textColor="@color/white"
+        android:textColor="@color/win"
         android:textSize="@dimen/bet_history_item_h0"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBetValue"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvBetResultTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBetOutcomeLose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/bet_history_item_horizontal_margin"
+        android:layout_marginVertical="@dimen/bet_history_item_vertical_margin"
+        android:text="@string/bet_history_item_bet_outcome"
+        android:textColor="@color/lose"
+        android:textSize="@dimen/bet_history_item_h0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBetResultTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

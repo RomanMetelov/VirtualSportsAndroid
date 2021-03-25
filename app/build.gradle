@@ -61,7 +61,6 @@ android.testOptions {
 }
 
 dependencies {
-
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
 
@@ -112,4 +111,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //paging library
+    implementation "androidx.paging:paging-runtime-ktx:3.0.0-beta01"
 }
