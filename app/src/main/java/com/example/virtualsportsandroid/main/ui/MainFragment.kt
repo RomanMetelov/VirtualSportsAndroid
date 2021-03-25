@@ -36,11 +36,13 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding = MainFragmentBinding.bind(view)
         (requireActivity().application as Application).getComponent().inject(this)
+        observeMainFragmentState()
         observeIsAuthorized()
-        setupListeners()
-        viewModel.checkIsAuthorized()
         observeContainerState()
         observerLogoutResult()
+        setupListeners()
+        viewModel.loadConfigs()
+        viewModel.checkIsAuthorized()
         viewModel.showGamesFragment(null, null)
     }
 
@@ -59,6 +61,38 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
                 navigator.showDiceGameFragment()
             }
 
+        }
+    }
+
+    private fun observeMainFragmentState() {
+        viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                MainFragmentState.LOADING -> showLoading()
+                MainFragmentState.CONTENT -> {
+                    showContent()
+                    viewModel.isAuthorizedLiveData.value?.let { isAuthorized ->
+                        if (!isAuthorized) {
+                            navigator.showLoginFragment()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showLoading() {
+        with(binding) {
+            loginHeader.headerContainer.hide()
+            fragmentContainer.hide()
+            pbLoading.show()
+        }
+    }
+
+    private fun showContent() {
+        with(binding) {
+            pbLoading.hide()
+            loginHeader.headerContainer.show()
+            fragmentContainer.show()
         }
     }
 

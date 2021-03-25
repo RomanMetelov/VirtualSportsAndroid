@@ -151,7 +151,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
                 handleRegisterError(result.errorResult)
             } else {
                 saveUserTokenToLocal(result.successResult)
-                navigator.showConfigsLoadingFragment()
+                navigator.showMainFragment()
             }
         })
     }

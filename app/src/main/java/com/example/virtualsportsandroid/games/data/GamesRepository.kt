@@ -1,6 +1,6 @@
 package com.example.virtualsportsandroid.games.data
 
-import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsResponse
+import com.example.virtualsportsandroid.main.data.ConfigsResponse
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase

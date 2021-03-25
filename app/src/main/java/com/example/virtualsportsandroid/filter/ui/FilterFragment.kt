@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.FilterFragmentBinding
-import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
-import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
+import com.example.virtualsportsandroid.main.data.CategoryResponse
+import com.example.virtualsportsandroid.main.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show

@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.games.ui
+package com.example.virtualsportsandroid.main.data
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,9 @@ import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
 import com.example.virtualsportsandroid.games.domain.model.GamesList
+import com.example.virtualsportsandroid.games.ui.GamesFragmentState
+import com.example.virtualsportsandroid.games.ui.GamesViewModel
+import com.example.virtualsportsandroid.games.ui.MainRecyclerViewAdapter
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show

@@ -2,9 +2,9 @@ package com.example.virtualsportsandroid.filter.data
 
 import android.content.Context
 import com.example.virtualsportsandroid.R
-import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
-import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsResponse
-import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
+import com.example.virtualsportsandroid.main.data.CategoryResponse
+import com.example.virtualsportsandroid.main.data.ConfigsResponse
+import com.example.virtualsportsandroid.main.data.ProviderResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 import com.example.virtualsportsandroid.utils.Result

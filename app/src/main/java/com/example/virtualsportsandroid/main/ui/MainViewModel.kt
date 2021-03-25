@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.virtualsportsandroid.main.data.ConfigsRepository
 import com.example.virtualsportsandroid.utils.Result
 import com.example.virtualsportsandroid.utils.api.AuthorizationRepository
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val sharedPref: SharedPref,
-    private val authorizationRepository: AuthorizationRepository
+    private val authorizationRepository: AuthorizationRepository,
+    private val configsRepository: ConfigsRepository
 ) : ViewModel() {
 
     private val _isAuthorizedLiveData = MutableLiveData<Boolean>()
@@ -25,6 +27,9 @@ class MainViewModel @Inject constructor(
 
     private val _logoutResultLiveData = MutableLiveData<Result<Boolean, NetworkErrorType>>()
     val logoutResultLiveData: LiveData<Result<Boolean, NetworkErrorType>> = _logoutResultLiveData
+
+    private val _mainFragmentStateLiveData = MutableLiveData<MainFragmentState>()
+    val mainFragmentStateLiveData: LiveData<MainFragmentState> = _mainFragmentStateLiveData
 
     fun checkIsAuthorized() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -53,4 +58,11 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun loadConfigs() {
+        viewModelScope.launch {
+            _mainFragmentStateLiveData.value = MainFragmentState.LOADING
+            configsRepository.loadConfigs()
+            _mainFragmentStateLiveData.value = MainFragmentState.CONTENT
+        }
+    }
 }

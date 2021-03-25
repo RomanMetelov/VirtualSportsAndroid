@@ -10,8 +10,8 @@ import com.example.virtualsportsandroid.databinding.CategoryItemBinding
 import com.example.virtualsportsandroid.databinding.FilterBorderItemBinding
 import com.example.virtualsportsandroid.databinding.FilterProvidersTitleItemBinding
 import com.example.virtualsportsandroid.databinding.ProviderItemBinding
-import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
-import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
+import com.example.virtualsportsandroid.main.data.CategoryResponse
+import com.example.virtualsportsandroid.main.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
 
 @Suppress("LongParameterList")

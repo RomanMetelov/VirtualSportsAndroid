@@ -6,7 +6,6 @@ import com.example.virtualsportsandroid.dices.history.ui.DiceGameBetHistoryFragm
 import com.example.virtualsportsandroid.dices.game.ui.DiceGameFragment
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.ui.GameFragment
-import com.example.virtualsportsandroid.loadingConfigs.ui.LoadingFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
 import com.example.virtualsportsandroid.registration.ui.RegistrationFragment
 import com.example.virtualsportsandroid.main.ui.MainFragment
@@ -48,12 +47,6 @@ class FragmentNavigator(
         fragmentManager.beginTransaction()
             .replace(container, GameFragment.newInstance(gameModel))
             .addToBackStack(null)
-            .commit()
-    }
-
-    fun showConfigsLoadingFragment() {
-        fragmentManager.beginTransaction()
-            .replace(container, LoadingFragment.newInstance())
             .commit()
     }
 

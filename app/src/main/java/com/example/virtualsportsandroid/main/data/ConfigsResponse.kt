@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.loadingConfigs.data
+package com.example.virtualsportsandroid.main.data
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,8 @@
-package com.example.virtualsportsandroid.loadingConfigs.data
+package com.example.virtualsportsandroid.main.data
 
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
+import com.example.virtualsportsandroid.utils.Result
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
@@ -13,7 +15,7 @@ class ConfigsRepository @Inject constructor(
     private val gson: Gson
 ) {
     @Suppress("MagicNumber", "LongMethod")
-    suspend fun loadConfigs() = withContext(dispatcher) {
+    suspend fun loadConfigs(): Result<Boolean, NetworkErrorType> = withContext(dispatcher) {
         delay(1000)
         val fakeConfigs = ConfigsResponse(
             listOf(
@@ -119,5 +121,6 @@ class ConfigsRepository @Inject constructor(
             )
         )
         sharedPref.configsJSON = gson.toJson(fakeConfigs)
+        Result.success(true)
     }
 }

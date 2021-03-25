@@ -1,8 +1,8 @@
 package com.example.virtualsportsandroid
 
-import com.example.virtualsportsandroid.loadingConfigs.data.*
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.main.data.*
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
