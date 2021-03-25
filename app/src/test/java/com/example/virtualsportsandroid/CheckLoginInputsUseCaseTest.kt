@@ -17,7 +17,7 @@ class CheckLoginInputsUseCaseTest {
 
         useCase(
             UserModel(
-                login = emptyLogin,
+                mail = emptyLogin,
                 password = emptyPassword
             )
         ).isError shouldBe true
@@ -31,10 +31,10 @@ class CheckLoginInputsUseCaseTest {
 
         useCase(
             UserModel(
-                login = emptyLogin,
+                mail = emptyLogin,
                 password = password
             )
-        ).errorResult.type shouldBe LoginInputsErrorType.EMPTY_LOGIN
+        ).errorResult.type shouldBe LoginInputsErrorType.EMPTY_MAIL
     }
 
     @Test
@@ -45,7 +45,7 @@ class CheckLoginInputsUseCaseTest {
 
         useCase(
             UserModel(
-                login = login,
+                mail = login,
                 password = emptyPassword
             )
         ).errorResult.type shouldBe LoginInputsErrorType.EMPTY_PASSWORD

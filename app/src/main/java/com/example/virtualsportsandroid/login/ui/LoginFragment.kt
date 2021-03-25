@@ -30,7 +30,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private lateinit var binding: LoginFragmentBinding
-    private lateinit var etLogin: AppCompatEditText
+    private lateinit var etMail: AppCompatEditText
     private lateinit var etPassword: AppCompatEditText
     private lateinit var btnLogin: AppCompatButton
     private lateinit var btnRegister: AppCompatButton
@@ -51,23 +51,17 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //checkSavedToken()
         setupViews()
         setupListeners()
         observeCheckInputsLiveData()
         observeLoginTryLiveData()
     }
 
-    //private fun checkSavedToken() {
-    //if (sharedPreferences.token.isNotEmpty())
-    //navigator.back()
-    //}
-
     private fun setupViews() {
         btnLogin = binding.btnLogin
         btnRegister = binding.btnRegister
         btnClose = binding.btnClose
-        etLogin = binding.etLogin
+        etMail = binding.etMail
         etPassword = binding.etPassword
     }
 
@@ -81,7 +75,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         btnRegister.setOnClickListener {
             navigator.showRegistrationFragment()
         }
-        etLogin.doAfterTextChanged {
+        etMail.doAfterTextChanged {
             checkAllRules()
         }
         etPassword.doAfterTextChanged {
@@ -90,12 +84,12 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun checkAllRules() {
-        val login = etLogin.text.toString()
+        val mail = etMail.text.toString()
         val password = etPassword.text.toString()
 
         viewModel.checkInputs(
             UserModel(
-                login = login,
+                mail = mail,
                 password = password
             )
         )
@@ -114,9 +108,9 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     private fun handleInputsError(inputsErrorResult: LoginInputsError) {
         when (inputsErrorResult.type) {
-            LoginInputsErrorType.EMPTY_LOGIN -> {
+            LoginInputsErrorType.EMPTY_MAIL, LoginInputsErrorType.INCORRECT_MAIL -> {
                 showErrorOnEditText(
-                    etLogin,
+                    etMail,
                     inputsErrorResult.type.messageError,
                     inputsErrorResult.requireValue
                 )
@@ -170,7 +164,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     private fun tryLogin() {
         viewModel.tryLogin(
             UserModel(
-                login = etLogin.text.toString(),
+                mail = etMail.text.toString(),
                 password = etPassword.text.toString()
             )
         )
@@ -181,7 +175,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun enableLoginButton() {
-        etLogin.error = null
+        etMail.error = null
         etPassword.error = null
         btnLogin.isEnabled = true
         btnLogin.setBackgroundColor(requireActivity().getColor(R.color.bright_yellow_13))

@@ -1,20 +1,22 @@
 package com.example.virtualsportsandroid.registration.domain
 
+import android.util.Patterns
 import androidx.annotation.StringRes
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.utils.Result
 import javax.inject.Inject
 
 enum class RegistrationInputsErrorType(@StringRes val messageError: Int) {
-    MIN_LOGIN_LENGTH(R.string.min_login_length_error),
-    MAX_LOGIN_LENGTH(R.string.max_login_length_error),
+    MIN_LOGIN_LENGTH(R.string.min_mail_length_error),
+    MAX_LOGIN_LENGTH(R.string.max_mail_length_error),
     MIN_PASSWORD_LENGTH(R.string.min_password_length_error),
     MAX_PASSWORD_LENGTH(R.string.max_password_length_error),
-    NOT_SAME_PASSWORD(R.string.not_same_password_error)
+    NOT_SAME_PASSWORD(R.string.not_same_password_error),
+    INCORRECT_MAIL(R.string.incorrect_mail_error)
 }
 
 data class RegistrationUserInputs(
-    val login: String,
+    val mail: String,
     val password: String,
     val repeatPassword: String
 )
@@ -27,27 +29,34 @@ data class RegistrationInputsError(
 class CheckRegistrationInputsUseCase @Inject constructor() {
 
     companion object {
-        private const val minLoginLength = 3
-        private const val maxLoginLength = 64
+        private const val minMailLength = 6
+        private const val maxMailLength = 64
         private const val minPasswordLength = 8
         private const val maxPasswordLength = 20
     }
 
     fun invoke(userInputs: RegistrationUserInputs): Result<Boolean, RegistrationInputsError> {
         return when {
-            userInputs.login.length < minLoginLength -> {
+            !Patterns.EMAIL_ADDRESS.matcher(userInputs.mail).matches() -> {
                 Result.error(
                     RegistrationInputsError(
-                        RegistrationInputsErrorType.MIN_LOGIN_LENGTH,
-                        minLoginLength.toString()
+                        RegistrationInputsErrorType.INCORRECT_MAIL
                     )
                 )
             }
-            userInputs.login.length > maxLoginLength -> {
+            userInputs.mail.length < minMailLength -> {
+                Result.error(
+                    RegistrationInputsError(
+                        RegistrationInputsErrorType.MIN_LOGIN_LENGTH,
+                        minMailLength.toString()
+                    )
+                )
+            }
+            userInputs.mail.length > maxMailLength -> {
                 Result.error(
                     RegistrationInputsError(
                         RegistrationInputsErrorType.MAX_LOGIN_LENGTH,
-                        maxLoginLength.toString()
+                        maxMailLength.toString()
                     )
                 )
             }

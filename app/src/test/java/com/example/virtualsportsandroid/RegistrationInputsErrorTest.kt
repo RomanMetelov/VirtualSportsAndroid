@@ -17,7 +17,7 @@ class RegistrationInputsErrorTest {
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = login,
                 password = emptyPassword,
                 repeatPassword = emptyRepeatPassword
             )
@@ -33,7 +33,7 @@ class RegistrationInputsErrorTest {
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = login,
                 password = password,
                 repeatPassword = repeatPassword
             )
@@ -49,7 +49,7 @@ class RegistrationInputsErrorTest {
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = login,
                 password = password,
                 repeatPassword = repeatPassword
             )
@@ -65,7 +65,7 @@ class RegistrationInputsErrorTest {
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = login,
                 password = emptyPassword,
                 repeatPassword = emptyRepeatPassword
             )
@@ -81,7 +81,7 @@ class RegistrationInputsErrorTest {
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = login,
                 password = password,
                 repeatPassword = repeatPassword
             )

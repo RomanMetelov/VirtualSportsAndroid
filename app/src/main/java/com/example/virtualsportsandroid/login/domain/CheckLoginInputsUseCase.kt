@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.login.domain
 
+import android.util.Patterns
 import androidx.annotation.StringRes
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.login.data.model.UserModel
@@ -7,7 +8,8 @@ import com.example.virtualsportsandroid.utils.Result
 import javax.inject.Inject
 
 enum class LoginInputsErrorType(@StringRes val messageError: Int) {
-    EMPTY_LOGIN(R.string.empty_login_error),
+    INCORRECT_MAIL(R.string.incorrect_mail_error),
+    EMPTY_MAIL(R.string.empty_mail_error),
     EMPTY_PASSWORD(R.string.empty_password_error)
 }
 
@@ -21,11 +23,18 @@ class CheckLoginInputsUseCase @Inject constructor() {
 
     operator fun invoke(user: UserModel): Result<Boolean, LoginInputsError> {
         return when {
-            user.login.isEmpty() -> {
+            user.mail.isEmpty() -> {
                 Result.error(
                     LoginInputsError(
-                        LoginInputsErrorType.EMPTY_LOGIN,
+                        LoginInputsErrorType.EMPTY_MAIL,
                         minLoginLength.toString()
+                    )
+                )
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(user.mail).matches() -> {
+                Result.error(
+                    LoginInputsError(
+                        LoginInputsErrorType.INCORRECT_MAIL
                     )
                 )
             }

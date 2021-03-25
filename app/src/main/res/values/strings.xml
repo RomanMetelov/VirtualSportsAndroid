@@ -1,21 +1,22 @@
 <resources>
     <string name="app_name">Virtual Sports</string>
     <string name="password_input_text">Пароль</string>
-    <string name="login_input_text">Номер счёта</string>
+    <string name="mail_input_text">Эл. почта</string>
     <string name="register_btn_text">Регистрация</string>
     <string name="login_button_text">Вход</string>
     <string name="close_button_image_description">Close button</string>
     <string name="login_text">Вход</string>
     <string name="register_text">Регистрация</string>
     <string name="repeat_password_input_text">Повторите пароль</string>
-    <string name="min_login_length_error">Минимальная длина логина %1$s</string>
+    <string name="min_mail_length_error">Минимальная длина эл. почты %1$s</string>
     <string name="min_password_length_error">Минимальная длина пароля %1$s</string>
-    <string name="max_login_length_error">Максимальная длина логина %1$s</string>
+    <string name="max_mail_length_error">Максимальная длина эл. почты %1$s</string>
     <string name="max_password_length_error">Максимальная длина пароля %1$s</string>
     <string name="not_same_password_error">Пароли не совпадают</string>
-    <string name="empty_login_error">Номер счёта не может быть пустым</string>
+    <string name="incorrect_mail_error">Некорректный адрес эл. почты</string>
+    <string name="empty_mail_error">Эл. почта не может быть пустой</string>
     <string name="empty_password_error">Пароль не может быть пустым</string>
-    <string name="login_error_message_text">Неверно указан логин или пароль</string>
+    <string name="mail_error_message_text">Неверно указана почта или пароль</string>
     <string name="logout_button_text">Выход</string>
     <string name="signup_button_text">Регистрация</string>
     <string name="filters_button_text">Фильтры</string>
@@ -57,7 +58,7 @@
     <string name="unknown_registration_error_text">Неизвестная ошибка</string>
     <string name="network_error_text">Ошибка сети</string>
     <string name="inputs_login_error_text">Вы ввели неверные значения</string>
-    <string name="user_not_found_login_error_text">Неправильный номер счёта или пароль</string>
+    <string name="user_not_found_login_error_text">Неверная эл. почта или пароль</string>
     <string name="unknown_login_error_text">Неизвестная ошибка</string>
     <string name="dice_game_start_button">Dice Game Start Button</string>
 </resources>
