@@ -9,31 +9,31 @@ import org.junit.jupiter.api.Test
 class RegistrationInputsErrorTest {
 
     @Test
-    fun `if login too small - should return error result min login length`() {
+    fun `if mail too small - should return error result min mail length`() {
         val useCase = CheckRegistrationInputsUseCase()
-        val login = "12"
+        val mail = "a@a.c"
         val emptyPassword = ""
         val emptyRepeatPassword = ""
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = mail,
                 password = emptyPassword,
                 repeatPassword = emptyRepeatPassword
             )
-        ).errorResult.type shouldBe RegistrationInputsErrorType.MIN_LOGIN_LENGTH
+        ).errorResult.type shouldBe RegistrationInputsErrorType.MIN_MAIL_LENGTH
     }
 
     @Test
     fun `if password too small - should return error result min password length`() {
         val useCase = CheckRegistrationInputsUseCase()
-        val login = "login"
+        val mail = "mail@example.comf"
         val password = "123"
         val repeatPassword = "123"
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = mail,
                 password = password,
                 repeatPassword = repeatPassword
             )
@@ -43,13 +43,13 @@ class RegistrationInputsErrorTest {
     @Test
     fun `if repeat password not the same with password - should return error type no same password`() {
         val useCase = CheckRegistrationInputsUseCase()
-        val login = "login"
+        val mail = "mail@mail.com"
         val password = "12345678"
         val repeatPassword = "87654321"
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = mail,
                 password = password,
                 repeatPassword = repeatPassword
             )
@@ -57,31 +57,31 @@ class RegistrationInputsErrorTest {
     }
 
     @Test
-    fun `if login too long - should return error result max login length`() {
+    fun `if mail too long - should return error result max mail length`() {
         val useCase = CheckRegistrationInputsUseCase()
-        val login = "123456789123456789123456789123456789123456789123456789123456789123456789"
+        val mail = "1234567891234567891234567891234567891234567891234567891234567891@gmail.com"
         val emptyPassword = ""
         val emptyRepeatPassword = ""
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = mail,
                 password = emptyPassword,
                 repeatPassword = emptyRepeatPassword
             )
-        ).errorResult.type shouldBe RegistrationInputsErrorType.MAX_LOGIN_LENGTH
+        ).errorResult.type shouldBe RegistrationInputsErrorType.MAX_MAIL_LENGTH
     }
 
     @Test
     fun `if password too long - should return error result max password length`() {
         val useCase = CheckRegistrationInputsUseCase()
-        val login = "login"
+        val mail = "mail@mail.com"
         val password = "123456789123456789123456789"
         val repeatPassword = "123456789123456789123456789"
 
         useCase.invoke(
             RegistrationUserInputs(
-                login = login,
+                mail = mail,
                 password = password,
                 repeatPassword = repeatPassword
             )

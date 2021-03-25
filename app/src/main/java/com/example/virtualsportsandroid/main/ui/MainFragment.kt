@@ -2,9 +2,11 @@ package com.example.virtualsportsandroid.main.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.MainFragmentBinding
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
@@ -31,6 +33,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         setupListeners()
         viewModel.checkIsAuthorized()
         observeContainerState()
+        observerLogoutResult()
         viewModel.showGamesFragment(null, null)
     }
 
@@ -43,7 +46,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
                 navigator.showRegistrationFragment()
             }
             btnLogout.setOnClickListener {
-                //implementation
+                viewModel.logout()
             }
             ivDiceGameLaunch.setOnClickListener {
                 navigator.showDiceGameFragment()
@@ -79,4 +82,24 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             }
         }
     }
+
+    private fun observerLogoutResult() {
+        viewModel.logoutResultLiveData.observe(viewLifecycleOwner, { result ->
+            if (result.isError) {
+                handleNetworkError(result.errorResult)
+            }
+        })
+    }
+
+    private fun handleNetworkError(errorType: NetworkErrorType) {
+        when (errorType) {
+            NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
+            else -> Toast.makeText(
+                context,
+                getString(R.string.unknown_error_text),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
 }
