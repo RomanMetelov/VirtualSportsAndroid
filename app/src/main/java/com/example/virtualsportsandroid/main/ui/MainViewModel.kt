@@ -10,7 +10,6 @@ import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -49,10 +48,8 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             authorizationRepository.logout()
             sharedPref.token = ""
-            withContext(Dispatchers.Main) {
-                _logoutResultLiveData.value = Result.success(true)
-                _isAuthorizedLiveData.value = false
-            }
+            _logoutResultLiveData.value = Result.success(true)
+            _isAuthorizedLiveData.value = false
         }
     }
 
