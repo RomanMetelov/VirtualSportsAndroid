@@ -2,7 +2,7 @@
 
 package com.example.virtualsportsandroid.game.data.api
 
-import retrofit2.http.Field
+import retrofit2.http.DELETE
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -14,10 +14,8 @@ interface GameScreenService {
         @Path("gameId") gameId: String,
     )
 
-    //TODO: change url when back add delete from favorite games
-    @POST("/delFromFavorite")
-    @FormUrlEncoded
+    @DELETE("/User/favourite/{gameId}")
     suspend fun delGameFromFavorite(
-        @Field("id") gameId: String,
+        @Path("gameId") gameId: String,
     )
 }

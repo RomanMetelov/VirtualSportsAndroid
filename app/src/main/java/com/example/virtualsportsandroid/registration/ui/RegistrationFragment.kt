@@ -33,7 +33,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private lateinit var binding: RegistrationFragmentBinding
-    private lateinit var etLogin: AppCompatEditText
+    private lateinit var etMail: AppCompatEditText
     private lateinit var etPassword: AppCompatEditText
     private lateinit var etRepeatPassword: AppCompatEditText
     private lateinit var btnRegister: AppCompatButton
@@ -63,7 +63,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun setupViews() {
-        etLogin = binding.etLogin
+        etMail = binding.etMail
         etPassword = binding.etPassword
         etRepeatPassword = binding.etRepeatPassword
         btnRegister = binding.btnRegister
@@ -72,33 +72,27 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun setupListeners() {
-        etLogin.doAfterTextChanged {
+        etMail.doAfterTextChanged {
             checkAllRules()
             tvRegistrationErrorMessage.hide()
         }
-        etPassword.doAfterTextChanged {
-            checkAllRules()
-        }
-        etRepeatPassword.doAfterTextChanged {
-            checkAllRules()
-        }
+        etPassword.doAfterTextChanged { checkAllRules() }
+        etRepeatPassword.doAfterTextChanged { checkAllRules() }
         btnRegister.setOnClickListener {
             tvRegistrationErrorMessage.hide()
             tryRegister()
         }
-        btnClose.setOnClickListener {
-            navigator.back()
-        }
+        btnClose.setOnClickListener { navigator.back() }
     }
 
     private fun checkAllRules() {
-        val login = etLogin.text.toString()
+        val login = etMail.text.toString()
         val password = etPassword.text.toString()
         val repeatPassword = etRepeatPassword.text.toString()
 
         viewModel.checkInputs(
             RegistrationUserInputs(
-                login = login,
+                mail = login,
                 password = password,
                 repeatPassword = repeatPassword
             )
@@ -118,9 +112,10 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
 
     private fun handleInputsError(inputsErrorResult: RegistrationInputsError) {
         when (inputsErrorResult.type) {
-            RegistrationInputsErrorType.MIN_LOGIN_LENGTH, RegistrationInputsErrorType.MAX_LOGIN_LENGTH -> {
+            RegistrationInputsErrorType.MIN_MAIL_LENGTH, RegistrationInputsErrorType.MAX_MAIL_LENGTH,
+            RegistrationInputsErrorType.INCORRECT_MAIL -> {
                 showErrorOnEditText(
-                    etLogin,
+                    etMail,
                     inputsErrorResult.type.messageError,
                     inputsErrorResult.requireValue
                 )
@@ -179,7 +174,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     private fun enableRegisterButton() {
-        etLogin.error = null
+        etMail.error = null
         etPassword.error = null
         etRepeatPassword.error = null
         btnRegister.isEnabled = true
@@ -201,7 +196,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     private fun tryRegister() {
         viewModel.tryRegister(
             UserModel(
-                login = etLogin.text.toString(),
+                mail = etMail.text.toString(),
                 password = etPassword.text.toString()
             )
         )

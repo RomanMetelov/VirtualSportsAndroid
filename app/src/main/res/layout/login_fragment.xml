@@ -39,14 +39,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/login_margin_elements"
-        android:hint="@string/login_input_text"
+        android:hint="@string/mail_input_text"
         android:textColorHint="@color/gray_light_9e"
         app:boxBackgroundColor="@color/transparent"
         app:boxStrokeColor="@color/black"
         app:hintTextColor="@color/gray_light_9e">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_login"
+            android:id="@+id/et_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -109,7 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/login_error_message_text"
+        android:text="@string/mail_error_message_text"
         android:textColor="@color/red"
         android:visibility="gone"
         tools:visibility="visible" />
