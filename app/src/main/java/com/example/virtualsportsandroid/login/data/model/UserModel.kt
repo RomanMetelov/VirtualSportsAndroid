@@ -1,3 +1,5 @@
 package com.example.virtualsportsandroid.login.data.model
 
-data class UserModel(val mail: String, val password: String)
+import com.google.gson.annotations.SerializedName
+
+data class UserModel(@SerializedName("login") val mail: String, val password: String)

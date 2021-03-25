@@ -61,4 +61,5 @@
     <string name="user_not_found_login_error_text">Неверная эл. почта или пароль</string>
     <string name="unknown_login_error_text">Неизвестная ошибка</string>
     <string name="dice_game_start_button">Dice Game Start Button</string>
+    <string name="unknown_error_text">Неизвестная ошибкка</string>
 </resources>

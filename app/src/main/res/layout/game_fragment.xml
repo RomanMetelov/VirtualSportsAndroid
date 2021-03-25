@@ -53,6 +53,7 @@
         android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
         android:contentDescription="@string/add_to_favourites_button_description"
         android:src="@drawable/ic_baseline_favourite_not_added"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/tvGameTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvGameTitle" />
