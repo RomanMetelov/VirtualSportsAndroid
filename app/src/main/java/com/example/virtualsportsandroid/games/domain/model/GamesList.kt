@@ -1,7 +1,6 @@
 package com.example.virtualsportsandroid.games.domain.model
 
-data class TagModel(
-    val id: String,
+data class GamesList(
     val name: String,
     val games: List<GameModel>
 )

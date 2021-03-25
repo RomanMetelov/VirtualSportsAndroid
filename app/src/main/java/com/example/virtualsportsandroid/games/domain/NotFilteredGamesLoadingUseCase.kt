@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.games.data.GamesLoadingError
 import com.example.virtualsportsandroid.games.data.GamesRepository
-import com.example.virtualsportsandroid.games.domain.model.TagModel
+import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,8 +23,8 @@ class NotFilteredGamesLoadingUseCase(
     }
 
     private fun handleResult(
-        allGamesWithoutFirstTagResult: Result<List<TagModel>, GamesLoadingError>,
-        gamesWithFirstTagResult: Result<TagModel, GamesLoadingError>
+        allGamesWithoutFirstTagResult: Result<List<GamesList>, GamesLoadingError>,
+        gamesWithFirstTagResult: Result<GamesList, GamesLoadingError>
     ) = when {
         allGamesWithoutFirstTagResult.isError -> {
             when (allGamesWithoutFirstTagResult.errorResult) {

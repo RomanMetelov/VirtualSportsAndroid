@@ -28,7 +28,7 @@
     <dimen name="main_content_layout_padding">16dp</dimen>
     <dimen name="top_games_title_marginVertical">16dp</dimen>
     <dimen name="top_games_title_drawablePadding">4dp</dimen>
-    <dimen name="top_games_title_textSize">16sp</dimen>
+    <dimen name="games_title_textSize">16sp</dimen>
     <dimen name="all_games_title_marginVertical">16dp</dimen>
     <dimen name="all_games_title_textSize">16sp</dimen>
     <dimen name="game_name_marginTop">16dp</dimen>
@@ -84,4 +84,7 @@
     <dimen name="filtered_games_title_marginVertical">16dp</dimen>
     <dimen name="filtered_games_title_textSize">16sp</dimen>
     <dimen name="providers_list_marginHorizontal">16dp</dimen>
+    <dimen name="filter_button_item_padding">16dp</dimen>
+    <dimen name="games_list_title">16dp</dimen>
+    <dimen name="games_list_padding">16dp</dimen>
 </resources>
