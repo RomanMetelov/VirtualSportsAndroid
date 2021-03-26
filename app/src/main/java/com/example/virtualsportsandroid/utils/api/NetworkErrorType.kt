@@ -7,5 +7,6 @@ enum class NetworkErrorType {
     UNAUTHORIZED,
     USER_EXIST,
     UNKNOWN_ERROR,
-    BAD_REQUEST
+    BAD_REQUEST,
+    UnsupportedMediaType
 }

@@ -1,6 +1,7 @@
 package com.example.virtualsportsandroid.dices.game
 
 import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 
 sealed class DiceGameResultFragmentState {
     object Loading : DiceGameResultFragmentState()
@@ -8,5 +9,5 @@ sealed class DiceGameResultFragmentState {
         val gameResult: DiceGameResultModel,
     ) : DiceGameResultFragmentState()
 
-    data class Error(val errorMessage: String) : DiceGameResultFragmentState()
+    data class Error(val errorMessage: NetworkErrorType) : DiceGameResultFragmentState()
 }
