@@ -17,16 +17,19 @@ import com.example.virtualsportsandroid.dices.game.DiceGameResultFragmentState
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import kotlinx.coroutines.*
+import okhttp3.internal.wait
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.random.Random
+
 @Suppress("TooManyFunctions", "MagicNumber", "ComplexMethod")
 class DiceGameFragment :
     BaseFragment(R.layout.dice_game_fragment) {
 
     private lateinit var binding: DiceGameFragmentBinding
-
+    private var continueRolling: Boolean = false
     @Inject
     lateinit var viewModel: DiceGameViewModel
 
@@ -64,6 +67,7 @@ class DiceGameFragment :
         binding.ivBack.setOnClickListener { navigator.back() }
         binding.btnShowBetHistory.setOnClickListener { navigator.showDiceGameBetHistoryFragment() }
         binding.btnRoll.setOnClickListener {
+            terminateDiceRollingAnimation()
             val id: Int = binding.rgBetTypesSet.GetCheckedRadioButtonId()
             val dateNow = Calendar.getInstance().time
             val sdf = SimpleDateFormat("dd.MM.yyyy hh:mm:ss", Locale.getDefault())
@@ -95,7 +99,16 @@ class DiceGameFragment :
     private fun observeViewModel() {
         viewModel.diceGameResultFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is DiceGameResultFragmentState.Loading -> showLoading()
+                is DiceGameResultFragmentState.Loading -> {
+                    showLoading()
+                    val job = GlobalScope.launch {
+                        for (i in 0 until 20) {
+                            if (continueRolling) doRoll()
+                            else break
+                            delay(50)
+                        }
+                    }
+                }
                 is DiceGameResultFragmentState.Error -> showError(it.errorMessage)
                 is DiceGameResultFragmentState.Content -> showContent(it.gameResult)
             }
@@ -103,7 +116,10 @@ class DiceGameFragment :
     }
 
     private fun showContent(gameResult: DiceGameResultModel) {
+        terminateDiceRollingAnimation()
+        Log.d("refrefreffrefref", "SHOWCONTENT")
         //set tvDiceGameRollResult
+
         var evenOrOdd = "Even"
         if (gameResult.droppedNumber % 2 != 0) evenOrOdd = "Odd"
         Log.d("agdfgdagdfagdfag", (gameResult.betType).toString())
@@ -134,6 +150,7 @@ class DiceGameFragment :
     }
 
     private fun showError(errorMessage: String) {
+        terminateDiceRollingAnimation()
         with(binding) {
             tvDiceGameRollResultWin.hide()
             tvDiceGameRollResultLose.hide()
@@ -147,19 +164,17 @@ class DiceGameFragment :
 
     private fun showLoading() {
         with(binding) {
+            continueRolling = true
             tvDiceGameRollResultWin.text = ""
             tvDiceGameRollResultWin.show()
             tvDiceGameRollResultLose.hide()
             tvErrorMessage.hide()
-            //animateDiceImage()
+            //anim
         }
     }
 
-    private fun animateDiceImage() {
-        //fast changing drawables
-        for (i in 0 until 1000) {
-            doRoll()
-        }
+    private fun terminateDiceRollingAnimation() {
+        continueRolling = false
     }
 
     private fun doRoll() { // only does a single roll

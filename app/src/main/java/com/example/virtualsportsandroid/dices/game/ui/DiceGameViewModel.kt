@@ -1,16 +1,22 @@
 package com.example.virtualsportsandroid.dices.game.ui
 
+import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.virtualsportsandroid.R
+import com.example.virtualsportsandroid.dices.BetType
 import com.example.virtualsportsandroid.dices.DiceGameResultModel
 import com.example.virtualsportsandroid.dices.game.DiceGameResultFragmentState
 import com.example.virtualsportsandroid.filter.domain.FiltersLoadingUseCase
 import com.example.virtualsportsandroid.utils.Result
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 class DiceGameViewModel @Inject constructor(
     private val diceGameResultLoadingUseCase: DiceGameResultLoadingUseCase
@@ -24,13 +30,17 @@ class DiceGameViewModel @Inject constructor(
     fun placeBet(betTypeId: Int, datetime: String) {
         viewModelScope.launch {
             _diceGameResultFragmentStateLiveData.value = DiceGameResultFragmentState.Loading
-//            val result = diceGameResultLoadingUseCase.invoke(betTypeId, datetime)
-//            when (result.isError) {
-//                true -> _diceGameResultFragmentStateLiveData.value =
-//                    DiceGameResultFragmentState.Error(result.errorResult.toString())
-//                false -> _diceGameResultFragmentStateLiveData.value =
-//                    DiceGameResultFragmentState.Content(result.successResult)
-//            }
+            Log.d("refrefreffrefref", "delay")
+            delay(1500)
+            Log.d("refrefreffrefref", "delayover")
+            DiceGameResultFragmentState.Content(DiceGameResultModel("1", "datetime", BetType.EVEN, 4, true))
+            val result = diceGameResultLoadingUseCase.invoke(betTypeId, datetime)
+            when (result.isError) {
+                true -> _diceGameResultFragmentStateLiveData.value =
+                    DiceGameResultFragmentState.Error(result.errorResult.toString())
+                false -> _diceGameResultFragmentStateLiveData.value =
+                    DiceGameResultFragmentState.Content(result.successResult)
+            }
         }
     }
 }
