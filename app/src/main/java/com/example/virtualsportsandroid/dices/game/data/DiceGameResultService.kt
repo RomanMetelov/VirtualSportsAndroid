@@ -11,3 +11,4 @@ interface DiceGameResultService {
         @Field("betTypeId") betTypeId: Int
     ) : DiceGameResultModel
 }
+

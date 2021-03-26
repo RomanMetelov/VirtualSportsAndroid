@@ -28,14 +28,14 @@ class DiceGameResultRepository @Inject constructor(
     suspend fun getDiceGameResult(
         datetime: String,
         betTypeId: Int
-    ): Result<DiceGameResultModel, String> =
+    ): Result<DiceGameResultModel, NetworkErrorType> =
         withContext(dispatcher) {
             val diceGameResult: DiceGameResultModel =
                 diceGameResultService.getDiceGameResult(datetime, betTypeId)
             return@withContext try {
                 Result.success(diceGameResult)
             } catch (e: Exception) {
-                Result.error(e.toString())
+                networkExceptionHandler.handleError(e)
             }
         }
 }

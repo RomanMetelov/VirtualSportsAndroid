@@ -14,6 +14,7 @@ import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
 import com.example.virtualsportsandroid.dices.BetType
 import com.example.virtualsportsandroid.dices.DiceGameResultModel
 import com.example.virtualsportsandroid.dices.game.DiceGameResultFragmentState
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
@@ -149,7 +150,7 @@ class DiceGameFragment :
 
     }
 
-    private fun showError(errorMessage: String) {
+    private fun showError(errorMessage: NetworkErrorType) {
         terminateDiceRollingAnimation()
         with(binding) {
             tvDiceGameRollResultWin.hide()
@@ -157,7 +158,7 @@ class DiceGameFragment :
             tvErrorMessage.hide()
             tvErrorMessage.apply {
                 show()
-                text = errorMessage
+                text = errorMessage.name
             }
         }
     }
