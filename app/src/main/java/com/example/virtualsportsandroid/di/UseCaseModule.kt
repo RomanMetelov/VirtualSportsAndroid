@@ -9,7 +9,14 @@ import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRep
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.filter.domain.FiltersLoadingUseCase
 import com.example.virtualsportsandroid.games.data.GamesRepository
-import com.example.virtualsportsandroid.games.domain.*
+import com.example.virtualsportsandroid.games.domain.LoadingByProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.LoadingByCategoryUseCase
+import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
+import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers

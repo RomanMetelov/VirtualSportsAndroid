@@ -3,6 +3,7 @@ package com.example.virtualsportsandroid.dices.game.domain
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultApiModel
 import javax.inject.Inject
 
+@Suppress("MagicNumber")
 class FromApiToUiMapper @Inject constructor() {
 
     operator fun invoke(diceGameApiModel: DiceGameResultApiModel): DiceGameResultModel {
