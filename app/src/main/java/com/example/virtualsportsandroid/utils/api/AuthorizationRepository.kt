@@ -21,7 +21,7 @@ class AuthorizationRepository @Inject constructor(
                 AccessTokenResponse(
                     loginService.tryLoginAndGetAccessToken(
                         UserModel(
-                            login = user.login,
+                            mail = user.mail,
                             password = user.password
                         )
                     )

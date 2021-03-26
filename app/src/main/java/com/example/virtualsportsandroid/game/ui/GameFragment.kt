@@ -4,7 +4,6 @@ package com.example.virtualsportsandroid.game.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +54,21 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
         setupListeners()
         observeLiveData()
         showGameInfo()
+        handleGameFavorite()
         binding.tvGameTitle.text = game.displayName
+    }
+
+    private fun handleGameFavorite() {
+        when (game.isFavorite) {
+            true -> {
+                ivAddToFavorite.hide()
+                ivDelFromFavorite.show()
+            }
+            false -> {
+                ivAddToFavorite.show()
+                ivDelFromFavorite.hide()
+            }
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -79,12 +92,13 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     private fun setupListeners() {
         ivAddToFavorite.setOnClickListener { changeGameFavorite() }
         ivDelFromFavorite.setOnClickListener { changeGameFavorite() }
+        binding.ivBack.setOnClickListener { navigator.back() }
     }
 
     private fun observeLiveData() {
         viewModel.changeGameFavoriteResultLiveData.observe(viewLifecycleOwner, { result ->
             if (!result.isError) {
-                game.isFavorite = !game.isFavorite
+                if (result.successResult) game.isFavorite = !game.isFavorite
             } else {
                 handleErrorOnUi(result.errorResult)
                 changeFavoriteStarView()
@@ -106,8 +120,8 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     }
 
     private fun changeGameFavorite() {
-        changeFavoriteStarView()
         viewModel.changeGameFavorite(game)
+        changeFavoriteStarView()
     }
 
     private fun changeFavoriteStarView() {
