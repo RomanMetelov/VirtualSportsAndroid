@@ -19,11 +19,13 @@ class DiceGameResultLoadingUseCase @Inject constructor(
     suspend operator fun invoke(
         betTypeId: Int,
         datetime: String
-    ): Result<DiceGameResultModel, NetworkErrorType> = withContext(dispatcher) {
+    ): DiceGameResultFragmentState = withContext(dispatcher) {
         val betResult = diceGameResultRepository.getDiceGameResult(datetime, betTypeId)
         when {
-            !betResult.isError -> Result.success(betResult.successResult)
-            else -> Result.error(betResult.errorResult)
+            betResult.isError -> DiceGameResultFragmentState.Error(betResult.errorResult)
+            else -> DiceGameResultFragmentState.Content(
+                betResult.successResult
+            )
         }
     }
 }

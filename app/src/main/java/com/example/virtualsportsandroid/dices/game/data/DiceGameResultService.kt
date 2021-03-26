@@ -7,7 +7,6 @@ interface DiceGameResultService {
     @POST("/Games/play/dice")
     @FormUrlEncoded
     suspend fun getDiceGameResult(
-        @Header("Android")
         @Field("datetime") datetime: String,
         @Field("betTypeId") betTypeId: Int
     ) : DiceGameResultModel

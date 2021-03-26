@@ -5,6 +5,7 @@ import android.content.Context
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultService
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
+import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryService
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsRepository
 import com.example.virtualsportsandroid.games.data.GamesRepository
@@ -63,8 +64,8 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideDiceGameBetHistoryRepository(sharedPref: SharedPref): DiceGameBetHistoryRepository {
-        return DiceGameBetHistoryRepository(Dispatchers.IO)
+    fun provideDiceGameBetHistoryRepository(sharedPref: SharedPref, diceGameBetHistoryService: DiceGameBetHistoryService): DiceGameBetHistoryRepository {
+        return DiceGameBetHistoryRepository(Dispatchers.IO, diceGameBetHistoryService)
     }
 
     @Singleton

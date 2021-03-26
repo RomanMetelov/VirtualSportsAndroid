@@ -30,17 +30,11 @@ class DiceGameViewModel @Inject constructor(
     fun placeBet(betTypeId: Int, datetime: String) {
         viewModelScope.launch {
             _diceGameResultFragmentStateLiveData.value = DiceGameResultFragmentState.Loading
-            Log.d("refrefreffrefref", "delay")
-            delay(1500)
-            Log.d("refrefreffrefref", "delayover")
-            DiceGameResultFragmentState.Content(DiceGameResultModel("1", "datetime", BetType.EVEN, 4, true))
-            val result = diceGameResultLoadingUseCase.invoke(betTypeId, datetime)
-            when (result.isError) {
-                true -> _diceGameResultFragmentStateLiveData.value =
-                    DiceGameResultFragmentState.Error(result.errorResult.toString())
-                false -> _diceGameResultFragmentStateLiveData.value =
-                    DiceGameResultFragmentState.Content(result.successResult)
-            }
+//            Log.d("refrefreffrefref", "delay")
+//            delay(1500)
+//            Log.d("refrefreffrefref", "delayover")
+            _diceGameResultFragmentStateLiveData.value =
+                diceGameResultLoadingUseCase.invoke(betTypeId, datetime)
         }
     }
 }
