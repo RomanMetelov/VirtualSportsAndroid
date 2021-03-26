@@ -22,9 +22,8 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             childFragmentManager,
             R.id.fragmentContainer,
             { viewModel.showFilterFragment() },
-            { category, providers ->
-                viewModel.showGamesFragment(category, providers)
-            })
+            { category, providers -> viewModel.showGamesFragment(category, providers) }
+        )
     }
 
 

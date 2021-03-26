@@ -87,4 +87,5 @@
     <dimen name="filter_button_item_padding">16dp</dimen>
     <dimen name="games_list_title">16dp</dimen>
     <dimen name="games_list_padding">16dp</dimen>
+    <dimen name="provider_item_marginHorizontal">16dp</dimen>
 </resources>
