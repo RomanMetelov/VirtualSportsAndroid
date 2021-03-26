@@ -18,7 +18,9 @@ import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.internal.wait
 import java.text.SimpleDateFormat
 import java.util.*

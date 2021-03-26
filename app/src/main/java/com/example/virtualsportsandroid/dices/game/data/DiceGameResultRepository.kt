@@ -17,7 +17,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 
-@Suppress("EmptyClassBlock", "MagicNumber")
+@Suppress("EmptyClassBlock", "MagicNumber", "TooGenericExceptionCaught")
 class DiceGameResultRepository @Inject constructor(
     private val diceGameResultService: DiceGameResultService,
     private val dispatcher: CoroutineDispatcher,

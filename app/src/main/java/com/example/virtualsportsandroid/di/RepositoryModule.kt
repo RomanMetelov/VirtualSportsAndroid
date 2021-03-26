@@ -64,7 +64,10 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideDiceGameBetHistoryRepository(sharedPref: SharedPref, diceGameBetHistoryService: DiceGameBetHistoryService): DiceGameBetHistoryRepository {
+    fun provideDiceGameBetHistoryRepository(
+        sharedPref: SharedPref,
+        diceGameBetHistoryService: DiceGameBetHistoryService
+    ): DiceGameBetHistoryRepository {
         return DiceGameBetHistoryRepository(Dispatchers.IO, diceGameBetHistoryService)
     }
 
