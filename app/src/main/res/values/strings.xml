@@ -62,4 +62,5 @@
     <string name="unknown_login_error_text">Неизвестная ошибка</string>
     <string name="dice_game_start_button">Dice Game Start Button</string>
     <string name="unknown_error_text">Неизвестная ошибкка</string>
+    <string name="need_authorization_error_text">Нужна авторизация</string>
 </resources>

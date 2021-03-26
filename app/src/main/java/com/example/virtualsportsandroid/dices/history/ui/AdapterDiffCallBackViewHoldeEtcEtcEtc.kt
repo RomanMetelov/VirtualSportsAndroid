@@ -3,18 +3,17 @@ package com.example.virtualsportsandroid.dices.history.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceBetHistoryItemBinding
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 
 @Suppress("EmptyClassBlock")
-class BetHistoryAdapter(function: () -> String) :
+class BetHistoryAdapter :
     ListAdapter<DiceGameResultModel, BetHistoryItemViewHolder>(ReposDiffCallBack()) {
 
     override fun onBindViewHolder(holder: BetHistoryItemViewHolder, position: Int) {
@@ -31,10 +30,7 @@ class BetHistoryAdapter(function: () -> String) :
     }
 }
 
-class BetHistoryItemViewHolder(
-    view: View
-) :
-    RecyclerView.ViewHolder(view) {
+class BetHistoryItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private lateinit var binding: DiceBetHistoryItemBinding
 

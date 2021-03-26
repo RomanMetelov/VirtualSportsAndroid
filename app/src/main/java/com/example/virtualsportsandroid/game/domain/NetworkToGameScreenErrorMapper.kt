@@ -6,9 +6,10 @@ import javax.inject.Inject
 
 class NetworkToGameScreenErrorMapper @Inject constructor() {
 
-    fun invoke(networkError: NetworkErrorType): GameScreenErrorType {
+    operator fun invoke(networkError: NetworkErrorType): GameScreenErrorType {
         return when (networkError) {
             NetworkErrorType.NO_NETWORK -> GameScreenErrorType.NETWORK_ERROR
+            NetworkErrorType.UNAUTHORIZED -> GameScreenErrorType.UNAUTHORIZED
             else -> GameScreenErrorType.UNKNOWN_ERROR
         }
     }

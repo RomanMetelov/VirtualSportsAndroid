@@ -1,8 +1,5 @@
 package com.example.virtualsportsandroid.dices.game.data
 
-import com.example.virtualsportsandroid.dices.BetType
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
-
 @Suppress("MagicNumber")
 abstract class DiceGameResultMockService : DiceGameResultService {
 //    override suspend fun getDiceGameResult(): DiceGameResultModel {

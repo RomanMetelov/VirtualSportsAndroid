@@ -2,18 +2,16 @@ package com.example.virtualsportsandroid.di
 
 
 import android.content.Context
-import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
-import com.example.virtualsportsandroid.dices.game.data.DiceGameResultService
+import com.example.virtualsportsandroid.dices.game.domain.FromApiToUiMapper
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryService
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
-import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsRepository
 import com.example.virtualsportsandroid.games.data.GamesRepository
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
-import com.example.virtualsportsandroid.utils.api.NetworkExceptionHandler
+import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsRepository
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import dagger.Module
@@ -65,24 +63,10 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideDiceGameBetHistoryRepository(
-        sharedPref: SharedPref,
-        diceGameBetHistoryService: DiceGameBetHistoryService
+        diceGameBetHistoryService: DiceGameBetHistoryService,
+        fromApiToUiMapper: FromApiToUiMapper
     ): DiceGameBetHistoryRepository {
-        return DiceGameBetHistoryRepository(Dispatchers.IO, diceGameBetHistoryService)
+        return DiceGameBetHistoryRepository(Dispatchers.IO, diceGameBetHistoryService, fromApiToUiMapper)
     }
 
-    @Singleton
-    @Provides
-    fun provideDiceGameResultRepository(
-        diceGameResultService: DiceGameResultService,
-        networkExceptionHandler: NetworkExceptionHandler,
-        sharedPref: SharedPref
-    ): DiceGameResultRepository {
-        return DiceGameResultRepository(
-            diceGameResultService,
-            Dispatchers.IO,
-            networkExceptionHandler,
-            sharedPref
-        )
-    }
 }

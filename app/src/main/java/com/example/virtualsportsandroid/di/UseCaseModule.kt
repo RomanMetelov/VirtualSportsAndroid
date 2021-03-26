@@ -2,20 +2,21 @@ package com.example.virtualsportsandroid.di
 
 import android.content.Context
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
+import com.example.virtualsportsandroid.dices.game.domain.FromApiToUiMapper
 import com.example.virtualsportsandroid.dices.game.ui.DiceGameResultLoadingUseCase
 import com.example.virtualsportsandroid.dices.history.DiceGameBetHistoryLoadingUseCase
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.filter.domain.FiltersLoadingUseCase
 import com.example.virtualsportsandroid.games.data.GamesRepository
-import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
+import com.example.virtualsportsandroid.games.domain.LoadingByProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.LoadingByCategoryUseCase
+import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
-import com.example.virtualsportsandroid.games.domain.LoadingByProvidersUseCase
-import com.example.virtualsportsandroid.games.domain.LoadingByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
-import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvidersUseCase
+import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -102,8 +103,13 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun provideDiceGameResultLoadingUseCase(
-        diceGameResultRepository: DiceGameResultRepository
+        diceGameResultRepository: DiceGameResultRepository,
+        fromApiToUiMapper: FromApiToUiMapper
     ): DiceGameResultLoadingUseCase {
-        return DiceGameResultLoadingUseCase(Dispatchers.Default, diceGameResultRepository)
+        return DiceGameResultLoadingUseCase(
+            dispatcher = Dispatchers.Default,
+            diceGameResultRepository = diceGameResultRepository,
+            fromApiToUiMapper = fromApiToUiMapper
+        )
     }
 }

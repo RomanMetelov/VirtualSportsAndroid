@@ -1,6 +1,7 @@
 package com.example.virtualsportsandroid.dices.history.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceGameBetHistoryFragmentBinding
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 import com.example.virtualsportsandroid.dices.history.DiceGameBetHistoryFragmentState
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
@@ -28,9 +29,7 @@ class DiceGameBetHistoryFragment :
 
     //adapter
     private val betHistoryAdapter: BetHistoryAdapter by lazy {
-        BetHistoryAdapter() {
-            viewModel.diceGameBetHistoryFragmentStateLiveData.value.toString()
-        }
+        BetHistoryAdapter()
     }
 
     companion object {
