@@ -30,10 +30,7 @@ class BetHistoryAdapter :
     }
 }
 
-class BetHistoryItemViewHolder(
-    view: View
-) :
-    RecyclerView.ViewHolder(view) {
+class BetHistoryItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private lateinit var binding: DiceBetHistoryItemBinding
 

@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.dices.history
 
+import android.util.Log
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.filter.ui.FilterFragmentState
 import kotlinx.coroutines.CoroutineDispatcher
