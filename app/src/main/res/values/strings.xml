@@ -64,4 +64,5 @@
     <string name="unknown_error_text">Неизвестная ошибкка</string>
     <string name="favourites_category_name">Избранные</string>
     <string name="recently_launched_category_name">Недавно запущеные</string>
+    <string name="need_authorization_error_text">Нужна авторизация</string>
 </resources>

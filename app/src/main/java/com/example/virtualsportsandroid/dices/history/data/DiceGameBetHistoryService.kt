@@ -1,7 +1,9 @@
 package com.example.virtualsportsandroid.dices.history.data
 
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import com.example.virtualsportsandroid.dices.game.data.DiceGameResultApiModel
+import retrofit2.http.GET
 
 interface DiceGameBetHistoryService {
-    suspend fun getDiceGameBetHistory() : List<DiceGameResultModel>
+    @GET("/User/history")
+    suspend fun getDiceGameBetHistory(): List<DiceGameResultApiModel>
 }

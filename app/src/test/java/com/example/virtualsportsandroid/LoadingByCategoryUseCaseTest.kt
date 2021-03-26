@@ -28,10 +28,11 @@ internal class LoadingByCategoryUseCaseTest {
             GameModel("id2", "name2", "url2"),
             GameModel("id3", "name3", "url3")
         )
+        val fakeCategory = "category"
         val mockGamesRepository = mockk<GamesRepository> {
             coEvery { getGamesFilteredByCategory(any()) } returns Result.success(fakeFilteredGames)
+            coEvery { getCategoryName(any()) } returns Result.success(fakeCategory)
         }
-        val fakeCategory = "category"
         runBlockingTest {
             LoadingByCategoryUseCase(
                 TestCoroutineDispatcher(),

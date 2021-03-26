@@ -30,4 +30,12 @@ class GameScreenRepository @Inject constructor(
         }
     }
 
+    suspend fun playGame(gameId: String): Result<Boolean, NetworkErrorType> {
+        return try {
+            gameScreenService.playGame(gameId = gameId)
+            Result.success(true)
+        } catch (e: Exception) {
+            networkExceptionHandler.handleError(e)
+        }
+    }
 }

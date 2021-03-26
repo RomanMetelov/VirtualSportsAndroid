@@ -2,8 +2,9 @@ package com.example.virtualsportsandroid.di
 
 
 import android.content.Context
-import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
+import com.example.virtualsportsandroid.dices.game.domain.FromApiToUiMapper
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
+import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryService
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
 import com.example.virtualsportsandroid.games.data.GamesRepository
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
@@ -72,13 +73,11 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideDiceGameBetHistoryRepository(): DiceGameBetHistoryRepository {
-        return DiceGameBetHistoryRepository(Dispatchers.IO)
+    fun provideDiceGameBetHistoryRepository(
+        diceGameBetHistoryService: DiceGameBetHistoryService,
+        fromApiToUiMapper: FromApiToUiMapper
+    ): DiceGameBetHistoryRepository {
+        return DiceGameBetHistoryRepository(Dispatchers.IO, diceGameBetHistoryService, fromApiToUiMapper)
     }
 
-    @Singleton
-    @Provides
-    fun provideDiceGameResultRepository(): DiceGameResultRepository {
-        return DiceGameResultRepository(Dispatchers.IO)
-    }
 }

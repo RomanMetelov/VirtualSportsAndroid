@@ -35,6 +35,7 @@ class GamesInfoRepository @Inject constructor(
         }
     }
 
+    @Suppress("LongMethod")
     private fun saveToSharedPref(
         gamesInfo: GamesResponse,
         favourites: List<GameResponse> = emptyList(),
@@ -61,18 +62,40 @@ class GamesInfoRepository @Inject constructor(
         }
         val newCategories = mutableListOf<CategoryResponse>().apply {
             if (favourites.isNotEmpty()) {
-                add(CategoryResponse(FAVOURITES_CATEGORY_ID, "", context.getString(R.string.favourites_category_name)))
+                add(
+                    CategoryResponse(
+                        FAVOURITES_CATEGORY_ID,
+                        "",
+                        context.getString(R.string.favourites_category_name)
+                    )
+                )
             }
             if (recent.isNotEmpty()) {
-                add(CategoryResponse(RECENTLY_LAUNCHED_CATEGORY_ID, "", context.getString(R.string.recently_launched_category_name)))
+                add(
+                    CategoryResponse(
+                        RECENTLY_LAUNCHED_CATEGORY_ID,
+                        "",
+                        context.getString(R.string.recently_launched_category_name)
+                    )
+                )
             }
         }.toList()
         val newTags = mutableListOf<TagResponse>().apply {
             if (favourites.isNotEmpty()) {
-                add(TagResponse(FAVOURITES_TAG_ID, context.getString(R.string.favourites_category_name)))
+                add(
+                    TagResponse(
+                        FAVOURITES_TAG_ID,
+                        context.getString(R.string.favourites_category_name)
+                    )
+                )
             }
             if (recent.isNotEmpty()) {
-                add(TagResponse(RECENTLY_LAUNCHED_TAG_ID, context.getString(R.string.recently_launched_category_name)))
+                add(
+                    TagResponse(
+                        RECENTLY_LAUNCHED_TAG_ID,
+                        context.getString(R.string.recently_launched_category_name)
+                    )
+                )
             }
         }.toList()
         sharedPref.gamesInfoJSON = gson.toJson(

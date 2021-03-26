@@ -54,11 +54,12 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
         setupListeners()
         observeLiveData()
         showGameInfo()
-        handleGameFavorite()
-        binding.tvGameTitle.text = game.displayName
+        viewModel.playGame(game)
     }
 
-    private fun handleGameFavorite() {
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun showGameInfo() {
+        binding.tvGameTitle.text = game.displayName
         when (game.isFavorite) {
             true -> {
                 ivAddToFavorite.hide()
@@ -69,10 +70,6 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
                 ivDelFromFavorite.hide()
             }
         }
-    }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun showGameInfo() {
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -104,16 +101,24 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
                 changeFavoriteStarView()
             }
         })
+        viewModel.playGameResultViewModel.observe(viewLifecycleOwner, { result ->
+            if (result.isError) handleErrorOnUi(result.errorResult)
+
+        })
     }
 
     private fun handleErrorOnUi(errorType: GameScreenErrorType) {
         when (errorType) {
             GameScreenErrorType.NETWORK_ERROR -> navigator.showNoNetworkFragment()
+            GameScreenErrorType.UNAUTHORIZED -> {
+                navigator.showMainFragment()
+                Toast.makeText(
+                    context, getString(errorType.errorMessage), Toast.LENGTH_SHORT
+                ).show()
+            }
             else -> {
                 Toast.makeText(
-                    context,
-                    getString(R.string.change_favorite_game_text),
-                    Toast.LENGTH_SHORT
+                    context, getString(R.string.change_favorite_game_text), Toast.LENGTH_SHORT
                 ).show()
             }
         }

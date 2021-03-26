@@ -1,7 +1,11 @@
 package com.example.virtualsportsandroid.dices.game.data
 
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 interface DiceGameResultService {
-    suspend fun getDiceGameResult() : DiceGameResultModel
+    @POST("/Games/play/dice")
+    suspend fun getDiceGameResult(
+        @Body diceGame: DiceGameApiModel
+    ) : DiceGameResultApiModel
 }

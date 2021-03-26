@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.dices.game.ui
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,22 +10,27 @@ import androidx.core.content.ContextCompat
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
-import com.example.virtualsportsandroid.dices.BetType
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import com.example.virtualsportsandroid.dices.game.data.DiceGameResultApiModel
 import com.example.virtualsportsandroid.dices.game.DiceGameResultFragmentState
+import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlin.random.Random
+
 @Suppress("TooManyFunctions", "MagicNumber", "ComplexMethod")
 class DiceGameFragment :
     BaseFragment(R.layout.dice_game_fragment) {
 
     private lateinit var binding: DiceGameFragmentBinding
-
+    private var continueRolling: Boolean = false
     @Inject
     lateinit var viewModel: DiceGameViewModel
 
@@ -50,6 +54,11 @@ class DiceGameFragment :
         setupListeners()
     }
 
+    override fun onStop() {
+        super.onStop()
+        binding.rgBetTypesSet.ClearCheck()
+    }
+
     private fun setupViews() {
         binding.tvDiceGameRollResultWin.text = getText(R.string.dice_game_roll_result_text_start)
         binding.tvDiceGameRollResultLose.hide()
@@ -59,6 +68,7 @@ class DiceGameFragment :
         binding.ivBack.setOnClickListener { navigator.back() }
         binding.btnShowBetHistory.setOnClickListener { navigator.showDiceGameBetHistoryFragment() }
         binding.btnRoll.setOnClickListener {
+            terminateDiceRollingAnimation()
             val id: Int = binding.rgBetTypesSet.GetCheckedRadioButtonId()
             val dateNow = Calendar.getInstance().time
             val sdf = SimpleDateFormat("dd.MM.yyyy hh:mm:ss", Locale.getDefault())
@@ -90,29 +100,41 @@ class DiceGameFragment :
     private fun observeViewModel() {
         viewModel.diceGameResultFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is DiceGameResultFragmentState.Loading -> showLoading()
+                is DiceGameResultFragmentState.Loading -> {
+                    showLoading()
+                    GlobalScope.launch {
+                        for (i in 0 until 20) {
+                            if (continueRolling) doRoll()
+                            else break
+                            delay(50)
+                        }
+                    }
+                }
                 is DiceGameResultFragmentState.Error -> showError(it.errorMessage)
-                is DiceGameResultFragmentState.Content -> showContent(it.gameResult)
+                is DiceGameResultFragmentState.Content -> showContent(it.gameResultApi)
             }
         }
     }
 
-    private fun showContent(gameResult: DiceGameResultModel) {
+    private fun showContent(gameResultApi: DiceGameResultModel) {
+        terminateDiceRollingAnimation()
+        Log.d("refrefreffrefref", "SHOWCONTENT")
         //set tvDiceGameRollResult
+
         var evenOrOdd = "Even"
-        if (gameResult.droppedNumber % 2 != 0) evenOrOdd = "Odd"
-        Log.d("agdfgdagdfagdfag", (gameResult.betType).toString())
-        Log.d("droppedNumber", gameResult.droppedNumber.toString())
-        Log.d("isEven", (gameResult.droppedNumber % 2 == 0).toString())
-        Log.d("isWon", (gameResult.isBetWon).toString())
+        if (gameResultApi.droppedNumber % 2 != 0) evenOrOdd = "Odd"
+        Log.d("agdfgdagdfagdfag", (gameResultApi.betType).toString())
+        Log.d("droppedNumber", gameResultApi.droppedNumber.toString())
+        Log.d("isEven", (gameResultApi.droppedNumber % 2 == 0).toString())
+        Log.d("isWon", (gameResultApi.isBetWon).toString())
         val stringGameResult = String.format(
             getString(R.string.dice_game_roll_result_text),
-            gameResult.droppedNumber,
+            gameResultApi.droppedNumber,
             evenOrOdd
         )
         with(binding) {
             tvErrorMessage.hide()
-            if (gameResult.isBetWon) {
+            if (gameResultApi.isBetWon) {
                 tvDiceGameRollResultLose.hide()
                 tvDiceGameRollResultWin.show()
                 tvDiceGameRollResultWin.text = stringGameResult
@@ -124,37 +146,36 @@ class DiceGameFragment :
             }
         }
         //set ivDiceImage
-        getRandomDiceImageWithValueOnTop(gameResult.droppedNumber)
+        getRandomDiceImageWithValueOnTop(gameResultApi.droppedNumber)
 
     }
 
-    private fun showError(errorMessage: String) {
+    private fun showError(errorMessage: NetworkErrorType) {
+        terminateDiceRollingAnimation()
         with(binding) {
             tvDiceGameRollResultWin.hide()
             tvDiceGameRollResultLose.hide()
             tvErrorMessage.hide()
             tvErrorMessage.apply {
                 show()
-                text = errorMessage
+                text = errorMessage.name
             }
         }
     }
 
     private fun showLoading() {
         with(binding) {
+            continueRolling = true
             tvDiceGameRollResultWin.text = ""
             tvDiceGameRollResultWin.show()
             tvDiceGameRollResultLose.hide()
             tvErrorMessage.hide()
-            //animateDiceImage()
+            //anim
         }
     }
 
-    private fun animateDiceImage() {
-        //fast changing drawables
-        for (i in 0 until 1000) {
-            doRoll()
-        }
+    private fun terminateDiceRollingAnimation() {
+        continueRolling = false
     }
 
     private fun doRoll() { // only does a single roll
