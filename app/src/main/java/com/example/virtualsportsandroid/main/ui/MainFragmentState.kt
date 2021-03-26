@@ -1,5 +1,7 @@
 package com.example.virtualsportsandroid.main.ui
 
-enum class MainFragmentState {
-    LOADING, CONTENT
+sealed class MainFragmentState {
+    object Loading : MainFragmentState()
+    object Content : MainFragmentState()
+    data class Error(val errorMessage: String) : MainFragmentState()
 }

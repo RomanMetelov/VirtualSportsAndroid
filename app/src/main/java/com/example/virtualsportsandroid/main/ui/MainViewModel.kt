@@ -43,6 +43,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun showError(errorMessage: String) {
+        viewModelScope.launch {
+            _mainFragmentStateLiveData.value = MainFragmentState.Error(errorMessage)
+        }
+    }
+
     fun showGamesFragment(category: String?, providers: List<String>?) {
         viewModelScope.launch {
             _containerStateLiveData.value = MainFragmentContainerState.Games(category, providers)
@@ -60,9 +66,9 @@ class MainViewModel @Inject constructor(
 
     fun loadConfigs() {
         viewModelScope.launch {
-            _mainFragmentStateLiveData.value = MainFragmentState.LOADING
+            _mainFragmentStateLiveData.value = MainFragmentState.Loading
             gamesInfoRepository.loadGames()
-            _mainFragmentStateLiveData.value = MainFragmentState.CONTENT
+            _mainFragmentStateLiveData.value = MainFragmentState.Content
             showGamesFragment(null, null)
         }
     }

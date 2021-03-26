@@ -264,7 +264,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed"
         android:textColor="@color/white"
-        android:textSize="@dimen/filter_fragment_error_message_textSize"
+        android:textSize="@dimen/error_message_textSize"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btnRoll"
         app:layout_constraintEnd_toEndOf="parent"

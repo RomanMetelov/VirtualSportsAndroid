@@ -2,7 +2,6 @@ package com.example.virtualsportsandroid.main.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.MainFragmentBinding
@@ -67,9 +66,20 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     private fun observeMainFragmentState() {
         viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                MainFragmentState.LOADING -> showLoading()
-                MainFragmentState.CONTENT -> showContent()
+                MainFragmentState.Loading -> showLoading()
+                MainFragmentState.Content -> showContent()
+                is MainFragmentState.Error -> showError(it.errorMessage)
             }
+        }
+    }
+
+    private fun showError(errorMessage: String) {
+        with(binding) {
+            loginHeader.headerContainer.hide()
+            fragmentContainer.hide()
+            pbLoading.hide()
+            tvErrorMessage.show()
+            tvErrorMessage.text = errorMessage
         }
     }
 
@@ -77,6 +87,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         with(binding) {
             loginHeader.headerContainer.hide()
             fragmentContainer.hide()
+            tvErrorMessage.hide()
             pbLoading.show()
         }
     }
@@ -84,6 +95,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     private fun showContent() {
         with(binding) {
             pbLoading.hide()
+            tvErrorMessage.hide()
             loginHeader.headerContainer.show()
             fragmentContainer.show()
         }
@@ -128,11 +140,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     private fun handleNetworkError(errorType: NetworkErrorType) {
         when (errorType) {
             NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
-            else -> Toast.makeText(
-                context,
-                getString(R.string.unknown_error_text),
-                Toast.LENGTH_SHORT
-            ).show()
+            else -> viewModel.showError(getString(R.string.unknown_error_text))
         }
     }
 

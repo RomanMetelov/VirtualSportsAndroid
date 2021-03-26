@@ -53,7 +53,7 @@
     <dimen name="provider_item_border">2dp</dimen>
     <dimen name="provider_image_width">256dp</dimen>
     <dimen name="provider_image_height">32dp</dimen>
-    <dimen name="filter_fragment_error_message_textSize">24sp</dimen>
+    <dimen name="error_message_textSize">24sp</dimen>
     <dimen name="provider_item_padding">32dp</dimen>
     <dimen name="provider_item_marginVertical">4dp</dimen>
     <dimen name="game_image_size">144dp</dimen>
