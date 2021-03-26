@@ -62,4 +62,6 @@
     <string name="unknown_login_error_text">Неизвестная ошибка</string>
     <string name="dice_game_start_button">Dice Game Start Button</string>
     <string name="unknown_error_text">Неизвестная ошибкка</string>
+    <string name="favourites_category_name">Избранные</string>
+    <string name="recently_launched_category_name">Недавно запущеные</string>
 </resources>

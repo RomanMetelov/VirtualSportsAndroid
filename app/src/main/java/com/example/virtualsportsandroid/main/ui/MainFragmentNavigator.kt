@@ -3,7 +3,7 @@ package com.example.virtualsportsandroid.main.ui
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import com.example.virtualsportsandroid.filter.ui.FilterFragment
-import com.example.virtualsportsandroid.main.data.GamesFragment
+import com.example.virtualsportsandroid.games.ui.GamesFragment
 
 class MainFragmentNavigator(
     private val fragmentManager: FragmentManager,

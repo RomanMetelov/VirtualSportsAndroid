@@ -43,7 +43,6 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         setupListeners()
         viewModel.loadConfigs()
         viewModel.checkIsAuthorized()
-        viewModel.showGamesFragment(null, null)
     }
 
     private fun setupListeners() {
@@ -55,7 +54,9 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
                 navigator.showRegistrationFragment()
             }
             btnLogout.setOnClickListener {
-                viewModel.logout()
+                viewModel.logout {
+                    navigator.showMainFragment()
+                }
             }
             ivDiceGameLaunch.setOnClickListener {
                 navigator.showDiceGameFragment()
@@ -68,14 +69,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 MainFragmentState.LOADING -> showLoading()
-                MainFragmentState.CONTENT -> {
-                    showContent()
-                    viewModel.isAuthorizedLiveData.value?.let { isAuthorized ->
-                        if (!isAuthorized) {
-                            navigator.showLoginFragment()
-                        }
-                    }
-                }
+                MainFragmentState.CONTENT -> showContent()
             }
         }
     }

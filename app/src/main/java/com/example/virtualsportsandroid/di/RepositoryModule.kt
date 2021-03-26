@@ -5,12 +5,12 @@ import android.content.Context
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.filter.data.FiltersRepository
-import com.example.virtualsportsandroid.main.data.ConfigsRepository
 import com.example.virtualsportsandroid.games.data.GamesRepository
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
+import com.example.virtualsportsandroid.main.data.GamesInfoService
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import dagger.Module
@@ -18,7 +18,7 @@ import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
-@Module(includes = [UseCaseModule::class, AppModule::class])
+@Module(includes = [UseCaseModule::class, AppModule::class, NetworkModule::class])
 class RepositoryModule {
 
     @Suppress("LongParameterList")
@@ -55,8 +55,19 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideConfigsRepository(sharedPref: SharedPref, gson: Gson): ConfigsRepository {
-        return ConfigsRepository(Dispatchers.IO, sharedPref, gson)
+    fun provideGamesInfoRepository(
+        sharedPref: SharedPref,
+        gson: Gson,
+        gamesInfoService: GamesInfoService,
+        context: Context
+    ): com.example.virtualsportsandroid.main.data.GamesInfoRepository {
+        return com.example.virtualsportsandroid.main.data.GamesInfoRepository(
+            Dispatchers.IO,
+            sharedPref,
+            gson,
+            gamesInfoService,
+            context
+        )
     }
 
     @Singleton

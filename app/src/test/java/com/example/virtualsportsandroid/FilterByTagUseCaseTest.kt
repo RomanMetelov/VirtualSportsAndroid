@@ -13,7 +13,7 @@ internal class FilterByTagUseCaseTest {
     @ExperimentalCoroutinesApi
     @Test
     fun `filter by tag works correctly`() {
-        val fakeConfigsResponse = ConfigsResponse(
+        val fakeConfigsResponse = GamesResponse(
             listOf(
                 GameResponse(
                     "id1", "", "provider1", listOf(

@@ -1,6 +1,6 @@
 package com.example.virtualsportsandroid.games.data
 
-import com.example.virtualsportsandroid.main.data.ConfigsResponse
+import com.example.virtualsportsandroid.main.data.GamesResponse
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
@@ -28,23 +28,27 @@ class GamesRepository @Inject constructor(
 
     suspend fun getGamesWithFirstTag(): Result<GamesList, GamesLoadingError> =
         withContext(dispatcher) {
-            val configsJSON = sharedPref.configsJSON
+            val configsJSON = sharedPref.gamesInfoJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
-            val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
-            with(configs.tags.first()) {
-                Result.success(GamesList(name, filterByTagUseCase(id, configs)))
+            val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
+            if (configs.tags.isNotEmpty()) {
+                with(configs.tags.first()) {
+                    Result.success(GamesList(name, filterByTagUseCase(id, configs)))
+                }
+            } else {
+                Result.error(GamesLoadingError.NOT_FOUND)
             }
         }
 
     suspend fun getAllGamesWithoutFirstTag(): Result<List<GamesList>, GamesLoadingError> =
         withContext(dispatcher) {
-            val configsJSON = sharedPref.configsJSON
+            val configsJSON = sharedPref.gamesInfoJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
-            val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
+            val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
             var tags = emptyList<GamesList>()
             configs.tags.forEach {
                 if (it.id != configs.tags.first().id) {
@@ -56,21 +60,21 @@ class GamesRepository @Inject constructor(
 
     suspend fun getGamesFilteredByCategory(category: String): Result<List<GameModel>, GamesLoadingError> =
         withContext(dispatcher) {
-            val configsJSON = sharedPref.configsJSON
+            val configsJSON = sharedPref.gamesInfoJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
-            val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
+            val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
             Result.success(filterByCategoryUseCase(category, configs))
         }
 
     suspend fun getGamesFilteredByProviders(providers: List<String>): Result<List<GameModel>, GamesLoadingError> =
         withContext(dispatcher) {
-            val configsJSON = sharedPref.configsJSON
+            val configsJSON = sharedPref.gamesInfoJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
-            val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
+            val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
             Result.success(filterByProvidersUseCase(providers, configs))
         }
 
@@ -79,11 +83,21 @@ class GamesRepository @Inject constructor(
         providers: List<String>
     ): Result<List<GameModel>, GamesLoadingError> =
         withContext(dispatcher) {
-            val configsJSON = sharedPref.configsJSON
+            val configsJSON = sharedPref.gamesInfoJSON
             if (configsJSON.isEmpty()) {
                 return@withContext Result.error(GamesLoadingError.NOT_FOUND)
             }
-            val configs = gson.fromJson(configsJSON, ConfigsResponse::class.java)
+            val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
             Result.success(filterByCategoryAndProvidersUseCase(category, providers, configs))
+        }
+
+    suspend fun getCategoryName(categoryId: String): Result<String, GamesLoadingError> =
+        withContext(dispatcher) {
+            val configsJSON = sharedPref.gamesInfoJSON
+            if (configsJSON.isEmpty()) {
+                return@withContext Result.error(GamesLoadingError.NOT_FOUND)
+            }
+            val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
+            Result.success(configs.categories.first { it.id == categoryId }.name)
         }
 }

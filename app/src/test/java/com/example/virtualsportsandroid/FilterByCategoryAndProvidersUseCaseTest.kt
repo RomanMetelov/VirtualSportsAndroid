@@ -13,7 +13,7 @@ internal class FilterByCategoryAndProvidersUseCaseTest {
     @ExperimentalCoroutinesApi
     @Test
     fun `filter by category and providers works correctly`() {
-        val fakeConfigsResponse = ConfigsResponse(
+        val fakeConfigsResponse = GamesResponse(
             listOf(
                 GameResponse(
                     "id1", "", "provider1", listOf(

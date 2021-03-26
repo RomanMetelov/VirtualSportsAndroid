@@ -1,6 +1,6 @@
 package com.example.virtualsportsandroid.games.domain
 
-import com.example.virtualsportsandroid.main.data.ConfigsResponse
+import com.example.virtualsportsandroid.main.data.GamesResponse
 import com.example.virtualsportsandroid.games.domain.model.GameModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -12,9 +12,9 @@ class FilterByCategoryAndProvidersUseCase @Inject constructor(
     suspend operator fun invoke(
         category: String,
         providers: List<String>,
-        configsResponse: ConfigsResponse
+        gamesResponse: GamesResponse
     ): List<GameModel> = withContext(dispatcher) {
-        configsResponse.games.filter { it.categoriesIds.contains(category) && providers.contains(it.providerId) }
+        gamesResponse.games.filter { it.categoriesIds.contains(category) && providers.contains(it.providerId) }
             .map {
                 GameModel(it.id, it.displayName, "")//temp solution
             }
