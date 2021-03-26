@@ -1,32 +1,33 @@
+/*
 package com.example.virtualsportsandroid.dices.history.data
 
-import com.example.virtualsportsandroid.dices.BetType
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import com.example.virtualsportsandroid.dices.game.data.BetType
+import com.example.virtualsportsandroid.dices.game.data.DiceGameResultApiModel
 import kotlin.random.Random
 
 @Suppress("MagicNumber")
 class DiceGameBetHistoryMockService : DiceGameBetHistoryService {
-    override suspend fun getDiceGameBetHistory(): List<DiceGameResultModel> {
-        val last100betsResult: MutableList<DiceGameResultModel> = mutableListOf()
+    override suspend fun getDiceGameBetHistory(): List<DiceGameResultApiModel> {
+        val last100BetsResultApi: MutableList<DiceGameResultApiModel> = mutableListOf()
         var randomDiceBet: BetType
         var diceRollRandomResult: Int
-        var diceGameResult: DiceGameResultModel
+        var diceGameResultApi: DiceGameResultApiModel
         var isBetWon: Boolean
 
         for (id in 1..100) {
             randomDiceBet = getRandomBet()
             diceRollRandomResult = getDiceRollRandomResult()
             isBetWon = isBetWon(randomDiceBet, diceRollRandomResult)
-            diceGameResult = DiceGameResultModel(
+            diceGameResultApi = DiceGameResultApiModel(
                 id.toString(),
                 "datetime",
                 randomDiceBet,
                 diceRollRandomResult,
                 isBetWon)
-            last100betsResult.add(diceGameResult)
+            last100BetsResultApi.add(diceGameResultApi)
         }
 
-        return last100betsResult
+        return last100BetsResultApi
     }
 
     private fun getRandomBet(): BetType {
@@ -59,3 +60,4 @@ class DiceGameBetHistoryMockService : DiceGameBetHistoryService {
         }
     }
 }
+*/

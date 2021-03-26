@@ -1,6 +1,6 @@
 package com.example.virtualsportsandroid.dices.history
 
-import com.example.virtualsportsandroid.dices.DiceGameResultModel
+import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 
 sealed class DiceGameBetHistoryFragmentState {
     object Loading : DiceGameBetHistoryFragmentState()

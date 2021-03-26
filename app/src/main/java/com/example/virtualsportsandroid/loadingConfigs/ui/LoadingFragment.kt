@@ -35,7 +35,7 @@ class LoadingFragment : BaseFragment(R.layout.loading_fragment) {
                 navigator.showLoginFragment()
                 navigator.showGameFragment(
                     ScreenGameModel(
-                        "156",
+                        "157",
                         "Game test",
                         "https://vsw.betradar.com/ls/mobile/?/parimatchrgs/ru/page/vsmobile_demo",
 
