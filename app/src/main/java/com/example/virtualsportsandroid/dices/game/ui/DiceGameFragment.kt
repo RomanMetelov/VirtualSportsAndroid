@@ -50,6 +50,11 @@ class DiceGameFragment :
         setupListeners()
     }
 
+    override fun onStop() {
+        super.onStop()
+        binding.rgBetTypesSet.ClearCheck()
+    }
+
     private fun setupViews() {
         binding.tvDiceGameRollResultWin.text = getText(R.string.dice_game_roll_result_text_start)
         binding.tvDiceGameRollResultLose.hide()

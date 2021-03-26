@@ -12,6 +12,7 @@ import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvider
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
+import com.example.virtualsportsandroid.utils.api.NetworkExceptionHandler
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import dagger.Module
@@ -62,13 +63,22 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideDiceGameBetHistoryRepository(): DiceGameBetHistoryRepository {
+    fun provideDiceGameBetHistoryRepository(sharedPref: SharedPref): DiceGameBetHistoryRepository {
         return DiceGameBetHistoryRepository(Dispatchers.IO)
     }
 
     @Singleton
     @Provides
-    fun provideDiceGameResultRepository(diceGameResultService: DiceGameResultService): DiceGameResultRepository {
-        return DiceGameResultRepository(diceGameResultService, Dispatchers.IO, )
+    fun provideDiceGameResultRepository(
+        diceGameResultService: DiceGameResultService,
+        networkExceptionHandler: NetworkExceptionHandler,
+        sharedPref: SharedPref
+    ): DiceGameResultRepository {
+        return DiceGameResultRepository(
+            diceGameResultService,
+            Dispatchers.IO,
+            networkExceptionHandler,
+            sharedPref
+        )
     }
 }
