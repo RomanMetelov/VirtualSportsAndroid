@@ -46,9 +46,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun showError(errorMessage: String) {
+    fun showError() {
         viewModelScope.launch {
-            _mainFragmentStateLiveData.value = MainFragmentState.Error(errorMessage)
+            _mainFragmentStateLiveData.value = MainFragmentState.Error
         }
     }
 
