@@ -27,7 +27,7 @@
     <string name="image_no_internet_text_description">Image no internet</string>
     <string name="search_results_title">Результаты поиска</string>
     <string name="not_found_message">Не найдено…</string>
-    <string name="need_login_error_message">Необходимо авторизоваться для игры</string>
+    <string name="need_login_error_message">Для доступа необходимо пройти авторизацию</string>
     <string name="filters_title_text">Фильтры</string>
     <string name="providers_title_text">Провайдеры</string>
     <string name="apply_button_text">Применить</string>

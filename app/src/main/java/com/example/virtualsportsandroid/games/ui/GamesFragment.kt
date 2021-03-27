@@ -127,29 +127,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     firstTagGames,
                     allGamesWithoutFirstTag,
                     {
-                        if (viewModel.isAuthorizeUser()) {
-                            if (it == DICE_GAME_ID) {
-                                navigator.showDiceGameFragment()
-                            } else {
-                                showLoading()
-                                lifecycleScope.launch {
-                                    val result = viewModel.loadScreenGameModel(it)
-                                    if (result.isError) {
-                                        showError(getString(R.string.unknown_error_text))
-                                    } else {
-                                        navigator.showGameFragment(result.successResult)
-                                    }
-                                }
-                            }
-                        } else {
-                            Toast.makeText(
-                                context,
-                                getString(R.string.need_login_error_message),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            binding.rvMain.show()
-                            binding.pbLoading.hide()
-                        }
+                        openGame(it)
                     }
                 )
             }
@@ -168,32 +146,36 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     null,
                     listOf(gamesList),
                     {
-                        if (viewModel.isAuthorizeUser()) {
-                            if (it == DICE_GAME_ID) {
-                                navigator.showDiceGameFragment()
-                            } else {
-                                lifecycleScope.launch {
-                                    showLoading()
-                                    val result = viewModel.loadScreenGameModel(it)
-                                    if (result.isError) {
-                                        showError(getString(R.string.unknown_error_text))
-                                    } else {
-                                        navigator.showGameFragment(result.successResult)
-                                    }
-                                }
-                            }
-                        } else {
-                            Toast.makeText(
-                                context,
-                                getString(R.string.need_login_error_message),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            binding.rvMain.show()
-                            binding.pbLoading.hide()
-                        }
+                        openGame(it)
                     }
                 )
             }
+        }
+    }
+
+    private fun openGame(gameName: String) {
+        if (viewModel.isAuthorizeUser()) {
+            if (gameName == DICE_GAME_ID) {
+                navigator.showDiceGameFragment()
+            } else {
+                lifecycleScope.launch {
+                    showLoading()
+                    val result = viewModel.loadScreenGameModel(gameName)
+                    if (result.isError) {
+                        showError(getString(R.string.unknown_error_text))
+                    } else {
+                        navigator.showGameFragment(result.successResult)
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(
+                context,
+                getString(R.string.need_login_error_message),
+                Toast.LENGTH_SHORT
+            ).show()
+            binding.rvMain.show()
+            binding.pbLoading.hide()
         }
     }
 
