@@ -14,6 +14,6 @@ class FilterByProvidersUseCase(
         gamesResponse: GamesResponse
     ): List<GameModel> = withContext(dispatcher) {
         gamesResponse.games.filter { providers.contains(it.providerId) }
-            .map { GameModel(it.id, it.displayName, "") } //temp solution
+            .map { GameModel(it.id, it.displayName, it.imageURL) }
     }
 }

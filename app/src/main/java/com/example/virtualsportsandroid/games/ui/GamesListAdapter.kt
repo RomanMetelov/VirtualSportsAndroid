@@ -24,7 +24,7 @@ class GamesListAdapter(
                 tvGameName.text = gameModel.displayName
                 ivGameImage.loadImageFromURLWithPlaceholder(
                     gameModel.imageURL,
-                    R.drawable.game_image_placeholder
+                    R.drawable.ic_default_game
                 )
                 root.setOnClickListener {
                     open(gameModel.id)

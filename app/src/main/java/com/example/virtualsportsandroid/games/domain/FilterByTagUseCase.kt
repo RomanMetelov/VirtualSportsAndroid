@@ -12,6 +12,6 @@ class FilterByTagUseCase @Inject constructor(
     suspend operator fun invoke(tag: String, gamesResponse: GamesResponse): List<GameModel> =
         withContext(dispatcher) {
             gamesResponse.games.filter { it.tagsIds.contains(tag) }
-                .map { GameModel(it.id, it.displayName, "") } //temp solution
+                .map { GameModel(it.id, it.displayName, it.imageURL) }
         }
 }
