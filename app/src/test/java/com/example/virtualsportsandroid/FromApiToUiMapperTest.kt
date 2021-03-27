@@ -16,7 +16,7 @@ class FromApiToUiMapperTest {
     fun `mapping with correct values works correctly`() {
         val id = "1"
         val datetime = "stringvalue"
-        val betType = 2
+        val betType = 7
         val droppedNumber = 6
         val isBetWon = false
 
@@ -31,7 +31,7 @@ class FromApiToUiMapperTest {
         val mockkDiceGameResultUiModel = DiceGameResultModel(
             id = id,
             datetime = datetime,
-            betType = BetType.valueOf((betType + 1).toString()),
+            betType = BetType.ODD,
             droppedNumber = droppedNumber,
             isBetWon = isBetWon
         )
