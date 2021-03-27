@@ -60,7 +60,6 @@ class DiceGameFragment :
 
     private fun setupViews() {
         binding.tvDiceGameRollResultWin.text = getText(R.string.dice_game_roll_result_text_start)
-        binding.tvDiceGameRollResultLose.hide()
     }
 
     private fun setupListeners() {
@@ -134,13 +133,13 @@ class DiceGameFragment :
         with(binding) {
             tvErrorMessage.hide()
             if (gameResultApi.isBetWon) {
-                tvDiceGameRollResultLose.hide()
-                tvDiceGameRollResultWin.show()
+                tvDiceGameRollResultLose.visibility = View.INVISIBLE
+                tvDiceGameRollResultWin.visibility = View.VISIBLE
                 tvDiceGameRollResultWin.text = stringGameResult
 
             } else {
-                tvDiceGameRollResultWin.hide()
-                tvDiceGameRollResultLose.show()
+                tvDiceGameRollResultWin.visibility = View.INVISIBLE
+                tvDiceGameRollResultLose.visibility = View.VISIBLE
                 tvDiceGameRollResultLose.text = stringGameResult
             }
         }
