@@ -2,18 +2,16 @@
 
 package com.example.virtualsportsandroid.game.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GameFragmentBinding
+import com.example.virtualsportsandroid.game.GameFragmentNavigator
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.data.api.GameScreenErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
@@ -24,11 +22,18 @@ import javax.inject.Inject
 
 class GameFragment : BaseFragment(R.layout.game_fragment) {
 
+
     private lateinit var game: ScreenGameModel
     private lateinit var binding: GameFragmentBinding
-    private lateinit var webView: WebView
     private lateinit var ivAddToFavorite: AppCompatImageView
     private lateinit var ivDelFromFavorite: AppCompatImageView
+
+    private val gameFragmentNavigator: GameFragmentNavigator by lazy {
+        GameFragmentNavigator(
+            childFragmentManager,
+            R.id.container
+        )
+    }
 
     @Inject
     lateinit var viewModel: GameFragmentViewModel
@@ -37,6 +42,10 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             game = it.getParcelable(GAME_KEY) ?: ScreenGameModel("", "", "")
+        }
+        when (game.id) {
+            DICE_GAME_ID -> gameFragmentNavigator.showDiceFragment()
+            else -> gameFragmentNavigator.showWebViewFragment(game)
         }
     }
 
@@ -57,7 +66,6 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
         viewModel.playGame(game)
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     private fun showGameInfo() {
         binding.tvGameTitle.text = game.displayName
         when (game.isFavorite) {
@@ -70,18 +78,10 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
                 ivDelFromFavorite.hide()
             }
         }
-        webView.settings.javaScriptEnabled = true
-        webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                view?.loadUrl(game.url)
-                return true
-            }
-        }
-        webView.loadUrl(game.url)
+
     }
 
     private fun initViews() {
-        webView = binding.webView
         ivAddToFavorite = binding.ivAddToFavourites
         ivDelFromFavorite = binding.ivDelFromFavourites
     }
@@ -144,6 +144,7 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     }
 
     companion object {
+        private const val DICE_GAME_ID = "original_dice_game"
         private const val GAME_KEY = "GAME_KEY"
 
         fun newInstance(gameModel: ScreenGameModel): GameFragment = GameFragment().apply {

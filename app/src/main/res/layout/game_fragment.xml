@@ -30,7 +30,7 @@
         android:textSize="@dimen/game_title_textSize"
         android:textStyle="bold"
         app:fontFamily="@font/parimatch"
-        app:layout_constraintBottom_toTopOf="@id/web_view"
+        app:layout_constraintBottom_toTopOf="@id/container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,10 +65,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"/>
+        app:layout_constraintGuide_percent="0.1" />
 
-    <WebView
-        android:id="@+id/web_view"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

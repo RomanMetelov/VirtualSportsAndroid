@@ -3,13 +3,12 @@ package com.example.virtualsportsandroid.utils
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import com.example.virtualsportsandroid.dices.history.ui.DiceGameBetHistoryFragment
-import com.example.virtualsportsandroid.dices.game.ui.DiceGameFragment
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.ui.GameFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
-import com.example.virtualsportsandroid.registration.ui.RegistrationFragment
 import com.example.virtualsportsandroid.main.ui.MainFragment
 import com.example.virtualsportsandroid.nonetwork.NetworkErrorFragment
+import com.example.virtualsportsandroid.registration.ui.RegistrationFragment
 
 class FragmentNavigator(
     private val fragmentManager: FragmentManager,
@@ -46,13 +45,6 @@ class FragmentNavigator(
     fun showGameFragment(gameModel: ScreenGameModel) {
         fragmentManager.beginTransaction()
             .replace(container, GameFragment.newInstance(gameModel))
-            .addToBackStack(null)
-            .commitAllowingStateLoss()
-    }
-
-    fun showDiceGameFragment(gameModel: ScreenGameModel) {
-        fragmentManager.beginTransaction()
-            .replace(container, DiceGameFragment.newInstance(gameModel))
             .addToBackStack(null)
             .commitAllowingStateLoss()
     }

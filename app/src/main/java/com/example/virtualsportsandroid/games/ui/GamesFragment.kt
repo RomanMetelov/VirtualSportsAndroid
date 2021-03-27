@@ -20,7 +20,6 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     companion object {
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
-        private const val DICE_GAME_ID = "original_dice_game"
 
         fun newInstance(
             category: String? = null,
@@ -161,11 +160,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 if (result.isError) {
                     showError()
                 } else {
-                    if (gameName == DICE_GAME_ID) {
-                        navigator.showDiceGameFragment(result.successResult)
-                    } else {
-                        navigator.showGameFragment(result.successResult)
-                    }
+                    navigator.showGameFragment(result.successResult)
                 }
             }
         } else {
