@@ -37,7 +37,8 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         observeMainFragmentState()
         observeIsAuthorized()
         observeContainerState()
-        observerLogoutResult()
+        observeLogoutResult()
+        observeLoadGamesResult()
         setupListeners()
         viewModel.loadConfigs()
         viewModel.checkIsAuthorized()
@@ -127,8 +128,16 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         }
     }
 
-    private fun observerLogoutResult() {
+    private fun observeLogoutResult() {
         viewModel.logoutResultLiveData.observe(viewLifecycleOwner, { result ->
+            if (result.isError) {
+                handleNetworkError(result.errorResult)
+            }
+        })
+    }
+
+    private fun observeLoadGamesResult() {
+        viewModel.loadGamesResult.observe(viewLifecycleOwner, { result ->
             if (result.isError) {
                 handleNetworkError(result.errorResult)
             }

@@ -1,8 +1,10 @@
 package com.example.virtualsportsandroid.main.data
 
 import android.content.Context
-import android.util.Log
 import com.example.virtualsportsandroid.R
+import com.example.virtualsportsandroid.utils.Result
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
+import com.example.virtualsportsandroid.utils.api.NetworkExceptionHandler
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,7 +17,8 @@ class GamesInfoRepository @Inject constructor(
     private val sharedPref: SharedPref,
     private val gson: Gson,
     private val gamesInfoService: GamesInfoService,
-    private val context: Context
+    private val context: Context,
+    private val networkExceptionHandler: NetworkExceptionHandler
 ) {
     companion object {
         const val FAVOURITES_CATEGORY_ID = "favourites"
@@ -24,15 +27,22 @@ class GamesInfoRepository @Inject constructor(
         const val RECENTLY_LAUNCHED_TAG_ID = "recent"
     }
 
-    suspend fun loadGames() = withContext(dispatcher) {
-        if (sharedPref.token.isNotEmpty()) {
-            val gamesInfo = async { gamesInfoService.loadGames() }
-            val favorites = async { gamesInfoService.loadFavorites() }
-            val recent = async { gamesInfoService.loadRecent() }
-            saveToSharedPref(gamesInfo.await(), favorites.await(), recent.await())
-        } else {
-            val gamesInfo = async { gamesInfoService.loadGames() }
-            saveToSharedPref(gamesInfo.await())
+    suspend fun loadGames(): Result<Unit, NetworkErrorType> {
+        return try {
+            withContext(dispatcher) {
+                if (sharedPref.token.isNotEmpty()) {
+                    val gamesInfo = async { gamesInfoService.loadGames() }
+                    val favorites = async { gamesInfoService.loadFavorites() }
+                    val recent = async { gamesInfoService.loadRecent() }
+                    saveToSharedPref(gamesInfo.await(), favorites.await(), recent.await())
+                } else {
+                    val gamesInfo = async { gamesInfoService.loadGames() }
+                    saveToSharedPref(gamesInfo.await())
+                }
+            }
+            Result.success(Unit)
+        } catch (e: Exception) {
+            networkExceptionHandler.handleError(e)
         }
     }
 
@@ -42,7 +52,7 @@ class GamesInfoRepository @Inject constructor(
         favourites: List<GameResponse> = emptyList(),
         recent: List<GameResponse> = emptyList()
     ) {
-        var allGames = gamesInfo.games.map { gameResponse ->
+        val allGames = gamesInfo.games.map { gameResponse ->
             val isFavorite = favourites.any { it.id == gameResponse.id }
             val isRecentlyLaunched = recent.any { it.id == gameResponse.id }
             if (isFavorite && isRecentlyLaunched) {

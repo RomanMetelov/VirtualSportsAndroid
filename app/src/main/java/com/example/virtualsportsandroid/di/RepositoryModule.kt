@@ -12,6 +12,7 @@ import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
 import com.example.virtualsportsandroid.main.data.GamesInfoService
+import com.example.virtualsportsandroid.utils.api.NetworkExceptionHandler
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import dagger.Module
@@ -60,14 +61,16 @@ class RepositoryModule {
         sharedPref: SharedPref,
         gson: Gson,
         gamesInfoService: GamesInfoService,
-        context: Context
+        context: Context,
+        networkExceptionHandler: NetworkExceptionHandler
     ): com.example.virtualsportsandroid.main.data.GamesInfoRepository {
         return com.example.virtualsportsandroid.main.data.GamesInfoRepository(
             Dispatchers.IO,
             sharedPref,
             gson,
             gamesInfoService,
-            context
+            context,
+            networkExceptionHandler
         )
     }
 
