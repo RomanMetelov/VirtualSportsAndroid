@@ -10,5 +10,5 @@ sealed class FilterFragmentState {
         val providers: List<ProviderResponse>
     ) : FilterFragmentState()
 
-    data class Error(val errorMessage: String) : FilterFragmentState()
+    object Error : FilterFragmentState()
 }

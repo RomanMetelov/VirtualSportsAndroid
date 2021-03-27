@@ -14,8 +14,8 @@ class FiltersLoadingUseCase @Inject constructor(
         val categoriesResult = filtersRepository.getCategories()
         val providersResult = filtersRepository.getProviders()
         when {
-            categoriesResult.isError -> FilterFragmentState.Error(categoriesResult.errorResult)
-            providersResult.isError -> FilterFragmentState.Error(categoriesResult.errorResult)
+            categoriesResult.isError -> FilterFragmentState.Error
+            providersResult.isError -> FilterFragmentState.Error
             else -> FilterFragmentState.Content(
                 categoriesResult.successResult,
                 providersResult.successResult
