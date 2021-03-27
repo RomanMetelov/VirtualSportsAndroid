@@ -10,8 +10,7 @@ data class DiceGameResultModel(
     val betType: BetType,
     val droppedNumber: Int,
     val isBetWon: Boolean
-): Parcelable
-
+) : Parcelable
 
 enum class BetType(val stringValue: String) {
     NUMBER1("1"),

@@ -12,7 +12,6 @@ import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 
-@Suppress("EmptyClassBlock")
 class BetHistoryAdapter :
     ListAdapter<DiceGameResultModel, BetHistoryItemViewHolder>(ReposDiffCallBack()) {
 

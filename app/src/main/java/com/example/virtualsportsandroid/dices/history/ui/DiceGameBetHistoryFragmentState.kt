@@ -1,4 +1,4 @@
-package com.example.virtualsportsandroid.dices.history
+package com.example.virtualsportsandroid.dices.history.ui
 
 import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 

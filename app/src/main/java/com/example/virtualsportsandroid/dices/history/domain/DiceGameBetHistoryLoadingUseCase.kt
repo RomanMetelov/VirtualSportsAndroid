@@ -1,8 +1,7 @@
-package com.example.virtualsportsandroid.dices.history
+package com.example.virtualsportsandroid.dices.history.domain
 
-import android.util.Log
+import com.example.virtualsportsandroid.dices.history.ui.DiceGameBetHistoryFragmentState
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
-import com.example.virtualsportsandroid.filter.ui.FilterFragmentState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

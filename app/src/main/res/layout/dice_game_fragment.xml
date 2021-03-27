@@ -178,8 +178,8 @@
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_2"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
-        app:layout_constraintEnd_toStartOf="@+id/radio4"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/radio1"
+        app:layout_constraintStart_toStartOf="@id/radio1"
         app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <RadioButton
@@ -189,8 +189,8 @@
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_4"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
-        app:layout_constraintEnd_toStartOf="@+id/radio6"
-        app:layout_constraintStart_toEndOf="@+id/radio2"
+        app:layout_constraintEnd_toStartOf="@+id/radio3"
+        app:layout_constraintStart_toEndOf="@+id/radio3"
         app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <RadioButton
@@ -200,8 +200,8 @@
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_6"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
-        app:layout_constraintEnd_toStartOf="@+id/radioEven"
-        app:layout_constraintStart_toEndOf="@+id/radio4"
+        app:layout_constraintEnd_toEndOf="@+id/radio5"
+        app:layout_constraintStart_toStartOf="@+id/radio5"
         app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <RadioButton
@@ -216,7 +216,7 @@
         app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radio6"
+        app:layout_constraintStart_toEndOf="@+id/radio5"
         app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <View
