@@ -13,6 +13,7 @@ import com.example.virtualsportsandroid.databinding.ProviderItemBinding
 import com.example.virtualsportsandroid.main.data.CategoryResponse
 import com.example.virtualsportsandroid.main.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
+import com.example.virtualsportsandroid.utils.ui.loadImageFromURLWithPlaceholder
 
 @Suppress("LongParameterList")
 class FiltersAdapter(
@@ -91,7 +92,10 @@ sealed class FiltersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 tvCategoryName.text = category.name
                 category.imageURL.let {
                     if (it.isNotEmpty()) {
-                        ivCategoryIcon.loadImageFromURL(category.imageURL)
+                        ivCategoryIcon.loadImageFromURLWithPlaceholder(
+                            category.imageURL,
+                            R.drawable.ic_default_category
+                        )
                     } else {
                         ivCategoryIcon.setImageResource(0)
                     }
@@ -123,7 +127,10 @@ sealed class FiltersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     ) : FiltersViewHolder(binding.root) {
         fun bind(provider: ProviderResponse) {
             with(binding) {
-                ivProviderImage.loadImageFromURL(provider.imageURL)
+                ivProviderImage.loadImageFromURLWithPlaceholder(
+                    provider.imageURL,
+                    R.drawable.ic_default_provider
+                )
                 root.setOnClickListener {
                     if (getSelectedProviders().contains(provider.id)) {
                         unselectProvider(provider.id)
