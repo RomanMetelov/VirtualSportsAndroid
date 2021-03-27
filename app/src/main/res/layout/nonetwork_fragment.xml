@@ -23,6 +23,7 @@
         android:id="@+id/tv_no_internet_error_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fontFamily="@font/parimatch"
         android:gravity="center"
         android:text="@string/no_internet_error_text"
         android:textColor="@color/black"
@@ -35,6 +36,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_retry"
         android:layout_width="wrap_content"
+        app:fontFamily="@font/parimatch"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@color/bright_yellow_13"
