@@ -19,49 +19,49 @@ class FragmentNavigator(
         fragmentManager.beginTransaction()
             .replace(container, LoginFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showRegistrationFragment() {
         fragmentManager.beginTransaction()
             .replace(container, RegistrationFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showMainFragment() {
         fragmentManager.beginTransaction()
             .replace(container, MainFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showNoNetworkFragment() {
         fragmentManager.beginTransaction()
             .replace(container, NetworkErrorFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showGameFragment(gameModel: ScreenGameModel) {
         fragmentManager.beginTransaction()
             .replace(container, GameFragment.newInstance(gameModel))
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showDiceGameFragment() {
         fragmentManager.beginTransaction()
             .replace(container, DiceGameFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showDiceGameBetHistoryFragment() {
         fragmentManager.beginTransaction()
             .replace(container, DiceGameBetHistoryFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun back() {
