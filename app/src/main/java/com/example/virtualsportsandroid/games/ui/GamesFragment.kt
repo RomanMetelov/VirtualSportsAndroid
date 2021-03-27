@@ -3,6 +3,7 @@ package com.example.virtualsportsandroid.games.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
@@ -41,7 +42,8 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     private lateinit var showFilterFragment: () -> Unit
 
     @Inject
-    lateinit var viewModel: GamesViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: GamesViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,6 +70,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(GamesViewModel::class.java)
     }
 
     private fun observeMainFragmentState() {

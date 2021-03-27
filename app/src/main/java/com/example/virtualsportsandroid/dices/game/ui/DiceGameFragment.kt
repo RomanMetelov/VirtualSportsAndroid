@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
@@ -30,7 +31,8 @@ class DiceGameFragment :
     private var continueRolling: Boolean = false
 
     @Inject
-    lateinit var viewModel: DiceGameViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: DiceGameViewModel
 
     companion object {
         fun newInstance(): DiceGameFragment = DiceGameFragment()
@@ -87,6 +89,7 @@ class DiceGameFragment :
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(DiceGameViewModel::class.java)
         observeViewModel()
     }
 

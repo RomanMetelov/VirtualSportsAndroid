@@ -2,7 +2,7 @@ package com.example.virtualsportsandroid.di
 
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
 import com.example.virtualsportsandroid.dices.game.domain.FromApiToUiMapper
-import com.example.virtualsportsandroid.dices.game.ui.DiceGameResultLoadingUseCase
+import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultLoadingUseCase
 import com.example.virtualsportsandroid.dices.history.domain.DiceGameBetHistoryLoadingUseCase
 import com.example.virtualsportsandroid.dices.history.data.DiceGameBetHistoryRepository
 import com.example.virtualsportsandroid.filter.data.FiltersRepository

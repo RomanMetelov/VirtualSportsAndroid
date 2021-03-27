@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +24,9 @@ class DiceGameBetHistoryFragment :
     private lateinit var binding: DiceGameBetHistoryFragmentBinding
 
     @Inject
-    lateinit var viewModel: DiceGameBetHistoryViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: DiceGameBetHistoryViewModel
 
-    //adapter
     private val betHistoryAdapter: BetHistoryAdapter by lazy {
         BetHistoryAdapter()
     }
@@ -62,6 +63,8 @@ class DiceGameBetHistoryFragment :
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(DiceGameBetHistoryViewModel::class.java)
         observeViewModel()
     }
 

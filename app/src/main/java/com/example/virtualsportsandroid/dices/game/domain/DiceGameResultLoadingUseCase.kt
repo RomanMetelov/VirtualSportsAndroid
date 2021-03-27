@@ -1,7 +1,7 @@
-package com.example.virtualsportsandroid.dices.game.ui
+package com.example.virtualsportsandroid.dices.game.domain
 
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
-import com.example.virtualsportsandroid.dices.game.domain.FromApiToUiMapper
+import com.example.virtualsportsandroid.dices.game.ui.DiceGameResultFragmentState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
