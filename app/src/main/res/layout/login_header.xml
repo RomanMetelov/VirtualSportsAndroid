@@ -9,13 +9,14 @@
     android:paddingVertical="@dimen/login_header_paddingVertical">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivDiceGameLaunch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ivLogoPM"
+        android:layout_width="@dimen/logo_width"
+        android:layout_height="@dimen/logo_height"
         android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
-        android:contentDescription="@string/dice_game_start_button"
-        android:paddingHorizontal="@dimen/logout_button_paddingHorizontal"
-        android:src="@drawable/ic_dice_game_icon"
+        android:contentDescription="@string/logo"
+        android:paddingHorizontal="@dimen/button_roll_horizontal_padding"
+        android:src="@drawable/logo_pm_header_new"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -66,4 +66,5 @@
     <string name="favourites_category_name">Избранные</string>
     <string name="recently_launched_category_name">Недавно запущенные</string>
     <string name="need_authorization_error_text">Нужна авторизация</string>
+    <string name="logo">Лого</string>
 </resources>
