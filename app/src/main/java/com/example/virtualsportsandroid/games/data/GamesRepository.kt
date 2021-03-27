@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.games.data
 
+import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.main.data.GamesResponse
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvidersUseCase
@@ -7,6 +8,7 @@ import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
 import com.example.virtualsportsandroid.games.domain.model.GameModel
 import com.example.virtualsportsandroid.games.domain.model.GamesList
+import com.example.virtualsportsandroid.main.data.GamesInfoRepository
 import com.example.virtualsportsandroid.utils.Result
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
@@ -99,4 +101,24 @@ class GamesRepository @Inject constructor(
             val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
             Result.success(configs.categories.first { it.id == categoryId }.name)
         }
+
+    suspend fun getScreenGameModel(gameId: String): Result<ScreenGameModel, GamesLoadingError> {
+        return withContext(dispatcher) {
+            val configsJSON = sharedPref.gamesInfoJSON
+            if (configsJSON.isEmpty()) {
+                return@withContext Result.error<ScreenGameModel, GamesLoadingError>(
+                    GamesLoadingError.NOT_FOUND
+                )
+            }
+            val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
+            val gameResponse = configs.games.first { it.id == gameId }
+            Result.success(
+                ScreenGameModel(
+                    gameResponse.id, gameResponse.displayName, gameResponse.gameURL,
+
+                    gameResponse.tagsIds.contains(GamesInfoRepository.FAVOURITES_TAG_ID)
+                )
+            )
+        }
+    }
 }

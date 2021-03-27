@@ -103,7 +103,6 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
         })
         viewModel.playGameResultViewModel.observe(viewLifecycleOwner, { result ->
             if (result.isError) handleErrorOnUi(result.errorResult)
-
         })
     }
 

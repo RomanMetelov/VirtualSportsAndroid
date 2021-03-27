@@ -1,6 +1,7 @@
 package com.example.virtualsportsandroid.main.data
 
 import android.content.Context
+import android.util.Log
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
@@ -16,7 +17,7 @@ class GamesInfoRepository @Inject constructor(
     private val gamesInfoService: GamesInfoService,
     private val context: Context
 ) {
-    private companion object {
+    companion object {
         const val FAVOURITES_CATEGORY_ID = "favourites"
         const val FAVOURITES_TAG_ID = "favourites"
         const val RECENTLY_LAUNCHED_CATEGORY_ID = "recent"
@@ -41,24 +42,39 @@ class GamesInfoRepository @Inject constructor(
         favourites: List<GameResponse> = emptyList(),
         recent: List<GameResponse> = emptyList()
     ) {
-        val allGames = gamesInfo.games + favourites.map {
-            GameResponse(
-                it.id,
-                it.displayName,
-                it.providerId,
-                it.categoriesIds + FAVOURITES_CATEGORY_ID,
-                it.tagsIds + FAVOURITES_TAG_ID,
-                it.gameURL
-            )
-        } + recent.map {
-            GameResponse(
-                it.id,
-                it.displayName,
-                it.providerId,
-                it.categoriesIds + RECENTLY_LAUNCHED_CATEGORY_ID,
-                it.tagsIds + RECENTLY_LAUNCHED_TAG_ID,
-                it.gameURL
-            )
+        var allGames = gamesInfo.games.map { gameResponse ->
+            val isFavorite = favourites.any { it.id == gameResponse.id }
+            val isRecentlyLaunched = recent.any { it.id == gameResponse.id }
+            if (isFavorite && isRecentlyLaunched) {
+                GameResponse(
+                    gameResponse.id,
+                    gameResponse.displayName,
+                    gameResponse.providerId,
+                    gameResponse.categoriesIds + FAVOURITES_CATEGORY_ID + RECENTLY_LAUNCHED_CATEGORY_ID,
+                    gameResponse.tagsIds + FAVOURITES_TAG_ID + RECENTLY_LAUNCHED_TAG_ID,
+                    gameResponse.gameURL
+                )
+            } else if (isFavorite) {
+                GameResponse(
+                    gameResponse.id,
+                    gameResponse.displayName,
+                    gameResponse.providerId,
+                    gameResponse.categoriesIds + FAVOURITES_CATEGORY_ID,
+                    gameResponse.tagsIds + FAVOURITES_TAG_ID,
+                    gameResponse.gameURL
+                )
+            } else if (isRecentlyLaunched) {
+                GameResponse(
+                    gameResponse.id,
+                    gameResponse.displayName,
+                    gameResponse.providerId,
+                    gameResponse.categoriesIds + RECENTLY_LAUNCHED_CATEGORY_ID,
+                    gameResponse.tagsIds + RECENTLY_LAUNCHED_TAG_ID,
+                    gameResponse.gameURL
+                )
+            } else {
+                gameResponse
+            }
         }
         val newCategories = mutableListOf<CategoryResponse>().apply {
             if (favourites.isNotEmpty()) {

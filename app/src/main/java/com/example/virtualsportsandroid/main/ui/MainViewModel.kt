@@ -25,8 +25,8 @@ class MainViewModel @Inject constructor(
     private val _containerStateLiveData = MutableLiveData<MainFragmentContainerState>()
     val containerStateLiveData: LiveData<MainFragmentContainerState> = _containerStateLiveData
 
-    private val _logoutResultLiveData = MutableLiveData<Result<Boolean, NetworkErrorType>>()
-    val logoutResultLiveData: LiveData<Result<Boolean, NetworkErrorType>> = _logoutResultLiveData
+    private val _logoutResultLiveData = MutableLiveData<Result<Unit, NetworkErrorType>>()
+    val logoutResultLiveData: LiveData<Result<Unit, NetworkErrorType>> = _logoutResultLiveData
 
     private val _mainFragmentStateLiveData = MutableLiveData<MainFragmentState>()
     val mainFragmentStateLiveData: LiveData<MainFragmentState> = _mainFragmentStateLiveData
@@ -59,7 +59,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             authorizationRepository.logout()
             sharedPref.token = ""
-            _logoutResultLiveData.value = Result.success(true)
+            _logoutResultLiveData.value = Result.success(Unit)
             updateCallback()
         }
     }

@@ -2,6 +2,7 @@ package com.example.virtualsportsandroid.games.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
@@ -10,6 +11,7 @@ import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class GamesFragment : BaseFragment(R.layout.games_fragment) {
@@ -17,6 +19,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     companion object {
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
+        private const val DICE_GAME_ID = "dice"
 
         fun newInstance(
             category: String? = null,
@@ -121,7 +124,22 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 adapter = MainRecyclerViewAdapter(
                     showFilterFragment,
                     firstTagGames,
-                    allGamesWithoutFirstTag
+                    allGamesWithoutFirstTag,
+                    {
+                        if (it == DICE_GAME_ID) {
+                            navigator.showDiceGameFragment()
+                        } else {
+                            showLoading()
+                            lifecycleScope.launch {
+                                val result = viewModel.loadScreenGameModel(it)
+                                if (result.isError) {
+                                    showError(getString(R.string.unknown_error_text))
+                                } else {
+                                    navigator.showGameFragment(result.successResult)
+                                }
+                            }
+                        }
+                    }
                 )
             }
         }
@@ -137,7 +155,22 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 adapter = MainRecyclerViewAdapter(
                     showFilterFragment,
                     null,
-                    listOf(gamesList)
+                    listOf(gamesList),
+                    {
+                        if (it == DICE_GAME_ID) {
+                            navigator.showDiceGameFragment()
+                        } else {
+                            lifecycleScope.launch {
+                                showLoading()
+                                val result = viewModel.loadScreenGameModel(it)
+                                if (result.isError) {
+                                    showError(getString(R.string.unknown_error_text))
+                                } else {
+                                    navigator.showGameFragment(result.successResult)
+                                }
+                            }
+                        }
+                    }
                 )
             }
         }
