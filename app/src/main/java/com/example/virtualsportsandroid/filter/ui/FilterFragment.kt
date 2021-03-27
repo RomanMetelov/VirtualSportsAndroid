@@ -2,10 +2,12 @@ package com.example.virtualsportsandroid.filter.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.FilterFragmentBinding
+import com.example.virtualsportsandroid.di.ViewModelFactory
 import com.example.virtualsportsandroid.main.data.CategoryResponse
 import com.example.virtualsportsandroid.main.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
@@ -27,7 +29,8 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
     }
 
     @Inject
-    lateinit var viewModel: FilterViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: FilterViewModel
     private lateinit var binding: FilterFragmentBinding
     private lateinit var back: () -> Unit
     private lateinit var showGamesFragment: (category: String?, providers: List<String>?) -> Unit
@@ -60,6 +63,7 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(FilterViewModel::class.java)
     }
 
     private fun observeFragmentState() {

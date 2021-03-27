@@ -11,9 +11,11 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.ViewModelProvider
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.LoginFragmentBinding
+import com.example.virtualsportsandroid.di.ViewModelFactory
 import com.example.virtualsportsandroid.login.data.model.AccessTokenResponse
 import com.example.virtualsportsandroid.login.data.model.UserModel
 import com.example.virtualsportsandroid.login.domain.LoginErrorType
@@ -37,7 +39,8 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     private lateinit var btnClose: AppCompatImageView
 
     @Inject
-    lateinit var viewModel: LoginViewModel
+    lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +55,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
+        viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
         setupListeners()
         observeCheckInputsLiveData()
         observeLoginTryLiveData()

@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.ViewModelProvider
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.RegistrationFragmentBinding
@@ -41,7 +42,8 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     private lateinit var tvRegistrationErrorMessage: TextView
 
     @Inject
-    lateinit var viewModel: RegistrationViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: RegistrationViewModel
 
 
     override fun onCreateView(
@@ -57,6 +59,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
+        viewModel = ViewModelProvider(this, viewModelFactory).get(RegistrationViewModel::class.java)
         setupListeners()
         observeCheckInputsLiveData()
         observeRegistrationTryLiveData()

@@ -14,7 +14,10 @@ import com.example.virtualsportsandroid.nonetwork.NetworkErrorFragment
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [AppModule::class, RepositoryModule::class, UseCaseModule::class, NetworkModule::class])
+@Component(
+    modules = [AppModule::class, RepositoryModule::class,
+        UseCaseModule::class, NetworkModule::class, ViewModelModule::class]
+)
 @Singleton
 interface AppComponent {
 

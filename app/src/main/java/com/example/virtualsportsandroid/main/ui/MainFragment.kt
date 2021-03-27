@@ -1,8 +1,10 @@
 @file:Suppress("TooManyFunctions")
+
 package com.example.virtualsportsandroid.main.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.MainFragmentBinding
@@ -15,7 +17,9 @@ import javax.inject.Inject
 class MainFragment : BaseFragment(R.layout.main_fragment) {
 
     @Inject
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: MainViewModel
+
     private lateinit var binding: MainFragmentBinding
     private val mainFragmentNavigator: MainFragmentNavigator by lazy {
         MainFragmentNavigator(
@@ -34,7 +38,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = MainFragmentBinding.bind(view)
-        (requireActivity().application as Application).getComponent().inject(this)
+        setupViewModel()
         observeMainFragmentState()
         observeIsAuthorized()
         observeContainerState()
@@ -43,6 +47,11 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         setupListeners()
         viewModel.loadConfigs()
         viewModel.checkIsAuthorized()
+    }
+
+    private fun setupViewModel() {
+        (requireActivity().application as Application).getComponent().inject(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
     }
 
     private fun setupListeners() {
