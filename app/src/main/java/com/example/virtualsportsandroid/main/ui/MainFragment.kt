@@ -1,3 +1,4 @@
+@file:Suppress("TooManyFunctions")
 package com.example.virtualsportsandroid.main.ui
 
 import android.os.Bundle

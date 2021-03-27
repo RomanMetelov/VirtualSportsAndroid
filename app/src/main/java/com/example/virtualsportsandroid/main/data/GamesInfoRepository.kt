@@ -1,3 +1,4 @@
+@file:Suppress("TooGenericExceptionCaught")
 package com.example.virtualsportsandroid.main.data
 
 import android.content.Context
