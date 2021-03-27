@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.virtualsportsandroid.utils.Result
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.games.data.GamesLoadingError
 import com.example.virtualsportsandroid.games.data.GamesRepository
@@ -12,6 +11,8 @@ import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvide
 import com.example.virtualsportsandroid.games.domain.LoadingByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.LoadingByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
+import com.example.virtualsportsandroid.utils.Result
+import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,7 +21,8 @@ class GamesViewModel @Inject constructor(
     private val loadingByCategoryUseCase: LoadingByCategoryUseCase,
     private val loadingByProvidersUseCase: LoadingByProvidersUseCase,
     private val loadingByCategoryAndProvidersUseCase: LoadingByCategoryAndProvidersUseCase,
-    private val gamesRepository: GamesRepository
+    private val gamesRepository: GamesRepository,
+    private val sharedPref: SharedPref
 ) : ViewModel() {
 
     private val _mainFragmentStateLiveData = MutableLiveData<GamesFragmentState>()
@@ -58,6 +60,10 @@ class GamesViewModel @Inject constructor(
     }
 
     suspend fun loadScreenGameModel(gameId: String): Result<ScreenGameModel, GamesLoadingError> {
-        return gamesRepository.getScreenGameModel(gameId)
+        return if (sharedPref.token.isEmpty()) {
+            Result.error(GamesLoadingError.NEED_LOGIN)
+        } else {
+            gamesRepository.getScreenGameModel(gameId)
+        }
     }
 }

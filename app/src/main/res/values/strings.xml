@@ -27,6 +27,7 @@
     <string name="image_no_internet_text_description">Image no internet</string>
     <string name="search_results_title">Результаты поиска</string>
     <string name="not_found_message">Не найдено…</string>
+    <string name="need_login_error_message">Необходимо авторизоваться для игры</string>
     <string name="filters_title_text">Фильтры</string>
     <string name="providers_title_text">Провайдеры</string>
     <string name="apply_button_text">Применить</string>
@@ -61,7 +62,7 @@
     <string name="user_not_found_login_error_text">Неверная эл. почта или пароль</string>
     <string name="unknown_login_error_text">Неизвестная ошибка</string>
     <string name="dice_game_start_button">Dice Game Start Button</string>
-    <string name="unknown_error_text">Неизвестная ошибкка</string>
+    <string name="unknown_error_text">Неизвестная ошибка</string>
     <string name="favourites_category_name">Избранные</string>
     <string name="recently_launched_category_name">Недавно запущеные</string>
     <string name="need_authorization_error_text">Нужна авторизация</string>

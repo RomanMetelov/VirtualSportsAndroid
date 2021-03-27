@@ -31,12 +31,18 @@ class NotFilteredGamesLoadingUseCase(
                 GamesLoadingError.NOT_FOUND -> {
                     GamesFragmentState.Error(context.getString(R.string.not_found_message))
                 }
+                GamesLoadingError.NEED_LOGIN -> {
+                    GamesFragmentState.Error(context.getString(R.string.need_login_error_message))
+                }
             }
         }
         gamesWithFirstTagResult.isError -> {
             when (gamesWithFirstTagResult.errorResult) {
                 GamesLoadingError.NOT_FOUND -> {
                     GamesFragmentState.Error(context.getString(R.string.not_found_message))
+                }
+                GamesLoadingError.NEED_LOGIN -> {
+                    GamesFragmentState.Error(context.getString(R.string.need_login_error_message))
                 }
             }
         }

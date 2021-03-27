@@ -2,11 +2,13 @@ package com.example.virtualsportsandroid.games.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
+import com.example.virtualsportsandroid.games.data.GamesLoadingError
 import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
@@ -133,7 +135,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                             lifecycleScope.launch {
                                 val result = viewModel.loadScreenGameModel(it)
                                 if (result.isError) {
-                                    showError(getString(R.string.unknown_error_text))
+                                    handleError(result.errorResult)
                                 } else {
                                     navigator.showGameFragment(result.successResult)
                                 }
@@ -164,7 +166,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                                 showLoading()
                                 val result = viewModel.loadScreenGameModel(it)
                                 if (result.isError) {
-                                    showError(getString(R.string.unknown_error_text))
+                                    handleError(result.errorResult)
                                 } else {
                                     navigator.showGameFragment(result.successResult)
                                 }
@@ -173,6 +175,21 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     }
                 )
             }
+        }
+    }
+
+    private fun handleError(errorResult: GamesLoadingError) {
+        when (errorResult) {
+            GamesLoadingError.NEED_LOGIN -> {
+                Toast.makeText(
+                    context,
+                    getString(R.string.need_login_error_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+                binding.rvMain.show()
+                binding.pbLoading.hide()
+            }
+            else -> showError(getString(R.string.unknown_error_text))
         }
     }
 
