@@ -15,8 +15,8 @@
         android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
         android:contentDescription="@string/logo"
         android:paddingHorizontal="@dimen/button_roll_horizontal_padding"
-        android:src="@drawable/logo_pm_header_new"
         android:scaleType="centerCrop"
+        android:src="@drawable/logo_pm_header_new"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
