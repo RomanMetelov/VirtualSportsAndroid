@@ -66,7 +66,6 @@
         android:textColor="@color/gray_dark_0f"
         android:textSize="@dimen/signup_button_textSize"
         android:textStyle="bold"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +74,6 @@
         android:id="@+id/gButtonsForUnauthorizedUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:constraint_referenced_ids="btnLogin, btnSignUp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

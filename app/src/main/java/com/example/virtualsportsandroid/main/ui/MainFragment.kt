@@ -118,12 +118,10 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             with(binding.loginHeader) {
                 if (it) {
                     btnLogout.show()
-                    btnLogin.hide()
-                    btnSignUp.hide()
+                    gButtonsForUnauthorizedUser.hide()
                 } else {
                     btnLogout.hide()
-                    btnLogin.show()
-                    btnSignUp.show()
+                    gButtonsForUnauthorizedUser.show()
                 }
             }
         }
