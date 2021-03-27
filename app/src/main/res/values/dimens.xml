@@ -88,4 +88,6 @@
     <dimen name="games_list_title">16dp</dimen>
     <dimen name="games_list_padding">16dp</dimen>
     <dimen name="provider_item_marginHorizontal">16dp</dimen>
+    <dimen name="logo_width">120dp</dimen>
+    <dimen name="logo_height">80dp</dimen>
 </resources>
