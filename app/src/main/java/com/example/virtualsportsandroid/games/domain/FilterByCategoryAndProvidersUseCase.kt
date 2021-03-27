@@ -16,7 +16,7 @@ class FilterByCategoryAndProvidersUseCase @Inject constructor(
     ): List<GameModel> = withContext(dispatcher) {
         gamesResponse.games.filter { it.categoriesIds.contains(category) && providers.contains(it.providerId) }
             .map {
-                GameModel(it.id, it.displayName, "")//temp solution
+                GameModel(it.id, it.displayName, it.imageURL)
             }
     }
 }

@@ -19,7 +19,7 @@
         android:id="@+id/tvGameName"
         android:layout_width="144dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/game_name_marginTop"
+        android:layout_marginVertical="@dimen/game_name_marginVertical"
         android:maxLines="3"
         app:fontFamily="@font/parimatch"
         android:textAlignment="center"
