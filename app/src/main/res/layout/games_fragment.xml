@@ -10,7 +10,7 @@
         android:id="@+id/rvMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"/>
+        android:overScrollMode="never" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvErrorMessage"
@@ -22,6 +22,12 @@
         android:textSize="@dimen/main_fragment_error_message_textSize"
         android:visibility="gone"
         tools:text="Some error message" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivError"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_pm_sorry" />
 
     <ProgressBar
         android:id="@+id/pbLoading"

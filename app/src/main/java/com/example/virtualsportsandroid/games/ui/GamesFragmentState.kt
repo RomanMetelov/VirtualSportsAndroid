@@ -7,7 +7,7 @@ import com.example.virtualsportsandroid.games.domain.model.GamesList
 sealed class GamesFragmentState {
 
     object Loading : GamesFragmentState()
-    data class Error(val errorMessage: String) : GamesFragmentState()
+    object Error : GamesFragmentState()
     data class NotFiltered(
         val gamesWithFirstTag: GamesList,
         val allGamesWithoutFirstTag: List<GamesList>
