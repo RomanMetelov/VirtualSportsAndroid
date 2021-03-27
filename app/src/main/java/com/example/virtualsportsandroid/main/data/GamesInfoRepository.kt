@@ -63,7 +63,8 @@ class GamesInfoRepository @Inject constructor(
                     gameResponse.providerId,
                     gameResponse.categoriesIds + FAVOURITES_CATEGORY_ID + RECENTLY_LAUNCHED_CATEGORY_ID,
                     gameResponse.tagsIds + FAVOURITES_TAG_ID + RECENTLY_LAUNCHED_TAG_ID,
-                    gameResponse.gameURL
+                    gameResponse.gameURL,
+                    gameResponse.imageURL
                 )
             } else if (isFavorite) {
                 GameResponse(
@@ -72,7 +73,8 @@ class GamesInfoRepository @Inject constructor(
                     gameResponse.providerId,
                     gameResponse.categoriesIds + FAVOURITES_CATEGORY_ID,
                     gameResponse.tagsIds + FAVOURITES_TAG_ID,
-                    gameResponse.gameURL
+                    gameResponse.gameURL,
+                    gameResponse.imageURL
                 )
             } else if (isRecentlyLaunched) {
                 GameResponse(
@@ -81,7 +83,8 @@ class GamesInfoRepository @Inject constructor(
                     gameResponse.providerId,
                     gameResponse.categoriesIds + RECENTLY_LAUNCHED_CATEGORY_ID,
                     gameResponse.tagsIds + RECENTLY_LAUNCHED_TAG_ID,
-                    gameResponse.gameURL
+                    gameResponse.gameURL,
+                    gameResponse.imageURL
                 )
             } else {
                 gameResponse
