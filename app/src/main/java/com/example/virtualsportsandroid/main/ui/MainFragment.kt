@@ -58,10 +58,6 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
                     navigator.showMainFragment()
                 }
             }
-            ivDiceGameLaunch.setOnClickListener {
-                navigator.showDiceGameFragment()
-            }
-
         }
     }
 

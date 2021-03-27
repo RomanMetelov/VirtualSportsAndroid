@@ -37,6 +37,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/game_title_textSize"
         android:textStyle="bold"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +90,7 @@
         android:background="@drawable/bet_history_button_background"
         android:text="@string/button_bet_history_text"
         android:textStyle="bold"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@+id/tvPlaceYourBet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline" />
@@ -102,9 +104,10 @@
         android:textColor="@color/white"
         android:textSize="@dimen/place_your_bet_textSize"
         android:textStyle="bold"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@id/rgBetTypesSet"
-        app:layout_constraintTop_toBottomOf="@+id/btnShowBetHistory"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowBetHistory" />
 
     <com.example.virtualsportsandroid.utils.ui.BlRadioGroup
         android:id="@+id/rgBetTypesSet"
@@ -112,9 +115,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="@dimen/radio_group_horizontal_padding"
+        android:visibility="gone"
         app:constraint_referenced_ids="radio1, radio2, radio3, radio4, radio5, radio6,
                                         radioOdd, radioEven"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/radioOdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,10 +129,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_1"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven"
         app:layout_constraintEnd_toStartOf="@+id/radio3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
-        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet" />
 
     <RadioButton
         android:id="@+id/radio3"
@@ -137,10 +140,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_3"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven"
         app:layout_constraintEnd_toStartOf="@+id/radio5"
         app:layout_constraintStart_toEndOf="@+id/radio1"
-        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
-        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet" />
 
     <RadioButton
         android:id="@+id/radio5"
@@ -148,10 +151,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_5"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven"
         app:layout_constraintEnd_toStartOf="@+id/radioOdd"
         app:layout_constraintStart_toEndOf="@+id/radio3"
-        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
-        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet" />
 
     <RadioButton
         android:id="@+id/radioOdd"
@@ -162,10 +165,11 @@
         android:text="@string/radio_button_odd_text"
         android:textColor="@color/white"
         android:textSize="@dimen/radio_button_textSize"
+        app:fontFamily="@font/parimatch"
+        app:layout_constraintBottom_toTopOf="@+id/radioEven"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radio5"
-        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet"
-        app:layout_constraintBottom_toTopOf="@+id/radioEven" />
+        app:layout_constraintTop_toBottomOf="@+id/rgBetTypesSet" />
 
     <RadioButton
         android:id="@+id/radio2"
@@ -173,10 +177,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_2"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/radio4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
-        app:layout_constraintBottom_toTopOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <RadioButton
         android:id="@+id/radio4"
@@ -184,10 +188,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_4"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/radio6"
         app:layout_constraintStart_toEndOf="@+id/radio2"
-        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
-        app:layout_constraintBottom_toTopOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <RadioButton
         android:id="@+id/radio6"
@@ -195,10 +199,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/radio_button_margin"
         android:button="@drawable/ic_twotone_bet_6"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/radioEven"
         app:layout_constraintStart_toEndOf="@+id/radio4"
-        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
-        app:layout_constraintBottom_toTopOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <RadioButton
         android:id="@+id/radioEven"
@@ -209,10 +213,11 @@
         android:text="@string/radio_button_even_text"
         android:textColor="@color/white"
         android:textSize="@dimen/radio_button_textSize"
+        app:fontFamily="@font/parimatch"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radio6"
-        app:layout_constraintTop_toBottomOf="@+id/radioOdd"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"/>
+        app:layout_constraintTop_toBottomOf="@+id/radioOdd" />
 
     <View
         android:id="@+id/divider2"
@@ -240,6 +245,7 @@
         android:text="@string/dice_game_roll_result_text"
         android:textColor="@color/lose"
         android:textSize="@dimen/radio_button_textSize"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toBottomOf="@+id/tvErrorMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -253,6 +259,7 @@
         android:text="@string/dice_game_roll_result_text"
         android:textColor="@color/win"
         android:textSize="@dimen/radio_button_textSize"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toBottomOf="@+id/tvErrorMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -266,6 +273,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/error_message_textSize"
         android:visibility="gone"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@+id/btnRoll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -283,6 +291,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/game_title_textSize"
         android:textStyle="bold"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

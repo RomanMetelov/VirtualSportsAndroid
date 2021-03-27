@@ -39,6 +39,7 @@
         android:textColor="@color/gray_light_f5"
         android:textSize="@dimen/error_message_textSize"
         android:visibility="gone"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
