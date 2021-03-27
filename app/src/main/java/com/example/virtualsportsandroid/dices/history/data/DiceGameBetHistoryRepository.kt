@@ -9,7 +9,6 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import javax.inject.Inject
 
-@Suppress("EmptyClassBlock", "MagicNumber")
 class DiceGameBetHistoryRepository @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val diceGameBetHistoryService: DiceGameBetHistoryService,
