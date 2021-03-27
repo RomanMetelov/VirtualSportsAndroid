@@ -14,9 +14,10 @@
         android:fontFamily="@font/roboto_condensed"
         android:textColor="@color/gray_light_f5"
         android:textSize="@dimen/tag_name_textSize"
+        app:fontFamily="@font/parimatch"
+        app:layout_constraintBottom_toTopOf="@id/rvGames"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rvGames"
         tools:text="Tag name" />
 
     <androidx.recyclerview.widget.RecyclerView

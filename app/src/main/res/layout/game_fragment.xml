@@ -29,6 +29,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/game_title_textSize"
         android:textStyle="bold"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@id/web_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

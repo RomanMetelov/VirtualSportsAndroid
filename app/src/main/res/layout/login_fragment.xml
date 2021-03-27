@@ -23,7 +23,7 @@
             android:padding="@dimen/login_half_all_padding_elements"
             android:src="@drawable/ic_close_dark" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/login_half_margin_elements"
@@ -31,7 +31,8 @@
             android:text="@string/login_text"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:fontFamily="@font/parimatch" />
 
     </RelativeLayout>
 
@@ -50,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            app:fontFamily="@font/parimatch"
             android:inputType="text"
             android:paddingStart="@dimen/zero_dp"
             android:paddingEnd="@dimen/zero_dp"
@@ -74,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            app:fontFamily="@font/parimatch"
             android:inputType="textPassword"
             android:paddingStart="@dimen/zero_dp"
             android:paddingEnd="@dimen/zero_dp"
@@ -87,6 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/login_margin_elements"
         android:layout_marginEnd="@dimen/login_margin_elements"
+        app:fontFamily="@font/parimatch"
         android:background="@color/gray_light_eb"
         android:enabled="false"
         android:padding="@dimen/login_all_padding_buttons"
@@ -99,6 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/login_margin_elements"
+        app:fontFamily="@font/parimatch"
         android:background="@drawable/btn_register_border"
         android:padding="@dimen/login_all_padding_buttons"
         android:text="@string/register_btn_text"
@@ -108,6 +113,7 @@
         android:id="@+id/tv_login_error_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:fontFamily="@font/parimatch"
         android:gravity="center"
         android:text="@string/mail_error_message_text"
         android:textColor="@color/red"

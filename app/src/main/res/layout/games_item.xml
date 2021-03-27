@@ -14,6 +14,7 @@
         android:fontFamily="@font/roboto_condensed"
         android:textColor="@color/gray_light_f5"
         android:textSize="@dimen/games_title_textSize"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@id/rvGames"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
