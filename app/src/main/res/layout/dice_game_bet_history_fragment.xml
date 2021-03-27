@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_condensed"
         android:textColor="@color/gray_light_f5"
-        android:textSize="@dimen/filter_fragment_error_message_textSize"
+        android:textSize="@dimen/error_message_textSize"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

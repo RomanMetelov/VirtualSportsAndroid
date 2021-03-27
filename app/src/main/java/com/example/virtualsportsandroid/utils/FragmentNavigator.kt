@@ -6,7 +6,6 @@ import com.example.virtualsportsandroid.dices.history.ui.DiceGameBetHistoryFragm
 import com.example.virtualsportsandroid.dices.game.ui.DiceGameFragment
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.ui.GameFragment
-import com.example.virtualsportsandroid.loadingConfigs.ui.LoadingFragment
 import com.example.virtualsportsandroid.login.ui.LoginFragment
 import com.example.virtualsportsandroid.registration.ui.RegistrationFragment
 import com.example.virtualsportsandroid.main.ui.MainFragment
@@ -20,55 +19,49 @@ class FragmentNavigator(
         fragmentManager.beginTransaction()
             .replace(container, LoginFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showRegistrationFragment() {
         fragmentManager.beginTransaction()
             .replace(container, RegistrationFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showMainFragment() {
         fragmentManager.beginTransaction()
             .replace(container, MainFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showNoNetworkFragment() {
         fragmentManager.beginTransaction()
             .replace(container, NetworkErrorFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showGameFragment(gameModel: ScreenGameModel) {
         fragmentManager.beginTransaction()
             .replace(container, GameFragment.newInstance(gameModel))
             .addToBackStack(null)
-            .commit()
-    }
-
-    fun showConfigsLoadingFragment() {
-        fragmentManager.beginTransaction()
-            .replace(container, LoadingFragment.newInstance())
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showDiceGameFragment() {
         fragmentManager.beginTransaction()
             .replace(container, DiceGameFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun showDiceGameBetHistoryFragment() {
         fragmentManager.beginTransaction()
             .replace(container, DiceGameBetHistoryFragment.newInstance())
             .addToBackStack(null)
-            .commit()
+            .commitAllowingStateLoss()
     }
 
     fun back() {

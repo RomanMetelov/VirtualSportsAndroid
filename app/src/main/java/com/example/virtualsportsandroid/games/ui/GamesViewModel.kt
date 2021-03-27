@@ -1,13 +1,19 @@
 package com.example.virtualsportsandroid.games.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.virtualsportsandroid.game.data.ScreenGameModel
+import com.example.virtualsportsandroid.games.data.GamesLoadingError
+import com.example.virtualsportsandroid.games.data.GamesRepository
 import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.LoadingByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.LoadingByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
+import com.example.virtualsportsandroid.utils.Result
+import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,7 +21,9 @@ class GamesViewModel @Inject constructor(
     private val notFilteredGamesLoadingUseCase: NotFilteredGamesLoadingUseCase,
     private val loadingByCategoryUseCase: LoadingByCategoryUseCase,
     private val loadingByProvidersUseCase: LoadingByProvidersUseCase,
-    private val loadingByCategoryAndProvidersUseCase: LoadingByCategoryAndProvidersUseCase
+    private val loadingByCategoryAndProvidersUseCase: LoadingByCategoryAndProvidersUseCase,
+    private val gamesRepository: GamesRepository,
+    private val sharedPref: SharedPref
 ) : ViewModel() {
 
     private val _mainFragmentStateLiveData = MutableLiveData<GamesFragmentState>()
@@ -50,5 +58,13 @@ class GamesViewModel @Inject constructor(
                 loadingByCategoryAndProvidersUseCase.invoke(category, providers)
 
         }
+    }
+
+    fun isAuthorizeUser(): Boolean {
+        return (sharedPref.token.isNotEmpty())
+    }
+
+    suspend fun loadScreenGameModel(gameId: String): Result<ScreenGameModel, GamesLoadingError> {
+        return gamesRepository.getScreenGameModel(gameId)
     }
 }

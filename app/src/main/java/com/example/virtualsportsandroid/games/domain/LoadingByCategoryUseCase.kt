@@ -16,16 +16,21 @@ class LoadingByCategoryUseCase(
         val result = gamesRepository.getGamesFilteredByCategory(category)
         when {
             result.isError -> {
-                return@withContext GamesFragmentState.Error(context.getString(R.string.not_found_message))
+                GamesFragmentState.Error(context.getString(R.string.not_found_message))
             }
             result.successResult.isEmpty() -> {
-                return@withContext GamesFragmentState.Error(context.getString(R.string.not_found_message))
+                GamesFragmentState.Error(context.getString(R.string.not_found_message))
             }
             else -> {
-                return@withContext GamesFragmentState.FilteredByCategory(
-                    category,
-                    result.successResult
-                )
+                val categoryNameResult = gamesRepository.getCategoryName(category)
+                if (categoryNameResult.isError) {
+                    GamesFragmentState.Error(context.getString(R.string.not_found_message))
+                } else {
+                    GamesFragmentState.FilteredByCategory(
+                        categoryNameResult.successResult,
+                        result.successResult
+                    )
+                }
             }
         }
     }

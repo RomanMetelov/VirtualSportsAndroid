@@ -1,8 +1,8 @@
 package com.example.virtualsportsandroid
 
-import com.example.virtualsportsandroid.loadingConfigs.data.*
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.model.GameModel
+import com.example.virtualsportsandroid.main.data.*
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -13,7 +13,7 @@ internal class FilterByProvidersUseCaseTest {
     @ExperimentalCoroutinesApi
     @Test
     fun `filter by providers works correctly`() {
-        val fakeConfigsResponse = ConfigsResponse(
+        val fakeConfigsResponse = GamesResponse(
             listOf(
                 GameResponse(
                     "id1", "", "provider1", listOf(

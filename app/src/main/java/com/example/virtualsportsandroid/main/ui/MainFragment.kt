@@ -1,8 +1,8 @@
+@file:Suppress("TooManyFunctions")
 package com.example.virtualsportsandroid.main.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.MainFragmentBinding
@@ -18,8 +18,14 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     lateinit var viewModel: MainViewModel
     private lateinit var binding: MainFragmentBinding
     private val mainFragmentNavigator: MainFragmentNavigator by lazy {
-        MainFragmentNavigator(childFragmentManager, R.id.fragmentContainer)
+        MainFragmentNavigator(
+            childFragmentManager,
+            R.id.fragmentContainer,
+            { viewModel.showFilterFragment() },
+            { category, providers -> viewModel.showGamesFragment(category, providers) }
+        )
     }
+
 
     companion object {
         fun newInstance() = MainFragment()
@@ -29,12 +35,14 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding = MainFragmentBinding.bind(view)
         (requireActivity().application as Application).getComponent().inject(this)
+        observeMainFragmentState()
         observeIsAuthorized()
-        setupListeners()
-        viewModel.checkIsAuthorized()
         observeContainerState()
-        observerLogoutResult()
-        viewModel.showGamesFragment(null, null)
+        observeLogoutResult()
+        observeLoadGamesResult()
+        setupListeners()
+        viewModel.loadConfigs()
+        viewModel.checkIsAuthorized()
     }
 
     private fun setupListeners() {
@@ -46,12 +54,52 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
                 navigator.showRegistrationFragment()
             }
             btnLogout.setOnClickListener {
-                viewModel.logout()
+                viewModel.logout {
+                    navigator.showMainFragment()
+                }
             }
             ivDiceGameLaunch.setOnClickListener {
                 navigator.showDiceGameFragment()
             }
 
+        }
+    }
+
+    private fun observeMainFragmentState() {
+        viewModel.mainFragmentStateLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                MainFragmentState.Loading -> showLoading()
+                MainFragmentState.Content -> showContent()
+                is MainFragmentState.Error -> showError(it.errorMessage)
+            }
+        }
+    }
+
+    private fun showError(errorMessage: String) {
+        with(binding) {
+            loginHeader.headerContainer.hide()
+            fragmentContainer.hide()
+            pbLoading.hide()
+            tvErrorMessage.show()
+            tvErrorMessage.text = errorMessage
+        }
+    }
+
+    private fun showLoading() {
+        with(binding) {
+            loginHeader.headerContainer.hide()
+            fragmentContainer.hide()
+            tvErrorMessage.hide()
+            pbLoading.show()
+        }
+    }
+
+    private fun showContent() {
+        with(binding) {
+            pbLoading.hide()
+            tvErrorMessage.hide()
+            loginHeader.headerContainer.show()
+            fragmentContainer.show()
         }
     }
 
@@ -72,19 +120,25 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             with(binding.loginHeader) {
                 if (it) {
                     btnLogout.show()
-                    btnLogin.hide()
-                    btnSignUp.hide()
+                    gButtonsForUnauthorizedUser.hide()
                 } else {
                     btnLogout.hide()
-                    btnLogin.show()
-                    btnSignUp.show()
+                    gButtonsForUnauthorizedUser.show()
                 }
             }
         }
     }
 
-    private fun observerLogoutResult() {
+    private fun observeLogoutResult() {
         viewModel.logoutResultLiveData.observe(viewLifecycleOwner, { result ->
+            if (result.isError) {
+                handleNetworkError(result.errorResult)
+            }
+        })
+    }
+
+    private fun observeLoadGamesResult() {
+        viewModel.loadGamesResult.observe(viewLifecycleOwner, { result ->
             if (result.isError) {
                 handleNetworkError(result.errorResult)
             }
@@ -94,11 +148,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     private fun handleNetworkError(errorType: NetworkErrorType) {
         when (errorType) {
             NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
-            else -> Toast.makeText(
-                context,
-                getString(R.string.unknown_error_text),
-                Toast.LENGTH_SHORT
-            ).show()
+            else -> viewModel.showError(getString(R.string.unknown_error_text))
         }
     }
 

@@ -2,9 +2,9 @@ package com.example.virtualsportsandroid.filter.data
 
 import android.content.Context
 import com.example.virtualsportsandroid.R
-import com.example.virtualsportsandroid.loadingConfigs.data.CategoryResponse
-import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsResponse
-import com.example.virtualsportsandroid.loadingConfigs.data.ProviderResponse
+import com.example.virtualsportsandroid.main.data.CategoryResponse
+import com.example.virtualsportsandroid.main.data.GamesResponse
+import com.example.virtualsportsandroid.main.data.ProviderResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 import com.example.virtualsportsandroid.utils.Result
@@ -20,20 +20,20 @@ class FiltersRepository @Inject constructor(
 ) {
 
     suspend fun getCategories(): Result<List<CategoryResponse>, String> = withContext(dispatcher) {
-        val configsJSON = sharedPref.configsJSON
+        val configsJSON = sharedPref.gamesInfoJSON
         if (configsJSON.isEmpty()) {
             return@withContext Result.error(context.getString(R.string.not_found_message))
         }
-        val configsResponse = gson.fromJson(configsJSON, ConfigsResponse::class.java)
+        val configsResponse = gson.fromJson(configsJSON, GamesResponse::class.java)
         Result.success(configsResponse.categories)
     }
 
     suspend fun getProviders(): Result<List<ProviderResponse>, String> = withContext(dispatcher) {
-        val configsJSON = sharedPref.configsJSON
+        val configsJSON = sharedPref.gamesInfoJSON
         if (configsJSON.isEmpty()) {
             return@withContext Result.error(context.getString(R.string.not_found_message))
         }
-        val configsResponse = gson.fromJson(configsJSON, ConfigsResponse::class.java)
+        val configsResponse = gson.fromJson(configsJSON, GamesResponse::class.java)
         Result.success(configsResponse.providers)
     }
 }

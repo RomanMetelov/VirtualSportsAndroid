@@ -17,9 +17,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvGameName"
-        android:layout_width="wrap_content"
+        android:layout_width="144dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/game_name_marginTop"
+        android:maxLines="3"
+        android:textAlignment="center"
         android:fontFamily="@font/roboto_condensed"
         android:textColor="@color/white"
         android:textSize="@dimen/game_name_textSize"

@@ -1,17 +1,18 @@
 package com.example.virtualsportsandroid.games.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
 import com.example.virtualsportsandroid.games.domain.model.GamesList
-import com.example.virtualsportsandroid.main.ui.MainFragmentNavigator
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class GamesFragment : BaseFragment(R.layout.games_fragment) {
@@ -19,11 +20,12 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     companion object {
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
+        private const val DICE_GAME_ID = "dice"
 
         fun newInstance(
             category: String? = null,
             providers: List<String>? = null,
-            mainFragmentNavigator: MainFragmentNavigator
+            showFilterFragment: () -> Unit
         ) =
             GamesFragment().apply {
                 arguments = Bundle().apply {
@@ -32,12 +34,12 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                         putStringArray(PROVIDERS_KEY, it.toTypedArray())
                     }
                 }
-                this.mainFragmentNavigator = mainFragmentNavigator
+                this.showFilterFragment = showFilterFragment
             }
     }
 
     private lateinit var binding: GamesFragmentBinding
-    private lateinit var mainFragmentNavigator: MainFragmentNavigator
+    private lateinit var showFilterFragment: () -> Unit
 
     @Inject
     lateinit var viewModel: GamesViewModel
@@ -121,9 +123,12 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 show()
                 layoutManager = LinearLayoutManager(context)
                 adapter = MainRecyclerViewAdapter(
-                    mainFragmentNavigator::showFilterFragment,
+                    showFilterFragment,
                     firstTagGames,
-                    allGamesWithoutFirstTag
+                    allGamesWithoutFirstTag,
+                    {
+                        openGame(it)
+                    }
                 )
             }
         }
@@ -137,11 +142,40 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 show()
                 layoutManager = LinearLayoutManager(context)
                 adapter = MainRecyclerViewAdapter(
-                    mainFragmentNavigator::showFilterFragment,
+                    showFilterFragment,
                     null,
-                    listOf(gamesList)
+                    listOf(gamesList),
+                    {
+                        openGame(it)
+                    }
                 )
             }
+        }
+    }
+
+    private fun openGame(gameName: String) {
+        if (viewModel.isAuthorizeUser()) {
+            if (gameName == DICE_GAME_ID) {
+                navigator.showDiceGameFragment()
+            } else {
+                lifecycleScope.launch {
+                    showLoading()
+                    val result = viewModel.loadScreenGameModel(gameName)
+                    if (result.isError) {
+                        showError(getString(R.string.unknown_error_text))
+                    } else {
+                        navigator.showGameFragment(result.successResult)
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(
+                context,
+                getString(R.string.need_login_error_message),
+                Toast.LENGTH_SHORT
+            ).show()
+            binding.rvMain.show()
+            binding.pbLoading.hide()
         }
     }
 

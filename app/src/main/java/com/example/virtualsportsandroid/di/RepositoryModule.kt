@@ -11,7 +11,8 @@ import com.example.virtualsportsandroid.games.domain.FilterByCategoryAndProvider
 import com.example.virtualsportsandroid.games.domain.FilterByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.FilterByTagUseCase
-import com.example.virtualsportsandroid.loadingConfigs.data.ConfigsRepository
+import com.example.virtualsportsandroid.main.data.GamesInfoService
+import com.example.virtualsportsandroid.utils.api.NetworkExceptionHandler
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import com.google.gson.Gson
 import dagger.Module
@@ -19,7 +20,7 @@ import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
-@Module(includes = [UseCaseModule::class, AppModule::class])
+@Module(includes = [UseCaseModule::class, AppModule::class, NetworkModule::class])
 class RepositoryModule {
 
     @Suppress("LongParameterList")
@@ -56,8 +57,21 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideConfigsRepository(sharedPref: SharedPref, gson: Gson): ConfigsRepository {
-        return ConfigsRepository(Dispatchers.IO, sharedPref, gson)
+    fun provideGamesInfoRepository(
+        sharedPref: SharedPref,
+        gson: Gson,
+        gamesInfoService: GamesInfoService,
+        context: Context,
+        networkExceptionHandler: NetworkExceptionHandler
+    ): com.example.virtualsportsandroid.main.data.GamesInfoRepository {
+        return com.example.virtualsportsandroid.main.data.GamesInfoRepository(
+            Dispatchers.IO,
+            sharedPref,
+            gson,
+            gamesInfoService,
+            context,
+            networkExceptionHandler
+        )
     }
 
     @Singleton

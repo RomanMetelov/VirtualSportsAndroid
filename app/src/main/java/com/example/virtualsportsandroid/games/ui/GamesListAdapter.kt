@@ -6,14 +6,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GameItemBinding
+import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.games.domain.model.GameDiffCallback
 import com.example.virtualsportsandroid.games.domain.model.GameModel
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURLWithPlaceholder
 
-class GamesListAdapter :
+class GamesListAdapter(
+    private val open: (String) -> Unit
+):
     ListAdapter<GameModel, GamesListAdapter.GameViewHolder>(GameDiffCallback()) {
 
-    class GameViewHolder(private val binding: GameItemBinding) :
+    class GameViewHolder(private val binding: GameItemBinding,
+                         private val open: (String) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(gameModel: GameModel) {
             with(binding) {
@@ -22,6 +26,9 @@ class GamesListAdapter :
                     gameModel.imageURL,
                     R.drawable.game_image_placeholder
                 )
+                root.setOnClickListener {
+                    open(gameModel.id)
+                }
             }
         }
     }
@@ -30,7 +37,7 @@ class GamesListAdapter :
         val binding = GameItemBinding.inflate(
             LayoutInflater.from(parent.context), null, false
         )
-        return GameViewHolder(binding)
+        return GameViewHolder(binding, open)
     }
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {

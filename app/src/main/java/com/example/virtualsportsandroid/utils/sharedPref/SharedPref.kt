@@ -8,7 +8,7 @@ class SharedPref @Inject constructor(context: Context) {
 
     private companion object {
         const val KEY_TOKEN = "KEY_TOKEN"
-        const val KEY_CONFIGS = "KEY_CONFIGS"
+        const val KEY_GAMES_INFO = "KEY_GAMES_INFO"
     }
 
     private val sharedPreferences: SharedPreferences by lazy {
@@ -16,5 +16,5 @@ class SharedPref @Inject constructor(context: Context) {
     }
 
     var token: String by SharedPrefDelegate(sharedPreferences, KEY_TOKEN, "")
-    var configsJSON: String by SharedPrefDelegate(sharedPreferences, KEY_CONFIGS, "")
+    var gamesInfoJSON: String by SharedPrefDelegate(sharedPreferences, KEY_GAMES_INFO, "")
 }

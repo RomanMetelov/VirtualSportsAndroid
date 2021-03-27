@@ -14,7 +14,8 @@ import com.example.virtualsportsandroid.games.domain.model.GamesList
 class MainRecyclerViewAdapter(
     private val filterButtonOnClick: () -> Unit,
     private val firstTagGames: GamesList?,
-    private val anotherGames: List<GamesList>
+    private val anotherGames: List<GamesList>,
+    private val open: (String) -> Unit
 ) : RecyclerView.Adapter<MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -34,7 +35,8 @@ class MainRecyclerViewAdapter(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    )
+                    ),
+                    open
                 )
             }
             ItemType.ANOTHER_GAMES -> {
@@ -43,7 +45,8 @@ class MainRecyclerViewAdapter(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
-                    )
+                    ),
+                    open
                 )
             }
         }
@@ -91,7 +94,10 @@ sealed class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    class FirstTagGames(private val binding: GamesItemBinding) :
+    class FirstTagGames(
+        private val binding: GamesItemBinding,
+        private val open: (String) -> Unit
+    ) :
         MainViewHolder(binding.root) {
         fun bind(tag: GamesList) {
             with(binding) {
@@ -107,15 +113,19 @@ sealed class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                             resources.getDimension(R.dimen.first_tag_games_space_between).toInt()
                         )
                     )
-                    adapter = GamesListAdapter().apply {
-                        submitList(tag.games)
-                    }
+                    adapter =
+                        GamesListAdapter(open).apply {
+                            submitList(tag.games)
+                        }
                 }
             }
         }
     }
 
-    class AnotherGames(private val binding: GamesItemBinding) :
+    class AnotherGames(
+        private val binding: GamesItemBinding,
+        private val open: (String) -> Unit
+    ) :
         MainViewHolder(binding.root) {
         private companion object {
             const val COLUMNS_COUNT = 2
@@ -126,9 +136,10 @@ sealed class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 tvGamesListTitle.text = gamesList.name
                 with(rvGames) {
                     layoutManager = GridLayoutManager(context, COLUMNS_COUNT)
-                    adapter = GamesListAdapter().apply {
-                        submitList(gamesList.games)
-                    }
+                    adapter =
+                        GamesListAdapter(open).apply {
+                            submitList(gamesList.games)
+                        }
                 }
             }
         }

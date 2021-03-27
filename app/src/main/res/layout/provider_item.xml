@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/provider_item_marginHorizontal"
     android:layout_marginVertical="@dimen/provider_item_marginVertical"
     android:background="@drawable/default_provider_item_background"
     android:padding="@dimen/provider_item_padding">
