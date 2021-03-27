@@ -1,7 +1,5 @@
 package com.example.virtualsportsandroid.games.domain
 
-import android.content.Context
-import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.games.data.GamesLoadingError
 import com.example.virtualsportsandroid.games.data.GamesRepository
 import com.example.virtualsportsandroid.games.domain.model.GamesList
@@ -12,8 +10,7 @@ import kotlinx.coroutines.withContext
 
 class NotFilteredGamesLoadingUseCase(
     private val dispatcher: CoroutineDispatcher,
-    private val gamesRepository: GamesRepository,
-    private val context: Context
+    private val gamesRepository: GamesRepository
 ) {
     suspend operator fun invoke(): GamesFragmentState = withContext(dispatcher) {
         handleResult(
@@ -29,14 +26,14 @@ class NotFilteredGamesLoadingUseCase(
         allGamesWithoutFirstTagResult.isError -> {
             when (allGamesWithoutFirstTagResult.errorResult) {
                 GamesLoadingError.NOT_FOUND -> {
-                    GamesFragmentState.Error(context.getString(R.string.not_found_message))
+                    GamesFragmentState.Error
                 }
             }
         }
         gamesWithFirstTagResult.isError -> {
             when (gamesWithFirstTagResult.errorResult) {
                 GamesLoadingError.NOT_FOUND -> {
-                    GamesFragmentState.Error(context.getString(R.string.not_found_message))
+                    GamesFragmentState.Error
                 }
             }
         }

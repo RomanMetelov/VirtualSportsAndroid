@@ -66,7 +66,7 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
         viewModel.filterFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is FilterFragmentState.Loading -> showLoading()
-                is FilterFragmentState.Error -> showError(it.errorMessage)
+                is FilterFragmentState.Error -> showError()
                 is FilterFragmentState.Content -> showContent(it.categories, it.providers)
             }
         }
@@ -79,7 +79,7 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
             filtersBorder.hide()
             rvFilters.hide()
             btnApply.hide()
-            tvErrorMessage.hide()
+            ivError.hide()
             pbLoading.show()
         }
     }
@@ -87,7 +87,7 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
 
     private fun showContent(categories: List<CategoryResponse>, providers: List<ProviderResponse>) {
         with(binding) {
-            tvErrorMessage.hide()
+            ivError.hide()
             pbLoading.hide()
             tvFiltersTitle.show()
             ivClose.show()
@@ -109,18 +109,15 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
         }
     }
 
-    private fun showError(errorMessage: String) {
+    private fun showError() {
         with(binding) {
             tvFiltersTitle.hide()
             ivClose.hide()
             filtersBorder.hide()
             rvFilters.hide()
             btnApply.hide()
-            tvErrorMessage.apply {
-                show()
-                text = errorMessage
-            }
             pbLoading.hide()
+            ivError.show()
         }
     }
 

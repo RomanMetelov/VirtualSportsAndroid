@@ -66,18 +66,17 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
             when (it) {
                 MainFragmentState.Loading -> showLoading()
                 MainFragmentState.Content -> showContent()
-                is MainFragmentState.Error -> showError(it.errorMessage)
+                is MainFragmentState.Error -> showError()
             }
         }
     }
 
-    private fun showError(errorMessage: String) {
+    private fun showError() {
         with(binding) {
             loginHeader.headerContainer.hide()
             fragmentContainer.hide()
             pbLoading.hide()
-            tvErrorMessage.show()
-            tvErrorMessage.text = errorMessage
+            ivError.show()
         }
     }
 
@@ -85,7 +84,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         with(binding) {
             loginHeader.headerContainer.hide()
             fragmentContainer.hide()
-            tvErrorMessage.hide()
+            ivError.hide()
             pbLoading.show()
         }
     }
@@ -93,7 +92,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     private fun showContent() {
         with(binding) {
             pbLoading.hide()
-            tvErrorMessage.hide()
+            ivError.hide()
             loginHeader.headerContainer.show()
             fragmentContainer.show()
         }
@@ -144,7 +143,7 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
     private fun handleNetworkError(errorType: NetworkErrorType) {
         when (errorType) {
             NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
-            else -> viewModel.showError(getString(R.string.unknown_error_text))
+            else -> viewModel.showError()
         }
     }
 

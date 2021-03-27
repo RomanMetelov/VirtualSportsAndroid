@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.di
 
-import android.content.Context
 import com.example.virtualsportsandroid.dices.game.data.DiceGameResultRepository
 import com.example.virtualsportsandroid.dices.game.domain.FromApiToUiMapper
 import com.example.virtualsportsandroid.dices.game.ui.DiceGameResultLoadingUseCase
@@ -23,7 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Suppress("TooManyFunctions")
-@Module(includes = [RepositoryModule::class, AppModule::class])
+@Module(includes = [RepositoryModule::class])
 class UseCaseModule {
 
     @Provides
@@ -53,37 +52,33 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun provideNotFilteredGamesLoadingUseCase(
-        gamesRepository: GamesRepository,
-        context: Context
+        gamesRepository: GamesRepository
     ): NotFilteredGamesLoadingUseCase {
-        return NotFilteredGamesLoadingUseCase(Dispatchers.Default, gamesRepository, context)
+        return NotFilteredGamesLoadingUseCase(Dispatchers.Default, gamesRepository)
     }
 
     @Provides
     @Singleton
     fun provideFilteredGamesByCategoryLoadingUseCase(
-        gamesRepository: GamesRepository,
-        context: Context
+        gamesRepository: GamesRepository
     ): LoadingByCategoryUseCase {
-        return LoadingByCategoryUseCase(Dispatchers.IO, gamesRepository, context)
+        return LoadingByCategoryUseCase(Dispatchers.IO, gamesRepository)
     }
 
     @Provides
     @Singleton
     fun provideFilteredGamesByProvidersLoadingUseCase(
-        gamesRepository: GamesRepository,
-        context: Context
+        gamesRepository: GamesRepository
     ): LoadingByProvidersUseCase {
-        return LoadingByProvidersUseCase(Dispatchers.IO, gamesRepository, context)
+        return LoadingByProvidersUseCase(Dispatchers.IO, gamesRepository)
     }
 
     @Provides
     @Singleton
     fun provideLoadingByCategoryAndProvidersUseCase(
-        gamesRepository: GamesRepository,
-        context: Context
+        gamesRepository: GamesRepository
     ): LoadingByCategoryAndProvidersUseCase {
-        return LoadingByCategoryAndProvidersUseCase(Dispatchers.IO, gamesRepository, context)
+        return LoadingByCategoryAndProvidersUseCase(Dispatchers.IO, gamesRepository)
     }
 
     @Provides

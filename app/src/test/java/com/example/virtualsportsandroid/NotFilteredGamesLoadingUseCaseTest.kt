@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid
 
-import android.content.Context
 import com.example.virtualsportsandroid.games.data.GamesRepository
 import com.example.virtualsportsandroid.games.data.GamesLoadingError
 import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
@@ -10,7 +9,6 @@ import com.example.virtualsportsandroid.games.ui.GamesFragmentState
 import com.example.virtualsportsandroid.utils.Result
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -23,9 +21,6 @@ internal class NotFilteredGamesLoadingUseCaseTest {
 
     @Test
     fun `not filtered games loading use case without errors works correctly`() {
-        val mockContext = mockk<Context> {
-            every { getString(any()) } returns "Error"
-        }
         val fakeFirstTag = GamesList(
             "Top",
             listOf(
@@ -55,18 +50,13 @@ internal class NotFilteredGamesLoadingUseCaseTest {
         runBlockingTest {
             NotFilteredGamesLoadingUseCase(
                 TestCoroutineDispatcher(),
-                mockGamesRepository,
-                mockContext
+                mockGamesRepository
             ).invoke() shouldBe expectedResult
         }
     }
 
     @Test
     fun `not filtered games loading use case with not found error in top games works correctly`() {
-        val errorMessage = "Error"
-        val mockContext = mockk<Context> {
-            every { getString(any()) } returns errorMessage
-        }
         val fakeAllTagsWithoutFirst = listOf(
             GamesList("Favorites", listOf(
                 GameModel("id1", "name1", "imageURL1"),
@@ -81,22 +71,17 @@ internal class NotFilteredGamesLoadingUseCaseTest {
             coEvery { getAllGamesWithoutFirstTag() } returns Result.success(fakeAllTagsWithoutFirst)
             coEvery { getGamesWithFirstTag() } returns Result.error(GamesLoadingError.NOT_FOUND)
         }
-        val expectedResult = GamesFragmentState.Error(errorMessage)
+        val expectedResult = GamesFragmentState.Error
         runBlockingTest {
             NotFilteredGamesLoadingUseCase(
                 TestCoroutineDispatcher(),
-                mockGamesRepository,
-                mockContext
+                mockGamesRepository
             ).invoke() shouldBe expectedResult
         }
     }
 
     @Test
     fun `not filtered games loading use case with not found error in all games works correctly`() {
-        val errorMessage = "Error"
-        val mockContext = mockk<Context> {
-            every { getString(any()) } returns errorMessage
-        }
         val fakeFirstTag = GamesList(
             "Top",
             listOf(
@@ -109,12 +94,11 @@ internal class NotFilteredGamesLoadingUseCaseTest {
             coEvery { getAllGamesWithoutFirstTag() } returns Result.error(GamesLoadingError.NOT_FOUND)
             coEvery { getGamesWithFirstTag() } returns Result.success(fakeFirstTag)
         }
-        val expectedResult = GamesFragmentState.Error(errorMessage)
+        val expectedResult = GamesFragmentState.Error
         runBlockingTest {
             NotFilteredGamesLoadingUseCase(
                 TestCoroutineDispatcher(),
-                mockGamesRepository,
-                mockContext
+                mockGamesRepository
             ).invoke() shouldBe expectedResult
         }
     }

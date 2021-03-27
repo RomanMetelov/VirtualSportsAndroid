@@ -98,7 +98,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                         )
                     )
                 }
-                is GamesFragmentState.Error -> showError(it.errorMessage)
+                is GamesFragmentState.Error -> showError()
             }
         }
     }
@@ -106,7 +106,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     private fun showLoading() {
         with(binding) {
             rvMain.hide()
-            tvErrorMessage.hide()
+            ivError.hide()
             pbLoading.show()
         }
     }
@@ -117,7 +117,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         allGamesWithoutFirstTag: List<GamesList>
     ) {
         with(binding) {
-            tvErrorMessage.hide()
+            ivError.hide()
             pbLoading.hide()
             with(rvMain) {
                 show()
@@ -136,7 +136,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     private fun showFilteredGames(gamesList: GamesList) {
         with(binding) {
-            tvErrorMessage.hide()
+            ivError.hide()
             pbLoading.hide()
             with(rvMain) {
                 show()
@@ -162,7 +162,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     showLoading()
                     val result = viewModel.loadScreenGameModel(gameName)
                     if (result.isError) {
-                        showError(getString(R.string.unknown_error_text))
+                        showError()
                     } else {
                         navigator.showGameFragment(result.successResult)
                     }
@@ -179,14 +179,11 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         }
     }
 
-    private fun showError(errorMessage: String) {
+    private fun showError() {
         with(binding) {
             pbLoading.hide()
             rvMain.hide()
-            with(tvErrorMessage) {
-                text = errorMessage
-                show()
-            }
+            ivError.show()
         }
     }
 }
