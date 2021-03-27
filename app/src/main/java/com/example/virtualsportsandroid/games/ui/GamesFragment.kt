@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
-import com.example.virtualsportsandroid.games.data.GamesLoadingError
 import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
@@ -128,18 +127,28 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     firstTagGames,
                     allGamesWithoutFirstTag,
                     {
-                        if (it == DICE_GAME_ID) {
-                            navigator.showDiceGameFragment()
-                        } else {
-                            showLoading()
-                            lifecycleScope.launch {
-                                val result = viewModel.loadScreenGameModel(it)
-                                if (result.isError) {
-                                    handleError(result.errorResult)
-                                } else {
-                                    navigator.showGameFragment(result.successResult)
+                        if (viewModel.isAuthorizeUser()) {
+                            if (it == DICE_GAME_ID) {
+                                navigator.showDiceGameFragment()
+                            } else {
+                                showLoading()
+                                lifecycleScope.launch {
+                                    val result = viewModel.loadScreenGameModel(it)
+                                    if (result.isError) {
+                                        showError(getString(R.string.unknown_error_text))
+                                    } else {
+                                        navigator.showGameFragment(result.successResult)
+                                    }
                                 }
                             }
+                        } else {
+                            Toast.makeText(
+                                context,
+                                getString(R.string.need_login_error_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            binding.rvMain.show()
+                            binding.pbLoading.hide()
                         }
                     }
                 )
@@ -159,37 +168,32 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     null,
                     listOf(gamesList),
                     {
-                        if (it == DICE_GAME_ID) {
-                            navigator.showDiceGameFragment()
-                        } else {
-                            lifecycleScope.launch {
-                                showLoading()
-                                val result = viewModel.loadScreenGameModel(it)
-                                if (result.isError) {
-                                    handleError(result.errorResult)
-                                } else {
-                                    navigator.showGameFragment(result.successResult)
+                        if (viewModel.isAuthorizeUser()) {
+                            if (it == DICE_GAME_ID) {
+                                navigator.showDiceGameFragment()
+                            } else {
+                                lifecycleScope.launch {
+                                    showLoading()
+                                    val result = viewModel.loadScreenGameModel(it)
+                                    if (result.isError) {
+                                        showError(getString(R.string.unknown_error_text))
+                                    } else {
+                                        navigator.showGameFragment(result.successResult)
+                                    }
                                 }
                             }
+                        } else {
+                            Toast.makeText(
+                                context,
+                                getString(R.string.need_login_error_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            binding.rvMain.show()
+                            binding.pbLoading.hide()
                         }
                     }
                 )
             }
-        }
-    }
-
-    private fun handleError(errorResult: GamesLoadingError) {
-        when (errorResult) {
-            GamesLoadingError.NEED_LOGIN -> {
-                Toast.makeText(
-                    context,
-                    getString(R.string.need_login_error_message),
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.rvMain.show()
-                binding.pbLoading.hide()
-            }
-            else -> showError(getString(R.string.unknown_error_text))
         }
     }
 

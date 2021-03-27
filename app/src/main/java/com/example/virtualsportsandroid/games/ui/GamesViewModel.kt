@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.games.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -59,11 +60,11 @@ class GamesViewModel @Inject constructor(
         }
     }
 
+    fun isAuthorizeUser(): Boolean {
+        return (sharedPref.token.isNotEmpty())
+    }
+
     suspend fun loadScreenGameModel(gameId: String): Result<ScreenGameModel, GamesLoadingError> {
-        return if (sharedPref.token.isEmpty()) {
-            Result.error(GamesLoadingError.NEED_LOGIN)
-        } else {
-            gamesRepository.getScreenGameModel(gameId)
-        }
+        return gamesRepository.getScreenGameModel(gameId)
     }
 }
