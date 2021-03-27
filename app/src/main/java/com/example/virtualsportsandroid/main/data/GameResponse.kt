@@ -8,5 +8,6 @@ data class GameResponse(
     @SerializedName("provider") val providerId: String,
     @SerializedName("categories") val categoriesIds: List<String>,
     @SerializedName("tags") val tagsIds: List<String>,
-    @SerializedName("url") val gameURL: String
+    @SerializedName("url") val gameURL: String,
+    @SerializedName("image") val imageURL: String
 )

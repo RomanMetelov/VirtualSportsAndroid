@@ -20,42 +20,48 @@ internal class FilterByTagUseCaseTest {
                         "category1", "category2"
                     ),
                     listOf("all"),
-                    "gameURL"
+                    "gameURL",
+                    ""
                 ),
                 GameResponse(
                     "id2", "", "provider2", listOf(
                         "category1"
                     ),
                     listOf("all"),
-                    "gameURL"
+                    "gameURL",
+                    ""
                 ),
                 GameResponse(
                     "id3", "", "provider2", listOf(
                         "category1", "category2", "category3"
                     ),
                     listOf("all"),
-                    "gameURL"
+                    "gameURL",
+                    ""
                 ),
                 GameResponse(
                     "id4", "", "provider3", listOf(
                         "category1"
                     ),
                     listOf("top"),
-                    "gameURL"
+                    "gameURL",
+                    ""
                 ),
                 GameResponse(
                     "id5", "", "provider3", listOf(
                         "category2"
                     ),
                     listOf("top", "all"),
-                    "gameURL"
+                    "gameURL",
+                    ""
                 ),
                 GameResponse(
                     "id6", "", "provider4", listOf(
                         "category2"
                     ),
                     listOf("top"),
-                    "gameURL"
+                    "gameURL",
+                    ""
                 )
             ),
             listOf(
