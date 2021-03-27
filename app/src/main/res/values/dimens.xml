@@ -94,4 +94,5 @@
     <dimen name="login_btn_font_size">18sp</dimen>
     <dimen name="login_header_text_size">20sp</dimen>
     <dimen name="game_name_text_width">144dp</dimen>
+    <dimen name="no_network_text_size">24sp</dimen>
 </resources>

@@ -50,9 +50,9 @@ class FragmentNavigator(
             .commitAllowingStateLoss()
     }
 
-    fun showDiceGameFragment() {
+    fun showDiceGameFragment(gameModel: ScreenGameModel) {
         fragmentManager.beginTransaction()
-            .replace(container, DiceGameFragment.newInstance())
+            .replace(container, DiceGameFragment.newInstance(gameModel))
             .addToBackStack(null)
             .commitAllowingStateLoss()
     }

@@ -1,7 +1,6 @@
 package com.example.virtualsportsandroid.dices.game.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,15 @@ import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
 import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
+import com.example.virtualsportsandroid.game.data.ScreenGameModel
+import com.example.virtualsportsandroid.game.data.api.GameScreenErrorType
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
+import com.example.virtualsportsandroid.utils.ui.isVisible
 import com.example.virtualsportsandroid.utils.ui.show
+import kotlinx.android.synthetic.main.dice_game_fragment.ivAddToFavourites
+import kotlinx.android.synthetic.main.game_fragment.ivDelFromFavourites
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -33,8 +37,23 @@ class DiceGameFragment :
     @Inject
     lateinit var viewModel: DiceGameViewModel
 
+    private lateinit var game: ScreenGameModel
+
     companion object {
-        fun newInstance() = DiceGameFragment()
+        private const val GAME_KEY = "GAME_KEY"
+
+        fun newInstance(gameModel: ScreenGameModel): DiceGameFragment = DiceGameFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(GAME_KEY, gameModel)
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            game = it.getParcelable(GAME_KEY) ?: ScreenGameModel("", "", "")
+        }
     }
 
     override fun onCreateView(
@@ -48,9 +67,9 @@ class DiceGameFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = DiceGameFragmentBinding.bind(view)
-        setupViews()
         setupViewModel()
         setupListeners()
+        showGameInfo()
     }
 
     override fun onStop() {
@@ -58,11 +77,24 @@ class DiceGameFragment :
         binding.rgBetTypesSet.ClearCheck()
     }
 
-    private fun setupViews() {
+    private fun showGameInfo() {
         binding.tvDiceGameRollResultWin.text = getText(R.string.dice_game_roll_result_text_start)
+        when (game.isFavorite) {
+            true -> {
+                binding.ivAddToFavourites.hide()
+                binding.ivDelFromFavourites.show()
+            }
+            false -> {
+                binding.ivAddToFavourites.show()
+                binding.ivDelFromFavourites.hide()
+            }
+        }
     }
 
+
     private fun setupListeners() {
+        ivAddToFavourites.setOnClickListener { changeGameFavorite() }
+        ivDelFromFavourites.setOnClickListener { changeGameFavorite() }
         binding.ivBack.setOnClickListener { navigator.back() }
         binding.btnShowBetHistory.setOnClickListener { navigator.showDiceGameBetHistoryFragment() }
         binding.btnRoll.setOnClickListener {
@@ -90,6 +122,21 @@ class DiceGameFragment :
         }
     }
 
+    private fun changeGameFavorite() {
+        viewModel.changeGameFavorite(game)
+        changeFavoriteStarView()
+    }
+
+    private fun changeFavoriteStarView() {
+        if (ivAddToFavourites.isVisible()) {
+            ivDelFromFavourites.show()
+            ivAddToFavourites.hide()
+        } else {
+            ivDelFromFavourites.hide()
+            ivAddToFavourites.show()
+        }
+    }
+
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
         observeViewModel()
@@ -112,19 +159,20 @@ class DiceGameFragment :
                 is DiceGameResultFragmentState.Content -> showContent(it.gameResultApi)
             }
         }
+        viewModel.changeGameFavoriteResultLiveData.observe(viewLifecycleOwner, { result ->
+            if (!result.isError) {
+                if (result.successResult) game.isFavorite = !game.isFavorite
+            } else {
+                handleErrorOnUi(result.errorResult)
+                changeFavoriteStarView()
+            }
+        })
     }
 
     private fun showContent(gameResultApi: DiceGameResultModel) {
         terminateDiceRollingAnimation()
-        Log.d("refrefreffrefref", "SHOWCONTENT")
-        //set tvDiceGameRollResult
-
         var evenOrOdd = "Even"
         if (gameResultApi.droppedNumber % 2 != 0) evenOrOdd = "Odd"
-        Log.d("agdfgdagdfagdfag", (gameResultApi.betType).toString())
-        Log.d("droppedNumber", gameResultApi.droppedNumber.toString())
-        Log.d("isEven", (gameResultApi.droppedNumber % 2 == 0).toString())
-        Log.d("isWon", (gameResultApi.isBetWon).toString())
         val stringGameResult = String.format(
             getString(R.string.dice_game_roll_result_text),
             gameResultApi.droppedNumber,
@@ -148,15 +196,36 @@ class DiceGameFragment :
 
     }
 
+    private fun handleErrorOnUi(errorType: GameScreenErrorType) {
+        when (errorType) {
+            GameScreenErrorType.NETWORK_ERROR -> navigator.showNoNetworkFragment()
+            GameScreenErrorType.UNAUTHORIZED -> {
+                navigator.showMainFragment()
+                Toast.makeText(
+                    context, getString(errorType.errorMessage), Toast.LENGTH_SHORT
+                ).show()
+            }
+            else -> {
+                Toast.makeText(
+                    context, getString(R.string.change_favorite_game_text), Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
     private fun showError(errorMessage: NetworkErrorType) {
         terminateDiceRollingAnimation()
-        with(binding) {
-            tvDiceGameRollResultWin.hide()
-            tvDiceGameRollResultLose.hide()
-            tvErrorMessage.hide()
-            tvErrorMessage.apply {
-                show()
-                text = errorMessage.name
+        if (errorMessage == NetworkErrorType.NO_NETWORK) {
+            navigator.showNoNetworkFragment()
+        } else {
+            with(binding) {
+                tvDiceGameRollResultWin.hide()
+                tvDiceGameRollResultLose.hide()
+                tvErrorMessage.hide()
+                tvErrorMessage.apply {
+                    show()
+                    text = errorMessage.name
+                }
             }
         }
     }

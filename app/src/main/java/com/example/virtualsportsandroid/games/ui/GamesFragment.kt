@@ -155,14 +155,14 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     private fun openGame(gameName: String) {
         if (viewModel.isAuthorizeUser()) {
-            if (gameName == DICE_GAME_ID) {
-                navigator.showDiceGameFragment()
-            } else {
-                lifecycleScope.launch {
-                    showLoading()
-                    val result = viewModel.loadScreenGameModel(gameName)
-                    if (result.isError) {
-                        showError()
+            lifecycleScope.launch {
+                showLoading()
+                val result = viewModel.loadScreenGameModel(gameName)
+                if (result.isError) {
+                    showError()
+                } else {
+                    if (gameName == DICE_GAME_ID) {
+                        navigator.showDiceGameFragment(result.successResult)
                     } else {
                         navigator.showGameFragment(result.successResult)
                     }
