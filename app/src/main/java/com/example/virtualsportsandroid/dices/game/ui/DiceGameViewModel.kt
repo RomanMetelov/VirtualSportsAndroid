@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultLoadingUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
