@@ -1,6 +1,5 @@
-package com.example.virtualsportsandroid.dices.game
+package com.example.virtualsportsandroid.dices.game.ui
 
-import com.example.virtualsportsandroid.dices.game.data.DiceGameResultApiModel
 import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 

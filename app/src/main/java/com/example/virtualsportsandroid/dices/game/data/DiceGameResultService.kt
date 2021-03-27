@@ -7,5 +7,5 @@ interface DiceGameResultService {
     @POST("/Games/play/dice")
     suspend fun getDiceGameResult(
         @Body diceGame: DiceGameApiModel
-    ) : DiceGameResultApiModel
+    ): DiceGameResultApiModel
 }

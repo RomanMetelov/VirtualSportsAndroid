@@ -20,7 +20,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     companion object {
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
-        private const val DICE_GAME_ID = "dice"
+        private const val DICE_GAME_ID = "original_dice_game"
 
         fun newInstance(
             category: String? = null,

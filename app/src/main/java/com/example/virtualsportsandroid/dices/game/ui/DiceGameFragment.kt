@@ -10,8 +10,6 @@ import androidx.core.content.ContextCompat
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
-import com.example.virtualsportsandroid.dices.game.data.DiceGameResultApiModel
-import com.example.virtualsportsandroid.dices.game.DiceGameResultFragmentState
 import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
@@ -31,6 +29,7 @@ class DiceGameFragment :
 
     private lateinit var binding: DiceGameFragmentBinding
     private var continueRolling: Boolean = false
+
     @Inject
     lateinit var viewModel: DiceGameViewModel
 
