@@ -17,6 +17,7 @@ import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
 import com.google.android.material.transition.platform.MaterialFadeThrough
+import kotlinx.android.synthetic.main.games_fragment.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -146,7 +147,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         with(binding) {
             rvMain.hide()
             ivError.hide()
-            pbLoading.show()
+            root.postDelayed({ pbLoading.hide() }, 200)
         }
     }
 
@@ -157,7 +158,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     ) {
         with(binding) {
             ivError.hide()
-            pbLoading.hide()
+            root.postDelayed({ pbLoading.hide() }, 200)
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
@@ -177,7 +178,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     private fun showFilteredGames(gamesList: GamesList) {
         with(binding) {
             ivError.hide()
-            pbLoading.hide()
+            root.postDelayed({ pbLoading.hide() }, 200)
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
@@ -211,13 +212,13 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 Toast.LENGTH_SHORT
             ).show()
             binding.rvMain.show()
-            binding.pbLoading.hide()
+            binding.root.postDelayed({ pbLoading.hide() }, 200)
         }
     }
 
     private fun showError() {
         with(binding) {
-            pbLoading.hide()
+            root.postDelayed({ pbLoading.hide() }, 200)
             rvMain.hide()
             ivError.show()
         }
