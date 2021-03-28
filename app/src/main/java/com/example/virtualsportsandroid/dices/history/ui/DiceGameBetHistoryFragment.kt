@@ -16,8 +16,10 @@ import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class DiceGameBetHistoryFragment :
     BaseFragment(R.layout.dice_game_bet_history_fragment) {
 
@@ -33,6 +35,12 @@ class DiceGameBetHistoryFragment :
 
     companion object {
         fun newInstance() = DiceGameBetHistoryFragment()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
     }
 
     override fun onCreateView(

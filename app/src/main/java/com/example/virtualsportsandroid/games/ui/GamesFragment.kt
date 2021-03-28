@@ -13,6 +13,7 @@ import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +22,6 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     companion object {
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
-        private const val DICE_GAME_ID = "original_dice_game"
 
         fun newInstance(
             category: String? = null,
@@ -45,6 +45,11 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: GamesViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = MaterialFadeThrough()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -158,17 +163,13 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     private fun openGame(gameName: String) {
         if (viewModel.isAuthorizeUser()) {
-            if (gameName == DICE_GAME_ID) {
-                navigator.showDiceGameFragment()
-            } else {
-                lifecycleScope.launch {
-                    showLoading()
-                    val result = viewModel.loadScreenGameModel(gameName)
-                    if (result.isError) {
-                        showError()
-                    } else {
-                        navigator.showGameFragment(result.successResult)
-                    }
+            lifecycleScope.launch {
+                showLoading()
+                val result = viewModel.loadScreenGameModel(gameName)
+                if (result.isError) {
+                    showError()
+                } else {
+                    navigator.showGameFragment(result.successResult)
                 }
             }
         } else {

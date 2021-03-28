@@ -1,7 +1,6 @@
 package com.example.virtualsportsandroid.dices.game.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -36,7 +36,13 @@ class DiceGameFragment :
     private lateinit var viewModel: DiceGameViewModel
 
     companion object {
-        fun newInstance() = DiceGameFragment()
+        fun newInstance(): DiceGameFragment = DiceGameFragment()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
     }
 
     override fun onCreateView(
@@ -50,7 +56,6 @@ class DiceGameFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = DiceGameFragmentBinding.bind(view)
-        setupViews()
         setupViewModel()
         setupListeners()
     }
@@ -60,13 +65,8 @@ class DiceGameFragment :
         binding.rgBetTypesSet.ClearCheck()
     }
 
-    private fun setupViews() {
-        binding.tvDiceGameRollResultWin.text = getText(R.string.dice_game_roll_result_text_start)
-        binding.tvDiceGameRollResultLose.hide()
-    }
 
     private fun setupListeners() {
-        binding.ivBack.setOnClickListener { navigator.back() }
         binding.btnShowBetHistory.setOnClickListener { navigator.showDiceGameBetHistoryFragment() }
         binding.btnRoll.setOnClickListener {
             terminateDiceRollingAnimation()
@@ -92,6 +92,7 @@ class DiceGameFragment :
             }
         }
     }
+
 
     private fun setupViewModel() {
         (requireActivity().application as Application).getComponent().inject(this)
@@ -120,15 +121,8 @@ class DiceGameFragment :
 
     private fun showContent(gameResultApi: DiceGameResultModel) {
         terminateDiceRollingAnimation()
-        Log.d("refrefreffrefref", "SHOWCONTENT")
-        //set tvDiceGameRollResult
-
         var evenOrOdd = "Even"
         if (gameResultApi.droppedNumber % 2 != 0) evenOrOdd = "Odd"
-        Log.d("agdfgdagdfagdfag", (gameResultApi.betType).toString())
-        Log.d("droppedNumber", gameResultApi.droppedNumber.toString())
-        Log.d("isEven", (gameResultApi.droppedNumber % 2 == 0).toString())
-        Log.d("isWon", (gameResultApi.isBetWon).toString())
         val stringGameResult = String.format(
             getString(R.string.dice_game_roll_result_text),
             gameResultApi.droppedNumber,
@@ -137,13 +131,13 @@ class DiceGameFragment :
         with(binding) {
             tvErrorMessage.hide()
             if (gameResultApi.isBetWon) {
-                tvDiceGameRollResultLose.hide()
-                tvDiceGameRollResultWin.show()
+                tvDiceGameRollResultLose.visibility = View.INVISIBLE
+                tvDiceGameRollResultWin.visibility = View.VISIBLE
                 tvDiceGameRollResultWin.text = stringGameResult
 
             } else {
-                tvDiceGameRollResultWin.hide()
-                tvDiceGameRollResultLose.show()
+                tvDiceGameRollResultWin.visibility = View.INVISIBLE
+                tvDiceGameRollResultLose.visibility = View.VISIBLE
                 tvDiceGameRollResultLose.text = stringGameResult
             }
         }
@@ -152,15 +146,20 @@ class DiceGameFragment :
 
     }
 
+
     private fun showError(errorMessage: NetworkErrorType) {
         terminateDiceRollingAnimation()
-        with(binding) {
-            tvDiceGameRollResultWin.hide()
-            tvDiceGameRollResultLose.hide()
-            tvErrorMessage.hide()
-            tvErrorMessage.apply {
-                show()
-                text = errorMessage.name
+        if (errorMessage == NetworkErrorType.NO_NETWORK) {
+            navigator.showNoNetworkFragment()
+        } else {
+            with(binding) {
+                tvDiceGameRollResultWin.hide()
+                tvDiceGameRollResultLose.hide()
+                tvErrorMessage.hide()
+                tvErrorMessage.apply {
+                    show()
+                    text = errorMessage.name
+                }
             }
         }
     }

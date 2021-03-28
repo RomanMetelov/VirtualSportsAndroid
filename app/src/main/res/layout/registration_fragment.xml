@@ -30,8 +30,7 @@
             android:gravity="center"
             android:text="@string/register_text"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="@dimen/login_header_text_size"
             app:fontFamily="@font/parimatch" />
 
     </RelativeLayout>
@@ -55,6 +54,7 @@
             android:paddingStart="@dimen/zero_dp"
             android:paddingEnd="@dimen/zero_dp"
             android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/edit_text_font_size"
             app:fontFamily="@font/parimatch" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +80,7 @@
             android:paddingEnd="@dimen/zero_dp"
             android:textColor="@color/black"
             android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/edit_text_font_size"
             app:fontFamily="@font/parimatch" />
 
 
@@ -107,6 +108,7 @@
             android:paddingEnd="@dimen/zero_dp"
             android:textColor="@color/black"
             android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/edit_text_font_size"
             app:fontFamily="@font/parimatch" />
 
 
@@ -124,6 +126,7 @@
         android:padding="@dimen/login_all_padding_buttons"
         android:text="@string/register_btn_text"
         android:textColor="@color/gray_light_9e"
+        android:textSize="@dimen/login_btn_font_size"
         android:textStyle="bold"
         app:fontFamily="@font/parimatch" />
 
@@ -134,6 +137,7 @@
         android:gravity="center"
         android:textColor="@color/red"
         android:visibility="gone"
+        android:textSize="@dimen/login_btn_font_size"
         app:fontFamily="@font/parimatch"
         tools:text="Не удалось зарегистрироваться"
         tools:visibility="visible" />

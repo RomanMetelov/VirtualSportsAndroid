@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.filter.ui
 
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.example.virtualsportsandroid.databinding.FilterProvidersTitleItemBind
 import com.example.virtualsportsandroid.databinding.ProviderItemBinding
 import com.example.virtualsportsandroid.main.data.CategoryResponse
 import com.example.virtualsportsandroid.main.data.ProviderResponse
-import com.example.virtualsportsandroid.utils.ui.loadImageFromURL
 import com.example.virtualsportsandroid.utils.ui.loadImageFromURLWithPlaceholder
 
 @Suppress("LongParameterList")
@@ -108,13 +106,9 @@ sealed class FiltersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                     }
                     update()
                 }
-                if (category.id == getSelectedCategory()) {
-                    tvCategoryName.typeface = Typeface.DEFAULT_BOLD
-                    root.setBackgroundResource(R.color.gray_light_4a)
-                } else {
-                    tvCategoryName.typeface = Typeface.DEFAULT
-                    root.setBackgroundResource(R.color.gray_background)
-                }
+                if (category.id == getSelectedCategory()) root.setBackgroundResource(R.color.gray_light_4a)
+                else root.setBackgroundResource(R.color.gray_background)
+
             }
         }
     }

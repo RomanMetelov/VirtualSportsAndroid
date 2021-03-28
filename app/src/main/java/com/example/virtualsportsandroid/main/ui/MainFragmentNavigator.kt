@@ -2,6 +2,7 @@ package com.example.virtualsportsandroid.main.ui
 
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
+import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.filter.ui.FilterFragment
 import com.example.virtualsportsandroid.games.ui.GamesFragment
 
@@ -14,6 +15,12 @@ class MainFragmentNavigator(
 
     fun showFilterFragment() {
         fragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out_right
+            )
             .addToBackStack(null)
             .replace(
                 container,
