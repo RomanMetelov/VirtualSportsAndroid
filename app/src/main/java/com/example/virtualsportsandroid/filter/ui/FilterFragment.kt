@@ -1,7 +1,9 @@
 package com.example.virtualsportsandroid.filter.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
@@ -35,6 +37,12 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
     private lateinit var back: () -> Unit
     private lateinit var showGamesFragment: (category: String?, providers: List<String>?) -> Unit
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupViewModel()
+        viewModel.loadData()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FilterFragmentBinding.bind(view)
@@ -57,6 +65,14 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
                     providers = null
                 }
                 showGamesFragment(category, providers)
+            }
+            btnClearAll.setOnClickListener {
+                viewModel.unselectCategory()
+                viewModel.unselectAllProviders()
+                val category = viewModel.selectedCategoryLiveData.value
+                val providers = viewModel.selectedProvidersLiveData.value
+                showGamesFragment(category, providers)
+
             }
         }
     }

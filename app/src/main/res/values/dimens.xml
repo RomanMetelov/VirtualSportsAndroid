@@ -65,7 +65,7 @@
     <dimen name="button_roll_horizontal_padding">60dp</dimen>
     <dimen name="game_title_textSize">22sp</dimen>
     <dimen name="radio_button_textSize">20sp</dimen>
-    <dimen name="place_your_bet_textSize">22sp</dimen>
+    <dimen name="place_your_bet_textSize">20sp</dimen>
     <dimen name="dice_image_width">160dp</dimen>
     <dimen name="dice_image_height">200dp</dimen>
     <dimen name="square_icon_size">34dp</dimen>
