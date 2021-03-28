@@ -13,6 +13,7 @@ import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
 import com.example.virtualsportsandroid.games.domain.model.GamesList
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
@@ -50,13 +51,46 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     @Inject
     lateinit var viewModel: GamesViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onCreate")
+        setupViewModel()
+        viewModel.loadDataFromServer()
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(LOG_TAG, "onCreateView")
+
+        observeLoadGamesResult()
+        binding = GamesFragmentBinding.inflate(layoutInflater)
+        observeGamesFragmentState()
+        loadData()
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(LOG_TAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        binding = GamesFragmentBinding.bind(view)
-        setupViewModel()
-        observeMainFragmentState()
-        loadData()
+
+    }
+
+    private fun observeLoadGamesResult() {
+        viewModel.loadGamesResult.observe(viewLifecycleOwner, { result ->
+            if (result.isError) {
+                handleNetworkError(result.errorResult)
+            }
+        })
+    }
+
+    private fun handleNetworkError(errorType: NetworkErrorType) {
+        when (errorType) {
+            NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
+            else -> viewModel.showError()
+        }
     }
 
     @Suppress("SpreadOperator")
@@ -78,9 +112,10 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         (requireActivity().application as Application).getComponent().inject(this)
     }
 
-    private fun observeMainFragmentState() {
+    private fun observeGamesFragmentState() {
         viewModel.gamesFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
+                is GamesFragmentState.Content -> loadData()
                 is GamesFragmentState.Loading -> showLoading()
                 is GamesFragmentState.NotFiltered -> showNotFilteredGames(
                     it.gamesWithFirstTag,
@@ -196,6 +231,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     override fun onAttach(context: Context) {
         Log.d(LOG_TAG, "onAttach")
+
         super.onAttach(context)
 
     }
@@ -211,10 +247,6 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         super.onDestroyView()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(LOG_TAG, "onCreate")
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onDetach() {
         Log.d(LOG_TAG, "onDetach")
@@ -246,14 +278,6 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         super.onSaveInstanceState(outState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.d(LOG_TAG, "onCreateView")
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
 
     override fun onStop() {
         Log.d(LOG_TAG, "onStop")

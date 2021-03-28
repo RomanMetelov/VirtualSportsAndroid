@@ -2,11 +2,13 @@ package com.example.virtualsportsandroid.games.ui
 
 import com.example.virtualsportsandroid.games.domain.model.GameModel
 import com.example.virtualsportsandroid.games.domain.model.GamesList
+import com.example.virtualsportsandroid.main.ui.MainFragmentState
 
 
 sealed class GamesFragmentState {
 
     object Loading : GamesFragmentState()
+    object Content : GamesFragmentState()
     object Error : GamesFragmentState()
     data class NotFiltered(
         val gamesWithFirstTag: GamesList,

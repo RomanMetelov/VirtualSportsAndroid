@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.games.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,12 +12,16 @@ import com.example.virtualsportsandroid.games.domain.LoadingByCategoryAndProvide
 import com.example.virtualsportsandroid.games.domain.LoadingByCategoryUseCase
 import com.example.virtualsportsandroid.games.domain.LoadingByProvidersUseCase
 import com.example.virtualsportsandroid.games.domain.NotFilteredGamesLoadingUseCase
+import com.example.virtualsportsandroid.main.data.GamesInfoRepository
+import com.example.virtualsportsandroid.main.ui.MainFragmentState
 import com.example.virtualsportsandroid.utils.Result
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class GamesViewModel @Inject constructor(
+    private val gamesInfoRepository: GamesInfoRepository,
     private val notFilteredGamesLoadingUseCase: NotFilteredGamesLoadingUseCase,
     private val loadingByCategoryUseCase: LoadingByCategoryUseCase,
     private val loadingByProvidersUseCase: LoadingByProvidersUseCase,
@@ -25,35 +30,46 @@ class GamesViewModel @Inject constructor(
     private val sharedPref: SharedPref
 ) : ViewModel() {
 
-    private val _mainFragmentStateLiveData = MutableLiveData<GamesFragmentState>()
-    val gamesFragmentStateLiveData: LiveData<GamesFragmentState> = _mainFragmentStateLiveData
+    private val _gamesFragmentStateLiveData = MutableLiveData<GamesFragmentState>()
+    val gamesFragmentStateLiveData: LiveData<GamesFragmentState> = _gamesFragmentStateLiveData
+
+    private val _loadGamesResult = MutableLiveData<Result<Unit, NetworkErrorType>>()
+    val loadGamesResult: LiveData<Result<Unit, NetworkErrorType>> = _loadGamesResult
+
+    fun loadDataFromServer() {
+        viewModelScope.launch {
+            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
+            _loadGamesResult.postValue(gamesInfoRepository.loadGames())
+            _gamesFragmentStateLiveData.value = GamesFragmentState.Content
+        }
+    }
 
     fun loadNotFilteredGames() {
         viewModelScope.launch {
-            _mainFragmentStateLiveData.value = GamesFragmentState.Loading
-            _mainFragmentStateLiveData.value = notFilteredGamesLoadingUseCase.invoke()
+            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
+            _gamesFragmentStateLiveData.value = notFilteredGamesLoadingUseCase.invoke()
         }
     }
 
     fun loadFilteredByCategory(category: String) {
         viewModelScope.launch {
-            _mainFragmentStateLiveData.value = GamesFragmentState.Loading
-            _mainFragmentStateLiveData.value = loadingByCategoryUseCase.invoke(category)
+            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
+            _gamesFragmentStateLiveData.value = loadingByCategoryUseCase.invoke(category)
         }
     }
 
     fun loadFilteredByProviders(providers: List<String>) {
         viewModelScope.launch {
-            _mainFragmentStateLiveData.value = GamesFragmentState.Loading
-            _mainFragmentStateLiveData.value = loadingByProvidersUseCase.invoke(providers)
+            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
+            _gamesFragmentStateLiveData.value = loadingByProvidersUseCase.invoke(providers)
 
         }
     }
 
     fun loadFilteredByCategoryAndProviders(category: String, providers: List<String>) {
         viewModelScope.launch {
-            _mainFragmentStateLiveData.value = GamesFragmentState.Loading
-            _mainFragmentStateLiveData.value =
+            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
+            _gamesFragmentStateLiveData.value =
                 loadingByCategoryAndProvidersUseCase.invoke(category, providers)
 
         }
@@ -64,6 +80,13 @@ class GamesViewModel @Inject constructor(
     }
 
     suspend fun loadScreenGameModel(gameId: String): Result<ScreenGameModel, GamesLoadingError> {
+        Log.d("QZGAMES_VIEW_MODEL", "loadScreenGameModel")
         return gamesRepository.getScreenGameModel(gameId)
+    }
+
+    fun showError() {
+        viewModelScope.launch {
+            _gamesFragmentStateLiveData.value = GamesFragmentState.Error
+        }
     }
 }

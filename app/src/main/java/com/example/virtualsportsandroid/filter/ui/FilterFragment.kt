@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.FilterFragmentBinding
+import com.example.virtualsportsandroid.databinding.GameFragmentBinding
 import com.example.virtualsportsandroid.main.data.CategoryResponse
 import com.example.virtualsportsandroid.main.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
@@ -32,24 +33,22 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
             }
     }
 
-
     @Inject
     lateinit var viewModel: FilterViewModel
     private lateinit var binding: FilterFragmentBinding
     private lateinit var back: () -> Unit
     private lateinit var showGamesFragment: (category: String?, providers: List<String>?) -> Unit
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onCreate")
+        setupViewModel()
+        viewModel.loadData()
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(LOG_TAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
-        binding = FilterFragmentBinding.bind(view)
-        setupViewModel()
-        observeFragmentState()
-        observeSelectedItems()
-        setupListeners()
-        viewModel.loadData()
     }
 
     override fun onAttach(context: Context) {
@@ -62,9 +61,13 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         Log.d(LOG_TAG, "onCreateView")
-        return super.onCreateView(inflater, container, savedInstanceState)
+        binding = FilterFragmentBinding.inflate(inflater, container, false)
+        observeFragmentState()
+        observeSelectedItems()
+        setupListeners()
+        return binding.root
 
     }
 
@@ -79,10 +82,7 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
         super.onDestroyView()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(LOG_TAG, "onCreate")
-        super.onCreate(savedInstanceState)
-    }
+
 
     override fun onDetach() {
         Log.d(LOG_TAG, "onDetach")
