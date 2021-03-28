@@ -43,19 +43,6 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
         viewModel.loadData()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FilterFragmentBinding.inflate(inflater, container, false)
-        observeFragmentState()
-        observeSelectedItems()
-        setupListeners()
-        viewModel.loadData()
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FilterFragmentBinding.bind(view)
