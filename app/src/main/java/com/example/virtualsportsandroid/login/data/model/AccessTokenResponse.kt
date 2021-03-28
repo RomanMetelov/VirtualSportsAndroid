@@ -6,5 +6,5 @@ data class AccessTokenResponse(
     @SerializedName("access_token") val safeAccessToken: String?
 ) {
     val accessToken: String
-        get() = "bearer $safeAccessToken"
+        get() = "Bearer $safeAccessToken"
 }
