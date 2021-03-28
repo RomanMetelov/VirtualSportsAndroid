@@ -23,6 +23,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/category_name_textSize"
         android:fontFamily="@font/parimatch"
+        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toBottomOf="@id/ivCategoryIcon"
         app:layout_constraintLeft_toRightOf="@id/ivCategoryIcon"
         app:layout_constraintTop_toTopOf="@id/ivCategoryIcon"

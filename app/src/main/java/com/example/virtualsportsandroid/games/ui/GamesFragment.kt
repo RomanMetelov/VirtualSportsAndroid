@@ -13,6 +13,7 @@ import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,6 +45,11 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: GamesViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = MaterialFadeThrough()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

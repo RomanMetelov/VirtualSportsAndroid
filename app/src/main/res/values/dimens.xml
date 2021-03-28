@@ -95,4 +95,5 @@
     <dimen name="login_header_text_size">20sp</dimen>
     <dimen name="game_name_text_width">144dp</dimen>
     <dimen name="no_network_text_size">24sp</dimen>
+    <dimen name="heart_favorite_size_square">72dp</dimen>
 </resources>
