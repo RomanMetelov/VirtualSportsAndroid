@@ -1,5 +1,4 @@
 @file:Suppress("TooManyFunctions")
-
 package com.example.virtualsportsandroid.main.ui
 
 import android.os.Bundle
@@ -12,6 +11,7 @@ import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
+import kotlinx.android.synthetic.main.login_header.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragment(R.layout.main_fragment) {
@@ -43,7 +43,6 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         observeIsAuthorized()
         observeContainerState()
         observeLogoutResult()
-        observeLoadGamesResult()
         setupListeners()
         viewModel.loadConfigs()
         viewModel.checkIsAuthorized()
@@ -141,19 +140,10 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         })
     }
 
-    private fun observeLoadGamesResult() {
-        viewModel.loadGamesResult.observe(viewLifecycleOwner, { result ->
-            if (result.isError) {
-                handleNetworkError(result.errorResult)
-            }
-        })
-    }
-
     private fun handleNetworkError(errorType: NetworkErrorType) {
         when (errorType) {
             NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
             else -> viewModel.showError()
         }
     }
-
 }

@@ -18,7 +18,6 @@
         android:textSize="@dimen/bet_history_item_h2"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +33,6 @@
         android:textColor="@color/bright_yellow_57"
         android:textSize="@dimen/bet_history_item_h2"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +47,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/bet_history_item_h1"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@+id/tvBetResultTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBetId" />
@@ -65,7 +62,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/bet_history_item_h1"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toBottomOf="@+id/tvBetTitle"
         app:layout_constraintStart_toEndOf="@+id/tvBetResultTitle"
         app:layout_constraintTop_toTopOf="@+id/tvBetTitle" />
@@ -81,7 +77,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/bet_history_item_h1"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@+id/tvBetOutcomeWin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBetTitle" />
@@ -97,7 +92,6 @@
         android:textColor="@color/white"
         android:textSize="@dimen/bet_history_item_h1"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toBottomOf="@+id/tvBetResultTitle"
         app:layout_constraintStart_toEndOf="@+id/tvBetResultTitle"
         app:layout_constraintTop_toTopOf="@+id/tvBetResultTitle" />
@@ -113,7 +107,6 @@
         android:textColor="@color/win"
         android:textSize="@dimen/bet_history_item_h0"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBetResultTitle" />
 
@@ -129,7 +122,6 @@
         android:textColor="@color/lose"
         android:textSize="@dimen/bet_history_item_h0"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBetResultTitle" />
 

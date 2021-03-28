@@ -1,7 +1,9 @@
 package com.example.virtualsportsandroid.games.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +12,7 @@ import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
 import com.example.virtualsportsandroid.games.domain.model.GamesList
+import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
@@ -17,6 +20,7 @@ import com.google.android.material.transition.platform.MaterialFadeThrough
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     companion object {
@@ -48,15 +52,41 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupViewModel()
+        viewModel.loadDataFromServer()
         exitTransition = MaterialFadeThrough()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        viewModel.loadDataFromServer()
+        observeLoadGamesResult()
+        binding = GamesFragmentBinding.inflate(layoutInflater)
+        observeGamesFragmentState()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = GamesFragmentBinding.bind(view)
-        setupViewModel()
-        observeMainFragmentState()
-        loadData()
+        binding.ivError.hide()
+    }
+
+    private fun observeLoadGamesResult() {
+        viewModel.loadGamesResult.observe(viewLifecycleOwner, { result ->
+            if (result.isError) {
+                handleNetworkError(result.errorResult)
+            }
+        })
+    }
+
+    private fun handleNetworkError(errorType: NetworkErrorType) {
+        when (errorType) {
+            NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
+            else -> viewModel.showError()
+        }
     }
 
     @Suppress("SpreadOperator")
@@ -79,10 +109,11 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         viewModel = ViewModelProvider(this, viewModelFactory).get(GamesViewModel::class.java)
     }
 
-    private fun observeMainFragmentState() {
+    private fun observeGamesFragmentState() {
         viewModel.gamesFragmentStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is GamesFragmentState.Loading -> showLoading()
+                is GamesFragmentState.Content -> loadData()
                 is GamesFragmentState.NotFiltered -> showNotFilteredGames(
                     it.gamesWithFirstTag,
                     it.allGamesWithoutFirstTag
