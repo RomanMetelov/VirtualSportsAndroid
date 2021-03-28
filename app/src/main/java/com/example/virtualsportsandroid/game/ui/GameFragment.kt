@@ -2,12 +2,14 @@
 
 package com.example.virtualsportsandroid.game.ui
 
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
@@ -16,10 +18,9 @@ import com.example.virtualsportsandroid.game.GameFragmentNavigator
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.data.api.GameScreenErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
-import com.example.virtualsportsandroid.utils.ui.hide
-import com.example.virtualsportsandroid.utils.ui.isVisible
-import com.example.virtualsportsandroid.utils.ui.show
+import com.google.android.material.transition.platform.MaterialFadeThrough
 import javax.inject.Inject
+
 
 class GameFragment : BaseFragment(R.layout.game_fragment) {
 
@@ -28,6 +29,15 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     private lateinit var binding: GameFragmentBinding
     private lateinit var ivAddToFavorite: AppCompatImageView
     private lateinit var ivDelFromFavorite: AppCompatImageView
+    private lateinit var ivHeart: AppCompatImageView
+    private lateinit var emptyHeart: AnimatedVectorDrawable
+    private lateinit var fillHeart: AnimatedVectorDrawable
+
+    private var isFavorite = false
+        set(value) {
+            field = value
+            animateHeart()
+        }
 
     private val gameFragmentNavigator: GameFragmentNavigator by lazy {
         GameFragmentNavigator(
@@ -42,6 +52,7 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough()
         arguments?.let {
             game = it.getParcelable(GAME_KEY) ?: ScreenGameModel("", "", "")
         }
@@ -62,37 +73,37 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(GameFragmentViewModel::class.java)
-        initViews()
         setupListeners()
         observeLiveData()
-        showGameInfo()
         viewModel.playGame(game)
+        initViews()
+        showGameInfo()
     }
 
     private fun showGameInfo() {
         binding.tvGameTitle.text = game.displayName
-        when (game.isFavorite) {
-            true -> {
-                ivAddToFavorite.hide()
-                ivDelFromFavorite.show()
-            }
-            false -> {
-                ivAddToFavorite.show()
-                ivDelFromFavorite.hide()
-            }
-        }
-
+        if (game.isFavorite) isFavorite = game.isFavorite
     }
 
     private fun initViews() {
         ivAddToFavorite = binding.ivAddToFavourites
         ivDelFromFavorite = binding.ivDelFromFavourites
+        ivHeart = binding.ivHeart
+        emptyHeart = ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.avd_heart_empty
+        ) as AnimatedVectorDrawable
+        fillHeart = ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.avd_heart_fill
+        ) as AnimatedVectorDrawable
     }
 
     private fun setupListeners() {
-        ivAddToFavorite.setOnClickListener { changeGameFavorite() }
-        ivDelFromFavorite.setOnClickListener { changeGameFavorite() }
         binding.ivBack.setOnClickListener { navigator.back() }
+        binding.ivHeart.setOnClickListener {
+            changeGameFavorite()
+        }
     }
 
     private fun observeLiveData() {
@@ -101,7 +112,7 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
                 if (result.successResult) game.isFavorite = !game.isFavorite
             } else {
                 handleErrorOnUi(result.errorResult)
-                changeFavoriteStarView()
+                isFavorite = !isFavorite
             }
         })
         viewModel.playGameResultViewModel.observe(viewLifecycleOwner, { result ->
@@ -128,22 +139,18 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
 
     private fun changeGameFavorite() {
         viewModel.changeGameFavorite(game)
-        changeFavoriteStarView()
-    }
-
-    private fun changeFavoriteStarView() {
-        if (ivAddToFavorite.isVisible()) {
-            ivDelFromFavorite.show()
-            ivAddToFavorite.hide()
-        } else {
-            ivDelFromFavorite.hide()
-            ivAddToFavorite.show()
-        }
+        isFavorite = !isFavorite
     }
 
     private fun setupDi() {
         val app = requireActivity().application as Application
         app.getComponent().inject(this)
+    }
+
+    private fun animateHeart() {
+        val drawable: AnimatedVectorDrawable = if (isFavorite) fillHeart else emptyHeart
+        ivHeart.setImageDrawable(drawable)
+        drawable.start()
     }
 
     companion object {

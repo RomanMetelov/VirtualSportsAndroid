@@ -59,6 +59,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvGameTitle" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivHeart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/header_elements_horizontal_margin"
+        android:contentDescription="@string/add_to_favourites_button_description"
+        android:src="@drawable/ic_heart"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGameTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvGameTitle"
+        tools:visibility="visible"/>
+
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
