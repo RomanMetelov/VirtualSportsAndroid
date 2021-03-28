@@ -19,6 +19,7 @@ import com.example.virtualsportsandroid.utils.ui.show
 import com.google.android.material.transition.platform.MaterialFadeThrough
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class DiceGameBetHistoryFragment :
     BaseFragment(R.layout.dice_game_bet_history_fragment) {
 
