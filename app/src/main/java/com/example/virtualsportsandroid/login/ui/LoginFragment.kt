@@ -125,7 +125,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
                 handleLoginError(result.errorResult)
             } else {
                 saveUserTokenToLocal(result.successResult)
-                requireActivity().onBackPressed()
+                navigator.showMainFragment()
             }
         })
     }

@@ -1,6 +1,5 @@
 package com.example.virtualsportsandroid.utils
 
-import android.view.View
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentManager
 import com.example.virtualsportsandroid.R
@@ -43,6 +42,7 @@ class FragmentNavigator(
     }
 
     fun showMainFragment() {
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         fragmentManager.beginTransaction()
             .replace(container, MainFragment.newInstance())
             .addToBackStack(null)

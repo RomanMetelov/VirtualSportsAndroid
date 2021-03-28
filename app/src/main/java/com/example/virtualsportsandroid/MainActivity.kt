@@ -39,5 +39,11 @@ class MainActivity : AppCompatActivity() {
         if (supportFragmentManager.backStackEntryCount < 1) {
             fragmentNavigator.showMainFragment()
         }
+//        if (supportFragmentManager.backStackEntryCount > 1) {
+//            super.onBackPressed()
+//        } else {
+//            this.finishAffinity()
+//        }
+
     }
 }

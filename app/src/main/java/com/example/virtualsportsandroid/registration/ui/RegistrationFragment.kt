@@ -39,6 +39,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
     private lateinit var etRepeatPassword: AppCompatEditText
     private lateinit var btnRegister: AppCompatButton
     private lateinit var btnClose: AppCompatImageView
+    private lateinit var btnLogin: AppCompatButton
     private lateinit var tvRegistrationErrorMessage: TextView
 
     @Inject
@@ -71,6 +72,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
         etRepeatPassword = binding.etRepeatPassword
         btnRegister = binding.btnRegister
         btnClose = binding.btnClose
+        btnLogin = binding.btnLogin
         tvRegistrationErrorMessage = binding.tvRegistrationErrorMessage
     }
 
@@ -86,6 +88,7 @@ class RegistrationFragment : BaseFragment(R.layout.login_fragment) {
             tryRegister()
         }
         btnClose.setOnClickListener { navigator.back() }
+        btnLogin.setOnClickListener { navigator.showLoginFragment() }
     }
 
     private fun checkAllRules() {
