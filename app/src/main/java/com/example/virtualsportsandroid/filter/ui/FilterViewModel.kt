@@ -58,4 +58,10 @@ class FilterViewModel @Inject constructor(
             }
         }
     }
+
+    fun unselectAllProviders() {
+        viewModelScope.launch {
+            _selectedProvidersLiveData.value = null
+        }
+    }
 }

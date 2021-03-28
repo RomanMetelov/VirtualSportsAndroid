@@ -20,6 +20,7 @@ import com.example.virtualsportsandroid.utils.sharedPref.SharedPref
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions", "LongParameterList")
 class GamesViewModel @Inject constructor(
     private val gamesInfoRepository: GamesInfoRepository,
     private val notFilteredGamesLoadingUseCase: NotFilteredGamesLoadingUseCase,

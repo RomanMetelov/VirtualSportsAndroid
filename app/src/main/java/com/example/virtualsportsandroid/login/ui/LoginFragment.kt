@@ -147,6 +147,7 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
     private fun saveUserTokenToLocal(successResult: AccessTokenResponse) {
         sharedPreferences.token = successResult.accessToken
+        Log.d("QQQQQQQQQQQQQQ", sharedPreferences.token)
     }
 
     private fun showErrorOnEditText(

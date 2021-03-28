@@ -20,6 +20,7 @@ import javax.inject.Inject
 
 private const val LOG_TAG = "QZFILTER_FRAGMENT"
 
+@Suppress("TooManyFunctions")
 class FilterFragment : BaseFragment(R.layout.filter_fragment) {
 
     companion object {
@@ -131,6 +132,16 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
                     providers = null
                 }
                 showGamesFragment(category, providers)
+            }
+
+
+            btnClearAll.setOnClickListener {
+                viewModel.unselectCategory()
+                viewModel.unselectAllProviders()
+                val category = viewModel.selectedCategoryLiveData.value
+                val providers = viewModel.selectedProvidersLiveData.value
+                showGamesFragment(category, providers)
+
             }
         }
     }

@@ -15,6 +15,7 @@ import javax.inject.Inject
 
 private const val LOG_TAG = "QZNETWORK_ERR_FRAGMENT"
 
+@Suppress("TooManyFunctions", "LongParameterList")
 class NetworkErrorFragment : BaseFragment(R.layout.nonetwork_fragment) {
 
     private lateinit var binding: NonetworkFragmentBinding

@@ -13,6 +13,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
@@ -95,8 +98,16 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     }
 
     private fun setupListeners() {
-        ivAddToFavorite.setOnClickListener { changeGameFavorite() }
-        ivDelFromFavorite.setOnClickListener { changeGameFavorite() }
+        ivAddToFavorite.setOnClickListener {
+
+            changeGameFavorite()
+
+        }
+        ivDelFromFavorite.setOnClickListener {
+
+            changeGameFavorite()
+
+        }
         binding.ivBack.setOnClickListener { navigator.back() }
     }
 
