@@ -20,6 +20,7 @@ import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
+@Suppress("LongParameterList")
 @Module(includes = [UseCaseModule::class, AppModule::class, NetworkModule::class])
 class RepositoryModule {
 
