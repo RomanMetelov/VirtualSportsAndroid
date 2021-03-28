@@ -1,8 +1,10 @@
 package com.example.virtualsportsandroid.games.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +15,11 @@ import com.example.virtualsportsandroid.games.domain.model.GamesList
 
 class MainRecyclerViewAdapter(
     private val filterButtonOnClick: () -> Unit,
-    private val firstTagGames: GamesList?,
-    private val anotherGames: List<GamesList>,
     private val open: (String) -> Unit
 ) : RecyclerView.Adapter<MainViewHolder>() {
+
+    private val firstTagGames: GamesList = GamesList("", mutableListOf())
+    private val anotherGames: MutableList<GamesList> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         when (ItemType.values()[viewType]) {
@@ -66,7 +69,7 @@ class MainRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        firstTagGames?.let {
+        if (firstTagGames.games.size == 0) {
             return 1 + anotherGames.size + 1
         }
         return 1 + anotherGames.size
@@ -77,6 +80,37 @@ class MainRecyclerViewAdapter(
         position == 1 && firstTagGames != null -> ItemType.FIRST_TAG_GAMES.ordinal
         else -> ItemType.ANOTHER_GAMES.ordinal
     }
+
+    fun updateAnotherGamesItems(newAnotherGameList: List<GamesList>) {
+
+        val diffResult = DiffUtil.calculateDiff(
+            DiffMainListScreenCallback(
+                newAnotherGameList,
+                anotherGames
+            )
+        )
+        anotherGames.forEach { it.games.clear() }
+        anotherGames.addAll(newAnotherGameList)
+
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun updateTopListGamesItems(newFirstTagGames: GamesList) {
+        Log.d("TAGss", "updateTopListGamesItems: ${newFirstTagGames.games}")
+        Log.d("TAGss", "updateTopListGamesItems: ${firstTagGames?.games}")
+        val diffResult = DiffUtil.calculateDiff(
+            DiffTopGamesCallback(
+                newFirstTagGames,
+                firstTagGames
+            )
+        )
+        firstTagGames.name = newFirstTagGames.name
+        firstTagGames.games.clear()
+        firstTagGames.games.addAll(newFirstTagGames.games)
+
+        diffResult.dispatchUpdatesTo(this)
+    }
+
 
 }
 

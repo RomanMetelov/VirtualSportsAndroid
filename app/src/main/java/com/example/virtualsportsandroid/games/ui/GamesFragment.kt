@@ -1,7 +1,9 @@
 package com.example.virtualsportsandroid.games.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.GamesFragmentBinding
+import com.example.virtualsportsandroid.games.domain.model.GameModel
 import com.example.virtualsportsandroid.games.domain.model.GamesList
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
@@ -41,6 +44,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     private lateinit var binding: GamesFragmentBinding
     private lateinit var showFilterFragment: () -> Unit
+    private var mainAdapter: MainRecyclerViewAdapter? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -53,10 +57,28 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = GamesFragmentBinding.bind(view)
         setupViewModel()
         observeMainFragmentState()
         loadData()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = GamesFragmentBinding.inflate(inflater, container, false)
+        setupAdapter()
+        return binding.root
+    }
+
+    private fun setupAdapter() {
+        mainAdapter = MainRecyclerViewAdapter(
+            showFilterFragment,
+            {
+                openGame(it)
+            }
+        )
     }
 
     @Suppress("SpreadOperator")
@@ -88,13 +110,18 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     it.allGamesWithoutFirstTag
                 )
                 is GamesFragmentState.FilteredByCategory -> {
-                    showFilteredGames(GamesList(it.categoryName, it.filteredGames))
+                    showFilteredGames(
+                        GamesList(
+                            it.categoryName,
+                            it.filteredGames as MutableList<GameModel>
+                        )
+                    )
                 }
                 is GamesFragmentState.FilteredByProviders -> {
                     showFilteredGames(
                         GamesList(
                             getString(R.string.search_results_title),
-                            it.filteredGames
+                            it.filteredGames as MutableList<GameModel>
                         )
                     )
                 }
@@ -102,7 +129,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                     showFilteredGames(
                         GamesList(
                             getString(R.string.search_results_title),
-                            it.filteredGames
+                            it.filteredGames as MutableList<GameModel>
                         )
                     )
                 }
@@ -130,14 +157,10 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
-                adapter = MainRecyclerViewAdapter(
-                    showFilterFragment,
-                    firstTagGames,
-                    allGamesWithoutFirstTag,
-                    {
-                        openGame(it)
-                    }
-                )
+                adapter = mainAdapter
+                mainAdapter?.updateAnotherGamesItems(allGamesWithoutFirstTag)
+                mainAdapter?.updateTopListGamesItems(firstTagGames)
+
             }
         }
     }
@@ -149,14 +172,8 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
-                adapter = MainRecyclerViewAdapter(
-                    showFilterFragment,
-                    null,
-                    listOf(gamesList),
-                    {
-                        openGame(it)
-                    }
-                )
+                adapter = mainAdapter
+                mainAdapter?.updateAnotherGamesItems(listOf(gamesList))
             }
         }
     }

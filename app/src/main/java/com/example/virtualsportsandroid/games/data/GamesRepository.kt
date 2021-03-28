@@ -36,7 +36,9 @@ class GamesRepository @Inject constructor(
             val configs = gson.fromJson(configsJSON, GamesResponse::class.java)
             if (configs.tags.isNotEmpty()) {
                 with(configs.tags.first()) {
-                    Result.success(GamesList(name, filterByTagUseCase(id, configs)))
+                    Result.success(GamesList(name,
+                        filterByTagUseCase(id, configs) as MutableList<GameModel>
+                    ))
                 }
             } else {
                 Result.error(GamesLoadingError.NOT_FOUND)
@@ -53,7 +55,9 @@ class GamesRepository @Inject constructor(
             var tags = emptyList<GamesList>()
             configs.tags.forEach {
                 if (it.id != configs.tags.first().id) {
-                    tags = tags + GamesList(it.name, filterByTagUseCase(it.id, configs))
+                    tags = tags + GamesList(it.name,
+                        filterByTagUseCase(it.id, configs) as MutableList<GameModel>
+                    )
                 }
             }
             Result.success(tags)
