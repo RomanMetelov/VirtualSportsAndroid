@@ -169,6 +169,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                         openGame(it)
                     }
                 )
+                itemAnimator = null
             }
         }
     }
