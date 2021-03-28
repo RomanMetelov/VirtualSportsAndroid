@@ -27,6 +27,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     companion object {
         private const val CATEGORY_KEY = "CATEGORY_KEY"
         private const val PROVIDERS_KEY = "PROVIDERS_KEY"
+        private const val ANIMATE_LOADING = 200L
 
         fun newInstance(
             category: String? = null,
@@ -147,7 +148,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         with(binding) {
             rvMain.hide()
             ivError.hide()
-            root.postDelayed({ pbLoading.hide() }, 200)
+            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
         }
     }
 
@@ -158,7 +159,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     ) {
         with(binding) {
             ivError.hide()
-            root.postDelayed({ pbLoading.hide() }, 200)
+            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
@@ -178,7 +179,7 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     private fun showFilteredGames(gamesList: GamesList) {
         with(binding) {
             ivError.hide()
-            root.postDelayed({ pbLoading.hide() }, 200)
+            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
@@ -212,13 +213,13 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 Toast.LENGTH_SHORT
             ).show()
             binding.rvMain.show()
-            binding.root.postDelayed({ pbLoading.hide() }, 200)
+            binding.root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
         }
     }
 
     private fun showError() {
         with(binding) {
-            root.postDelayed({ pbLoading.hide() }, 200)
+            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
             rvMain.hide()
             ivError.show()
         }
