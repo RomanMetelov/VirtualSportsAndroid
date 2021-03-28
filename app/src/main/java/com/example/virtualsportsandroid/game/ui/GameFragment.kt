@@ -3,7 +3,9 @@
 package com.example.virtualsportsandroid.game.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
+import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
 import com.example.virtualsportsandroid.databinding.GameFragmentBinding
 import com.example.virtualsportsandroid.game.data.ScreenGameModel
 import com.example.virtualsportsandroid.game.data.api.GameScreenErrorType
@@ -21,6 +24,8 @@ import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.isVisible
 import com.example.virtualsportsandroid.utils.ui.show
 import javax.inject.Inject
+
+private const val LOG_TAG = "QZGAME_FRAGMENT"
 
 class GameFragment : BaseFragment(R.layout.game_fragment) {
 
@@ -34,6 +39,7 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     lateinit var viewModel: GameFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onCreate")
         super.onCreate(savedInstanceState)
         arguments?.let {
             game = it.getParcelable(GAME_KEY) ?: ScreenGameModel("", "", "")
@@ -43,12 +49,14 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        Log.d(LOG_TAG, "onCreateView")
         setupDi()
         binding = GameFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         initViews()
         setupListeners()
@@ -152,4 +160,57 @@ class GameFragment : BaseFragment(R.layout.game_fragment) {
             }
         }
     }
+
+    override fun onAttach(context: Context) {
+        Log.d(LOG_TAG, "onAttach")
+        super.onAttach(context)
+
+    }
+
+    override fun onDestroy() {
+        Log.d(LOG_TAG, "onDestroy")
+        super.onDestroy()
+
+    }
+
+    override fun onDestroyView() {
+        Log.d(LOG_TAG, "onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        Log.d(LOG_TAG, "onDetach")
+        super.onDetach()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onActivityCreated")
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onStart() {
+        Log.d(LOG_TAG, "onStart")
+        super.onStart()
+    }
+
+    override fun onResume() {
+        Log.d(LOG_TAG, "onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.d(LOG_TAG, "onPause")
+        super.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.d(LOG_TAG, "onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onStop() {
+        Log.d(LOG_TAG, "onStop")
+        super.onStop()
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.virtualsportsandroid.dices.game.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.DiceGameFragmentBinding
+import com.example.virtualsportsandroid.databinding.FilterFragmentBinding
 import com.example.virtualsportsandroid.dices.game.domain.DiceGameResultModel
 import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
@@ -23,6 +25,8 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.random.Random
 
+private const val LOG_TAG = "QZDICE_GAME_FRAGMENT"
+
 @Suppress("TooManyFunctions", "MagicNumber", "ComplexMethod")
 class DiceGameFragment :
     BaseFragment(R.layout.dice_game_fragment) {
@@ -33,6 +37,8 @@ class DiceGameFragment :
     @Inject
     lateinit var viewModel: DiceGameViewModel
 
+
+
     companion object {
         fun newInstance() = DiceGameFragment()
     }
@@ -41,11 +47,13 @@ class DiceGameFragment :
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d(LOG_TAG, "onCreateView")
         binding = DiceGameFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         binding = DiceGameFragmentBinding.bind(view)
         setupViews()
@@ -54,6 +62,7 @@ class DiceGameFragment :
     }
 
     override fun onStop() {
+        Log.d(LOG_TAG, "onStop")
         super.onStop()
         binding.rgBetTypesSet.ClearCheck()
     }
@@ -230,4 +239,57 @@ class DiceGameFragment :
             )
         })
     }
+
+    override fun onAttach(context: Context) {
+        Log.d(LOG_TAG, "onAttach")
+        super.onAttach(context)
+
+    }
+
+    override fun onDestroy() {
+        Log.d(LOG_TAG, "onDestroy")
+        super.onDestroy()
+
+    }
+
+    override fun onDestroyView() {
+        Log.d(LOG_TAG, "onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onCreate")
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onDetach() {
+        Log.d(LOG_TAG, "onDetach")
+        super.onDetach()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Log.d(LOG_TAG, "onActivityCreated")
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onStart() {
+        Log.d(LOG_TAG, "onStart")
+        super.onStart()
+    }
+
+    override fun onResume() {
+        Log.d(LOG_TAG, "onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.d(LOG_TAG, "onPause")
+        super.onPause()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.d(LOG_TAG, "onSaveInstanceState")
+        super.onSaveInstanceState(outState)
+    }
+
 }
