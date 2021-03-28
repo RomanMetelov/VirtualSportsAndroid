@@ -148,7 +148,8 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         with(binding) {
             rvMain.hide()
             ivError.hide()
-            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
+            vLoadingBackground.show()
+            pbLoading.show()
         }
     }
 
@@ -159,7 +160,10 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     ) {
         with(binding) {
             ivError.hide()
-            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
+            root.postDelayed({
+                vLoadingBackground.hide()
+                pbLoading.hide()
+            }, ANIMATE_LOADING)
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
@@ -179,7 +183,10 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     private fun showFilteredGames(gamesList: GamesList) {
         with(binding) {
             ivError.hide()
-            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
+            root.postDelayed({
+                vLoadingBackground.hide()
+                pbLoading.hide()
+            }, ANIMATE_LOADING)
             with(rvMain) {
                 show()
                 layoutManager = LinearLayoutManager(context)
@@ -213,13 +220,19 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
                 Toast.LENGTH_SHORT
             ).show()
             binding.rvMain.show()
-            binding.root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
+            binding.root.postDelayed({
+                vLoadingBackground.hide()
+                pbLoading.hide()
+            }, ANIMATE_LOADING)
         }
     }
 
     private fun showError() {
         with(binding) {
-            root.postDelayed({ pbLoading.hide() }, ANIMATE_LOADING)
+            root.postDelayed({
+                vLoadingBackground.hide()
+                pbLoading.hide()
+            }, ANIMATE_LOADING)
             rvMain.hide()
             ivError.show()
         }

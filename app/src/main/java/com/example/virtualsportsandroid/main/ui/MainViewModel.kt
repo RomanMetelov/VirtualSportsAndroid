@@ -15,8 +15,7 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val sharedPref: SharedPref,
-    private val authorizationRepository: AuthorizationRepository,
-    private val gamesInfoRepository: GamesInfoRepository
+    private val authorizationRepository: AuthorizationRepository
 ) : ViewModel() {
 
     private val _isAuthorizedLiveData = MutableLiveData<Boolean>()

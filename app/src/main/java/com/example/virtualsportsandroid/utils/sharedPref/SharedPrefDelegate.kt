@@ -14,7 +14,7 @@ class SharedPrefDelegate<T>(
         with(sharedPreferences.edit()) {
             when (value) {
                 is String -> putString(key, value)
-                else -> throw IllegalAccessError("")
+                else -> throw IllegalAccessError("Unsupported type")
             }.apply()
         }
 

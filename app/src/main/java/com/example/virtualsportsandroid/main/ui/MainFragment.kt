@@ -1,4 +1,5 @@
 @file:Suppress("TooManyFunctions")
+
 package com.example.virtualsportsandroid.main.ui
 
 import android.os.Bundle
@@ -11,7 +12,6 @@ import com.example.virtualsportsandroid.utils.api.NetworkErrorType
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
 import com.example.virtualsportsandroid.utils.ui.hide
 import com.example.virtualsportsandroid.utils.ui.show
-import kotlinx.android.synthetic.main.login_header.*
 import javax.inject.Inject
 
 class MainFragment : BaseFragment(R.layout.main_fragment) {
