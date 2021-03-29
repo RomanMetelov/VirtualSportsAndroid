@@ -6,7 +6,10 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.bundleOf
 import com.example.virtualsportsandroid.utils.FragmentNavigator
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         fragmentNavigator.showMainFragment()
+        Firebase.analytics.logEvent("app_started", bundleOf("test" to "number"))
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
