@@ -10,5 +10,4 @@ class AddGameToFavoriteUseCase @Inject constructor(private val gameScreenReposit
     suspend operator fun invoke(gameId: String): Result<Boolean, NetworkErrorType> {
         return gameScreenRepository.addGameToFavorite(gameId)
     }
-
 }

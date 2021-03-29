@@ -12,5 +12,4 @@ class LoginUseCase @Inject constructor(private val authorizationRepository: Auth
     suspend operator fun invoke(user: UserModel): Result<AccessTokenResponse, NetworkErrorType> {
         return authorizationRepository.tryLogin(user)
     }
-
 }

@@ -10,5 +10,4 @@ class PlayGameUseCase @Inject constructor(private val gameScreenRepository: Game
     suspend operator fun invoke(gameId: String): Result<Boolean, NetworkErrorType> {
         return gameScreenRepository.playGame(gameId)
     }
-
 }

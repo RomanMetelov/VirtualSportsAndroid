@@ -1,15 +1,12 @@
 package com.example.virtualsportsandroid.filter.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.FilterFragmentBinding
-import com.example.virtualsportsandroid.di.ViewModelFactory
 import com.example.virtualsportsandroid.main.data.CategoryResponse
 import com.example.virtualsportsandroid.main.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
@@ -67,8 +64,8 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
                 showGamesFragment(category, providers)
             }
             btnClearAll.setOnClickListener {
-                viewModel.unselectCategory()
-                viewModel.unselectAllProviders()
+                viewModel.unSelectCategory()
+                viewModel.unSelectAllProviders()
                 val category = viewModel.selectedCategoryLiveData.value
                 val providers = viewModel.selectedProvidersLiveData.value
                 showGamesFragment(category, providers)
@@ -119,10 +116,10 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
                     categories,
                     providers,
                     viewModel::selectCategory,
-                    viewModel::unselectCategory,
+                    viewModel::unSelectCategory,
                     { viewModel.selectedCategoryLiveData.value.toString() },
                     viewModel::selectProvider,
-                    viewModel::unselectProvider
+                    viewModel::unSelectProvider
                 ) { viewModel.selectedProvidersLiveData.value ?: emptyList() }
                 show()
             }

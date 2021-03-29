@@ -14,5 +14,4 @@ interface LoginService {
 
     @PUT("/logout")
     suspend fun logout()
-
 }

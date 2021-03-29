@@ -14,5 +14,4 @@ class NetworkHelper @Inject constructor(private val context: Context) {
         val activeNetwork = connectivityManager.activeNetwork
         return activeNetwork != null
     }
-
 }

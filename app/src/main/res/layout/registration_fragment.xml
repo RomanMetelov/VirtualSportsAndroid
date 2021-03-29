@@ -147,8 +147,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/red"
-        android:visibility="gone"
         android:textSize="@dimen/login_btn_font_size"
+        android:visibility="gone"
         app:fontFamily="@font/parimatch"
         tools:text="Не удалось зарегистрироваться"
         tools:visibility="visible" />

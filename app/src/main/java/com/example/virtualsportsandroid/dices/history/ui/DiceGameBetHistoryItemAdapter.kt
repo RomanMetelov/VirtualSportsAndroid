@@ -47,12 +47,12 @@ class BetHistoryItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 if (droppedNumber % 2 == 0) {
                     tvBetResultValue.text = String.format(
                         itemView.resources.getString(R.string.bet_history_item_bet_result_value),
-                        droppedNumber, "Even"
+                        droppedNumber, itemView.resources.getString(R.string.even_text)
                     )
                 } else {
                     tvBetResultValue.text = String.format(
                         itemView.resources.getString(R.string.bet_history_item_bet_result_value),
-                        droppedNumber, "Odd"
+                        droppedNumber, itemView.resources.getString(R.string.odd_text)
                     )
                 }
             }

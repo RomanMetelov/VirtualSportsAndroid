@@ -20,8 +20,6 @@
     <string name="logout_button_text">Выход</string>
     <string name="signup_button_text">Регистрация</string>
     <string name="filters_button_text">Фильтры</string>
-    <string name="top_games_title">Топ</string>
-    <string name="all_games_title">Все игры</string>
     <string name="no_internet_error_text">Подключение к интернету отсутствует</string>
     <string name="retry_btn_text">Обновить</string>
     <string name="image_no_internet_text_description">Картинка "Нет интернета"</string>
@@ -32,10 +30,8 @@
     <string name="providers_title_text">Провайдеры</string>
     <string name="apply_button_text">Применить</string>
     <string name="roll_the_dice_button_text">ПОДБРОСИТЬ! </string>
-    <string name="dice_game_roll_result_text_start">Исход: </string>
     <string name="dice_game_roll_result_text">Исход: %1$d - %2$s</string>
     <string name="back_button_description">Кнопка "назад"</string>
-    <string name="dice_game_title">Игра "Кости" </string>
     <string name="added_to_favourites_button_description">Иконка "Добавлено в избранное"</string>
     <string name="add_to_favourites_button_description">Иконка "Добавить в избранное"</string>
     <string name="tv_place_your_bet_text">Сделайте Вашу ставку (одиночный выбор) </string>
@@ -61,11 +57,12 @@
     <string name="inputs_login_error_text">Вы ввели неверные значения</string>
     <string name="user_not_found_login_error_text">Неверная эл. почта или пароль</string>
     <string name="unknown_login_error_text">Неизвестная ошибка</string>
-    <string name="dice_game_start_button">Кнопка "Запустить игру Кости"</string>
-    <string name="unknown_error_text">Неизвестная ошибка</string>
     <string name="favourites_category_name">Избранные</string>
     <string name="recently_launched_category_name">Недавно запущенные</string>
     <string name="need_authorization_error_text">Нужна авторизация</string>
     <string name="logo">Лого</string>
-    <string name="clear_filters">CLEAR</string>
+    <string name="clear_filters">Очистить</string>
+    <string name="place_your_bet_first_text">Сначала Сделайте Ставку!</string>
+    <string name="even_text">Чет</string>
+    <string name="odd_text">Нечет</string>
 </resources>

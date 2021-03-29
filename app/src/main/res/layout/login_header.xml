@@ -24,7 +24,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/logout_btn_height"
         android:layout_margin="@dimen/logout_button_margin"
         android:background="@drawable/logout_button_background"
         android:paddingHorizontal="@dimen/logout_button_paddingHorizontal"
@@ -42,7 +42,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/login_btn_height"
         android:layout_margin="@dimen/login_button_margin"
         android:background="@drawable/login_button_background"
         android:paddingHorizontal="@dimen/login_button_padding"
@@ -59,7 +59,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/signup_btn_height"
         android:layout_margin="@dimen/signup_button_margin"
         android:background="@drawable/signup_button_background"
         android:paddingHorizontal="@dimen/signup_button_paddingHorizontal"
@@ -79,6 +79,5 @@
         android:visibility="gone"
         app:constraint_referenced_ids="btnLogin, btnSignUp"
         tools:visibility="visible" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
