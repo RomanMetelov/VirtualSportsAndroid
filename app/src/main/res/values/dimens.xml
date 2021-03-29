@@ -55,7 +55,7 @@
     <dimen name="radio_group_horizontal_padding">40dp</dimen>
     <dimen name="button_roll_horizontal_padding">60dp</dimen>
     <dimen name="game_title_textSize">22sp</dimen>
-    <dimen name="radio_button_textSize">20sp</dimen>
+    <dimen name="radio_button_textSize">22sp</dimen>
     <dimen name="place_your_bet_textSize">20sp</dimen>
     <dimen name="dice_image_width">160dp</dimen>
     <dimen name="dice_image_height">200dp</dimen>
@@ -82,4 +82,11 @@
     <dimen name="no_network_text_size">24sp</dimen>
     <dimen name="heart_favorite_size_square">72dp</dimen>
     <dimen name="close_btn_filter_padding">12dp</dimen>
+    <dimen name="logout_btn_height">40dp</dimen>
+    <dimen name="login_btn_height">40dp</dimen>
+    <dimen name="signup_btn_height">40dp</dimen>
+    <dimen name="iv_no_internet_min_size">48dp</dimen>
+    <dimen name="btn_retry_margin">16dp</dimen>
+    <dimen name="btn_retry_padding_horizontal">32dp</dimen>
+    <dimen name="btn_retry_text_size">18sp</dimen>
 </resources>

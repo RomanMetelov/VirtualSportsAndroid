@@ -61,5 +61,5 @@
     <string name="recently_launched_category_name">Недавно запущенные</string>
     <string name="need_authorization_error_text">Нужна авторизация</string>
     <string name="logo">Лого</string>
-    <string name="clear_filters">CLEAR</string>
+    <string name="clear_filters">Очистить</string>
 </resources>
