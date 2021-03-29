@@ -86,5 +86,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmptyHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/header_elements_horizontal_margin"
+        android:padding="@dimen/game_title_padding"
+        android:text="@string/empty_bet_history"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/game_title_textSize"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:fontFamily="@font/parimatch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
