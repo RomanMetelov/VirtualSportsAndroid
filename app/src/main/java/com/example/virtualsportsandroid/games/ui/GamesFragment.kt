@@ -55,7 +55,6 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupViewModel()
-        viewModel.loadDataFromServer()
         exitTransition = MaterialFadeThrough()
     }
 
@@ -64,10 +63,10 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.loadDataFromServer()
-        observeLoadGamesResult()
         binding = GamesFragmentBinding.inflate(layoutInflater)
         observeGamesFragmentState()
+        observeLoadGamesResult()
+        viewModel.loadDataFromServer()
         return binding.root
     }
 

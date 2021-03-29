@@ -45,28 +45,24 @@ class GamesViewModel @Inject constructor(
 
     fun loadNotFilteredGames() {
         viewModelScope.launch {
-            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
             _gamesFragmentStateLiveData.value = notFilteredGamesLoadingUseCase.invoke()
         }
     }
 
     fun loadFilteredByCategory(category: String) {
         viewModelScope.launch {
-            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
             _gamesFragmentStateLiveData.value = loadingByCategoryUseCase.invoke(category)
         }
     }
 
     fun loadFilteredByProviders(providers: List<String>) {
         viewModelScope.launch {
-            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
             _gamesFragmentStateLiveData.value = loadingByProvidersUseCase.invoke(providers)
         }
     }
 
     fun loadFilteredByCategoryAndProviders(category: String, providers: List<String>) {
         viewModelScope.launch {
-            _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
             _gamesFragmentStateLiveData.value =
                 loadingByCategoryAndProvidersUseCase.invoke(category, providers)
         }
