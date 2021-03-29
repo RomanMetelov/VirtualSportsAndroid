@@ -16,7 +16,7 @@
         android:visibility="gone"
         app:constraint_referenced_ids="radio1, radio2, radio3, radio4, radio5, radio6,
                                         radioOdd, radioEven"
-        app:layout_constraintBottom_toTopOf="@+id/radioOdd"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
@@ -40,18 +40,20 @@
         app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@+id/tvPlaceYourBet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPlaceYourBet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/header_elements_horizontal_margin"
+        android:fontFamily="@font/roboto_condensed"
+        android:gravity="center"
+        android:padding="@dimen/header_elements_horizontal_margin"
         android:text="@string/tv_place_your_bet_text"
         android:textColor="@color/white"
         android:textSize="@dimen/place_your_bet_textSize"
         android:textStyle="bold"
-        app:fontFamily="@font/parimatch"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

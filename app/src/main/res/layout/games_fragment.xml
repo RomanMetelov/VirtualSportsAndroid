@@ -27,7 +27,15 @@
         android:id="@+id/ivError"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_pm_sorry" />
+        android:src="@drawable/ic_pm_sorry"
+        android:visibility="gone" />
+
+    <View
+        android:id="@+id/vLoadingBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_background"
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -35,4 +43,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone" />
+
 </FrameLayout>

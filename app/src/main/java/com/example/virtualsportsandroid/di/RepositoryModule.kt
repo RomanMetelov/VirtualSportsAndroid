@@ -20,10 +20,10 @@ import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
+@Suppress("LongParameterList")
 @Module(includes = [UseCaseModule::class, AppModule::class, NetworkModule::class])
 class RepositoryModule {
 
-    @Suppress("LongParameterList")
     @Singleton
     @Provides
     fun provideGamesRepository(
@@ -80,7 +80,11 @@ class RepositoryModule {
         diceGameBetHistoryService: DiceGameBetHistoryService,
         fromApiToUiMapper: FromApiToUiMapper
     ): DiceGameBetHistoryRepository {
-        return DiceGameBetHistoryRepository(Dispatchers.IO, diceGameBetHistoryService, fromApiToUiMapper)
+        return DiceGameBetHistoryRepository(
+            Dispatchers.IO,
+            diceGameBetHistoryService,
+            fromApiToUiMapper
+        )
     }
 
 }

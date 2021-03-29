@@ -15,8 +15,7 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val sharedPref: SharedPref,
-    private val authorizationRepository: AuthorizationRepository,
-    private val gamesInfoRepository: GamesInfoRepository
+    private val authorizationRepository: AuthorizationRepository
 ) : ViewModel() {
 
     private val _isAuthorizedLiveData = MutableLiveData<Boolean>()
@@ -27,9 +26,6 @@ class MainViewModel @Inject constructor(
 
     private val _logoutResultLiveData = MutableLiveData<Result<Unit, NetworkErrorType>>()
     val logoutResultLiveData: LiveData<Result<Unit, NetworkErrorType>> = _logoutResultLiveData
-
-    private val _loadGamesResult = MutableLiveData<Result<Unit, NetworkErrorType>>()
-    val loadGamesResult: LiveData<Result<Unit, NetworkErrorType>> = _loadGamesResult
 
     private val _mainFragmentStateLiveData = MutableLiveData<MainFragmentState>()
     val mainFragmentStateLiveData: LiveData<MainFragmentState> = _mainFragmentStateLiveData
@@ -70,7 +66,6 @@ class MainViewModel @Inject constructor(
     fun loadConfigs() {
         viewModelScope.launch {
             _mainFragmentStateLiveData.value = MainFragmentState.Loading
-            _loadGamesResult.postValue(gamesInfoRepository.loadGames())
             _mainFragmentStateLiveData.value = MainFragmentState.Content
             showGamesFragment(null, null)
         }

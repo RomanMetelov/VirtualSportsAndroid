@@ -25,5 +25,4 @@ class FromApiToUiMapper @Inject constructor() {
             isBetWon = diceGameApiModel.isBetWon
         )
     }
-
 }

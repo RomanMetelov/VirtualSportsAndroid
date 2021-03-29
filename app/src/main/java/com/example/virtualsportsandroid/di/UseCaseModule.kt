@@ -54,7 +54,7 @@ class UseCaseModule {
     fun provideNotFilteredGamesLoadingUseCase(
         gamesRepository: GamesRepository
     ): NotFilteredGamesLoadingUseCase {
-        return NotFilteredGamesLoadingUseCase(Dispatchers.Default, gamesRepository)
+        return NotFilteredGamesLoadingUseCase(Dispatchers.IO, gamesRepository)
     }
 
     @Provides
@@ -84,7 +84,7 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun provideFiltersLoadingUseCase(filtersRepository: FiltersRepository): FiltersLoadingUseCase {
-        return FiltersLoadingUseCase(Dispatchers.Default, filtersRepository)
+        return FiltersLoadingUseCase(Dispatchers.IO, filtersRepository)
     }
 
     @Provides
@@ -92,7 +92,7 @@ class UseCaseModule {
     fun provideDiceGameBetHistoryLoadingUseCase(
         diceGameBetHistoryRepository: DiceGameBetHistoryRepository
     ): DiceGameBetHistoryLoadingUseCase {
-        return DiceGameBetHistoryLoadingUseCase(Dispatchers.Default, diceGameBetHistoryRepository)
+        return DiceGameBetHistoryLoadingUseCase(Dispatchers.IO, diceGameBetHistoryRepository)
     }
 
     @Provides
@@ -102,7 +102,7 @@ class UseCaseModule {
         fromApiToUiMapper: FromApiToUiMapper
     ): DiceGameResultLoadingUseCase {
         return DiceGameResultLoadingUseCase(
-            dispatcher = Dispatchers.Default,
+            dispatcher = Dispatchers.IO,
             diceGameResultRepository = diceGameResultRepository,
             fromApiToUiMapper = fromApiToUiMapper
         )

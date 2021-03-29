@@ -43,7 +43,6 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         observeIsAuthorized()
         observeContainerState()
         observeLogoutResult()
-        observeLoadGamesResult()
         setupListeners()
         viewModel.loadConfigs()
         viewModel.checkIsAuthorized()
@@ -141,19 +140,10 @@ class MainFragment : BaseFragment(R.layout.main_fragment) {
         })
     }
 
-    private fun observeLoadGamesResult() {
-        viewModel.loadGamesResult.observe(viewLifecycleOwner, { result ->
-            if (result.isError) {
-                handleNetworkError(result.errorResult)
-            }
-        })
-    }
-
     private fun handleNetworkError(errorType: NetworkErrorType) {
         when (errorType) {
             NetworkErrorType.NO_NETWORK -> navigator.showNoNetworkFragment()
             else -> viewModel.showError()
         }
     }
-
 }

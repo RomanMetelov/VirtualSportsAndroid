@@ -34,14 +34,7 @@ class WebViewFragment : BaseFragment(R.layout.webview_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val webView: WebView = view.findViewById(R.id.web_view)
-
         webView.settings.javaScriptEnabled = true
-        webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                view?.loadUrl(game.url)
-                return true
-            }
-        }
         webView.loadUrl(game.url)
     }
 }

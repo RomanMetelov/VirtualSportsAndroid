@@ -24,7 +24,6 @@ import javax.inject.Inject
 
 class GameFragment : BaseFragment(R.layout.game_fragment) {
 
-
     private lateinit var game: ScreenGameModel
     private lateinit var binding: GameFragmentBinding
     private lateinit var ivAddToFavorite: AppCompatImageView

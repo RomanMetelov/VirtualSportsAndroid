@@ -37,7 +37,7 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    fun unselectCategory() {
+    fun unSelectCategory() {
         viewModelScope.launch {
             _selectedCategoryLiveData.value = null
         }
@@ -51,11 +51,17 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    fun unselectProvider(provider: String) {
+    fun unSelectProvider(provider: String) {
         viewModelScope.launch {
             (_selectedProvidersLiveData.value ?: emptyList()).let { selectedProviders ->
                 _selectedProvidersLiveData.value = selectedProviders.filter { it != provider }
             }
+        }
+    }
+
+    fun unSelectAllProviders() {
+        viewModelScope.launch {
+            _selectedProvidersLiveData.value = null
         }
     }
 }

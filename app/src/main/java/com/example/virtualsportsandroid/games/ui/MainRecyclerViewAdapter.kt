@@ -116,6 +116,7 @@ sealed class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                     adapter =
                         GamesListAdapter(open).apply {
                             submitList(tag.games)
+                            itemAnimator = null
                         }
                 }
             }
@@ -130,7 +131,6 @@ sealed class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private companion object {
             const val COLUMNS_COUNT = 2
         }
-
         fun bind(gamesList: GamesList) {
             with(binding) {
                 tvGamesListTitle.text = gamesList.name
@@ -139,6 +139,7 @@ sealed class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                     adapter =
                         GamesListAdapter(open).apply {
                             submitList(gamesList.games)
+                            itemAnimator = null
                         }
                 }
             }

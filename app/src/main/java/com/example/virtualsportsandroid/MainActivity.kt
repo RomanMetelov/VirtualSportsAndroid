@@ -39,15 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        //temp solution
         if (supportFragmentManager.backStackEntryCount < 1) {
             fragmentNavigator.showMainFragment()
         }
-//        if (supportFragmentManager.backStackEntryCount > 1) {
-//            super.onBackPressed()
-//        } else {
-//            this.finishAffinity()
-//        }
-
     }
 }

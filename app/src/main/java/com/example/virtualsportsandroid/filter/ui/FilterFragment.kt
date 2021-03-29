@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.virtualsportsandroid.Application
 import com.example.virtualsportsandroid.R
 import com.example.virtualsportsandroid.databinding.FilterFragmentBinding
-import com.example.virtualsportsandroid.di.ViewModelFactory
 import com.example.virtualsportsandroid.main.data.CategoryResponse
 import com.example.virtualsportsandroid.main.data.ProviderResponse
 import com.example.virtualsportsandroid.utils.ui.BaseFragment
@@ -35,6 +34,12 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
     private lateinit var back: () -> Unit
     private lateinit var showGamesFragment: (category: String?, providers: List<String>?) -> Unit
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupViewModel()
+        viewModel.loadData()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FilterFragmentBinding.bind(view)
@@ -57,6 +62,14 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
                     providers = null
                 }
                 showGamesFragment(category, providers)
+            }
+            btnClearAll.setOnClickListener {
+                viewModel.unSelectCategory()
+                viewModel.unSelectAllProviders()
+                val category = viewModel.selectedCategoryLiveData.value
+                val providers = viewModel.selectedProvidersLiveData.value
+                showGamesFragment(category, providers)
+
             }
         }
     }
@@ -103,10 +116,10 @@ class FilterFragment : BaseFragment(R.layout.filter_fragment) {
                     categories,
                     providers,
                     viewModel::selectCategory,
-                    viewModel::unselectCategory,
+                    viewModel::unSelectCategory,
                     { viewModel.selectedCategoryLiveData.value.toString() },
                     viewModel::selectProvider,
-                    viewModel::unselectProvider
+                    viewModel::unSelectProvider
                 ) { viewModel.selectedProvidersLiveData.value ?: emptyList() }
                 show()
             }

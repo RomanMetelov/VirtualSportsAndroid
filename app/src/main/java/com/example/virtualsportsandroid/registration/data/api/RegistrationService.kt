@@ -10,5 +10,4 @@ interface RegistrationService {
     suspend fun tryRegisterAndGetAccessToken(
         @Body user: UserModel
     ): String
-
 }
