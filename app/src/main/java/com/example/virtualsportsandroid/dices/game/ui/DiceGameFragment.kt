@@ -125,8 +125,8 @@ class DiceGameFragment :
 
     private fun showContent(gameResultApi: DiceGameResultModel) {
         terminateDiceRollingAnimation()
-        var evenOrOdd = "Even"
-        if (gameResultApi.droppedNumber % 2 != 0) evenOrOdd = "Odd"
+        var evenOrOdd = getString(R.string.even_text)
+        if (gameResultApi.droppedNumber % 2 != 0) evenOrOdd = getString(R.string.odd_text)
         val stringGameResult = String.format(
             getString(R.string.dice_game_roll_result_text),
             gameResultApi.droppedNumber,
