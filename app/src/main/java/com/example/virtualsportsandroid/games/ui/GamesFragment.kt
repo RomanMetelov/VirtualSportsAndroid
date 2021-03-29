@@ -95,14 +95,13 @@ class GamesFragment : BaseFragment(R.layout.games_fragment) {
     private fun loadData() {
         val category = arguments?.getString(CATEGORY_KEY)
         val providers = arguments?.getStringArray(PROVIDERS_KEY)
-        if (category != null && providers != null) {
-            viewModel.loadFilteredByCategoryAndProviders(category, listOf(*providers))
-        } else if (category != null) {
-            viewModel.loadFilteredByCategory(category)
-        } else if (providers != null) {
-            viewModel.loadFilteredByProviders(listOf(*providers))
-        } else {
-            viewModel.loadNotFilteredGames()
+        when {
+            category != null && providers != null -> {
+                viewModel.loadFilteredByCategoryAndProviders(category, listOf(*providers))
+            }
+            category != null -> viewModel.loadFilteredByCategory(category)
+            providers != null -> viewModel.loadFilteredByProviders(listOf(*providers))
+            else -> viewModel.loadNotFilteredGames()
         }
     }
 

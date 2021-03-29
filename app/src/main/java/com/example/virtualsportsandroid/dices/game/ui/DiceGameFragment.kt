@@ -87,7 +87,11 @@ class DiceGameFragment :
                 }
             } else {
                 Toast
-                    .makeText(activity, "Place Your Bet first!", Toast.LENGTH_SHORT)
+                    .makeText(
+                        activity,
+                        getString(R.string.place_your_bet_first_text),
+                        Toast.LENGTH_SHORT
+                    )
                     .show()
             }
         }
@@ -141,7 +145,6 @@ class DiceGameFragment :
                 tvDiceGameRollResultLose.text = stringGameResult
             }
         }
-        //set ivDiceImage
         getRandomDiceImageWithValueOnTop(gameResultApi.droppedNumber)
 
     }
@@ -171,7 +174,6 @@ class DiceGameFragment :
             tvDiceGameRollResultWin.show()
             tvDiceGameRollResultLose.hide()
             tvErrorMessage.hide()
-            //anim
         }
     }
 
@@ -179,7 +181,7 @@ class DiceGameFragment :
         continueRolling = false
     }
 
-    private fun doRoll() { // only does a single roll
+    private fun doRoll() {
         getRandomDiceImageWithValueOnTop(Random.nextInt(6) + 1)
     }
 

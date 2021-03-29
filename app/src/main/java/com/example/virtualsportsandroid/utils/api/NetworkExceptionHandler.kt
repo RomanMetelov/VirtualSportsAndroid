@@ -28,5 +28,4 @@ class NetworkExceptionHandler @Inject constructor() {
             else -> Result.error(NetworkErrorType.UNKNOWN_ERROR)
         }
     }
-
 }

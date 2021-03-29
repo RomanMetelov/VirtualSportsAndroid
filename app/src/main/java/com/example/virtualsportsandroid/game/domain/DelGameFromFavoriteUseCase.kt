@@ -10,5 +10,4 @@ class DelGameFromFavoriteUseCase @Inject constructor(private val gameScreenRepos
     suspend operator fun invoke(gameId: String): Result<Boolean, NetworkErrorType> {
         return gameScreenRepository.delGameFromFavorite(gameId)
     }
-
 }

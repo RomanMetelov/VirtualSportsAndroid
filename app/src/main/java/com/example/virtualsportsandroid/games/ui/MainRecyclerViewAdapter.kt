@@ -131,7 +131,6 @@ sealed class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private companion object {
             const val COLUMNS_COUNT = 2
         }
-
         fun bind(gamesList: GamesList) {
             with(binding) {
                 tvGamesListTitle.text = gamesList.name

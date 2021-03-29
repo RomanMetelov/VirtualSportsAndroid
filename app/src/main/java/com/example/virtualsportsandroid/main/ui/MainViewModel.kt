@@ -66,7 +66,6 @@ class MainViewModel @Inject constructor(
     fun loadConfigs() {
         viewModelScope.launch {
             _mainFragmentStateLiveData.value = MainFragmentState.Loading
-            //_loadGamesResult.postValue(gamesInfoRepository.loadGames())
             _mainFragmentStateLiveData.value = MainFragmentState.Content
             showGamesFragment(null, null)
         }

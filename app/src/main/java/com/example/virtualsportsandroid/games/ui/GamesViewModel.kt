@@ -61,7 +61,6 @@ class GamesViewModel @Inject constructor(
         viewModelScope.launch {
             _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
             _gamesFragmentStateLiveData.value = loadingByProvidersUseCase.invoke(providers)
-
         }
     }
 
@@ -70,7 +69,6 @@ class GamesViewModel @Inject constructor(
             _gamesFragmentStateLiveData.value = GamesFragmentState.Loading
             _gamesFragmentStateLiveData.value =
                 loadingByCategoryAndProvidersUseCase.invoke(category, providers)
-
         }
     }
 
