@@ -20,6 +20,7 @@
     <color name="dice_edge">#888800</color>
     <color name="dice_corner">#666600</color>
     <color name="win">#28BC00</color>
-    <color name="lose">#C50000</color>C50000
+    <color name="lose">#C50000</color>
+    <color name="loose">#E45151</color>
     <color name="logo_pm_header_new_background">#000000</color>
 </resources>
