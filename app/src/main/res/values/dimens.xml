@@ -62,9 +62,9 @@
     <dimen name="square_icon_size">34dp</dimen>
     <dimen name="square_background_size">108dp</dimen>
     <dimen name="button_corners_radius">4dp</dimen>
-    <dimen name="bet_history_item_h2">16sp</dimen>
-    <dimen name="bet_history_item_h1">20sp</dimen>
-    <dimen name="bet_history_item_h0">22sp</dimen>
+    <dimen name="bet_history_item_h2">14sp</dimen>
+    <dimen name="bet_history_item_h1">18sp</dimen>
+    <dimen name="bet_history_item_h0">20sp</dimen>
     <dimen name="bet_history_item_vertical_margin">4dp</dimen>
     <dimen name="bet_history_item_id_margin">4dp</dimen>
     <dimen name="bet_history_item_horizontal_margin">16dp</dimen>

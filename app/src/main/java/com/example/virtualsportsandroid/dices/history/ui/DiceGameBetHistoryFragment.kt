@@ -101,6 +101,8 @@ class DiceGameBetHistoryFragment :
     private fun showContent(betHistory: List<DiceGameResultModel>) {
         with(binding) {
             rvBetHistory.show()
+            if (betHistory.isNullOrEmpty()) { tvEmptyHistory.show() }
+            else { tvEmptyHistory.hide() }
             tvErrorMessage.hide()
             pbLoading.hide()
         }
@@ -112,6 +114,7 @@ class DiceGameBetHistoryFragment :
             rvBetHistory.hide()
             tvErrorMessage.hide()
             pbLoading.hide()
+            tvEmptyHistory.hide()
             tvErrorMessage.apply {
                 show()
                 text = errorMessage
@@ -123,6 +126,7 @@ class DiceGameBetHistoryFragment :
         with(binding) {
             rvBetHistory.hide()
             tvErrorMessage.hide()
+            tvEmptyHistory.hide()
             pbLoading.show()
         }
     }

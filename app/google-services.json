@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "128430461936",
+    "project_id": "virtual-sports-android",
+    "storage_bucket": "virtual-sports-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128430461936:android:d44e68851ecc84da0cc335",
+        "android_client_info": {
+          "package_name": "com.example.virtualsportsandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128430461936-6cv1rb3avuvu7j489kk0689ovdeg5599.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAyvP6tsC2zOzlVIC-B7XJs0UVWWeOK_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128430461936-6cv1rb3avuvu7j489kk0689ovdeg5599.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
