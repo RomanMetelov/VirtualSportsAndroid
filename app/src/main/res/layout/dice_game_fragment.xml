@@ -172,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dice_game_roll_result_text"
-        android:textColor="@color/lose"
+        android:textColor="@color/loose"
         android:textSize="@dimen/radio_button_textSize"
         android:visibility="invisible"
         app:fontFamily="@font/parimatch"

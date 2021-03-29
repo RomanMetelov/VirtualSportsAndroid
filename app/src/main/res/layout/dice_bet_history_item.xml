@@ -127,7 +127,7 @@
         android:paddingHorizontal="@dimen/bet_history_item_id_margin"
         android:paddingBottom="@dimen/bet_history_item_vertical_margin"
         android:text="@string/bet_history_item_bet_outcome"
-        android:textColor="@color/lose"
+        android:textColor="@color/loose"
         android:textSize="@dimen/bet_history_item_h0"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
